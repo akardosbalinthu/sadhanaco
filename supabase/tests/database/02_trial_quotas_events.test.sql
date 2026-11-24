@@ -1,10 +1,10 @@
 -- =============================================================================
 -- 02_trial_quotas_events.test.sql — próbaidő-korlátok, díjmentes keretek,
--- eseményfoglalási szabályok (kvóta, 48 órás ablak, elvonulás), KATA, sztornó.
+-- eseményfoglalási szabályok (kvóta, 48 órás ablak, elvonulás), bevételi határok.
 -- =============================================================================
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(37);
+select plan(39);
 
 -- ---- Teszt-segédek (pg_temp: csak ebben a munkamenetben léteznek) ----------
 create function pg_temp.mk_user(
@@ -170,7 +170,7 @@ select is((select count(*)::int from public.event_registrations
             where user_id = :'tag' and event_id = '00000000-0000-0000-0000-00000000e002' and status = 'cancelled'),
           1, 'a lejárt helyfoglalás törölt állapotba került');
 
--- ---- KATA-összesítő és sztornó (determinisztikus: a jövő évre számolunk) ---------
+-- ---- Bevételi összesítő (determinisztikus: a jövő évre számolunk) -----------------
 select (extract(year from now() at time zone 'Europe/Budapest')::int + 1) as y \gset
 -- Lezárt (nem induló) előfizetések nem számítanak bele az előrejelzésbe:
 update public.profiles set subscription_status = 'canceled', tier = 'none'
@@ -183,39 +183,45 @@ update public.profiles
    set billing_interval = 'year', recurring_amount_huf = 279400,
        current_period_end = make_timestamptz(:y, 3, 1, 12, 0, 0, 'Europe/Budapest'), country = 'DE'
  where id = :'bk1';                                      -- 1 x 279 400 (EU)
-update public.app_settings set kata_annual_limit_huf = 1000000;
+-- Teszthatár: KATA 1,2 M, alanyi adómentesség 1 M => a kötő határ 1 M (adómentesség)
+insert into public.revenue_limits (year, kata_limit_huf, vat_exemption_limit_huf)
+values (:y, 1200000, 1000000)
+on conflict (year) do update set kata_limit_huf = excluded.kata_limit_huf,
+                                 vat_exemption_limit_huf = excluded.vat_exemption_limit_huf;
 
 insert into public.invoices (id, user_id, description, amount_huf, country, region, billing_entity, issued_at)
 values ('00000000-0000-0000-0000-0000000f0001', :'tag', 'Társasági Tagság', 9940, 'HU', 'HU', '{}',
         make_timestamptz(:y, 2, 1, 12, 0, 0, 'Europe/Budapest')),
        ('00000000-0000-0000-0000-0000000f0002', :'bk1', 'Belső Kör', 600000, 'DE', 'EU', '{}',
         make_timestamptz(:y, 2, 1, 12, 0, 0, 'Europe/Budapest')),
-       ('00000000-0000-0000-0000-0000000f0003', :'bk1', 'Tavalyi', 50000, 'HU', 'HU', '{}',
+       ('00000000-0000-0000-0000-0000000f0003', :'bk1', 'Előző év', 50000, 'HU', 'HU', '{}',
         make_timestamptz(:y - 1, 12, 31, 23, 30, 0, 'Europe/Budapest'));
 
 set local role authenticated;
 select pg_temp.act_as(:'admin');
+select is((public.kata_revenue_status(:y) ->> 'binding_limit_huf')::bigint, 1000000::bigint,
+          'kötő határ = least(KATA, alanyi adómentesség)');
+select is(public.kata_revenue_status(:y) ->> 'binding_limit_kind', 'vat_exemption',
+          'a kötő határ itt az alanyi adómentesség');
 select is((public.kata_revenue_status(:y) ->> 'invoiced_total_huf')::bigint, 609940::bigint,
-          'KATA: csak az adott naptári év (Budapest) számlái');
+          'csak az adott naptári év (Budapest) számlái');
 select is((public.kata_revenue_status(:y) ->> 'projected_renewals_huf')::bigint, (69580 + 279400)::bigint,
-          'KATA: várható megújulások az év végéig');
+          'várható megújulások az év végéig');
 select is((public.kata_revenue_status(:y) ->> 'warning')::boolean, true,
-          'KATA: 80% felett figyelmeztet (609 940 + 348 980 >= 800 000)');
+          '80% felett figyelmeztet (958 920 >= 800 000)');
+select is((public.kata_revenue_status(:y) ->> 'limit_reached')::boolean, false, 'a határ még nincs elérve');
 select is((public.kata_revenue_status(:y) -> 'invoiced_by_region' ->> 'EU')::bigint, 600000::bigint,
           'régiós bontás: EU');
-
-select is(pg_temp.err($$select public.admin_record_storno('00000000-0000-0000-0000-0000000f0002', 'Hibás összeg', 'E-STORNO-1')$$),
-          'NO_ERROR', 'admin sztornózhat hibás számlát');
-select is((public.kata_revenue_status() ->> 'invoiced_total_huf')::bigint, (50000 - 600000)::bigint,
-          'a sztornó a saját kiállítási évében negatív tételként csökkenti az összeget');
-select is(pg_temp.err($$select public.admin_record_storno('00000000-0000-0000-0000-0000000f0002', 'Megint', 'E-STORNO-2')$$),
-          'ALREADY_STORNOED', 'egy számla csak egyszer sztornózható');
+select is((public.kata_revenue_status(2099) ->> 'year')::int, 2099,
+          'jövőbeli évre a legutolsó ismert határral számol');
 select is(pg_temp.err($$update public.invoices set amount_huf = 1 where id = '00000000-0000-0000-0000-0000000f0001'$$),
-          '42501', 'kiállított számla összege nem írható át');
+          '42501', 'rögzített számlatétel összege nem írható át');
+reset role;
+select hasnt_function('public', 'admin_record_storno', 'sztornó funkció nincs (üzleti döntés)');
 
+set local role authenticated;
 select pg_temp.act_as(:'tag');
-select is(pg_temp.err($$select public.admin_record_storno('00000000-0000-0000-0000-0000000f0001', 'x', 'y')$$),
-          'FORBIDDEN', 'tag nem sztornózhat');
+select is(pg_temp.err('select public.kata_revenue_status()'), 'FORBIDDEN', 'tag nem kérheti le a bevételi összesítőt');
 reset role;
 
 select * from finish();

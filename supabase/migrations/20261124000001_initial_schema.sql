@@ -47,13 +47,12 @@ create type public.consultation_status as enum ('requested', 'scheduled', 'done'
 -- Egysoros beállítástábla. A 7.7-es nyitott kérdések kapcsolói is itt vannak.
 create table public.app_settings (
   id                               boolean primary key default true check (id),
-  -- 7.1 KATA: új jelentkezések lezárása
+  -- 7.1 KATA: új jelentkezések lezárása. Az éves határok a revenue_limits táblában.
   registration_open                boolean not null default true,
-  kata_annual_limit_huf            bigint  not null default 18000000 check (kata_annual_limit_huf > 0),
-  kata_warning_ratio               numeric(4,3) not null default 0.800 check (kata_warning_ratio > 0 and kata_warning_ratio <= 1),
-  -- 7.2 OSS-határ figyelése
-  oss_limit_eur                    numeric(12,2) not null default 10000,
-  eur_huf_rate                     numeric(10,4) not null default 400 check (eur_huf_rate > 0),
+  revenue_warning_ratio            numeric(4,3) not null default 0.800 check (revenue_warning_ratio > 0 and revenue_warning_ratio <= 1),
+  -- 7.2 OSS: az EU-s (nem magyar) bevétel figyelmeztetési küszöbe forintban (≈ 10 000 EUR).
+  -- Fizetés mindig HUF-ban, árfolyamot nem kezelünk.
+  oss_warning_huf                  bigint not null default 4000000 check (oss_warning_huf > 0),
   -- Cserélhető számlázási entitás (később Kft.) és számlázó szolgáltató — soha ne legyen kódba égetve.
   billing_entity                   jsonb not null default jsonb_build_object(
                                      'name', 'Kardos Bálint egyéni vállalkozó',
@@ -62,7 +61,7 @@ create table public.app_settings (
                                      'b2c_only', true
                                    ),
   -- 'manual': a számlát Bálint kézzel állítja ki (jelenleg), az admin utólag rögzíti a sorszámot.
-  invoice_provider                 text not null default 'manual' check (invoice_provider in ('manual', 'billingo', 'szamlazz')),
+  invoice_provider                 text not null default 'manual' check (invoice_provider in ('manual', 'billingo')),
   -- Ezek az e-mail-címek regisztrációkor automatikusan superadmin szerepkört kapnak.
   superadmin_emails                text[] not null default array['akardosbalint.hu@gmail.com'],
   terms_version                    text not null default '2026-11',
@@ -71,16 +70,23 @@ create table public.app_settings (
   event_member_quota_ratio         numeric(3,2) not null default 0.50 check (event_member_quota_ratio > 0 and event_member_quota_ratio <= 1),
   belso_kor_priority_hours         smallint not null default 48 check (belso_kor_priority_hours >= 0),
   payment_hold_minutes             smallint not null default 30 check (payment_hold_minutes > 0),
-  -- NYITOTT (7.7): heti nyitás egyéni belépéstől vagy kohorsz-indulástól
-  lesson_unlock_mode               text not null default 'individual' check (lesson_unlock_mode in ('individual', 'cohort')),
-  cohort_start_date                date,
-  -- NYITOTT: past_due (sikertelen megújítás, Stripe újrapróbálkozik) alatt marad-e a hozzáférés
-  past_due_has_access              boolean not null default true,
-  -- NYITOTT (7.7): kereten felüli Kedves Üzenet / Nyílt Est hozzájárulás = szabad összegű szolgáltatási díj AAM számlával
-  voluntary_fees_are_service       boolean not null default true,
-  -- NYITOTT (7.7): Belső Kör éves konzultációs keret nullázása és a maradék sorsa
-  consultation_reset_mode          text not null default 'anniversary' check (consultation_reset_mode in ('anniversary', 'calendar_year')),
-  consultation_carry_over          boolean not null default false,
+  -- Sikertelen megújítás: a hozzáférés ennyi napig megmarad (a Stripe ezalatt újrapróbálkozik),
+  -- utána szünetel. Megszűnés (és ezzel újrakezdés) csak a Stripe-előfizetés lezárásakor.
+  past_due_grace_days              smallint not null default 10 check (past_due_grace_days between 0 and 30),
+  -- Havi díjmentes Elsőbbségi Kedves Üzenet tierenként; Belső Kör éves díjmentes konzultációk
+  -- (évfordulós nullázás, nem görgethető tovább).
+  free_messages_per_tier           jsonb not null default '{"tarsasagi": 1, "belso_kor": 3}'::jsonb,
+  belso_kor_yearly_consultations   smallint not null default 4 check (belso_kor_yearly_consultations >= 0),
+  -- Közösségi részvételi pontok (PRIVÁT: csak a tag és az admin látja, nincs rangsor).
+  participation_weights            jsonb not null default
+                                     '{"post": 3, "comment": 2, "helpful_received": 1, "similar_received": 1, "practice_day": 1}'::jsonb,
+  -- Továbblépési jogosultsághoz szükséges pontszám célszintenként (a nyitás így is kézi).
+  progression_points_required      jsonb not null default '{"2": 60, "3": 120, "4": 0}'::jsonb,
+  -- Az előző lépcső "elvégzett", ha letelt a hetek száma, és a leckék legalább ennyi részét pipálta.
+  stage_completion_min_ratio       numeric(3,2) not null default 0.70 check (stage_completion_min_ratio between 0 and 1),
+  -- Ütemezett feladatok utolsó futása (pg_cron, Budapest-idő szerinti ellenőrzéssel)
+  last_monthly_reset_on            date,
+  last_friday_checkin_on           date,
   -- Egy Kedves Üzenet: kereten felüli díj minimuma, címzett telefonszámának megőrzése (max. 180 nap)
   kind_message_min_huf             integer not null default 1000 check (kind_message_min_huf > 0),
   phone_retention_days             smallint not null default 180 check (phone_retention_days between 1 and 180),
@@ -99,6 +105,18 @@ create table public.price_catalog (
   is_active        boolean not null default true,
   updated_at       timestamptz not null default now()
 );
+
+-- Éves bevételi határok (7.1). A ténylegesen kötő határ: least(KATA, alanyi adómentesség).
+-- 2026: KATA 18 M Ft; 2027-től: KATA 22 M Ft, de az alanyi adómentesség határa 20 M Ft.
+create table public.revenue_limits (
+  year                     integer primary key check (year between 2020 and 2100),
+  kata_limit_huf           bigint not null check (kata_limit_huf > 0),
+  vat_exemption_limit_huf  bigint not null check (vat_exemption_limit_huf > 0),
+  note                     text
+);
+insert into public.revenue_limits (year, kata_limit_huf, vat_exemption_limit_huf, note) values
+  (2026, 18000000, 20000000, 'KATA 18 M Ft; alanyi adómentesség 20 M Ft (ellenőrizendő)'),
+  (2027, 22000000, 20000000, 'KATA 22 M Ft; alanyi adómentesség 20 M Ft — a kötő határ 20 M Ft');
 
 -- -----------------------------------------------------------------------------
 -- 3. Tagok
@@ -122,7 +140,7 @@ create table public.profiles (
   trial_ends_at                 timestamptz,
   membership_started_at         timestamptz,   -- az aktuális tagsági ciklus kezdete (visszatérésnél újraindul)
   membership_ended_at           timestamptz,   -- nem NULL és tier='none' => volt tag
-  cohort_start_date             date,          -- kohorsz mód esetén egyéni felülírás
+  past_due_since                timestamptz,   -- első sikertelen megújítás; sikeres fizetéskor NULL
 
   -- Lépcsők (7.4: visszatéréskor mind visszaáll false-ra)
   m2_unlocked                   boolean not null default false,
@@ -193,7 +211,8 @@ as $$
       and p.tier <> 'none'
       and (
         p.subscription_status in ('active', 'trialing')
-        or (p.subscription_status = 'past_due' and s.past_due_has_access)
+        or (p.subscription_status = 'past_due'
+            and coalesce(p.past_due_since, now()) + make_interval(days => s.past_due_grace_days) > now())
       )
   )
 $$;
@@ -212,7 +231,8 @@ as $$
       and p.tier <> 'none'
       and (
         p.subscription_status = 'active'
-        or (p.subscription_status = 'past_due' and s.past_due_has_access)
+        or (p.subscription_status = 'past_due'
+            and coalesce(p.past_due_since, now()) + make_interval(days => s.past_due_grace_days) > now())
       )
   )
 $$;
@@ -238,7 +258,7 @@ as $$
 $$;
 
 -- A tag aktuális hete egy lépcsőn belül (1-től). NULL, ha a lépcső nincs nyitva.
--- 1. lépcső: app_settings.lesson_unlock_mode szerint (egyéni belépés / kohorsz).
+-- 1. lépcső: az egyéni belépés (aktuális tagsági ciklus kezdete) napjától.
 -- 2–3. lépcső: az admin általi nyitás napjától számolva.
 create or replace function public.current_week(p_stage smallint)
 returns integer
@@ -251,16 +271,12 @@ as $$
          end
   from (
     select case p_stage
-             when 1 then case s.lesson_unlock_mode
-                           when 'cohort' then coalesce(p.cohort_start_date, s.cohort_start_date)
-                           else (p.membership_started_at at time zone 'Europe/Budapest')::date
-                         end
+             when 1 then (p.membership_started_at at time zone 'Europe/Budapest')::date
              when 2 then (p.m2_unlocked_at at time zone 'Europe/Budapest')::date
              when 3 then (p.ip3_unlocked_at at time zone 'Europe/Budapest')::date
              else null
            end as start_date
     from public.profiles p
-    cross join public.app_settings s
     where p.id = (select auth.uid())
   ) x
 $$;
@@ -279,7 +295,8 @@ create table public.stripe_events (
   error         text
 );
 
--- Kiállított AAM e-számlák. Sztornó negatív összeggel, az eredetire hivatkozva.
+-- Számlázandó / kiállított AAM számlák (a KATA- és OSS-összesítő alapja).
+-- Sztornó nincs (üzleti döntés: nincs visszatérítés, lemondás a következő ciklustól).
 create table public.invoices (
   id                        uuid primary key default gen_random_uuid(),
   user_id                   uuid references public.profiles (id) on delete set null,  -- a számla jogilag megmarad
@@ -287,7 +304,7 @@ create table public.invoices (
   stripe_payment_intent_id  text,
   product_code              text references public.price_catalog (code),
   description               text not null,
-  amount_huf                bigint not null,     -- bruttó = nettó (AAM); sztornónál negatív
+  amount_huf                bigint not null check (amount_huf > 0),  -- bruttó = nettó (AAM)
   currency                  char(3) not null default 'HUF',
   country                   char(2) not null,    -- Stripe számlázási cím
   region                    public.revenue_region not null,
@@ -296,15 +313,7 @@ create table public.invoices (
   provider_invoice_number   text,                -- a számla sorszáma
   billing_entity            jsonb not null,      -- a kiállító entitás pillanatképe
   issued_at                 timestamptz not null default now(),
-  is_storno                 boolean not null default false,
-  storno_of                 uuid unique references public.invoices (id),
-  storno_reason             text,
-  created_by                uuid references public.profiles (id) on delete set null,
   created_at                timestamptz not null default now(),
-  constraint invoices_storno_consistency check (
-    (is_storno and storno_of is not null and amount_huf < 0 and storno_reason is not null)
-    or (not is_storno and storno_of is null and amount_huf > 0)
-  ),
   unique (invoice_provider, provider_invoice_number)
 );
 create index invoices_issued_idx on public.invoices (issued_at);
@@ -339,7 +348,8 @@ create index purchase_consents_user_idx on public.purchase_consents (user_id);
 -- Admin értesítések (chargeback, KATA-figyelmeztetés). Nem push, csak az admin felületen.
 create table public.admin_notifications (
   id          uuid primary key default gen_random_uuid(),
-  kind        text not null check (kind in ('chargeback', 'kata_warning', 'oss_warning', 'other')),
+  kind        text not null check (kind in (
+                'chargeback', 'revenue_warning', 'payment_failed', 'progression_request', 'overbooking', 'other')),
   payload     jsonb not null default '{}'::jsonb,
   created_at  timestamptz not null default now(),
   read_at     timestamptz
@@ -523,6 +533,30 @@ create table public.consultations (
 );
 
 -- -----------------------------------------------------------------------------
+-- 9/b. Továbblépés a következő lépcsőre
+-- A rendszer jelzi a jogosultságot (előző lépcső elvégezve + részvételi pontok vagy
+-- gyorsított vásárlás vagy Belső Kör), a tag kéri a továbblépést, ehhez egy rövid,
+-- díjmentes konzultáció tartozik Bálinttal, és a nyitás MINDIG admin kézi döntése.
+-- -----------------------------------------------------------------------------
+create type public.progression_status as enum ('requested', 'scheduled', 'approved', 'declined', 'cancelled');
+
+create table public.progression_requests (
+  id               uuid primary key default gen_random_uuid(),
+  user_id          uuid not null references public.profiles (id) on delete cascade,
+  target_stage     smallint not null check (target_stage between 2 and 4),
+  status           public.progression_status not null default 'requested',
+  note             text check (char_length(note) <= 2000),
+  consultation_at  timestamptz,          -- a díjmentes továbblépési konzultáció időpontja
+  admin_note       text,
+  decided_at       timestamptz,
+  decided_by       uuid references public.profiles (id) on delete set null,
+  created_at       timestamptz not null default now()
+);
+create unique index progression_requests_one_open
+  on public.progression_requests (user_id, target_stage)
+  where status in ('requested', 'scheduled');
+
+-- -----------------------------------------------------------------------------
 -- 10. Triggerek
 -- -----------------------------------------------------------------------------
 
@@ -617,21 +651,17 @@ create trigger posts_guard before update on public.posts
 create trigger comments_guard before update on public.comments
   for each row execute function public.guard_content_update();
 
--- Számla csak sztornóval javítható: kiállított számla összege/adatai nem írhatók át.
+-- Rögzített számlatétel nem módosítható; utólag csak a szolgáltatói azonosító / sorszám írható
+-- (kézi számlázásnál az admin itt rögzíti a kiállított számla sorszámát).
 create or replace function public.guard_invoice_update()
 returns trigger
 language plpgsql
 set search_path = ''
 as $$
 begin
-  if new.amount_huf is distinct from old.amount_huf
-     or new.country is distinct from old.country
-     or new.region is distinct from old.region
-     or new.billing_entity is distinct from old.billing_entity
-     or new.issued_at is distinct from old.issued_at
-     or new.is_storno is distinct from old.is_storno
-     or new.storno_of is distinct from old.storno_of then
-    raise exception 'Kiállított számla nem módosítható; hibás számlát admin sztornóval javíts.' using errcode = '42501';
+  if (to_jsonb(new) - array['provider_invoice_id', 'provider_invoice_number'])
+     is distinct from (to_jsonb(old) - array['provider_invoice_id', 'provider_invoice_number']) then
+    raise exception 'Rögzített számlatétel nem módosítható; csak a számla sorszáma írható be.' using errcode = '42501';
   end if;
   return new;
 end;
@@ -682,6 +712,8 @@ alter table public.events              enable row level security;
 alter table public.event_registrations enable row level security;
 alter table public.kind_messages       enable row level security;
 alter table public.consultations       enable row level security;
+alter table public.revenue_limits      enable row level security;
+alter table public.progression_requests enable row level security;
 
 alter table public.app_settings        force row level security;
 alter table public.price_catalog       force row level security;
@@ -701,6 +733,8 @@ alter table public.events              force row level security;
 alter table public.event_registrations force row level security;
 alter table public.kind_messages       force row level security;
 alter table public.consultations       force row level security;
+alter table public.revenue_limits      force row level security;
+alter table public.progression_requests force row level security;
 
 -- app_settings: minden bejelentkezett olvashatja, csak admin írja.
 create policy app_settings_select on public.app_settings
@@ -858,6 +892,19 @@ create policy consultations_select on public.consultations
 create policy consultations_admin_update on public.consultations
   for update to authenticated using (public.is_admin()) with check (public.is_admin());
 
+-- revenue_limits: csak admin.
+create policy revenue_limits_admin_select on public.revenue_limits
+  for select to authenticated using (public.is_admin());
+create policy revenue_limits_admin_write on public.revenue_limits
+  for all to authenticated using (public.is_superadmin()) with check (public.is_superadmin());
+
+-- progression_requests: saját kérelmek olvasása; létrehozás csak request_progression() RPC-vel,
+-- döntés csak admin_decide_progression() RPC-vel; az admin az időpontot/megjegyzést írhatja.
+create policy progression_requests_select on public.progression_requests
+  for select to authenticated using (user_id = (select auth.uid()) or public.is_admin());
+create policy progression_requests_admin_update on public.progression_requests
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
 -- -----------------------------------------------------------------------------
 -- 12. Tábla- és oszlopszintű jogok (az RLS mellett második védelmi vonal)
 -- -----------------------------------------------------------------------------
@@ -884,6 +931,9 @@ grant select, insert, update, delete on public.events to authenticated;
 grant select, update on public.event_registrations to authenticated;
 grant select, update on public.kind_messages to authenticated;
 grant select, update on public.consultations to authenticated;
+grant select, insert, update, delete on public.revenue_limits to authenticated;
+grant select on public.progression_requests to authenticated;
+grant update (consultation_at, admin_note, status) on public.progression_requests to authenticated;
 
 grant all on all tables in schema public to service_role;
 
