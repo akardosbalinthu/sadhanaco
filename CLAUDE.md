@@ -165,10 +165,11 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 ### 7.8 Döntések (2026. november 24.)
 - **Superadmin:** `akardosbalint.hu@gmail.com` (regisztrációkor automatikusan `role = 'superadmin'`; `app_settings.superadmin_emails`). Szerepkört csak superadmin oszthat.
-- **Számlázó:** a Számlázz.hu helyett **Billingo** (a dokumentum korábbi Számlázz.hu-említései ennek megfelelően értendők). Egyelőre helyőrző; a réteg cserélhető (`app_settings.invoice_provider`, `src/lib/invoicing`). Az `AAM` / KATA szabályok változatlanok.
+- **Számlázó:** a Számlázz.hu helyett **Billingo** (a dokumentum korábbi Számlázz.hu-említései ennek megfelelően értendők). **Jelenleg kézi számlázás** (`app_settings.invoice_provider = 'manual'`): a rendszer minden fizetésről rögzíti a számlázandó tételt az `invoices` táblában (ez adja a KATA/OSS-összesítőt), Bálint kézzel állítja ki a számlát, és az admin felületen utólag rögzíti a sorszámot. A Billingo API később kapcsol be; a réteg cserélhető (`src/lib/invoicing`). Az `AAM` / KATA szabályok változatlanok.
 - **E-mail:** Resend, feladó: `balint@akardosbalint.hu`.
 - **Stripe:** éles módban létrehozva (`docs/stripe-katalogus.md`). **Nincs alapítói kupon.** A belépési e-mail-cím a Stripe-fizetéskor megadott e-mail-cím.
 - **Szabadság Elvonulás:** önköltséges ár eseményenként megadva — jóváhagyva.
+- **Nyílt Est külsős résztvevői** bejelentkezés nélkül, a weboldalon keresztül fizetnek ezen a rendszeren (`4 940 Ft`, Stripe `nyilt_est_kulsos`). A külsős a teljes kapacitásig foglalhat; a tagokra az 50%-os kvóta vonatkozik.
 - **Kereten felüli Kedves Üzenet:** minimum `1 000 Ft` (`app_settings.kind_message_min_huf`).
 - **Címzett telefonszáma:** legfeljebb **180 napig** tárolva, utána napi ütemezett törlés (`purge_kind_message_phones`, pg_cron).
 

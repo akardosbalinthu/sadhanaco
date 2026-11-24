@@ -96,7 +96,7 @@ select is(pg_temp.err('select public.purge_kind_message_phones()'), '42501', 'ta
 reset role;
 
 -- ---- Számlázó szolgáltató -------------------------------------------------------
-select is((select invoice_provider from public.app_settings), 'billingo', 'alapértelmezett számlázó: Billingo');
+select is((select invoice_provider from public.app_settings), 'manual', 'jelenleg kézi számlázás (Billingo később)');
 
 select * from finish();
 rollback;

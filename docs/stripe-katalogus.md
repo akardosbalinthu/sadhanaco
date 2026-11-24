@@ -14,7 +14,8 @@ A Stripe-ban a HUF kéttizedes: `unit_amount 994000` = 9 940 Ft.
 | II. Modul + IP 2 (gyorsított) | `prod_VgbwbICFQliZfC` | `gyorsitott_m2_ip2` | 54 940 Ft |
 | IP 3 (gyorsított) | `prod_VgbwI6pIJhOfRS` | `gyorsitott_ip3` | 44 940 Ft |
 | II. Modul + IP 2 + IP 3 csomag | `prod_VgbwymkGkEr3BR` | `gyorsitott_m2_ip3_csomag` | 89 940 Ft |
-| Nyílt Meditációs Est (tagi) | `prod_VgbwHLurwdeqiB` | `nyilt_est_tarsasagi` | 3 200 Ft |
+| Nyílt Meditációs Est | `prod_VgbwHLurwdeqiB` | `nyilt_est_tarsasagi` | 3 200 Ft (Társasági Tag) |
+| | | `nyilt_est_kulsos` | 4 940 Ft (külsős, bejelentkezés nélkül a weboldalon) |
 | Élő Gyakorlónap | `prod_VgbwzJ9WLwj3sm` | `gyakorlonap_tarsasagi` | 6 460 Ft |
 | 1-on-1 konzultáció | `prod_VgbwTM5LbEZbJp` | `konzultacio_tarsasagi` | 15 000 Ft |
 | | | `konzultacio_belso_kor` | 13 000 Ft |

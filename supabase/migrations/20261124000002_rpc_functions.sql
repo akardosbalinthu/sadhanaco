@@ -156,6 +156,176 @@ end;
 $$;
 
 -- -----------------------------------------------------------------------------
+-- Külsős (bejelentkezés nélküli) helyfoglalás a Nyílt Estre — CSAK service role.
+-- A weboldal szerveroldali kódja hívja a Stripe Checkout indítása előtt;
+-- a helyet payment_hold_minutes (30 perc = a Stripe Checkout minimális
+-- lejárata) idejére tartja, a fizetés után confirm_registration_payment() erősíti meg.
+-- A tagi 50%-os kvóta nem érinti: külsős a teljes kapacitásig foglalhat.
+-- -----------------------------------------------------------------------------
+create or replace function public.reserve_guest_seat(
+  p_event_id    uuid,
+  p_guest_name  text,
+  p_guest_email text
+)
+returns public.event_registrations
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_settings public.app_settings;
+  v_event    public.events;
+  v_email    text := lower(btrim(p_guest_email));
+  v_taken    integer;
+  v_reg      public.event_registrations;
+begin
+  if coalesce(auth.role(), '') <> 'service_role' then
+    raise exception 'Csak szerveroldalról hívható.' using errcode = '42501', hint = 'FORBIDDEN';
+  end if;
+  if v_email !~ '^[^@\s]+@[^@\s]+\.[^@\s]+$' or nullif(btrim(p_guest_name), '') is null then
+    raise exception 'Adj meg nevet és érvényes e-mail-címet.' using errcode = 'P0001', hint = 'INVALID_GUEST';
+  end if;
+
+  select * into strict v_settings from public.app_settings where id;
+
+  select * into v_event from public.events where id = p_event_id for update;
+  if not found or not v_event.is_published or v_event.cancelled_at is not null then
+    raise exception 'Ez az esemény nem érhető el.' using errcode = 'P0001', hint = 'EVENT_NOT_FOUND';
+  end if;
+  if v_event.members_only or v_event.price_external_huf is null then
+    raise exception 'Erre az alkalomra csak tagok jelentkezhetnek.' using errcode = 'P0001', hint = 'NOT_PUBLIC_EVENT';
+  end if;
+  if now() < v_event.registration_opens_at then
+    raise exception 'A jelentkezés még nem nyílt meg.' using errcode = 'P0001', hint = 'REGISTRATION_NOT_OPEN';
+  end if;
+  if now() >= v_event.starts_at
+     or (v_event.registration_closes_at is not null and now() >= v_event.registration_closes_at) then
+    raise exception 'A jelentkezés erre az alkalomra lezárult.' using errcode = 'P0001', hint = 'REGISTRATION_CLOSED';
+  end if;
+
+  update public.event_registrations
+     set status = 'cancelled', cancelled_at = now()
+   where event_id = v_event.id and status = 'pending_payment' and hold_expires_at <= now();
+
+  if exists (
+    select 1 from public.event_registrations r
+     where r.event_id = v_event.id and r.user_id is null
+       and lower(r.guest_email) = v_email and r.status <> 'cancelled'
+  ) then
+    raise exception 'Ezzel az e-mail-címmel már van jelentkezés erre az alkalomra.'
+      using errcode = 'P0001', hint = 'ALREADY_REGISTERED';
+  end if;
+
+  if v_event.capacity is not null then
+    select count(*) into v_taken from public.event_registrations r
+     where r.event_id = v_event.id and r.status <> 'cancelled';
+    if v_taken >= v_event.capacity then
+      raise exception 'Erre az alkalomra minden hely betelt.' using errcode = 'P0001', hint = 'EVENT_FULL';
+    end if;
+  end if;
+
+  insert into public.event_registrations (
+    event_id, user_id, guest_name, guest_email, is_member_seat, price_huf, status, hold_expires_at
+  ) values (
+    v_event.id, null, btrim(p_guest_name), v_email, false, v_event.price_external_huf,
+    case when v_event.price_external_huf = 0 then 'confirmed' else 'pending_payment' end::public.registration_status,
+    case when v_event.price_external_huf = 0 then null
+         else now() + make_interval(mins => v_settings.payment_hold_minutes) end
+  )
+  returning * into v_reg;
+
+  return v_reg;
+end;
+$$;
+
+-- Sikeres fizetés után (Stripe webhook) — CSAK service role. Idempotens.
+-- Ha a tartott hely közben lejárt és felszabadult, a foglalást mégis
+-- megerősítjük (a vendég fizetett), és túlfoglalás esetén admin értesítés készül.
+create or replace function public.confirm_registration_payment(p_registration_id uuid)
+returns public.event_registrations
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_reg   public.event_registrations;
+  v_event public.events;
+  v_taken integer;
+begin
+  if coalesce(auth.role(), '') <> 'service_role' then
+    raise exception 'Csak szerveroldalról hívható.' using errcode = '42501', hint = 'FORBIDDEN';
+  end if;
+
+  select r.* into v_reg from public.event_registrations r where r.id = p_registration_id;
+  if not found then
+    raise exception 'A foglalás nem található.' using errcode = 'P0001', hint = 'REGISTRATION_NOT_FOUND';
+  end if;
+  select * into v_event from public.events where id = v_reg.event_id for update;
+  select * into v_reg from public.event_registrations where id = p_registration_id for update;
+
+  if v_reg.status = 'confirmed' then
+    return v_reg;
+  end if;
+
+  update public.event_registrations
+     set status = 'confirmed', hold_expires_at = null, cancelled_at = null
+   where id = v_reg.id
+  returning * into v_reg;
+
+  if v_event.capacity is not null then
+    select count(*) into v_taken from public.event_registrations r
+     where r.event_id = v_event.id and r.status <> 'cancelled';
+    if v_taken > v_event.capacity then
+      insert into public.admin_notifications (kind, payload)
+      values ('other', jsonb_build_object(
+        'type', 'overbooking', 'event_id', v_event.id, 'registration_id', v_reg.id,
+        'capacity', v_event.capacity, 'taken', v_taken));
+    end if;
+  end if;
+
+  return v_reg;
+end;
+$$;
+
+-- Nyilvános lista a weboldalnak: közelgő, külsősök számára nyitott Nyílt Estek
+-- szabad helyekkel. Személyes adatot nem ad vissza.
+create or replace function public.public_open_evenings()
+returns table (
+  id                  uuid,
+  title               text,
+  description         text,
+  location            text,
+  is_online           boolean,
+  starts_at           timestamptz,
+  ends_at             timestamptz,
+  price_external_huf  integer,
+  registration_open   boolean,
+  seats_left          integer
+)
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select e.id, e.title, e.description, e.location, e.is_online, e.starts_at, e.ends_at,
+         e.price_external_huf,
+         now() >= e.registration_opens_at
+           and (e.registration_closes_at is null or now() < e.registration_closes_at),
+         case when e.capacity is null then null
+              else greatest(e.capacity - (
+                select count(*) from public.event_registrations r
+                 where r.event_id = e.id
+                   and (r.status = 'confirmed' or (r.status = 'pending_payment' and r.hold_expires_at > now()))
+              ), 0)::integer
+         end
+    from public.events e
+   where e.is_published and e.cancelled_at is null
+     and not e.members_only and e.price_external_huf is not null
+     and e.starts_at > now()
+   order by e.starts_at
+$$;
+
+-- -----------------------------------------------------------------------------
 -- Díjmentes Elsőbbségi Kedves Üzenet felhasználása (havi keret)
 -- -----------------------------------------------------------------------------
 create or replace function public.send_free_kind_message(
@@ -509,5 +679,7 @@ grant execute on function public.kata_revenue_status(integer) to authenticated;
 grant execute on function public.admin_record_storno(uuid, text, text) to authenticated;
 grant execute on function public.community_authors(uuid[]) to authenticated;
 grant execute on function public.revenue_region_for(text) to authenticated;
+grant execute on function public.public_open_evenings() to anon, authenticated;
+-- reserve_guest_seat és confirm_registration_payment: csak service_role (lent).
 grant execute on all functions in schema public to service_role;
 grant select on public.post_feed to service_role;

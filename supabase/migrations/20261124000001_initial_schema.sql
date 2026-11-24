@@ -61,7 +61,8 @@ create table public.app_settings (
                                      'kata', true,
                                      'b2c_only', true
                                    ),
-  invoice_provider                 text not null default 'billingo' check (invoice_provider in ('billingo', 'szamlazz', 'none')),
+  -- 'manual': a számlát Bálint kézzel állítja ki (jelenleg), az admin utólag rögzíti a sorszámot.
+  invoice_provider                 text not null default 'manual' check (invoice_provider in ('manual', 'billingo', 'szamlazz')),
   -- Ezek az e-mail-címek regisztrációkor automatikusan superadmin szerepkört kapnak.
   superadmin_emails                text[] not null default array['akardosbalint.hu@gmail.com'],
   terms_version                    text not null default '2026-11',
@@ -290,7 +291,7 @@ create table public.invoices (
   currency                  char(3) not null default 'HUF',
   country                   char(2) not null,    -- Stripe számlázási cím
   region                    public.revenue_region not null,
-  invoice_provider          text not null default 'billingo',  -- cserélhető (billingo / szamlazz)
+  invoice_provider          text not null default 'manual',    -- manual / billingo / szamlazz
   provider_invoice_id       text,                -- a szolgáltató belső azonosítója
   provider_invoice_number   text,                -- a számla sorszáma
   billing_entity            jsonb not null,      -- a kiállító entitás pillanatképe
@@ -481,6 +482,9 @@ create table public.event_registrations (
 create unique index event_registrations_one_active_per_user
   on public.event_registrations (event_id, user_id)
   where user_id is not null and status <> 'cancelled';
+create unique index event_registrations_one_active_per_guest
+  on public.event_registrations (event_id, lower(guest_email))
+  where user_id is null and status <> 'cancelled';
 create index event_registrations_event_idx on public.event_registrations (event_id, status);
 
 -- -----------------------------------------------------------------------------
@@ -729,6 +733,9 @@ create policy trial_usage_admin_select on public.trial_usage
 -- invoices: saját számlák olvasása; admin mindent lát. Írás: service role / admin RPC.
 create policy invoices_select on public.invoices
   for select to authenticated using (user_id = (select auth.uid()) or public.is_admin());
+-- Kézi számlázásnál az admin utólag rögzíti a sorszámot (oszlopszintű jog lent; összeg nem írható).
+create policy invoices_admin_update on public.invoices
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
 
 -- purchase_consents: saját hozzájárulás olvasása; admin mindent lát.
 create policy purchase_consents_select on public.purchase_consents
@@ -863,6 +870,7 @@ grant select, insert, update, delete on public.price_catalog to authenticated;
 grant select, update on public.profiles to authenticated;
 grant select on public.stripe_events to authenticated;
 grant select on public.invoices to authenticated;
+grant update (provider_invoice_id, provider_invoice_number) on public.invoices to authenticated;
 grant select on public.trial_usage to authenticated;
 grant select on public.purchase_consents to authenticated;
 grant select, update on public.admin_notifications to authenticated;

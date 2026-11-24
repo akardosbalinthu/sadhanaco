@@ -521,6 +521,27 @@ isOneToOne: false
               "current_stage_label": string,"display_name": string,"id": string,"is_current_member": boolean
             }[]
                            },
+"confirm_registration_payment":
+{ Args: { "p_registration_id": string }; Returns: {
+              "cancelled_at": string | null,
+"created_at": string,
+"event_id": string,
+"guest_email": string | null,
+"guest_name": string | null,
+"hold_expires_at": string | null,
+"id": string,
+"is_member_seat": boolean,
+"price_huf": number,
+"status": Database["public"]['Enums']["registration_status"],
+"tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
+"user_id": string | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "event_registrations"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "current_week":
 { Args: { "p_stage": number }; Returns: number
                            },
@@ -539,9 +560,35 @@ isOneToOne: false
 "kata_revenue_status":
 { Args: { "p_year"?: number }; Returns: Json
                            },
+"public_open_evenings":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "description": string,"ends_at": string,"id": string,"is_online": boolean,"location": string,"price_external_huf": number,"registration_open": boolean,"seats_left": number,"starts_at": string,"title": string
+            }[]
+                           },
 "purge_kind_message_phones":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
+"reserve_guest_seat":
+{ Args: { "p_event_id": string,"p_guest_email": string,"p_guest_name": string }; Returns: {
+              "cancelled_at": string | null,
+"created_at": string,
+"event_id": string,
+"guest_email": string | null,
+"guest_name": string | null,
+"hold_expires_at": string | null,
+"id": string,
+"is_member_seat": boolean,
+"price_huf": number,
+"status": Database["public"]['Enums']["registration_status"],
+"tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
+"user_id": string | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "event_registrations"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "revenue_region_for":
 { Args: { "p_country": string }; Returns: Database["public"]['Enums']["revenue_region"]
                            },
