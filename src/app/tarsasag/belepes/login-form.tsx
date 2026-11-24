@@ -27,7 +27,7 @@ export function LoginForm({ tovabb }: { tovabb?: string }) {
       <input type="hidden" name="tovabb" value={tovabb ?? ""} />
       <label className="block">
         <span className="mb-1.5 block text-sm text-ink-soft">E-mail-cím</span>
-        <div className="flex items-center gap-2 rounded-md border border-line bg-white/60 px-3 transition-colors duration-300 focus-within:border-gold">
+        <div className="flex items-center gap-2 rounded-md border border-line bg-paper-deep/60 px-3 transition-colors duration-300 focus-within:border-gold">
           <Mail className="h-4 w-4 text-ink-soft" strokeWidth={1.5} aria-hidden />
           <input
             type="email"

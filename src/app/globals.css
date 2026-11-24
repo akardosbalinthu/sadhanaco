@@ -23,6 +23,28 @@
   --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 }
 
+/*
+ * Sötét mód: ugyanazok a tokenek, sötét értékekkel. Alapból a látogató helyi ideje dönt
+ * (20:00–6:59 sötét), a fejléc kapcsolójával felülírható (src/components/theme.tsx).
+ */
+:root[data-theme="dark"] {
+  --color-paper: #121815;
+  --color-paper-deep: #19201c;
+  --color-moss: #9fbfa9;
+  --color-moss-soft: #8aa894;
+  --color-moss-tint: #1f2a24;
+  --color-ink: #ece8df;
+  --color-ink-soft: #b4b0a6;
+  --color-line: #2a332e;
+  --color-forest: #e6ebe2;
+  --color-gold: #cfa962;
+  --color-gold-soft: #3b3323;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
 html {
   background: var(--color-paper);
 }

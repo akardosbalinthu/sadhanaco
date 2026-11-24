@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { themeInitScript } from "@/components/theme";
 
 export const metadata: Metadata = {
   title: "Kardos Bálint · A Társaság",
@@ -12,7 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hu">
+    <html lang="hu" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-screen bg-paper text-ink antialiased">{children}</body>
     </html>
   );

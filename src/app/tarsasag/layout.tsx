@@ -2,6 +2,7 @@ import Link from "next/link";
 import { publicEnv } from "@/lib/env";
 import { tp } from "@/lib/site";
 import { SiteFooter } from "@/components/site-header";
+import { ThemeToggle } from "@/components/theme";
 
 export const metadata = {
   title: "A Társaság · Nyugodtabb idegrendszer, kedvesebb hétköznapok",
@@ -41,6 +42,7 @@ export default function TarsasagLayout({ children }: { children: React.ReactNode
             >
               Csatlakozás
             </a>
+            <ThemeToggle />
           </nav>
         </div>
       </header>

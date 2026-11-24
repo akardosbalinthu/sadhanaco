@@ -140,6 +140,6 @@ export const buttonPrimary =
 export const buttonSecondary =
   "inline-block rounded-md border border-forest px-5 py-2.5 text-sm text-forest transition-all duration-300 hover:border-gold hover:bg-gold-soft/40";
 export const inputClass =
-  "w-full rounded-md border border-line bg-white/60 px-3 py-2.5 outline-none transition-colors duration-300 focus:border-gold";
+  "w-full rounded-md border border-line bg-paper-deep/60 px-3 py-2.5 outline-none transition-colors duration-300 focus:border-gold";
 export const linkClass =
   "text-sm text-forest underline decoration-gold/60 underline-offset-4 transition-colors duration-300 hover:text-gold";

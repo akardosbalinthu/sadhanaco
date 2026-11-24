@@ -2,6 +2,7 @@ import Link from "next/link";
 import { publicEnv } from "@/lib/env";
 import { SITE } from "@/lib/site";
 import { CompassDivider } from "@/components/ornaments";
+import { ThemeToggle } from "@/components/theme";
 
 const nav = [
   { href: "/", label: "Kezdőlap" },
@@ -31,6 +32,7 @@ export function SiteHeader() {
           >
             A Társaság
           </a>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
