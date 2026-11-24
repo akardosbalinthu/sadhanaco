@@ -1199,10 +1199,20 @@ select p.id,
 -- -----------------------------------------------------------------------------
 -- Jogok
 -- -----------------------------------------------------------------------------
-revoke execute on all functions in schema public from public, anon;
+-- Explicit, a migrációt futtató szerepkör alapértelmezett jogaitól függetlenül:
+-- alapból senki (az authenticated sem) hívhat semmit; alább csak az engedélyezettek.
+revoke execute on all functions in schema public from public, anon, authenticated;
 revoke all on public.post_feed from anon, authenticated;
 grant select on public.post_feed to authenticated;
 
+grant execute on function public.budapest_today() to authenticated;
+grant execute on function public.is_admin() to authenticated;
+grant execute on function public.is_superadmin() to authenticated;
+grant execute on function public.has_member_access() to authenticated;
+grant execute on function public.is_paying_member() to authenticated;
+grant execute on function public.can_access_stage(smallint) to authenticated;
+grant execute on function public.current_week(smallint) to authenticated;
+grant execute on function public.can_access_lesson(uuid, smallint) to authenticated;
 grant execute on function public.book_event(uuid) to authenticated;
 grant execute on function public.send_free_kind_message(text, text, text) to authenticated;
 grant execute on function public.book_free_consultation(timestamptz, text) to authenticated;

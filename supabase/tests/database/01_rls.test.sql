@@ -4,7 +4,7 @@
 -- =============================================================================
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(31);
+select plan(32);
 
 -- ---- Teszt-segédek (pg_temp: csak ebben a munkamenetben léteznek) ----------
 create function pg_temp.mk_user(
@@ -53,6 +53,16 @@ select is(
     where n.nspname = 'public' and c.relkind = 'r'
       and not exists (select 1 from pg_policies p where p.schemaname = 'public' and p.tablename = c.relname)),
   0, 'nincs policy nélküli tábla');
+select is(
+  (select count(*)::int from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname = 'public'
+      and p.proname in ('run_scheduled_tasks', '_revenue_status_internal', 'purge_kind_message_phones',
+                        'membership_trial_started', 'membership_payment_succeeded', 'membership_payment_failed',
+                        'membership_ended', 'membership_stage_purchased', 'reserve_guest_seat',
+                        'confirm_registration_payment', 'handle_new_user')
+      and (has_function_privilege('authenticated', p.oid, 'execute')
+           or has_function_privilege('anon', p.oid, 'execute'))),
+  0, 'belső / szerveroldali függvényekhez a kliens szerepköröknek nincs joga');
 select is(
   (select count(*)::int from pg_proc p join pg_namespace n on n.oid = p.pronamespace
     where n.nspname = 'public' and p.prosecdef
