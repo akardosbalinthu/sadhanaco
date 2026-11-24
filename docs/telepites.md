@@ -25,11 +25,13 @@ Vercel → Account Settings → Authentication → GitHub, majd a projektben Set
 ## 3. Környezeti változók
 
 Már beállítva: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_TARSASAG_URL`, `ONLINE_PAYMENTS_ENABLED=false`,
-`RESEND_FROM_EMAIL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (publikus).
+`RESEND_FROM_EMAIL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (publikus),
+`RESEND_API_KEY` (csak küldés, csak az akardosbalint.hu domainről), `INTERNAL_API_SECRET`, `CRON_SECRET`.
 
-Hiányzik (titkok — a Vercel felületén add meg, ne a chatben):
-`SUPABASE_SERVICE_ROLE_KEY` (Supabase → Project Settings → API),
-`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `INTERNAL_API_SECRET`.
+Hiányzik (titkok — ezeket semmilyen integráción keresztül nem lehet kiolvasni, a Vercel felületén add meg):
+`SUPABASE_SERVICE_ROLE_KEY` (Supabase → Project Settings → API keys → secret / service_role),
+`STRIPE_SECRET_KEY` (Stripe → Developers → API keys). `STRIPE_WEBHOOK_SECRET` a 2. fázisban,
+a webhook-végpont létrehozásakor keletkezik.
 Opcionális: `NEXT_PUBLIC_PODCAST_SPOTIFY_URL`, `NEXT_PUBLIC_PODCAST_APPLE_URL`.
 
 ## 4. Supabase (éles: `kqvxosoqmwscymaoqhyj`)
