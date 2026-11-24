@@ -45,9 +45,10 @@ grant execute on all functions in schema pg_temp to authenticated;
 create function pg_temp.as_service() returns void language sql as $f$
   select set_config('request.jwt.claims', '{"role":"service_role"}', true);
 $f$;
+update public.app_settings set superadmin_emails = array['owner@example.test'];
 
 select pg_temp.mk_user('uj@example.test', 'none', 'none') as u \gset
-select pg_temp.mk_user('akardosbalint.hu@gmail.com', 'belso_kor', 'active') as sa \gset
+select pg_temp.mk_user('owner@example.test', 'belso_kor', 'active') as sa \gset
 select pg_temp.mk_user('masik@example.test', 'tarsasagi', 'active') as other \gset
 
 -- ---- Állapotátmenetek csak szerverről ------------------------------------------------

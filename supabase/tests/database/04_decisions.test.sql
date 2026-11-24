@@ -41,15 +41,16 @@ exception when others then
 end $f$;
 grant execute on all functions in schema pg_temp to authenticated;
 -- ---------------------------------------------------------------------------
+update public.app_settings set superadmin_emails = array['owner@example.test'];
 
 -- ---- Superadmin ---------------------------------------------------------------
-select pg_temp.mk_user('akardosbalint.hu@gmail.com', 'belso_kor', 'active') as sa \gset
+select pg_temp.mk_user('owner@example.test', 'belso_kor', 'active') as sa \gset
 select pg_temp.mk_user('admin2@example.test', 'tarsasagi', 'active') as adm \gset
 select pg_temp.mk_user('tag2@example.test', 'tarsasagi', 'active') as tag \gset
 update public.profiles set role = 'admin' where id = :'adm';
 
 select is((select role::text from public.profiles where id = :'sa'), 'superadmin',
-          'a megadott e-mail-cím regisztrációkor superadmin lesz');
+          'az app_settings.superadmin_emails címe regisztrációkor superadmin lesz');
 select is((select role::text from public.profiles where id = :'tag'), 'member',
           'mindenki más tagként indul');
 

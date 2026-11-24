@@ -63,7 +63,8 @@ create table public.app_settings (
   -- 'manual': a számlát Bálint kézzel állítja ki (jelenleg), az admin utólag rögzíti a sorszámot.
   invoice_provider                 text not null default 'manual' check (invoice_provider in ('manual', 'billingo')),
   -- Ezek az e-mail-címek regisztrációkor automatikusan superadmin szerepkört kapnak.
-  superadmin_emails                text[] not null default array['akardosbalint.hu@gmail.com'],
+  -- Személyes adat, ezért a migrációban nincs; telepítéskor egyszer kell beállítani (docs/telepites.md).
+  superadmin_emails                text[] not null default '{}',
   terms_version                    text not null default '2026-11',
   trial_days                       smallint not null default 7 check (trial_days between 0 and 30),
   -- Események

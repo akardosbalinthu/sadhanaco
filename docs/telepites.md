@@ -41,6 +41,9 @@ Opcionális: `NEXT_PUBLIC_PODCAST_SPOTIFY_URL`, `NEXT_PUBLIC_PODCAST_APPLE_URL`.
 4. Auth → Emails → SMTP: Resend (`smtp.resend.com`, feladó `balint@akardosbalint.hu`);
    a Magic Link sablon: `supabase/templates/magic_link.html`
 5. Database → Extensions: `pg_cron` (a 003-as migráció ütemezi a feladatokat)
+6. **Superadmin beállítása** (SQL Editor, egyszer — a cím személyes adat, ezért nincs a migrációban):
+   `update public.app_settings set superadmin_emails = array['<a te e-mail-címed>'];`
+   Ha a fiók már létezik: `update public.profiles set role = 'superadmin' where email = '<cím>';`
 
 ## 5. Stripe
 
