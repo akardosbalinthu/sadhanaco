@@ -1,0 +1,47 @@
+# Élesítés — akardosbalint.hu + tarsasag.akardosbalint.hu
+
+Vercel: csapat `akardosbalint1`, projekt **`akardosbalint`** (`prj_0zrZ01CMABrSU2OGOAcJcOO4Zsnw`),
+függvényrégió `dub1` (Dublin — a Supabase `eu-west-1` mellett).
+
+## 1. DNS (a domain szolgáltatójánál) — csak hozzáadás, a Zoho MX-rekordokhoz nem nyúlunk
+
+| Típus | Név | Érték |
+| --- | --- | --- |
+| TXT | `_vercel` | `vc-domain-verify=akardosbalint.hu,1c4bfb576e43a6181193` |
+| TXT | `_vercel` | `vc-domain-verify=tarsasag.akardosbalint.hu,0adccac7c57545a40674` |
+| TXT | `_vercel` | `vc-domain-verify=www.akardosbalint.hu,5608bd3b49c746226f06` |
+| A | `@` | `216.198.79.1` (ha még nincs) |
+| CNAME | `tarsasag` | a Vercel által a domain beállításainál kiírt cél |
+| CNAME | `www` | a Vercel által a domain beállításainál kiírt cél |
+
+A `www` 308-cal átirányít az `akardosbalint.hu`-ra.
+
+## 2. Git-kapcsolat
+
+A Vercel-fiókhoz még nincs GitHub Login Connection, ezért a projekt Git nélkül jött létre.
+Vercel → Account Settings → Authentication → GitHub, majd a projektben Settings → Git →
+`akardosbalinthu/sadhanaco`. (A kód feltöltéséhez a Claude GitHub App is kell a repón.)
+
+## 3. Környezeti változók
+
+Már beállítva (production): `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_TARSASAG_URL`,
+`ONLINE_PAYMENTS_ENABLED=false`, `RESEND_FROM_EMAIL`.
+
+Hiányzik (titkok — a Vercel felületén add meg, ne a chatben):
+`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
+`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `INTERNAL_API_SECRET`.
+Opcionális: `NEXT_PUBLIC_PODCAST_SPOTIFY_URL`, `NEXT_PUBLIC_PODCAST_APPLE_URL`.
+
+## 4. Supabase (éles: `kqvxosoqmwscymaoqhyj`) — csak Bálint jóváhagyásával
+
+1. `npx supabase link --project-ref kqvxosoqmwscymaoqhyj`
+2. `npx supabase db push --include-seed` (migrációk + tananyag-ív + árlista)
+3. Auth → URL Configuration: Site URL `https://tarsasag.akardosbalint.hu`, Redirect URL
+   `https://tarsasag.akardosbalint.hu/auth/confirm`
+4. Auth → Emails → SMTP: Resend (`smtp.resend.com`, feladó `balint@akardosbalint.hu`);
+   a Magic Link sablon: `supabase/templates/magic_link.html`
+5. Database → Extensions: `pg_cron` (a 003-as migráció ütemezi a feladatokat)
+
+## 5. Stripe
+
+Sikertelen terhelés: lásd `docs/stripe-katalogus.md`. Webhook-végpont: 2. fázis.
