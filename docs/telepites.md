@@ -46,10 +46,10 @@ Opcionális: `NEXT_PUBLIC_PODCAST_SPOTIFY_URL`, `NEXT_PUBLIC_PODCAST_APPLE_URL`.
 
 ## 4. Supabase (éles: `kqvxosoqmwscymaoqhyj`)
 
-**Kész (2026-11-24, Bálint jóváhagyásával):** mind az 5 migráció és a seed (4 lépcső, 16 ár) fent van;
+**Kész (2026-11-24, Bálint jóváhagyásával):** mind a 6 migráció és a seed (4 lépcső, 16 ár) fent van;
 28 tábla, mindegyiken ENABLE + FORCE RLS és legalább egy policy; a pg_cron két feladata ütemezve.
 Az 5. migrációt (`20261124150000_kind_messages_xp_compass`) Bálint az SQL Editorban futtatta, a
-migrációs előzménybe utólag bejegyezve. A helyi migrációs fájlnevek az éles verziószámokat viselik,
+migrációs előzménybe utólag bejegyezve. A 6. (`20261124170000_leaderboard`) az MCP-n keresztül ment fel; a verziószámát az előzményben a helyi fájlhoz igazítottuk, hogy a sorrend (005 → 006) megmaradjon. A helyi migrációs fájlnevek az éles verziószámokat viselik,
 így a későbbi `supabase db push` csak az újakat viszi fel. A Supabase biztonsági tanácsadó csak a
 szándékosan a kliensnek engedett RPC-ket jelzi (mindegyik saját jogosultság-ellenőrzéssel).
 
