@@ -36,7 +36,7 @@ const paths = [
   {
     icon: Leaf,
     title: "A Társaság",
-    text: "Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve. Kedvesség, figyelmesség, tudatosság, segítőkészség, és havonta egy közös túra.",
+    text: "Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve. Négy rend, napi küldetések, saját karakterkártya és havonta egy közös túra.",
     href: publicEnv.NEXT_PUBLIC_TARSASAG_URL,
     cta: "A Társaságról",
     external: true,
@@ -78,7 +78,7 @@ export default function HomePage() {
               </span>
             </>
           );
-          const cls = "flex flex-col rounded-lg border border-line bg-paper-deep/50 p-6 hover:border-moss-soft";
+          const cls = "flex flex-col rounded-lg border border-line bg-paper-deep/50 p-6 transition-all duration-300 hover:border-gold/60";
           return external ? (
             <a key={title} href={href} className={cls}>
               {body}
