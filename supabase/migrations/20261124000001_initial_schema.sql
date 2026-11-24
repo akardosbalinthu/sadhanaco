@@ -69,7 +69,7 @@ create table public.app_settings (
   -- Események
   event_member_quota_ratio         numeric(3,2) not null default 0.50 check (event_member_quota_ratio > 0 and event_member_quota_ratio <= 1),
   belso_kor_priority_hours         smallint not null default 48 check (belso_kor_priority_hours >= 0),
-  payment_hold_minutes             smallint not null default 30 check (payment_hold_minutes > 0),
+  payment_hold_minutes             smallint not null default 35 check (payment_hold_minutes >= 31),  -- > Stripe Checkout 31 perc
   -- Sikertelen megújítás: a hozzáférés ennyi napig megmarad (a Stripe ezalatt újrapróbálkozik),
   -- utána szünetel. Megszűnés (és ezzel újrakezdés) csak a Stripe-előfizetés lezárásakor.
   past_due_grace_days              smallint not null default 10 check (past_due_grace_days between 0 and 30),

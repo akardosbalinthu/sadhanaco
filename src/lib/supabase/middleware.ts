@@ -1,25 +1,31 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/** Útvonalak, amelyek bejelentkezés nélkül is elérhetők. */
-const PUBLIC_PATHS = ["/", "/belepes", "/auth"];
-/** Gépi végpontok: saját titokkal védettek (webhook aláírás, CRON_SECRET, INTERNAL_API_SECRET). */
-const MACHINE_PATHS = ["/api/webhooks", "/api/cron", "/api/internal"];
+/** A Társaság belső (átírt) útvonalai közül ezek nyilvánosak. */
+const PUBLIC_TARSASAG_PATHS = ["/tarsasag", "/tarsasag/belepes", "/tarsasag/auth"];
 
-function isPublic(pathname: string) {
-  return (
-    PUBLIC_PATHS.some((p) => pathname === p || (p !== "/" && pathname.startsWith(`${p}/`))) ||
-    MACHINE_PATHS.some((p) => pathname.startsWith(p))
-  );
+function isPublicTarsasagPath(pathname: string) {
+  return PUBLIC_TARSASAG_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
 
 /**
- * Frissíti a Supabase munkamenetet minden kérésnél, és a védett oldalakról
- * a belépési oldalra irányít. Ez csak kényelmi réteg: a tényleges jogosultság-
- * ellenőrzés mindig szerveroldalon és RLS-sel történik.
+ * Supabase munkamenet frissítése a Társaság oldalain, és a védett oldalakról
+ * a belépési oldalra irányítás. Ez csak kényelmi réteg: a tényleges
+ * jogosultság-ellenőrzés mindig szerveroldalon és RLS-sel történik.
+ *
+ * @param internalPath  a belső útvonal (/tarsasag/...), aldomainről érkező kérésnél már átírva
+ * @param rewriteTo     ha meg van adva, a választ erre az URL-re írjuk át (aldomain)
+ * @param basePath      a böngésző felé használt előtag ("" aldomainen, "/tarsasag" helyben)
  */
-export async function updateSession(request: NextRequest) {
-  let response = NextResponse.next({ request });
+export async function updateSession(
+  request: NextRequest,
+  internalPath: string,
+  basePath: string,
+  rewriteTo?: URL,
+) {
+  const makeResponse = () =>
+    rewriteTo ? NextResponse.rewrite(rewriteTo, { request }) : NextResponse.next({ request });
+  let response = makeResponse();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -31,7 +37,7 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          response = NextResponse.next({ request });
+          response = makeResponse();
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options),
           );
@@ -45,11 +51,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { pathname } = request.nextUrl;
-  if (!user && !isPublic(pathname)) {
+  if (!user && !isPublicTarsasagPath(internalPath)) {
     const url = request.nextUrl.clone();
-    url.pathname = "/belepes";
-    url.searchParams.set("tovabb", pathname);
+    url.pathname = `${basePath}/belepes`;
+    url.search = "";
+    url.searchParams.set("tovabb", request.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 

@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { publicEnv } from "@/lib/env";
+import { tp } from "@/lib/site";
 
 export type LoginState =
   | { status: "idle" }
@@ -16,7 +17,7 @@ const schema = z.object({
 
 /** Csak belső, relatív útvonalra engedünk visszairányítani (open redirect ellen). */
 function safeNext(next: string | undefined) {
-  if (!next || !next.startsWith("/") || next.startsWith("//")) return "/gyakorlas";
+  if (!next || !next.startsWith("/") || next.startsWith("//")) return tp("/gyakorlas");
   return next;
 }
 
@@ -30,7 +31,7 @@ export async function sendMagicLink(_prev: LoginState, formData: FormData): Prom
   }
 
   const supabase = await createClient();
-  const redirect = new URL("/auth/confirm", publicEnv.NEXT_PUBLIC_SITE_URL);
+  const redirect = new URL(`${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/auth/confirm`);
   redirect.searchParams.set("next", safeNext(parsed.data.tovabb));
 
   const { error } = await supabase.auth.signInWithOtp({

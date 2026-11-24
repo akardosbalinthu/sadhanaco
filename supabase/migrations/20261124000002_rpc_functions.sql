@@ -158,8 +158,8 @@ $$;
 -- -----------------------------------------------------------------------------
 -- Külsős (bejelentkezés nélküli) helyfoglalás a Nyílt Estre — CSAK service role.
 -- A weboldal szerveroldali kódja hívja a Stripe Checkout indítása előtt;
--- a helyet payment_hold_minutes (30 perc = a Stripe Checkout minimális
--- lejárata) idejére tartja, a fizetés után confirm_registration_payment() erősíti meg.
+-- a helyet payment_hold_minutes (35 perc; a Stripe Checkout 31 perc után lejár, így
+-- lejárt munkamenetből nem jöhet fizetés tartott hely nélkül) idejére tartja, a fizetés után confirm_registration_payment() erősíti meg.
 -- A tagi 50%-os kvóta nem érinti: külsős a teljes kapacitásig foglalhat.
 -- -----------------------------------------------------------------------------
 create or replace function public.reserve_guest_seat(
