@@ -1,6 +1,6 @@
 import { LoginForm } from "./login-form";
 
-export const metadata = { title: "Belépés · Sadhana Társaság" };
+export const metadata = { title: "Belépés · A Társaság" };
 
 export default async function LoginPage({
   searchParams,

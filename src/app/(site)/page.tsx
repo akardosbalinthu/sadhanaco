@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Headphones, Leaf } from "lucide-react";
+import { ArrowRight, CalendarDays, Heart, Leaf, Newspaper } from "lucide-react";
 import { publicEnv } from "@/lib/env";
 
 export const metadata = {
@@ -18,17 +18,25 @@ const paths = [
     external: false,
   },
   {
-    icon: Headphones,
-    title: "Podcast",
-    text: "5–10 perces epizódok a stressz, a légzés és a figyelem neurobiológiájáról.",
-    href: "/podcast",
-    cta: "Az epizódokhoz",
+    icon: Heart,
+    title: "Egy Kedves Üzenet",
+    text: "Hálaüzenetek, amelyeket meglepetés-telefonhívásban adok át annak, akinek szólnak.",
+    href: "/egy-kedves-uzenet",
+    cta: "Hogyan működik",
+    external: false,
+  },
+  {
+    icon: Newspaper,
+    title: "Napi Közlöny",
+    text: "Reggeli, kinyomtatott újság a telefon helyett — értesítési zaj nélkül.",
+    href: "/napi-kozlony",
+    cta: "Bővebben",
     external: false,
   },
   {
     icon: Leaf,
-    title: "Sadhana Idegrendszerfejlesztő Társaság",
-    text: "Közös gyakorlótér lépcsőzetes tananyaggal és egy közösséggel, ahol tapasztalatot osztunk meg, nem tanácsot.",
+    title: "A Társaság",
+    text: "Közös gyakorlótér: idegrendszer-fejlesztés, és mellette kedvesség, figyelmesség, tudatosság és segítőkészség.",
     href: publicEnv.NEXT_PUBLIC_TARSASAG_URL,
     cta: "A Társaságról",
     external: true,
@@ -52,11 +60,10 @@ export default function HomePage() {
           <li>Életmód-orvostani konzulens</li>
           <li>RYT-500 jógaoktató (Rishikesh, India — 500 órás képzés)</li>
           <li>Az Egy Kedves Üzenet házigazdája</li>
-          <li>Az Integrált meditációs és idegrendszer-fejlesztő podcast alkotója</li>
         </ul>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-3">
+      <section className="grid gap-6 sm:grid-cols-2">
         {paths.map(({ icon: Icon, title, text, href, cta, external }) => {
           const body = (
             <>

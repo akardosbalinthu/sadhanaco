@@ -15,7 +15,7 @@ export default async function OpenEveningsPage() {
       <h1 className="font-serif text-3xl">Nyílt Meditációs Estek</h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         Havonta egyszer, Budapesten, kis csoportban (legfeljebb 15 fő). Vezetett légzés- és
-        figyelemgyakorlatok egy nyugodt estén. Külsősöknek és a Sadhana Társaság tagjainak egyaránt
+        figyelemgyakorlatok egy nyugodt estén. Külsősöknek és a Társaság tagjainak egyaránt
         nyitott — a helyek fele mindig külsősöknek marad.
       </p>
 

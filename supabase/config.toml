@@ -262,10 +262,10 @@ otp_expiry = 3600
 # user = "resend"
 # pass = "env(RESEND_API_KEY)"
 # admin_email = "balint@akardosbalint.hu"
-# sender_name = "Kardos Bálint · Sadhana Társaság"
+# sender_name = "Kardos Bálint · A Társaság"
 
 [auth.email.template.magic_link]
-subject = "Belépő link · Sadhana Társaság"
+subject = "Belépő link · A Társaság"
 content_path = "./supabase/templates/magic_link.html"
 
 # Uncomment to customize email template

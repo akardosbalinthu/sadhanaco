@@ -186,6 +186,12 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Díjmentes Kedves Üzenet és Privát Közlöny PRO:** az első sikeres fizetés napjától jár; próbaidő alatt nem.
 - **Ütemezések:** a hó 1-jei keret-visszaállítás, a pénteki kör és a bevételi figyelmeztetés az adatbázisban fut (pg_cron óránként, Budapest-idő szerinti ellenőrzéssel), így nem kell hozzá Vercel Cron.
 
+### 7.10 Döntések (2026. november 24., harmadik kör)
+- **Új név:** a „Sadhana Idegrendszerfejlesztő Társaság” neve mostantól **„A Társaság”**. A fókusz: az idegrendszer-fejlesztés mellett **a kedvesség, a figyelmesség, a tudatosság és a segítőkészség**. A dokumentum korábbi elnevezései így értendők.
+- **Privát Közlöny → Napi Közlöny.** (Az adatbázisban a jogosultsági mező neve technikai okból `privat_kozlony_pro` marad.)
+- **Nincs szakmai podcast** — a weboldalról lekerült.
+- **A fő weboldalon saját aloldal** van az Egy Kedves Üzenetnek (`/egy-kedves-uzenet`) és a Napi Közlönynek (`/napi-kozlony`).
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

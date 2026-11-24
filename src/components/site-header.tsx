@@ -5,7 +5,8 @@ import { SITE } from "@/lib/site";
 const nav = [
   { href: "/", label: "Kezdőlap" },
   { href: "/nyilt-estek", label: "Nyílt Estek" },
-  { href: "/podcast", label: "Podcast" },
+  { href: "/egy-kedves-uzenet", label: "Egy Kedves Üzenet" },
+  { href: "/napi-kozlony", label: "Napi Közlöny" },
 ];
 
 export function SiteHeader() {
@@ -22,10 +23,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className="hover:text-moss">
-            Sadhana Társaság
-          </a>
-          <a href={SITE.egyKedvesUzenetUrl} className="hover:text-moss" rel="noopener">
-            Egy Kedves Üzenet
+            A Társaság
           </a>
         </nav>
       </div>

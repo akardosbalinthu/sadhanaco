@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { tp } from "@/lib/site";
 
-export const metadata = { title: "Gyakorlás · Sadhana Társaság" };
+export const metadata = { title: "Gyakorlás · A Társaság" };
 
 /** Ideiglenes védett kezdőoldal — a tényleges tartalom a későbbi fázisokban jön. */
 export default async function PracticePage() {

@@ -16,7 +16,7 @@ const TIERS = [
       "I. Modul (Jelenlét) + I. Integrációs Program — 8+1 hét, azonnal",
       "Heti online közös meditáció, havi Q&A felvételek",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
-      "Privát Közlöny PRO a tagság ideje alatt",
+      "Napi Közlöny PRO a tagság ideje alatt",
       "Kedvezményes részvétel a Nyílt Esteken és az Élő Gyakorlónapokon",
     ],
   },
@@ -44,12 +44,17 @@ export default async function TarsasagHome() {
     <main className="mx-auto max-w-4xl px-6 py-16">
       <section className="max-w-2xl">
         <Leaf className="mb-8 h-6 w-6 text-moss" strokeWidth={1.5} aria-hidden />
-        <h1 className="font-serif text-3xl sm:text-4xl">Sadhana Idegrendszerfejlesztő Társaság</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl">A Társaság</h1>
         <p className="mt-3 text-sm tracking-wide text-moss-soft">Jelenlét – Tudatosság – Szabadság</p>
         <p className="mt-8 text-ink-soft">
-          Csendes, közös gyakorlótér. Nem tanácsokat osztunk egymásnak, hanem megosztjuk, mit
-          tapasztalunk a légzéssel, a figyelemmel és a saját idegrendszerünkkel. A tananyag négy
-          egymásra épülő lépcsőben halad; a továbblépés előtt mindig beszélünk egy rövidet.
+          Csendes, közös gyakorlótér. Az idegrendszer-fejlesztés mellett négy dologra figyelünk
+          különösen: a kedvességre, a figyelmességre, a tudatosságra és a segítőkészségre — egymás
+          felé és a hétköznapokban is.
+        </p>
+        <p className="mt-4 text-ink-soft">
+          Nem tanácsokat osztunk egymásnak, hanem megosztjuk, mit tapasztalunk a légzéssel, a
+          figyelemmel és a saját idegrendszerünkkel. A tananyag négy egymásra épülő lépcsőben halad; a
+          továbblépés előtt mindig beszélünk egy rövidet.
         </p>
         <div className="mt-10">
           <Link

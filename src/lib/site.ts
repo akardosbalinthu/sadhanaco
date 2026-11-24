@@ -1,7 +1,7 @@
 /**
  * Egy Next.js app két felülettel:
  *  - akardosbalint.hu           — fő weboldal (nyilvános)
- *  - tarsasag.akardosbalint.hu  — Sadhana Társaság (élesben aldomain; a middleware
+ *  - tarsasag.akardosbalint.hu  — A Társaság (élesben aldomain; a middleware
  *                                 belsőleg a /tarsasag útvonalakra írja át)
  * Helyi fejlesztésben a Társaság a http://localhost:3000/tarsasag címen érhető el.
  */
@@ -40,11 +40,6 @@ export const SITE = {
   name: "Kardos Bálint",
   email: "info@akardosbalint.hu",
   egyKedvesUzenetUrl: "https://egykedvesuzenet.hu",
-  /** A podcast-linkek még nincsenek megadva — üresen a felület „hamarosan” jelzést mutat. */
-  podcast: {
-    spotify: process.env.NEXT_PUBLIC_PODCAST_SPOTIFY_URL ?? "",
-    apple: process.env.NEXT_PUBLIC_PODCAST_APPLE_URL ?? "",
-  },
 } as const;
 
 const hufFormatter = new Intl.NumberFormat("hu-HU", { maximumFractionDigits: 0 });

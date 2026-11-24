@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sadhana Idegrendszerfejlesztő Társaság",
-  description: "Jelenlét – Tudatosság – Szabadság. Közös gyakorlótér Kardos Bálinttal.",
+  title: "Kardos Bálint · A Társaság",
+  description: "Jelenlét – Tudatosság – Szabadság. Kardos Bálint és A Társaság.",
 };
 
 export default function RootLayout({

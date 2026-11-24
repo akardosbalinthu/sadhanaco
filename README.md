@@ -1,9 +1,9 @@
-# Sadhana Idegrendszerfejlesztő Társaság
+# Kardos Bálint — weboldal és A Társaság
 
 Next.js 15 (App Router, TypeScript strict) + Supabase webalkalmazás — **egy app, két felület**:
 
-- `akardosbalint.hu` — fő weboldal (`src/app/(site)`): bemutatkozás, Nyílt Estek nyilvános jelentkezéssel, podcast, impresszum
-- `tarsasag.akardosbalint.hu` — Sadhana Társaság (`src/app/tarsasag`); a middleware az aldomain kéréseit a `/tarsasag` útvonalakra írja át. Helyben: http://localhost:3000/tarsasag
+- `akardosbalint.hu` — fő weboldal (`src/app/(site)`): bemutatkozás, Nyílt Estek nyilvános jelentkezéssel, Egy Kedves Üzenet, Napi Közlöny, impresszum
+- `tarsasag.akardosbalint.hu` — A Társaság (`src/app/tarsasag`); a middleware az aldomain kéréseit a `/tarsasag` útvonalakra írja át. Helyben: http://localhost:3000/tarsasag
 A kötelező érvényű specifikáció: [`CLAUDE.md`](./CLAUDE.md) (a 7. pont felülír mindent).
 
 ## Helyi fejlesztés
