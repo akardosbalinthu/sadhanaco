@@ -143,3 +143,22 @@ test("visszatérő tag: a már megadott nevet a csatlakozás nem írja felül", 
   await processStripeEvent(checkout(emailB, custB, subB), deps);
   assert.equal((await profile(emailB)).display_name, 'Nagy Béla "Béci"');
 });
+
+test("kereten felüli Kedves Üzenet: fizetés után sorba áll, egy számlatétel, ismételt eseményre sem kettő", async () => {
+  const sender = await profile(emailA);
+  await admin.from("profiles").update({ tier: "tarsasagi", subscription_status: "active" }).eq("id", sender.id);
+  const { data: msgId, error } = await admin.rpc("create_paid_kind_message", {
+    p_sender: sender.id, p_recipient_name: "Anyu", p_recipient_phone: "+36301234567", p_message: "Köszönöm.", p_amount_huf: 5000,
+  });
+  assert.equal(error, null);
+  const session = { id: `cs_km_${run}`, payment_status: "paid", amount_total: 500000, payment_intent: `pi_km_${run}`,
+    metadata: { kind: "kind_message", message_id: msgId }, customer_details: { address: { country: "HU" } } };
+  assert.equal(await processStripeEvent(ev("checkout.session.completed", session), deps), "processed");
+  const { data: m } = await admin.from("kind_messages").select("status, invoice_id, amount_huf").eq("id", msgId!).single();
+  assert.equal(m?.status, "queued");
+  assert.ok(m?.invoice_id, "a számlatétel az üzenethez kötve");
+  // Új esemény-azonosítóval érkező ismétlés (pl. async_payment_succeeded): nem rögzít újabb tételt.
+  await processStripeEvent(ev("checkout.session.async_payment_succeeded", session), deps);
+  const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_km_${run}`);
+  assert.deepEqual(invs, [{ amount_huf: 5000, product_code: "kedves_uzenet_extra" }]);
+});

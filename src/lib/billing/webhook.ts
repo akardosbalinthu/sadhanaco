@@ -72,14 +72,14 @@ async function recordInvoice(
   admin: Admin,
   row: { userId: string | null; code: string; amount: number; country: string | null; stripeInvoiceId: string | null; paymentIntentId: string | null },
 ) {
-  if (row.amount <= 0) return;
+  if (row.amount <= 0) return null;
   const country = (row.country ?? "HU").toUpperCase().slice(0, 2);
   const [{ data: settings }, { data: region }, { data: price }] = await Promise.all([
     admin.from("app_settings").select("billing_entity, invoice_provider").single(),
     admin.rpc("revenue_region_for", { p_country: country }),
     admin.from("price_catalog").select("label").eq("code", row.code).maybeSingle(),
   ]);
-  const { error } = await admin.from("invoices").upsert(
+  const { data: saved, error } = await admin.from("invoices").upsert(
     {
       user_id: row.userId,
       stripe_invoice_id: row.stripeInvoiceId,
@@ -93,8 +93,9 @@ async function recordInvoice(
       billing_entity: settings?.billing_entity ?? {},
     },
     { onConflict: "stripe_invoice_id", ignoreDuplicates: true },
-  );
+  ).select("id");
   if (error) throw new Error(`A számlatétel rögzítése nem sikerült: ${error.message}`);
+  return saved?.[0]?.id ?? null;
 }
 
 async function rpcOrThrow(p: PromiseLike<{ error: { message: string } | null }>, what: string) {
@@ -116,6 +117,28 @@ async function onCheckoutCompleted(s: Stripe.Checkout.Session, d: WebhookDeps) {
       stripeInvoiceId: null,
       paymentIntentId: idOf(s.payment_intent),
     });
+    return;
+  }
+
+  if (kind === "kind_message") {
+    if (s.payment_status !== "paid" || !s.metadata?.message_id) return;
+    const messageId = s.metadata.message_id;
+    // Idempotens: az ismételt esemény nem rögzít új tételt (a stripe_events is szűr).
+    const { data: msg } = await d.admin.from("kind_messages").select("status, sender_id, invoice_id").eq("id", messageId).maybeSingle();
+    if (!msg) throw new Error(`Ismeretlen Kedves Üzenet: ${messageId}`);
+    if (!msg.invoice_id) {
+      const invoiceId = await recordInvoice(d.admin, {
+        userId: msg.sender_id,
+        code: "kedves_uzenet_extra",
+        amount: hufFromStripe(s.amount_total ?? 0),
+        country: s.customer_details?.address?.country ?? null,
+        stripeInvoiceId: null,
+        paymentIntentId: idOf(s.payment_intent),
+      });
+      // Azonnal az üzenethez kötjük, hogy egy újrapróbált esemény ne rögzítsen második tételt.
+      if (invoiceId) await d.admin.from("kind_messages").update({ invoice_id: invoiceId }).eq("id", messageId);
+    }
+    await rpcOrThrow(d.admin.rpc("confirm_paid_kind_message", { p_message: messageId }), "Kedves Üzenet sorba állítása");
     return;
   }
 

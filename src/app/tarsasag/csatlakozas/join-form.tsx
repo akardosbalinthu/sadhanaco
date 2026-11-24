@@ -1,5 +1,6 @@
 "use client";
 
+import { keepFields } from "@/lib/keep-fields";
 import { useActionState, useState } from "react";
 import { buttonPrimary, inputClass } from "@/components/ornaments";
 import { publicEnv } from "@/lib/env";
@@ -16,7 +17,7 @@ export function JoinForm({ plans, defaultPlan }: { plans: PlanOption[]; defaultP
   const [plan, setPlan] = useState(defaultPlan);
 
   return (
-    <form action={action} className="space-y-6">
+    <form onSubmit={keepFields(action)} className="space-y-6">
       <fieldset className="grid gap-3 sm:grid-cols-2">
         <legend className="mb-3 text-sm text-ink-soft">Válassz csomagot</legend>
         {plans.map((p) => (

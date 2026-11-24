@@ -1,5 +1,6 @@
 "use client";
 
+import { keepFields } from "@/lib/keep-fields";
 import { buttonPrimary } from "@/components/ornaments";
 import { useActionState } from "react";
 import { Mail } from "lucide-react";
@@ -23,7 +24,7 @@ export function LoginForm({ tovabb }: { tovabb?: string }) {
   }
 
   return (
-    <form action={action} className="space-y-4">
+    <form onSubmit={keepFields(action)} className="space-y-4">
       <input type="hidden" name="tovabb" value={tovabb ?? ""} />
       <label className="block">
         <span className="mb-1.5 block text-sm text-ink-soft">E-mail-cím</span>

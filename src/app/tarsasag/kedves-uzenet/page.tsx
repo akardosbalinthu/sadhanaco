@@ -3,6 +3,7 @@ import { publicEnv } from "@/lib/env";
 import { MemberNav } from "@/components/member-nav";
 import { GildedCard } from "@/components/ornaments";
 import { KindMessageForm } from "@/components/kind-message-form";
+import { onlinePaymentsEnabled } from "@/lib/stripe";
 import { sendMemberMessage } from "./actions";
 
 export const metadata = { title: "Kedves Üzenet · A Társaság", robots: { index: false, follow: false } };
@@ -15,11 +16,13 @@ const STATUS: Record<string, string> = {
   failed: "nem sikerült elérni",
   rejected: "nem kézbesíthető",
   pending_confirmation: "megerősítésre vár",
+  pending_payment: "fizetésre vár",
 };
 
 const when = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", month: "short", day: "numeric" });
 
-export default async function MemberKindMessagePage() {
+export default async function MemberKindMessagePage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const sp = await searchParams;
   const { supabase, profile, hasAccess } = await requireMember();
   if (!hasAccess) {
     return (
@@ -30,13 +33,19 @@ export default async function MemberKindMessagePage() {
     );
   }
 
-  const { data: paying } = await supabase.rpc("is_paying_member");
+  const [{ data: paying }, { data: settings }] = await Promise.all([
+    supabase.rpc("is_paying_member"),
+    supabase.from("app_settings").select("kind_message_min_huf").single(),
+  ]);
+  const minHuf = settings?.kind_message_min_huf ?? 1000;
+  const payments = onlinePaymentsEnabled();
   const trial = profile.subscription_status === "trialing";
   const left = paying ? profile.free_messages_remaining : 0;
   const { data: mine } = await supabase
     .from("kind_messages")
     .select("id, recipient_name, kind, status, created_at")
     .eq("sender_id", profile.id)
+    .neq("status", "pending_payment")
     .order("created_at", { ascending: false })
     .limit(10);
 
@@ -57,6 +66,17 @@ export default async function MemberKindMessagePage() {
         keretedből elsőbbséggel küldheted.
       </p>
 
+      {sp.fizetve && (
+        <p role="status" className="mt-6 rounded-md border border-gold/50 px-4 py-3 text-sm text-forest">
+          Köszönöm! A fizetés után az üzeneted bekerül a sor elejére — a lenti listában néhány pillanat múlva megjelenik.
+        </p>
+      )}
+      {sp.megszakitva && (
+        <p role="status" className="mt-6 rounded-md border border-line px-4 py-3 text-sm text-ink-soft">
+          A fizetés megszakadt, az üzenet nem ment el. Bármikor újrakezdheted.
+        </p>
+      )}
+
       <GildedCard className="mt-8 p-7">
         <KindMessageForm
           action={sendMemberMessage}
@@ -64,12 +84,20 @@ export default async function MemberKindMessagePage() {
           choices={[
             { value: "priority", title: "Elsőbbségi", text: priorityText, disabled: trial || left <= 0 },
             { value: "standard", title: "Díjmentes", text: "Bármikor küldhetsz; a beérkezés sorrendjében kézbesítem, három próbálkozással." },
+            {
+              value: "paid",
+              title: "Elsőbbségi, kereten felül",
+              text: trial
+                ? "A próbaidő után küldhető."
+                : payments
+                ? `Általad választott összegért (legalább ${minHuf.toLocaleString("hu-HU", { useGrouping: "always" } as Intl.NumberFormatOptions)} Ft), garanciával.`
+                : "Hamarosan nyílik meg.",
+              disabled: trial || !paying || !payments,
+            },
           ]}
+          paid={{ min: minHuf, suggested: Math.max(minHuf, 3000) }}
         />
       </GildedCard>
-      <p className="mt-4 text-xs text-ink-soft">
-        A kereten felüli, általad választott összegű elsőbbségi üzenet hamarosan itt is elérhető lesz.
-      </p>
 
       {(mine ?? []).length > 0 && (
         <section className="mt-12">

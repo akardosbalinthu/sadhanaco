@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { keepFields } from "@/lib/keep-fields";
+import { useActionState, useState } from "react";
 import { Check } from "lucide-react";
 import { buttonPrimary, inputClass } from "@/components/ornaments";
 import type { FormState } from "@/lib/kind-message";
@@ -16,13 +17,19 @@ export function KindMessageForm({
   guest = false,
   choices,
   termsHref,
+  paid,
 }: {
   action: (prev: FormState, fd: FormData) => Promise<FormState>;
   guest?: boolean;
   choices?: Choice[];
   termsHref: string;
+  /** A „paid” választásnál megjelenő összegmező beállításai. */
+  paid?: { min: number; suggested: number };
 }) {
   const [state, formAction, pending] = useActionState(action, { status: "idle" } as FormState);
+  const firstEnabled = choices?.find((c) => !c.disabled)?.value;
+  const [kind, setKind] = useState(firstEnabled);
+  const isPaid = kind === "paid" && paid;
 
   if (state.status === "done") {
     return (
@@ -33,11 +40,10 @@ export function KindMessageForm({
     );
   }
 
-  const firstEnabled = choices?.find((c) => !c.disabled)?.value;
   return (
-    <form action={formAction} className="space-y-5">
+    <form onSubmit={keepFields(formAction)} className="space-y-5">
       {choices && (
-        <fieldset className="grid gap-3 sm:grid-cols-2">
+        <fieldset className={`grid gap-3 ${choices.length > 2 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
           <legend className="mb-2 text-sm text-ink-soft">Milyen üzenetet küldesz?</legend>
           {choices.map((c) => (
             <label
@@ -46,7 +52,15 @@ export function KindMessageForm({
                 c.disabled ? "cursor-not-allowed opacity-50" : "hover:border-gold/60"
               }`}
             >
-              <input type="radio" name="kind" value={c.value} defaultChecked={c.value === firstEnabled} disabled={c.disabled} className="mt-1 accent-forest" />
+              <input
+                type="radio"
+                name="kind"
+                value={c.value}
+                defaultChecked={c.value === firstEnabled}
+                disabled={c.disabled}
+                onChange={() => setKind(c.value)}
+                className="mt-1 accent-forest"
+              />
               <span>
                 <span className="block font-serif text-lg text-forest">{c.title}</span>
                 <span className="mt-1 block text-sm text-ink-soft">{c.text}</span>
@@ -94,6 +108,32 @@ export function KindMessageForm({
         </div>
       )}
 
+      {isPaid && (
+        <div className="space-y-4 rounded-md border border-gold/40 p-4">
+          <label className="block max-w-xs">
+            <span className="mb-1.5 block text-sm text-ink-soft">Az összeg, amelyet szánsz rá (Ft)</span>
+            <input
+              name="amount"
+              type="number"
+              required
+              min={paid.min}
+              step={100}
+              defaultValue={paid.suggested}
+              className={inputClass}
+            />
+          </label>
+          <p className="text-xs text-ink-soft">
+            Legalább {paid.min.toLocaleString("hu-HU", { useGrouping: "always" } as Intl.NumberFormatOptions)} Ft. A kereten felüli
+            üzeneteket az összeg szerint csökkenő sorrendben kézbesítem, a díjmentesek előtt. Ez digitális szolgáltatás, nem
+            adomány: számla készül róla.
+          </p>
+          <label className="flex items-start gap-3 text-sm text-ink-soft">
+            <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
+            <span>Kérem a szolgáltatás azonnali teljesítését, és tudomásul veszem, hogy ezzel elveszítem a 14 napos elállási jogomat.</span>
+          </label>
+        </div>
+      )}
+
       <label className="flex items-start gap-3 text-sm text-ink-soft">
         <input type="checkbox" name="consent" required className="mt-1 accent-forest" />
         <span>
@@ -112,7 +152,7 @@ export function KindMessageForm({
       )}
 
       <button type="submit" disabled={pending} className={buttonPrimary}>
-        {pending ? "Egy pillanat…" : guest ? "Elküldöm" : "Elküldöm az üzenetet"}
+        {pending ? "Egy pillanat…" : guest ? "Elküldöm" : isPaid ? "Tovább a fizetéshez" : "Elküldöm az üzenetet"}
       </button>
     </form>
   );

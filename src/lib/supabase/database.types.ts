@@ -938,6 +938,36 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"confirm_paid_kind_message":
+{ Args: { "p_invoice"?: string,"p_message": string }; Returns: {
+              "amount_huf": number,
+"attempts": number,
+"closed_at": string | null,
+"confirm_expires_at": string | null,
+"confirm_token_hash": string | null,
+"confirmed_at": string | null,
+"created_at": string,
+"delivered_at": string | null,
+"guest_email": string | null,
+"guest_name": string | null,
+"id": string,
+"invoice_id": string | null,
+"is_free": boolean,
+"kind": Database["public"]['Enums']["kind_message_kind"],
+"last_attempt_at": string | null,
+"message": string,
+"phone_purged_at": string | null,
+"recipient_name": string,
+"recipient_phone": string | null,
+"sender_id": string | null,
+"status": Database["public"]['Enums']["kind_message_status"]
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "kind_messages"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "confirm_registration_payment":
 { Args: { "p_registration_id": string }; Returns: {
               "attended_at": string | null,
@@ -960,6 +990,9 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"create_paid_kind_message":
+{ Args: { "p_amount_huf": number,"p_message": string,"p_recipient_name": string,"p_recipient_phone": string,"p_sender": string }; Returns: string
+                           },
 "current_week":
 { Args: { "p_stage": number }; Returns: number
                            },
@@ -1205,6 +1238,9 @@ isOneToOne: false
 "purge_kind_message_phones":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
+"purge_unpaid_kind_messages":
+{ Args: Record<PropertyKey, never>; Returns: number
+                           },
 "request_progression":
 { Args: { "p_note"?: string }; Returns: {
               "admin_note": string | null,
@@ -1344,7 +1380,7 @@ isOneToOne: false
       } }
           }
           Enums: {
-            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok","post_kind": "normal"|"penteki_kor","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
+            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok","post_kind": "normal"|"penteki_kor","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -1464,7 +1500,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok"],"post_kind": ["normal", "penteki_kor"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
+            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok"],"post_kind": ["normal", "penteki_kor"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
           }
         }
 } as const

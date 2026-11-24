@@ -1,5 +1,6 @@
 "use client";
 
+import { keepFields } from "@/lib/keep-fields";
 import { buttonPrimary, inputClass } from "@/components/ornaments";
 import { publicEnv } from "@/lib/env";
 
@@ -13,7 +14,7 @@ export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLab
   const [state, action, pending] = useActionState(bookOpenEvening, initial);
 
   return (
-    <form action={action} className="space-y-4">
+    <form onSubmit={keepFields(action)} className="space-y-4">
       <input type="hidden" name="eventId" value={eventId} />
       <label className="block">
         <span className="mb-1.5 block text-sm text-ink-soft">Név</span>
