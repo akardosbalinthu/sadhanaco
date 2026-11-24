@@ -190,6 +190,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Új név:** a „Sadhana Idegrendszerfejlesztő Társaság” neve mostantól **„A Társaság”**. A fókusz: az idegrendszer-fejlesztés mellett **a kedvesség, a figyelmesség, a tudatosság és a segítőkészség**. A dokumentum korábbi elnevezései így értendők.
 - **Privát Közlöny → Napi Közlöny.** (Az adatbázisban a jogosultsági mező neve technikai okból `privat_kozlony_pro` marad.)
 - **Nincs szakmai podcast** — a weboldalról lekerült.
+- **Végzettségek (pontos megnevezés):** Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy); Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh). Bemutatkozó mondat: „Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjainak pedig az idegrendszer-fejlesztésben.”
 - **A fő weboldalon saját aloldal** van az Egy Kedves Üzenetnek (`/egy-kedves-uzenet`) és a Napi Közlönynek (`/napi-kozlony`).
 
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)

@@ -49,17 +49,20 @@ export default function HomePage() {
       <section className="py-20 sm:py-28">
         <p className="text-sm tracking-wide text-moss-soft">Jelenlét – Tudatosság – Szabadság</p>
         <h1 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">Kardos Bálint</h1>
-        <p className="mt-3 text-lg text-ink-soft">Integratív meditációs és idegrendszer-fejlesztő tréner</p>
+        <p className="mt-4 max-w-2xl text-lg text-ink-soft">
+          Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjainak
+          pedig az idegrendszer-fejlesztésben.
+        </p>
         <p className="mt-8 max-w-2xl text-ink-soft">
           A légzésszabályozás, a meditáció és a testre irányuló figyelem klasszikus gyakorlatait a
           modern idegtudomány és az életmód-orvostan felől közelítem meg: mit csinál a légzés a
           vagus-tónussal, a szívritmus-variabilitással, és hogyan csendesedik a figyelem. Dogmák és
           misztifikálás nélkül.
         </p>
-        <ul className="mt-8 space-y-1.5 text-sm text-ink-soft">
-          <li>Életmód-orvostani konzulens</li>
-          <li>RYT-500 jógaoktató (Rishikesh, India — 500 órás képzés)</li>
-          <li>Az Egy Kedves Üzenet házigazdája</li>
+        <h2 className="mt-10 text-sm tracking-wide text-moss-soft">Végzettségek</h2>
+        <ul className="mt-3 space-y-1.5 text-sm text-ink-soft">
+          <li>Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy)</li>
+          <li>Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh)</li>
         </ul>
       </section>
 
