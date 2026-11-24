@@ -24,18 +24,22 @@ Vercel → Account Settings → Authentication → GitHub, majd a projektben Set
 
 ## 3. Környezeti változók
 
-Már beállítva (production): `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_TARSASAG_URL`,
-`ONLINE_PAYMENTS_ENABLED=false`, `RESEND_FROM_EMAIL`.
+Már beállítva: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_TARSASAG_URL`, `ONLINE_PAYMENTS_ENABLED=false`,
+`RESEND_FROM_EMAIL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (publikus).
 
 Hiányzik (titkok — a Vercel felületén add meg, ne a chatben):
-`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
+`SUPABASE_SERVICE_ROLE_KEY` (Supabase → Project Settings → API),
 `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY`, `INTERNAL_API_SECRET`.
 Opcionális: `NEXT_PUBLIC_PODCAST_SPOTIFY_URL`, `NEXT_PUBLIC_PODCAST_APPLE_URL`.
 
-## 4. Supabase (éles: `kqvxosoqmwscymaoqhyj`) — csak Bálint jóváhagyásával
+## 4. Supabase (éles: `kqvxosoqmwscymaoqhyj`)
 
-1. `npx supabase link --project-ref kqvxosoqmwscymaoqhyj`
-2. `npx supabase db push --include-seed` (migrációk + tananyag-ív + árlista)
+**Kész (2026-11-24, Bálint jóváhagyásával):** a 3 migráció és a seed (4 lépcső, 16 ár) fent van;
+20 tábla, mindegyiken ENABLE + FORCE RLS; a pg_cron két feladata ütemezve. A helyi migrációs
+fájlnevek az éles verziószámokat viselik, így a későbbi `supabase db push` csak az újakat viszi fel.
+
+Hátralévő (Supabase Dashboard):
+
 3. Auth → URL Configuration: Site URL `https://tarsasag.akardosbalint.hu`, Redirect URL
    `https://tarsasag.akardosbalint.hu/auth/confirm`
 4. Auth → Emails → SMTP: Resend (`smtp.resend.com`, feladó `balint@akardosbalint.hu`);
