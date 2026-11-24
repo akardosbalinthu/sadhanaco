@@ -7,6 +7,7 @@ const ITEMS = [
   { href: "/kozosseg", label: "Közösség" },
   { href: "/esemenyek", label: "Események" },
   { href: "/kedves-uzenet", label: "Kedves Üzenet" },
+  { href: "/konzultacio", label: "Konzultáció" },
   { href: "/naplo", label: "Belső Tükör" },
   { href: "/ranglista", label: "Ranglista" },
   { href: "/adataim", label: "Adataim" },

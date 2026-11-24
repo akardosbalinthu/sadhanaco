@@ -364,3 +364,37 @@ export async function linkPollEvent(formData: FormData) {
   const { error } = await supabase.from("destination_polls").update({ event_id: eventId }).eq("id", id);
   done("/turak", error, "A túra hozzárendelve.");
 }
+
+// ---------------------------------------------------------------------------
+// Konzultációk
+// ---------------------------------------------------------------------------
+
+export async function scheduleConsultationSlot(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(formData.get("id"));
+  const at = budapestLocalToIso(str(formData, "requested_for"));
+  if (!at) back("/konzultaciok", { hiba: "Add meg az időpontot." });
+  const { error } = await supabase.from("consultations").update({ requested_for: at, status: "scheduled" }).eq("id", id);
+  done("/konzultaciok", error, "Az időpont rögzítve.");
+}
+
+export async function markConsultationDone(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(formData.get("id"));
+  const { error } = await supabase.from("consultations").update({ status: "done" }).eq("id", id);
+  done("/konzultaciok", error, "Megtörténtként jelölve.");
+}
+
+/** Lemondás; díjmentes alkalomnál az alkalom visszakerül a tag keretébe. */
+export async function cancelConsultation(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(formData.get("id"));
+  const { data: c } = await supabase.from("consultations").select("user_id, is_free, status").eq("id", id).single();
+  if (!c || c.status === "cancelled" || c.status === "done") back("/konzultaciok", { hiba: "Ez a konzultáció már nem mondható le." });
+  const { error } = await supabase.from("consultations").update({ status: "cancelled" }).eq("id", id);
+  if (!error && c.is_free) {
+    const { data: p } = await supabase.from("profiles").select("free_consultations_remaining").eq("id", c.user_id).single();
+    await supabase.from("profiles").update({ free_consultations_remaining: (p?.free_consultations_remaining ?? 0) + 1 }).eq("id", c.user_id);
+  }
+  done("/konzultaciok", error, c.is_free ? "Lemondva; az alkalom visszakerült a tag keretébe." : "Lemondva.");
+}

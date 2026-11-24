@@ -7,6 +7,7 @@ const ITEMS = [
   { href: "", label: "Áttekintés" },
   { href: "/tagok", label: "Tagok" },
   { href: "/tovabblepes", label: "Továbblépések" },
+  { href: "/konzultaciok", label: "Konzultációk" },
   { href: "/kedves-uzenetek", label: "Kedves Üzenetek" },
   { href: "/szamlak", label: "Számlák" },
   { href: "/tananyag", label: "Tananyag" },
