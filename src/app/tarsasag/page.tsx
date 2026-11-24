@@ -18,25 +18,61 @@ const ORDERS = [
     name: "Tündék",
     Crest: CrestTundek,
     gift: "Finom érzékelés és tudatosság",
-    focus: "Észrevenni a test halk jelzéseit, mielőtt hangossá válnak.",
+    motto: "Ők veszik észre elsőként, ha megváltozik a levegő.",
+    signs: [
+      "Belépsz egy szobába, és már érzed, milyen a hangulat.",
+      "A tested korán szól: a gyomrod, a vállad, a légzésed jelez, mielőtt a fejed rájönne.",
+      "Megérint egy jól eltalált mondat, egy fény, egy apró részlet.",
+    ],
+    strength:
+      "Finomhangolt belső érzékelés és mély empátia. Ahol mások zajt hallanak, te árnyalatokat.",
+    path: "Hogy az érzékenység ne árasszon el: határok, földelés, hosszabb kilégzés — érezni, de nem elsodródni.",
+    practice: "Kájánupassaná — a test végigpásztázása",
   },
   {
     name: "Kertőrzők",
     Crest: CrestKertorzok,
     gift: "Jelenlét és belső béke",
-    focus: "Otthon lenni a mostban — egy lassabb kilégzés, egy csendesebb reggel.",
+    motto: "Számukra a világ egy kertben kezdődik: amit gondozol, az megnő.",
+    signs: [
+      "Szereted a ritmust: a csendes reggelt, a meleg teát, az ismerős utat.",
+      "A kis dolgokban találod meg az örömöt, és nem kell hozzá nagy esemény.",
+      "Körülötted mások hamar otthon érzik magukat.",
+    ],
+    strength:
+      "Nyugalmat sugárzó jelenlét. Az idegrendszered biztonságérzete a környezetedre is átragad.",
+    path: "Kilépni a megszokottból, amikor a növekedés hív — és nemet mondani, hogy a kert a tiéd maradjon.",
+    practice: "Sama Vritti — az egyenletes, négyütemű légzés",
   },
   {
     name: "Törpök",
     Crest: CrestTorpok,
     gift: "Állhatatosság és belső rend",
-    focus: "Kitartó, ismétlődő gyakorlás, amelyre nehéz napokon is támaszkodhatsz.",
+    motto: "Mélyre ásnak, és amit építenek, az megmarad.",
+    signs: [
+      "Ha belekezdesz valamibe, végigviszed — akkor is, ha senki sem figyel.",
+      "Megnyugtat a rend, a jól átlátható terv, a megbízható szokás.",
+      "Rád lehet számítani, és ezt te is fontosnak tartod másokban.",
+    ],
+    strength:
+      "Kitartás és szerkezet. A nehezebb napokon is ott vagy a gyakorlásnál, és ez tart meg.",
+    path: "Lazítani a szorításon: a kontroll helyett megengedni, és a pihenést is gyakorlásnak tekinteni.",
+    practice: "Nadi Shodhana — a váltott orrlyukas, rendező légzés",
   },
   {
     name: "Vándorok",
     Crest: CrestVandorok,
     gift: "Bátorság és fókusz",
-    focus: "Megmaradni a figyelemmel ott, ahol a test legszívesebben elmenekülne.",
+    motto: "Az út az otthonuk; a kihívás kitisztítja őket.",
+    signs: [
+      "A változás feltölt, a túl hosszú egyhelyben állás nyugtalanná tesz.",
+      "Nyomás alatt élesebb lesz a figyelmed, nem tompább.",
+      "Szívesen kipróbálsz valami újat, mielőtt minden részletét értenéd.",
+    ],
+    strength:
+      "Mozgósítható energia, jó irányba fordítva: kezdeményezés, fókusz és bátorság a nehéz helyzetekben.",
+    path: "Megérkezni: lassítani úgy, hogy a nyugalom ne unalomnak, hanem erőgyűjtésnek tűnjön.",
+    practice: "Anapanaszati — a légzés követése, a figyelem visszavezetése",
   },
 ];
 
@@ -153,26 +189,59 @@ export default async function TarsasagHome() {
       <section>
         <SectionHeading eyebrow="Az első lépés" title="Az Idegrendszeri Iránytű & A 4 Rend">
           <p>
-            Amikor csatlakozol, egy rövid önismereti iránytű segít megtalálni a természetes
-            kiindulópontodat a négy egyenrangú rend egyikében.
+            Minden idegrendszernek megvan a maga természetes hangolása: van, aki finoman érzékel, van,
+            aki nyugalmat teremt, van, aki kitartóan épít, és van, akit a kihívás tesz tisztává. A
+            Társaságban ezt a négy irányt négy rend őrzi.
           </p>
           <p>
-            Nincs jó vagy rossz hely. Minden rend a saját erősségével gazdagítja A Társaságot, és az
-            úton mindenki a saját idegrendszeri egyensúlyát építi.
+            Belépéskor egy rövid kérdőív, az Idegrendszeri Iránytű mutatja meg, melyik rendből indulsz.
+            A rended végleges: ez a kiindulópontod, amelyhez az úton végig visszatalálsz. Nincs jó vagy
+            rossz rend — mind egyenrangú, és minden rend mindent gyakorol; csak a kezdőpont más.
           </p>
         </SectionHeading>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {ORDERS.map(({ name, Crest, gift, focus }) => (
-            <GildedCard key={name} className="flex flex-col items-center text-center">
-              <Crest className="h-20 w-16" />
-              <h3 className="mt-4 font-serif text-xl text-forest">{name}</h3>
-              <p className="mt-2 text-sm text-gold">{gift}</p>
-              <p className="mt-3 flex-1 text-sm text-ink-soft">{focus}</p>
-              <p className="mt-5 text-[11px] uppercase tracking-[0.18em] text-ink-soft/80">Belépéskor vár rád</p>
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {ORDERS.map(({ name, Crest, gift, motto, signs, strength, path, practice }) => (
+            <GildedCard key={name} className="flex flex-col p-7">
+              <div className="flex items-center gap-4">
+                <Crest className="h-16 w-14 shrink-0" />
+                <div>
+                  <h3 className="font-serif text-2xl text-forest">{name}</h3>
+                  <p className="text-sm text-gold">{gift}</p>
+                </div>
+              </div>
+              <p className="mt-5 font-serif italic text-ink">{motto}</p>
+
+              <p className="mt-5 text-xs uppercase tracking-[0.18em] text-gold">Magadra ismersz, ha…</p>
+              <ul className="mt-2 space-y-1.5 text-sm text-ink-soft">
+                {signs.map((s) => (
+                  <li key={s} className="flex gap-2">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" aria-hidden />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+
+              <dl className="mt-5 space-y-3 text-sm">
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-gold">Az erősséged</dt>
+                  <dd className="mt-1 text-ink-soft">{strength}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-gold">Amit az úton tanulsz</dt>
+                  <dd className="mt-1 text-ink-soft">{path}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-[0.18em] text-gold">A rend kedvelt gyakorlata</dt>
+                  <dd className="mt-1 text-ink-soft">{practice}</dd>
+                </div>
+              </dl>
             </GildedCard>
           ))}
         </div>
+        <p className="mt-6 text-center text-xs uppercase tracking-[0.18em] text-ink-soft/80">
+          Az Iránytű belépéskor vár rád
+        </p>
       </section>
 
       <CompassDivider className="my-20" />

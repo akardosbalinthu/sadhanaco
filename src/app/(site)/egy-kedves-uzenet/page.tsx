@@ -1,7 +1,6 @@
-import { Gift, Heart, Phone } from "lucide-react";
+import { Heart, Phone, Send } from "lucide-react";
 import { publicEnv } from "@/lib/env";
-import { SITE } from "@/lib/site";
-import { buttonPrimary, CompassDivider, GildedCard, linkClass, PageHeader } from "@/components/ornaments";
+import { CompassDivider, GildedCard, linkClass, PageHeader } from "@/components/ornaments";
 
 export const metadata = {
   title: "Egy Kedves Üzenet · Kardos Bálint",
@@ -26,28 +25,29 @@ export default function KindMessagePage() {
           <Phone className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
           <h2 className="mt-4 font-serif text-xl text-forest">Hogyan működik</h2>
           <p className="mt-2 text-sm text-ink-soft">
-            A beküldött hálaüzeneteket élő adásban (YouTube, TikTok Live) és rövid videókban
-            telefonon juttatom el a címzettnek.
+            Itt, ezen az oldalon írod meg az üzenetet, és megadod, kinek szól. A hívásokat élő adásban
+            (YouTube, TikTok Live) és rövid videókban bonyolítom le, és ott adom át az üzenetedet a
+            címzettnek.
           </p>
         </GildedCard>
 
         <GildedCard>
-          <Gift className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-          <h2 className="mt-4 font-serif text-xl text-forest">Kártyajáték, könyv, doboz</h2>
+          <Send className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
+          <h2 className="mt-4 font-serif text-xl text-forest">Bárki küldhet — díjmentesen</h2>
           <p className="mt-2 text-sm text-ink-soft">
-            Az üzenetek szellemében készült az Egy Kedves Kártyajáték, az Egy Kedves Könyv és az Egy
-            Kedves Doboz is.
+            Kedves Üzenetet bárki küldhet, ingyen. Az üzeneteket a beérkezés sorrendjében dolgozom fel.
+            Ha a címzettet három próbálkozásra sem sikerül elérni, az üzenet sikertelennek minősül, és
+            további próbálkozás nincs.
           </p>
         </GildedCard>
 
         <GildedCard className="sm:col-span-2">
           <Heart className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
-          <h2 className="mt-4 font-serif text-xl text-forest">A Társaság tagjainak</h2>
+          <h2 className="mt-4 font-serif text-xl text-forest">Elsőbbségi Kedves Üzenet — A Társaság tagjainak</h2>
           <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-            A Társaság tagjai havonta díjmentesen küldhetnek Elsőbbségi Kedves Üzenetet (Társasági
-            Tagság: havi 1, Belső Kör: havi 3). Ezen felül szabadon választott összegű díjért — legalább
-            1 000 Ft — küldhetnek további üzeneteket; ezeket az összeg szerint csökkenő sorrendben
-            dolgozzuk fel. Ez digitális szolgáltatás, nem adomány: minden befizetésről számla készül.
+            A Társaság tagjai havonta Elsőbbségi Kedves Üzenetet küldhetnek (A Társaság Útja: havi 1, a
+            Belső Kör: havi 3). Ezeket kézbesítem elsőként, és kézbesítési garanciát vállalok rájuk: nem
+            állok meg három próbálkozás után, amíg az üzenet célba nem ér.
           </p>
           <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`mt-4 inline-block ${linkClass}`}>
             A Társaságról
@@ -55,11 +55,7 @@ export default function KindMessagePage() {
         </GildedCard>
       </div>
 
-      <div className="mt-12">
-        <a href={SITE.egyKedvesUzenetUrl} rel="noopener" className={buttonPrimary}>
-          egykedvesuzenet.hu
-        </a>
-      </div>
+      <p className="mt-12 text-sm text-ink-soft">Az üzenetküldés hamarosan itt nyílik meg.</p>
     </main>
   );
 }

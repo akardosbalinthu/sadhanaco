@@ -203,6 +203,14 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - Csomagnevek: **A Társaság Útja** (Társasági Tagság), **A Belső Kör · A Tanács**.
 - Vizuális nyelv: meleg törtfehér alap, erdőzöld (`#1C2520`), hajszálvékony antik arany (`#C5A059`) díszítés (`src/components/ornaments.tsx`).
 
+### 7.13 Döntések (2026. november 24., negyedik kör)
+- **Egy Kedves Üzenet:** egyelőre **nincs tárgyi termék** (kártyajáték, könyv, doboz) és **nincs külön weboldal** — minden, az üzenet beküldése is, ezen a rendszeren történik (`/egy-kedves-uzenet`). A 2.3 pont ennek megfelelően értendő.
+  - **Kedves Üzenet (bárki, díjmentes):** bárki küldhet, csak ingyen. A **beérkezés sorrendjében** dolgozzuk fel; **3 sikertelen próbálkozás után sikertelen**, további próbálkozás nincs.
+  - **Elsőbbségi Kedves Üzenet (Társaság tagjai, havi keret):** **elsőként** kerül kézbesítésre, **kézbesítési garanciával** (nem áll meg 3 próbálkozásnál).
+- **Túravendég:** tagonként túránként 2 vendég — jóváhagyva; **próbaidős tag is meghívhat**.
+- **A 4 Rend:** a rendet a belépéskori kérdőív (Idegrendszeri Iránytű) eredménye adja; **a tag nem válthat rendet**.
+- **Pontrendszer:** aktivitás + haladás alapú XP és rang a beépített gamificationhöz — terv jóváhagyásra vár (privát marad, nincs ranglista, nincs büntetés kihagyott napért).
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).
