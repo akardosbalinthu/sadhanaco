@@ -93,3 +93,15 @@ tagság az adminban lezárható.
 
 
 Sikertelen terhelés: lásd `docs/stripe-katalogus.md`. Webhook-végpont: 2. fázis.
+
+## 6. Bunny Stream — a leckék hang- és videóanyagai
+
+1. A bunny.net felületén hozz létre egy **Stream Library**-t (régió: Európa).
+2. A könyvtár *Security* beállításainál kapcsold be az **Embed view token authentication**-t,
+   és az **Allowed referrers** közé vedd fel: `tarsasag.akardosbalint.hu`, `akardosbalint.hu`.
+3. A Vercel környezeti változói közé:
+   - `BUNNY_STREAM_LIBRARY_ID` — a könyvtár azonosítója (szám),
+   - `BUNNY_TOKEN_AUTH_KEY` — a *Token Authentication Key* a Security oldalról.
+4. A hanganyagokat is ide töltsd fel videóként (MP4, egy nyugodt állóképpel) — egy lejátszó kezel mindent.
+5. A feltöltött videó azonosítóját (Video GUID) az admin **Tananyag** oldalán, a leckénél a
+   „Bunny videó-azonosító” mezőbe írd. A tagok 3 óráig érvényes, aláírt linket kapnak.

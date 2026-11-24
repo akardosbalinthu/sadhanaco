@@ -22,7 +22,7 @@ export async function toggleCompletion(formData: FormData) {
   } else {
     await supabase.from("lesson_completions").insert({ lesson_id: lessonId.data });
   }
-  revalidatePath(tp("/gyakorlas"));
+  revalidatePath(tp("/gyakorlas"), "layout");
 }
 
 export async function requestProgression(formData: FormData) {

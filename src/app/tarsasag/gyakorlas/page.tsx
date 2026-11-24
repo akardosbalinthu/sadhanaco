@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check, Circle, Lock, Sparkles } from "lucide-react";
-import { requireMember, ORDER_INFO, type OrderKey } from "@/lib/member";
+import { requireMember, ORDER_INFO, TRACK_LABEL, type OrderKey } from "@/lib/member";
 import { SITE, tp } from "@/lib/site";
 import { MemberNav } from "@/components/member-nav";
 import { OrderCrest } from "@/components/order-crest";
@@ -19,13 +19,6 @@ type Card = {
   next_rank: { label: string; xp: number } | null;
   xp_to_next: number | null;
   milestones: { key: string; label: string }[];
-};
-
-const TRACK_LABEL: Record<string, string> = {
-  gyakorlas: "Napi Küldetés",
-  tudas: "A Tudás Ösvénye",
-  ritual_reggeli: "Reggeli rituálé",
-  ritual_esti: "Esti rituálé",
 };
 
 export default async function PracticePage() {
@@ -197,7 +190,11 @@ export default async function PracticePage() {
                         {TRACK_LABEL[l.track] ?? "Küldetés"} · {l.week_number}. hét
                         {l.duration_seconds ? ` · ${Math.round(l.duration_seconds / 60)} perc` : ""}
                       </p>
-                      <h3 className="mt-1 font-serif text-lg text-forest">{l.title}</h3>
+                      <h3 className="mt-1 font-serif text-lg text-forest">
+                        <Link href={tp(`/gyakorlas/${l.id}`)} className="transition-colors duration-300 hover:text-gold">
+                          {l.title}
+                        </Link>
+                      </h3>
                       {l.description && <p className="mt-1 text-sm text-ink-soft">{l.description}</p>}
                     </div>
                   </GildedCard>

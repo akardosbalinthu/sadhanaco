@@ -24,3 +24,10 @@ export const ORDER_INFO = {
   vandorok: { name: "Vándorok", single: "Vándor", gift: "Bátorság és fókusz", motto: "Az út az otthonuk; a kihívás kitisztítja őket." },
 } as const;
 export type OrderKey = keyof typeof ORDER_INFO;
+
+export const TRACK_LABEL: Record<string, string> = {
+  gyakorlas: "Napi Küldetés",
+  tudas: "A Tudás Ösvénye",
+  ritual_reggeli: "Reggeli rituálé",
+  ritual_esti: "Esti rituálé",
+};
