@@ -289,13 +289,75 @@ const TIERS = [
   },
 ];
 
-const PRICE_ROWS: [string, string, string, string][] = [
-  ["Nyílt Meditációs Est", "4 940 Ft", "3 200 Ft", "díjmentes"],
-  ["Élő Gyakorlónap (évi 4)", "—", "6 460 Ft", "díjmentes"],
-  ["Szabadság Elvonulás (évi 3)", "—", "önköltség (kb. 65–85 ezer Ft)", "díjmentes"],
-  ["Havi közös túra", "meghívóval díjmentes", "díjmentes", "díjmentes"],
-  ["1-on-1 konzultáció", "—", "15 000 Ft", "13 000 Ft (éves: évi 4 díjmentes)"],
+/** Teljes összehasonlítás: "✓" = benne van, "—" = nem elérhető, egyébként a pontos feltétel. */
+type CompareRow = [feature: string, external: string, tier1: string, tier2: string];
+const COMPARE: { group: string; rows: CompareRow[] }[] = [
+  {
+    group: "Tananyag és gyakorlás",
+    rows: [
+      ["A Ceremónia és a rended", "—", "✓", "✓"],
+      ["I. Modul (Jelenlét) + IP 1 · 8+1 hét", "—", "✓ azonnal", "✓ azonnal"],
+      ["II. Modul (Tudatosság) + IP 2 · 8+1 hét", "—", "részvétellel vagy 54 940 Ft, beszélgetés után", "✓ díjmentes, beszélgetés után"],
+      ["III. Integrációs Program (IP 3) · 8+1 hét", "—", "részvétellel vagy 44 940 Ft (II+III együtt 89 940 Ft), beszélgetés után", "✓ díjmentes, beszélgetés után"],
+      ["Napi Küldetések és vezetett gyakorlások", "—", "✓", "✓"],
+      ["Belső Tükör — privát gyakorlónapló", "—", "✓", "✓"],
+      ["Karakterkártya, XP és rang", "—", "✓", "✓"],
+      ["Díjmentes továbblépési beszélgetés Bálinttal", "—", "✓", "✓"],
+    ],
+  },
+  {
+    group: "Közösség és online alkalmak",
+    rows: [
+      ["Közösségi tér", "—", "✓", "✓"],
+      ["Pénteki kör", "—", "✓", "✓"],
+      ["Heti online közös meditáció", "—", "✓ élőben", "✓ élőben"],
+      ["Havi élő kérdezz-felelek (Q&A)", "—", "a felvétel visszanézhető; élőben nem vehetsz részt, nem kérdezhetsz", "✓ élő részvétel és kérdezési jog"],
+      ["Havi élő szerepjáték- (D&D) és társasjáték-est", "—", "✓", "✓"],
+      ["Negyedéves vacsorameghívás Bálinttól", "—", "✓ a negyedév tíz legaktívabb tagjának", "✓ a negyedév tíz legaktívabb tagjának"],
+    ],
+  },
+  {
+    group: "Személyes alkalmak Budapesten",
+    rows: [
+      ["Nyílt Meditációs Est (havonta)", "4 940 Ft", "3 200 Ft, a Belső Kör 48 órás előfoglalása után", "✓ díjmentes, 48 órás elsőbbségi foglalással"],
+      ["Élő Gyakorlónap (évente 4)", "—", "6 460 Ft", "✓ díjmentes, elsőbbségi foglalással"],
+      ["III. Modul — Szabadság Elvonulás (évente 3, az IP 3 után)", "—", "önköltség (kb. 65–85 ezer Ft)", "✓ díjmentes, szállással és vegán ellátással, elsőbbségi foglalással"],
+      ["Havi közös túra", "csak meghívóval, díjmentesen", "✓ díjmentes, túránként 2 vendéget hívhatsz", "✓ díjmentes, túránként 2 vendéget hívhatsz"],
+      ["1-on-1 konzultáció", "—", "15 000 Ft", "13 000 Ft; éves tagságnál évi 4 díjmentes"],
+    ],
+  },
+  {
+    group: "Kedvesség és analóg reggel",
+    rows: [
+      ["Kedves Üzenet (beérkezési sorrendben)", "✓ díjmentes", "✓ díjmentes", "✓ díjmentes"],
+      ["Elsőbbségi Kedves Üzenet, kézbesítési garanciával", "—", "havi 1 díjmentes", "havi 3 díjmentes"],
+      ["Elsőbbségi üzenet a kereten felül", "—", "választott összegért, legalább 1 000 Ft", "választott összegért, legalább 1 000 Ft"],
+      ["Napi Közlöny PRO", "—", "✓ díjmentes, amint elindul", "✓ díjmentes, amint elindul"],
+    ],
+  },
+  {
+    group: "Díj és feltételek",
+    rows: [
+      ["7 napos ingyenes próbaidő", "—", "✓ a havi tagságra", "—"],
+      ["Bármikor lemondható (a következő időszaktól)", "—", "✓", "✓"],
+    ],
+  },
 ];
+
+function CompareCell({ value }: { value: string }) {
+  if (value === "—") return <span className="text-ink-soft/50">—</span>;
+  if (value.startsWith("✓")) {
+    const rest = value.slice(1).trim();
+    return (
+      <span className="flex gap-1.5">
+        <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.5} aria-label="benne van" />
+        {rest && <span>{rest}</span>}
+      </span>
+    );
+  }
+  return <span>{value}</span>;
+}
+
 
 const FAQ = [
   {
@@ -723,27 +785,38 @@ export default async function TarsasagHome() {
         </div>
 
         <GildedCard className="mt-8 overflow-x-auto">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">Élő alkalmak és díjak egy pillantásra</p>
-          <table className="mt-4 w-full min-w-[34rem] text-left text-sm">
+          <p className="text-xs uppercase tracking-[0.2em] text-gold">Minden, ami benne van — egy pillantásra</p>
+          <table className="mt-4 w-full min-w-[44rem] text-left text-sm">
             <thead className="text-ink">
               <tr className="border-b border-line">
-                <th className="py-2 pr-4 font-normal">Alkalom</th>
-                <th className="py-2 pr-4 font-normal">Külsősöknek</th>
-                <th className="py-2 pr-4 font-normal">A Társaság Útja</th>
-                <th className="py-2 font-normal">A Belső Kör</th>
+                <th className="w-[34%] py-2 pr-4 font-normal">Szolgáltatás</th>
+                <th className="w-[18%] py-2 pr-4 font-normal">Külsősöknek</th>
+                <th className="w-[24%] py-2 pr-4 font-normal">A Társaság Útja</th>
+                <th className="w-[24%] py-2 font-normal">A Belső Kör</th>
               </tr>
             </thead>
-            <tbody className="text-ink-soft">
-              {PRICE_ROWS.map(([what, ext, t1, t2]) => (
-                <tr key={what} className="border-b border-line/60 last:border-0">
-                  <td className="py-2 pr-4 text-ink">{what}</td>
-                  <td className="py-2 pr-4">{ext}</td>
-                  <td className="py-2 pr-4">{t1}</td>
-                  <td className="py-2">{t2}</td>
+            {COMPARE.map(({ group, rows }) => (
+              <tbody key={group} className="text-ink-soft">
+                <tr>
+                  <th colSpan={4} className="pb-2 pt-6 text-left text-xs font-normal uppercase tracking-[0.18em] text-gold">
+                    {group}
+                  </th>
                 </tr>
-              ))}
-            </tbody>
+                {rows.map(([feature, ext, t1, t2]) => (
+                  <tr key={feature} className="border-b border-line/60 align-top">
+                    <td className="py-2.5 pr-4 text-ink">{feature}</td>
+                    <td className="py-2.5 pr-4"><CompareCell value={ext} /></td>
+                    <td className="py-2.5 pr-4"><CompareCell value={t1} /></td>
+                    <td className="py-2.5"><CompareCell value={t2} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            ))}
           </table>
+          <p className="mt-4 text-xs text-ink-soft">
+            A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Elsőbbségi Kedves Üzenet és a
+            foglalások az első fizetés után nyílnak meg.
+          </p>
         </GildedCard>
 
         <p className="mt-6 max-w-2xl text-xs text-ink-soft">
