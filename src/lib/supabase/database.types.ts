@@ -886,6 +886,31 @@ isOneToOne: false
 "can_access_stage":
 { Args: { "p_stage": number }; Returns: boolean
                            },
+"cancel_hike_invitation":
+{ Args: { "p_invitation_id": string }; Returns: undefined
+                           },
+"cancel_my_registration":
+{ Args: { "p_registration_id": string }; Returns: {
+              "attended_at": string | null,
+"cancelled_at": string | null,
+"created_at": string,
+"event_id": string,
+"guest_email": string | null,
+"guest_name": string | null,
+"hold_expires_at": string | null,
+"id": string,
+"is_member_seat": boolean,
+"price_huf": number,
+"status": Database["public"]['Enums']["registration_status"],
+"tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
+"user_id": string | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "event_registrations"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "cast_destination_vote":
 { Args: { "p_option_id": string,"p_poll_id": string }; Returns: {
               "created_at": string,

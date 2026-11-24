@@ -3,7 +3,7 @@ import { requireMember } from "@/lib/member";
 import { EVENT_KIND_LABEL } from "@/lib/admin";
 import { MemberNav } from "@/components/member-nav";
 import { buttonPrimary, buttonSecondary, GildedCard, inputClass } from "@/components/ornaments";
-import { bookEvent, castVote, inviteGuest, payRegistration } from "./actions";
+import { bookEvent, cancelInvitation, cancelRegistration, castVote, inviteGuest, payRegistration } from "./actions";
 
 export const metadata = { title: "Események · A Társaság", robots: { index: false, follow: false } };
 
@@ -150,15 +150,21 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
 
                 <div className="mt-6 border-t border-line pt-5">
                   {reg?.status === "confirmed" ? (
-                    <p className="flex items-center gap-2 text-sm text-forest">
-                      <Check className="h-4 w-4 text-gold" strokeWidth={2} aria-hidden /> Ott leszel — a helyed le van foglalva.
-                    </p>
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <p className="flex items-center gap-2 text-sm text-forest">
+                        <Check className="h-4 w-4 text-gold" strokeWidth={2} aria-hidden /> Ott leszel — a helyed le van foglalva.
+                      </p>
+                      <CancelBooking registrationId={reg.id} eventId={e.id} paid={reg.price_huf > 0} />
+                    </div>
                   ) : holdValid ? (
-                    <form action={payRegistration} className="flex flex-wrap items-center gap-4">
-                      <input type="hidden" name="registrationId" value={reg!.id} />
-                      <button className={buttonPrimary}>Fizetés ({huf(reg!.price_huf)})</button>
+                    <div className="flex flex-wrap items-center gap-4">
+                      <form action={payRegistration}>
+                        <input type="hidden" name="registrationId" value={reg!.id} />
+                        <button className={buttonPrimary}>Fizetés ({huf(reg!.price_huf)})</button>
+                      </form>
                       <span className="text-xs text-ink-soft">A helyed {timeFmt.format(new Date(reg!.hold_expires_at!))}-ig fenntartva.</span>
-                    </form>
+                      <CancelBooking registrationId={reg!.id} eventId={e.id} paid={false} label="Mégsem kérem" />
+                    </div>
                   ) : !tierAllowed ? (
                     <p className="text-sm text-ink-soft">
                       {e.kind === "qa_elo"
@@ -192,8 +198,15 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
                       {myInvites.length > 0 && (
                         <ul className="mt-3 space-y-1 text-sm">
                           {myInvites.map((i) => (
-                            <li key={i.id} className="text-ink-soft">
-                              {i.guest_name} — {i.status === "accepted" ? <span className="text-gold">elfogadta</span> : "meghívva"}
+                            <li key={i.id} className="flex flex-wrap items-center gap-x-3 text-ink-soft">
+                              <span>
+                                {i.guest_name} — {i.status === "accepted" ? <span className="text-gold">elfogadta</span> : "meghívva"}
+                              </span>
+                              <form action={cancelInvitation}>
+                                <input type="hidden" name="invitationId" value={i.id} />
+                                <input type="hidden" name="eventId" value={e.id} />
+                                <button className="text-xs text-ink-soft underline decoration-gold/50 underline-offset-4 hover:text-gold">Visszavonom</button>
+                              </form>
                             </li>
                           ))}
                         </ul>
@@ -215,5 +228,24 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
         })}
       </section>
     </main>
+  );
+}
+
+/** Lemondás megerősítéssel (egy véletlen kattintás ne vegye el a helyet). */
+function CancelBooking({ registrationId, eventId, paid, label = "Lemondom a helyem" }: { registrationId: string; eventId: string; paid: boolean; label?: string }) {
+  return (
+    <details className="text-sm">
+      <summary className="cursor-pointer list-none text-xs text-ink-soft underline decoration-gold/50 underline-offset-4 hover:text-gold">{label}</summary>
+      <form action={cancelRegistration} className="mt-3 space-y-2 rounded-md border border-line p-3">
+        <input type="hidden" name="registrationId" value={registrationId} />
+        <input type="hidden" name="eventId" value={eventId} />
+        <p className="text-xs text-ink-soft">
+          {paid
+            ? "A helyed felszabadul, és más jöhet helyetted. A befizetett díjat az ÁSZF szerint nem térítjük vissza."
+            : "A helyed felszabadul, és más jöhet helyetted."}
+        </p>
+        <button className={buttonSecondary}>Igen, lemondom</button>
+      </form>
+    </details>
   );
 }

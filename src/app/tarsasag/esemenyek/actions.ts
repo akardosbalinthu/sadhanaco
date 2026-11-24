@@ -144,3 +144,25 @@ export async function castVote(fd: FormData) {
   revalidatePath(tp("/esemenyek"));
   back({ ok: "Köszönöm, a szavazatod megvan. A lezárásig bármikor módosíthatod." }, "#szavazas");
 }
+
+export async function cancelRegistration(fd: FormData) {
+  const registrationId = uuid.parse(fd.get("registrationId"));
+  const eventId = uuid.parse(fd.get("eventId"));
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("cancel_my_registration", { p_registration_id: registrationId });
+  if (error) {
+    back({ hiba: error.hint === "EVENT_STARTED" ? "Az alkalom már elkezdődött, a foglalás nem mondható le." : "A lemondás most nem sikerült." }, `#e-${eventId}`);
+  }
+  revalidatePath(tp("/esemenyek"));
+  back({ ok: "Lemondtad a helyed — így valaki más jöhet helyetted. Köszönöm, hogy szóltál." }, `#e-${eventId}`);
+}
+
+export async function cancelInvitation(fd: FormData) {
+  const invitationId = uuid.parse(fd.get("invitationId"));
+  const eventId = uuid.parse(fd.get("eventId"));
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("cancel_hike_invitation", { p_invitation_id: invitationId });
+  if (error) back({ hiba: error.hint === "EVENT_STARTED" ? "A túra már elkezdődött." : "A visszavonás most nem sikerült." }, `#e-${eventId}`);
+  revalidatePath(tp("/esemenyek"));
+  back({ ok: "A meghívót visszavontad." }, `#e-${eventId}`);
+}
