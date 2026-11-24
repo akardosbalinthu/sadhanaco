@@ -162,3 +162,24 @@ test("kereten felüli Kedves Üzenet: fizetés után sorba áll, egy számlatét
   const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_km_${run}`);
   assert.deepEqual(invs, [{ amount_huf: 5000, product_code: "kedves_uzenet_extra" }]);
 });
+
+test("tagi foglalás fizetése: a hely véglegessé válik, a tétel kódja szint szerint, ismétlésre sincs második", async () => {
+  const member = await profile(emailA);
+  await admin.from("profiles").update({ tier: "tarsasagi", subscription_status: "active" }).eq("id", member.id);
+  const { data: event } = await admin.from("events").insert({
+    kind: "gyakorlonap", title: "Gyakorlónap " + run, starts_at: new Date(Date.now() + 9 * 86400e3).toISOString(),
+    capacity: 15, price_tarsasagi_huf: 6460, registration_opens_at: new Date(Date.now() - 86400e3).toISOString(), is_published: true,
+  }).select("id").single();
+  const { data: reg } = await admin.from("event_registrations").insert({
+    event_id: event!.id, user_id: member.id, is_member_seat: true, tier_at_booking: "tarsasagi", price_huf: 6460,
+    status: "pending_payment", hold_expires_at: new Date(Date.now() + 35 * 60e3).toISOString(),
+  }).select("id").single();
+  const session = { id: `cs_ev_${run}`, payment_status: "paid", amount_total: 646000, payment_intent: `pi_ev_${run}`,
+    metadata: { kind: "member_event", registration_id: reg!.id }, customer_details: { address: { country: "HU" } } };
+  assert.equal(await processStripeEvent(ev("checkout.session.completed", session), deps), "processed");
+  await processStripeEvent(ev("checkout.session.async_payment_succeeded", session), deps);
+  const { data: after } = await admin.from("event_registrations").select("status, hold_expires_at").eq("id", reg!.id).single();
+  assert.deepEqual(after, { status: "confirmed", hold_expires_at: null });
+  const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_ev_${run}`);
+  assert.deepEqual(invs, [{ amount_huf: 6460, product_code: "gyakorlonap_tarsasagi" }]);
+});

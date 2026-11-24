@@ -3,6 +3,7 @@ import type Stripe from "stripe";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/database.types";
 import { hufFromStripe, isPlanCode, PLANS, type PlanCode } from "./plans";
+import { eventPriceCode } from "@/lib/events";
 
 type Admin = SupabaseClient<Database>;
 
@@ -117,6 +118,33 @@ async function onCheckoutCompleted(s: Stripe.Checkout.Session, d: WebhookDeps) {
       stripeInvoiceId: null,
       paymentIntentId: idOf(s.payment_intent),
     });
+    return;
+  }
+
+  if (kind === "member_event") {
+    if (s.payment_status !== "paid" || !s.metadata?.registration_id) return;
+    const regId = s.metadata.registration_id;
+    const { data: reg } = await d.admin
+      .from("event_registrations")
+      .select("user_id, tier_at_booking, events(kind)")
+      .eq("id", regId)
+      .maybeSingle();
+    if (!reg) throw new Error(`Ismeretlen foglalás: ${regId}`);
+    await rpcOrThrow(d.admin.rpc("confirm_registration_payment", { p_registration_id: regId }), "Tagi foglalás megerősítése");
+    const pi = idOf(s.payment_intent);
+    // Ismételt esemény esetén ne legyen második számlatétel ugyanarra a fizetésre.
+    const { data: existing } = pi ? await d.admin.from("invoices").select("id").eq("stripe_payment_intent_id", pi).limit(1) : { data: [] };
+    if (!existing?.length) {
+      const kindOfEvent = (reg.events as unknown as { kind: Parameters<typeof eventPriceCode>[0] }).kind;
+      await recordInvoice(d.admin, {
+        userId: reg.user_id,
+        code: eventPriceCode(kindOfEvent, reg.tier_at_booking) ?? "elvonulas",
+        amount: hufFromStripe(s.amount_total ?? 0),
+        country: s.customer_details?.address?.country ?? null,
+        stripeInvoiceId: null,
+        paymentIntentId: pi,
+      });
+    }
     return;
   }
 
