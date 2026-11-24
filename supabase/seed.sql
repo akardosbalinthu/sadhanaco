@@ -45,12 +45,12 @@ insert into public.price_catalog (code, label, amount_huf, tier, billing_interva
   ('gyorsitott_m2_ip2',        'II. Modul + IP 2 — gyorsított hozzáférés',   54940,  null, null, 'prod_VgbwbICFQliZfC'),
   ('gyorsitott_ip3',           'IP 3 — gyorsított hozzáférés',               44940,  null, null, 'prod_VgbwI6pIJhOfRS'),
   ('gyorsitott_m2_ip3_csomag', 'II. Modul + IP 2 + IP 3 — csomag',           89940,  null, null, 'prod_VgbwymkGkEr3BR'),
-  -- Események (terembérleti hozzájárulás)
-  ('nyilt_est_kulsos',         'Nyílt Meditációs Est — külsős',              4940,   null, null, 'prod_VgbwHLurwdeqiB'),
-  ('nyilt_est_tarsasagi',      'Nyílt Meditációs Est — Társasági Tag',       3200,   null, null, 'prod_VgbwHLurwdeqiB'),
-  ('nyilt_est_belso_kor',      'Nyílt Meditációs Est — Belső Kör',           0,      null, null, null),
-  ('gyakorlonap_tarsasagi',    'Élő Gyakorlónap — Társasági Tag',            6460,   null, null, 'prod_VgbwzJ9WLwj3sm'),
-  ('gyakorlonap_belso_kor',    'Élő Gyakorlónap — Belső Kör',                0,      null, null, null),
+  -- Események (részvételi díj — szolgáltatási díj, AAM számlával; nem adomány)
+  ('nyilt_est_kulsos',         'Nyílt Meditációs Est — részvételi díj, külsős',              4940,   null, null, 'prod_VgbwHLurwdeqiB'),
+  ('nyilt_est_tarsasagi',      'Nyílt Meditációs Est — részvételi díj, Társasági Tag',       3200,   null, null, 'prod_VgbwHLurwdeqiB'),
+  ('nyilt_est_belso_kor',      'Nyílt Meditációs Est — részvételi díj, Belső Kör',           0,      null, null, null),
+  ('gyakorlonap_tarsasagi',    'Élő Gyakorlónap — részvételi díj, Társasági Tag',            6460,   null, null, 'prod_VgbwzJ9WLwj3sm'),
+  ('gyakorlonap_belso_kor',    'Élő Gyakorlónap — részvételi díj, Belső Kör',                0,      null, null, null),
   -- 1-on-1 konzultáció
   ('konzultacio_tarsasagi',    '1-on-1 konzultáció — Társasági Tag',         15000,  null, null, 'prod_VgbwTM5LbEZbJp'),
   ('konzultacio_belso_kor',    '1-on-1 konzultáció — Belső Kör',             13000,  null, null, 'prod_VgbwTM5LbEZbJp'),

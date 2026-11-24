@@ -22,6 +22,7 @@ A Stripe-ban a HUF kéttizedes: `unit_amount 994000` = 9 940 Ft.
 | Kedves Üzenet (kereten felüli) | `prod_VgbwF1NbmherdR` | `kedves_uzenet_extra` | szabad összeg, min. 1 000 Ft (javasolt: 3 000 Ft) |
 | Szabadság Elvonulás (önköltség) | `prod_VgbwyB3bE8BEvE` | — | eseményenként `price_data`-val |
 
+Minden díj **szolgáltatási díj** (alanyi adómentes, AAM számlával) — adomány nincs.
 Alapítói kupon nincs. A próbaidő nem az áron, hanem a checkout-munkameneten
 (`subscription_data.trial_period_days = 7`) állítódik be, csak a `tarsasagi_havi` árhoz.
 
@@ -34,3 +35,18 @@ A fiók nem Társasági termékei a Stripe-ban nem törölhetők véglegesen (á
 IMI Tréning 1. Jelenlét modul, Csoportos Integrációs Program 1, Egyéni IP 1 – Kiegészítő csomag,
 Személyes Kalibráció. Bálint döntése alapján **megmaradt**: Okoskonyha Alaptagság (aktív előfizetők)
 és Elsőbbségi Kedves Üzenet (élő fizetési link). Az archivált termékek a Dashboardon visszaállíthatók.
+
+## Sikertelen terhelés — Dashboard-beállítás (Billing → Revenue recovery → Retries)
+
+Döntés: sikertelen megújításkor azonnali e-mail a tagnak, a hozzáférés **10 napig** megmarad, ezalatt
+összesen 5 újrapróbálkozás, utána megszűnik. A Stripe pontosan ezt nem tudja: az egyéni ütemezés
+legfeljebb 3 újrapróbálkozást enged, a Smart Retries pedig 1 / 2 / 3 hetes vagy 1 / 2 hónapos ablakot.
+Javasolt beállítás:
+
+- **Smart Retries: 5 újrapróbálkozás, 2 hetes ablak**
+- **Ha minden újrapróbálkozás sikertelen: Cancel the subscription**
+
+A 10 napos határt az adatbázis tartja be (`app_settings.past_due_grace_days = 10`): a 10. nap után a
+hozzáférés szünetel. Ha egy későbbi újrapróbálkozás (10–14. nap) mégis sikerül, a hozzáférés automatikusan
+visszaáll, a haladás megmarad. A tagság (és vele a 7.4 szerinti „elölről kezdés”) csak akkor szűnik meg,
+amikor a Stripe lezárja az előfizetést.

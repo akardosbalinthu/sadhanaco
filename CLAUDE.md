@@ -173,6 +173,19 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Kereten felüli Kedves Üzenet:** minimum `1 000 Ft` (`app_settings.kind_message_min_huf`).
 - **Címzett telefonszáma:** legfeljebb **180 napig** tárolva, utána napi ütemezett törlés (`purge_kind_message_phones`, pg_cron).
 
+### 7.9 Döntések (2026. november 24., második kör)
+- **Heti nyitás:** az egyéni belépés napjától.
+- **Lépcsők és továbblépés:** alapból az I. Modul + IP 1 nyitva. A rendszer felkínálja a „Továbblépés” lehetőséget, ha a tag elvégezte az előző lépcsőt (letelt a 9 hét, és a leckék legalább 70%-át pipálta) **és** elérte a szükséges részvételi pontszámot (vagy gyorsítva vásárolt, vagy Belső Kör tag). A továbblépéshez **díjmentes, rövid konzultáció** tartozik Bálinttal, a lépcsőt **mindig Bálint nyitja kézzel** (`progression_requests`, `admin_decide_progression`).
+- **Részvételi pontok:** vannak, de **privátak** — csak a tag maga és az admin látja, nincs ranglista, nincs összehasonlítás, másoknak nem jelenik meg (a 3. pont tilalmával összhangban). Súlyok és küszöbök: `app_settings.participation_weights`, `progression_points_required`.
+- **Díjak:** **egyik sem adomány**, mindegyik szolgáltatási díj, alanyi adómentes (AAM) számlával — a Nyílt Est részvételi díja is. A dokumentum korábbi „adomány / hozzájárulás” kifejezései így értendők.
+- **Online Nyílt Est létszáma:** eseményenként állítható (üresen hagyva korlátlan).
+- **Belső Kör konzultációk:** évi 4, évfordulós nullázással, **nem görgethető tovább**.
+- **Sikertelen terhelés:** a hozzáférés megmarad, a tag azonnal e-mail értesítést kap; 10 napon belül összesen 5 újrapróbálkozás, utána a hozzáférés megszűnik (`past_due_grace_days = 10`; Stripe-beállítás: `docs/stripe-katalogus.md`).
+- **Bevételi határok:** 2026-ban a KATA-határ 18 M Ft; 2027-től 22 M Ft, de az alanyi adómentesség határa 20 M Ft marad — a kötő határ a kettő közül a kisebb (`revenue_limits`). EUR-árfolyamot nem kezelünk, minden fizetés forintban.
+- **Sztornószámla nincs.** Lemondás csak a következő számlázási ciklustól él, addig a hozzáférés megmarad (a 7.2 admin-sztornóra vonatkozó mondata ezzel hatályát veszti).
+- **Díjmentes Kedves Üzenet és Privát Közlöny PRO:** az első sikeres fizetés napjától jár; próbaidő alatt nem.
+- **Ütemezések:** a hó 1-jei keret-visszaállítás, a pénteki kör és a bevételi figyelmeztetés az adatbázisban fut (pg_cron óránként, Budapest-idő szerinti ellenőrzéssel), így nem kell hozzá Vercel Cron.
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

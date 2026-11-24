@@ -39,14 +39,14 @@ export type Database = {
                   ]
                 },"app_settings": {
                   Row: {
-                    "belso_kor_priority_hours": number,"billing_entity": NonNullable<Json>,"cohort_start_date": string | null,"consultation_carry_over": boolean,"consultation_reset_mode": string,"eur_huf_rate": number,"event_member_quota_ratio": number,"id": boolean,"invoice_provider": string,"kata_annual_limit_huf": number,"kata_warning_ratio": number,"kind_message_min_huf": number,"lesson_unlock_mode": string,"oss_limit_eur": number,"past_due_has_access": boolean,"payment_hold_minutes": number,"phone_retention_days": number,"registration_open": boolean,"superadmin_emails": (string)[],"terms_version": string,"trial_days": number,"updated_at": string,"voluntary_fees_are_service": boolean
+                    "belso_kor_priority_hours": number,"belso_kor_yearly_consultations": number,"billing_entity": NonNullable<Json>,"event_member_quota_ratio": number,"free_messages_per_tier": NonNullable<Json>,"id": boolean,"invoice_provider": string,"kind_message_min_huf": number,"last_friday_checkin_on": string | null,"last_monthly_reset_on": string | null,"oss_warning_huf": number,"participation_weights": NonNullable<Json>,"past_due_grace_days": number,"payment_hold_minutes": number,"phone_retention_days": number,"progression_points_required": NonNullable<Json>,"registration_open": boolean,"revenue_warning_ratio": number,"stage_completion_min_ratio": number,"superadmin_emails": (string)[],"terms_version": string,"trial_days": number,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "belso_kor_priority_hours"?: number,"billing_entity"?: NonNullable<Json>,"cohort_start_date"?: string | null,"consultation_carry_over"?: boolean,"consultation_reset_mode"?: string,"eur_huf_rate"?: number,"event_member_quota_ratio"?: number,"id"?: boolean,"invoice_provider"?: string,"kata_annual_limit_huf"?: number,"kata_warning_ratio"?: number,"kind_message_min_huf"?: number,"lesson_unlock_mode"?: string,"oss_limit_eur"?: number,"past_due_has_access"?: boolean,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"registration_open"?: boolean,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"voluntary_fees_are_service"?: boolean
+                    "belso_kor_priority_hours"?: number,"belso_kor_yearly_consultations"?: number,"billing_entity"?: NonNullable<Json>,"event_member_quota_ratio"?: number,"free_messages_per_tier"?: NonNullable<Json>,"id"?: boolean,"invoice_provider"?: string,"kind_message_min_huf"?: number,"last_friday_checkin_on"?: string | null,"last_monthly_reset_on"?: string | null,"oss_warning_huf"?: number,"participation_weights"?: NonNullable<Json>,"past_due_grace_days"?: number,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"progression_points_required"?: NonNullable<Json>,"registration_open"?: boolean,"revenue_warning_ratio"?: number,"stage_completion_min_ratio"?: number,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string
                   }
                   Update: {
-                    "belso_kor_priority_hours"?: number,"billing_entity"?: NonNullable<Json>,"cohort_start_date"?: string | null,"consultation_carry_over"?: boolean,"consultation_reset_mode"?: string,"eur_huf_rate"?: number,"event_member_quota_ratio"?: number,"id"?: boolean,"invoice_provider"?: string,"kata_annual_limit_huf"?: number,"kata_warning_ratio"?: number,"kind_message_min_huf"?: number,"lesson_unlock_mode"?: string,"oss_limit_eur"?: number,"past_due_has_access"?: boolean,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"registration_open"?: boolean,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"voluntary_fees_are_service"?: boolean
+                    "belso_kor_priority_hours"?: number,"belso_kor_yearly_consultations"?: number,"billing_entity"?: NonNullable<Json>,"event_member_quota_ratio"?: number,"free_messages_per_tier"?: NonNullable<Json>,"id"?: boolean,"invoice_provider"?: string,"kind_message_min_huf"?: number,"last_friday_checkin_on"?: string | null,"last_monthly_reset_on"?: string | null,"oss_warning_huf"?: number,"participation_weights"?: NonNullable<Json>,"past_due_grace_days"?: number,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"progression_points_required"?: NonNullable<Json>,"registration_open"?: boolean,"revenue_warning_ratio"?: number,"stage_completion_min_ratio"?: number,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string
                   }
                   Relationships: [
                     
@@ -151,34 +151,22 @@ isOneToOne: false
                   ]
                 },"invoices": {
                   Row: {
-                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at": string,"created_by": string | null,"currency": string,"description": string,"id": string,"invoice_provider": string,"is_storno": boolean,"issued_at": string,"product_code": string | null,"provider_invoice_id": string | null,"provider_invoice_number": string | null,"region": Database["public"]['Enums']["revenue_region"],"storno_of": string | null,"storno_reason": string | null,"stripe_invoice_id": string | null,"stripe_payment_intent_id": string | null,"user_id": string | null
+                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at": string,"currency": string,"description": string,"id": string,"invoice_provider": string,"issued_at": string,"product_code": string | null,"provider_invoice_id": string | null,"provider_invoice_number": string | null,"region": Database["public"]['Enums']["revenue_region"],"stripe_invoice_id": string | null,"stripe_payment_intent_id": string | null,"user_id": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at"?: string,"created_by"?: string | null,"currency"?: string,"description": string,"id"?: string,"invoice_provider"?: string,"is_storno"?: boolean,"issued_at"?: string,"product_code"?: string | null,"provider_invoice_id"?: string | null,"provider_invoice_number"?: string | null,"region": Database["public"]['Enums']["revenue_region"],"storno_of"?: string | null,"storno_reason"?: string | null,"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"user_id"?: string | null
+                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at"?: string,"currency"?: string,"description": string,"id"?: string,"invoice_provider"?: string,"issued_at"?: string,"product_code"?: string | null,"provider_invoice_id"?: string | null,"provider_invoice_number"?: string | null,"region": Database["public"]['Enums']["revenue_region"],"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"user_id"?: string | null
                   }
                   Update: {
-                    "amount_huf"?: number,"billing_entity"?: NonNullable<Json>,"country"?: string,"created_at"?: string,"created_by"?: string | null,"currency"?: string,"description"?: string,"id"?: string,"invoice_provider"?: string,"is_storno"?: boolean,"issued_at"?: string,"product_code"?: string | null,"provider_invoice_id"?: string | null,"provider_invoice_number"?: string | null,"region"?: Database["public"]['Enums']["revenue_region"],"storno_of"?: string | null,"storno_reason"?: string | null,"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"user_id"?: string | null
+                    "amount_huf"?: number,"billing_entity"?: NonNullable<Json>,"country"?: string,"created_at"?: string,"currency"?: string,"description"?: string,"id"?: string,"invoice_provider"?: string,"issued_at"?: string,"product_code"?: string | null,"provider_invoice_id"?: string | null,"provider_invoice_number"?: string | null,"region"?: Database["public"]['Enums']["revenue_region"],"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"user_id"?: string | null
                   }
                   Relationships: [
                     {
-      foreignKeyName: "invoices_created_by_fkey"
-      columns: ["created_by"]
-isOneToOne: false
-      referencedRelation: "profiles"
-      referencedColumns: ["id"]
-    },{
       foreignKeyName: "invoices_product_code_fkey"
       columns: ["product_code"]
 isOneToOne: false
       referencedRelation: "price_catalog"
       referencedColumns: ["code"]
-    },{
-      foreignKeyName: "invoices_storno_of_fkey"
-      columns: ["storno_of"]
-isOneToOne: true
-      referencedRelation: "invoices"
-      referencedColumns: ["id"]
     },{
       foreignKeyName: "invoices_user_id_fkey"
       columns: ["user_id"]
@@ -341,17 +329,43 @@ isOneToOne: false
                   ]
                 },"profiles": {
                   Row: {
-                    "billing_interval": Database["public"]['Enums']["billing_interval"] | null,"bio": string | null,"cancel_at_period_end": boolean,"cohort_start_date": string | null,"consultations_period_start": string | null,"country": string | null,"created_at": string,"current_period_end": string | null,"current_stage_label": string | null,"display_name": string,"email": string,"free_consultations_remaining": number,"free_messages_remaining": number,"id": string,"ip3_purchased": boolean,"ip3_unlocked": boolean,"ip3_unlocked_at": string | null,"m2_purchased": boolean,"m2_unlocked": boolean,"m2_unlocked_at": string | null,"membership_ended_at": string | null,"membership_started_at": string | null,"privat_kozlony_pro": boolean,"recurring_amount_huf": number | null,"retreat_unlocked": boolean,"role": Database["public"]['Enums']["user_role"],"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"subscription_status": Database["public"]['Enums']["subscription_status"],"tier": Database["public"]['Enums']["membership_tier"],"trial_ends_at": string | null,"updated_at": string
+                    "billing_interval": Database["public"]['Enums']["billing_interval"] | null,"bio": string | null,"cancel_at_period_end": boolean,"consultations_period_start": string | null,"country": string | null,"created_at": string,"current_period_end": string | null,"current_stage_label": string | null,"display_name": string,"email": string,"free_consultations_remaining": number,"free_messages_remaining": number,"id": string,"ip3_purchased": boolean,"ip3_unlocked": boolean,"ip3_unlocked_at": string | null,"m2_purchased": boolean,"m2_unlocked": boolean,"m2_unlocked_at": string | null,"membership_ended_at": string | null,"membership_started_at": string | null,"past_due_since": string | null,"privat_kozlony_pro": boolean,"recurring_amount_huf": number | null,"retreat_unlocked": boolean,"role": Database["public"]['Enums']["user_role"],"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"subscription_status": Database["public"]['Enums']["subscription_status"],"tier": Database["public"]['Enums']["membership_tier"],"trial_ends_at": string | null,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"cohort_start_date"?: string | null,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email": string,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id": string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
+                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email": string,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id": string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"past_due_since"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
                   }
                   Update: {
-                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"cohort_start_date"?: string | null,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email"?: string,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id"?: string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
+                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email"?: string,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id"?: string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"past_due_since"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
                   }
                   Relationships: [
                     
+                  ]
+                },"progression_requests": {
+                  Row: {
+                    "admin_note": string | null,"consultation_at": string | null,"created_at": string,"decided_at": string | null,"decided_by": string | null,"id": string,"note": string | null,"status": Database["public"]['Enums']["progression_status"],"target_stage": number,"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "admin_note"?: string | null,"consultation_at"?: string | null,"created_at"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"id"?: string,"note"?: string | null,"status"?: Database["public"]['Enums']["progression_status"],"target_stage": number,"user_id": string
+                  }
+                  Update: {
+                    "admin_note"?: string | null,"consultation_at"?: string | null,"created_at"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"id"?: string,"note"?: string | null,"status"?: Database["public"]['Enums']["progression_status"],"target_stage"?: number,"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "progression_requests_decided_by_fkey"
+      columns: ["decided_by"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "progression_requests_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
                   ]
                 },"purchase_consents": {
                   Row: {
@@ -378,6 +392,20 @@ isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
     }
+                  ]
+                },"revenue_limits": {
+                  Row: {
+                    "kata_limit_huf": number,"note": string | null,"vat_exemption_limit_huf": number,"year": number
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "kata_limit_huf": number,"note"?: string | null,"vat_exemption_limit_huf": number,"year": number
+                  }
+                  Update: {
+                    "kata_limit_huf"?: number,"note"?: string | null,"vat_exemption_limit_huf"?: number,"year"?: number
+                  }
+                  Relationships: [
+                    
                   ]
                 },"stripe_events": {
                   Row: {
@@ -439,32 +467,28 @@ isOneToOne: false
                 }
           }
           Functions: {
-            "admin_record_storno":
-{ Args: { "p_invoice_id": string,"p_provider_invoice_number": string,"p_reason": string }; Returns: {
-              "amount_huf": number,
-"billing_entity": NonNullable<Json>,
-"country": string,
+            "_require_service_role":
+{ Args: Record<PropertyKey, never>; Returns: undefined
+                           },
+"_revenue_status_internal":
+{ Args: { "p_year"?: number }; Returns: Json
+                           },
+"admin_decide_progression":
+{ Args: { "p_admin_note"?: string,"p_approve": boolean,"p_request_id": string }; Returns: {
+              "admin_note": string | null,
+"consultation_at": string | null,
 "created_at": string,
-"created_by": string | null,
-"currency": string,
-"description": string,
+"decided_at": string | null,
+"decided_by": string | null,
 "id": string,
-"invoice_provider": string,
-"is_storno": boolean,
-"issued_at": string,
-"product_code": string | null,
-"provider_invoice_id": string | null,
-"provider_invoice_number": string | null,
-"region": Database["public"]['Enums']["revenue_region"],
-"storno_of": string | null,
-"storno_reason": string | null,
-"stripe_invoice_id": string | null,
-"stripe_payment_intent_id": string | null,
-"user_id": string | null
+"note": string | null,
+"status": Database["public"]['Enums']["progression_status"],
+"target_stage": number,
+"user_id": string
             }
                           SetofOptions: {
         from: "*"
-        to: "invoices"
+        to: "progression_requests"
         isOneToOne: true
         isSetofReturn: false
       } },
@@ -560,6 +584,179 @@ isOneToOne: false
 "kata_revenue_status":
 { Args: { "p_year"?: number }; Returns: Json
                            },
+"membership_ended":
+{ Args: { "p_user": string }; Returns: {
+              "billing_interval": Database["public"]['Enums']["billing_interval"] | null,
+"bio": string | null,
+"cancel_at_period_end": boolean,
+"consultations_period_start": string | null,
+"country": string | null,
+"created_at": string,
+"current_period_end": string | null,
+"current_stage_label": string | null,
+"display_name": string,
+"email": string,
+"free_consultations_remaining": number,
+"free_messages_remaining": number,
+"id": string,
+"ip3_purchased": boolean,
+"ip3_unlocked": boolean,
+"ip3_unlocked_at": string | null,
+"m2_purchased": boolean,
+"m2_unlocked": boolean,
+"m2_unlocked_at": string | null,
+"membership_ended_at": string | null,
+"membership_started_at": string | null,
+"past_due_since": string | null,
+"privat_kozlony_pro": boolean,
+"recurring_amount_huf": number | null,
+"retreat_unlocked": boolean,
+"role": Database["public"]['Enums']["user_role"],
+"stripe_customer_id": string | null,
+"stripe_subscription_id": string | null,
+"subscription_status": Database["public"]['Enums']["subscription_status"],
+"tier": Database["public"]['Enums']["membership_tier"],
+"trial_ends_at": string | null,
+"updated_at": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "profiles"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
+"membership_payment_failed":
+{ Args: { "p_user": string }; Returns: boolean
+                           },
+"membership_payment_succeeded":
+{ Args: { "p_amount_huf": number,"p_interval": Database["public"]['Enums']["billing_interval"],"p_period_end": string,"p_tier": Database["public"]['Enums']["membership_tier"],"p_user": string }; Returns: {
+              "billing_interval": Database["public"]['Enums']["billing_interval"] | null,
+"bio": string | null,
+"cancel_at_period_end": boolean,
+"consultations_period_start": string | null,
+"country": string | null,
+"created_at": string,
+"current_period_end": string | null,
+"current_stage_label": string | null,
+"display_name": string,
+"email": string,
+"free_consultations_remaining": number,
+"free_messages_remaining": number,
+"id": string,
+"ip3_purchased": boolean,
+"ip3_unlocked": boolean,
+"ip3_unlocked_at": string | null,
+"m2_purchased": boolean,
+"m2_unlocked": boolean,
+"m2_unlocked_at": string | null,
+"membership_ended_at": string | null,
+"membership_started_at": string | null,
+"past_due_since": string | null,
+"privat_kozlony_pro": boolean,
+"recurring_amount_huf": number | null,
+"retreat_unlocked": boolean,
+"role": Database["public"]['Enums']["user_role"],
+"stripe_customer_id": string | null,
+"stripe_subscription_id": string | null,
+"subscription_status": Database["public"]['Enums']["subscription_status"],
+"tier": Database["public"]['Enums']["membership_tier"],
+"trial_ends_at": string | null,
+"updated_at": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "profiles"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
+"membership_stage_purchased":
+{ Args: { "p_code": string,"p_user": string }; Returns: {
+              "billing_interval": Database["public"]['Enums']["billing_interval"] | null,
+"bio": string | null,
+"cancel_at_period_end": boolean,
+"consultations_period_start": string | null,
+"country": string | null,
+"created_at": string,
+"current_period_end": string | null,
+"current_stage_label": string | null,
+"display_name": string,
+"email": string,
+"free_consultations_remaining": number,
+"free_messages_remaining": number,
+"id": string,
+"ip3_purchased": boolean,
+"ip3_unlocked": boolean,
+"ip3_unlocked_at": string | null,
+"m2_purchased": boolean,
+"m2_unlocked": boolean,
+"m2_unlocked_at": string | null,
+"membership_ended_at": string | null,
+"membership_started_at": string | null,
+"past_due_since": string | null,
+"privat_kozlony_pro": boolean,
+"recurring_amount_huf": number | null,
+"retreat_unlocked": boolean,
+"role": Database["public"]['Enums']["user_role"],
+"stripe_customer_id": string | null,
+"stripe_subscription_id": string | null,
+"subscription_status": Database["public"]['Enums']["subscription_status"],
+"tier": Database["public"]['Enums']["membership_tier"],
+"trial_ends_at": string | null,
+"updated_at": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "profiles"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
+"membership_trial_started":
+{ Args: { "p_trial_end": string,"p_user": string }; Returns: {
+              "billing_interval": Database["public"]['Enums']["billing_interval"] | null,
+"bio": string | null,
+"cancel_at_period_end": boolean,
+"consultations_period_start": string | null,
+"country": string | null,
+"created_at": string,
+"current_period_end": string | null,
+"current_stage_label": string | null,
+"display_name": string,
+"email": string,
+"free_consultations_remaining": number,
+"free_messages_remaining": number,
+"id": string,
+"ip3_purchased": boolean,
+"ip3_unlocked": boolean,
+"ip3_unlocked_at": string | null,
+"m2_purchased": boolean,
+"m2_unlocked": boolean,
+"m2_unlocked_at": string | null,
+"membership_ended_at": string | null,
+"membership_started_at": string | null,
+"past_due_since": string | null,
+"privat_kozlony_pro": boolean,
+"recurring_amount_huf": number | null,
+"retreat_unlocked": boolean,
+"role": Database["public"]['Enums']["user_role"],
+"stripe_customer_id": string | null,
+"stripe_subscription_id": string | null,
+"subscription_status": Database["public"]['Enums']["subscription_status"],
+"tier": Database["public"]['Enums']["membership_tier"],
+"trial_ends_at": string | null,
+"updated_at": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "profiles"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
+"participation_score":
+{ Args: { "p_user"?: string }; Returns: Json
+                           },
+"progression_status":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
 "public_open_evenings":
 { Args: Record<PropertyKey, never>; Returns: {
               "description": string,"ends_at": string,"id": string,"is_online": boolean,"location": string,"price_external_huf": number,"registration_open": boolean,"seats_left": number,"starts_at": string,"title": string
@@ -568,6 +765,25 @@ isOneToOne: false
 "purge_kind_message_phones":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
+"request_progression":
+{ Args: { "p_note"?: string }; Returns: {
+              "admin_note": string | null,
+"consultation_at": string | null,
+"created_at": string,
+"decided_at": string | null,
+"decided_by": string | null,
+"id": string,
+"note": string | null,
+"status": Database["public"]['Enums']["progression_status"],
+"target_stage": number,
+"user_id": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "progression_requests"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "reserve_guest_seat":
 { Args: { "p_event_id": string,"p_guest_email": string,"p_guest_name": string }; Returns: {
               "cancelled_at": string | null,
@@ -592,6 +808,9 @@ isOneToOne: false
 "revenue_region_for":
 { Args: { "p_country": string }; Returns: Database["public"]['Enums']["revenue_region"]
                            },
+"run_scheduled_tasks":
+{ Args: { "p_now"?: string }; Returns: Json
+                           },
 "send_free_kind_message":
 { Args: { "p_message": string,"p_recipient_name": string,"p_recipient_phone": string }; Returns: {
               "amount_huf": number,
@@ -612,10 +831,13 @@ isOneToOne: false
         to: "kind_messages"
         isOneToOne: true
         isSetofReturn: false
-      } }
+      } },
+"stage_progress":
+{ Args: { "p_stage": number }; Returns: Json
+                           }
           }
           Enums: {
-            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","post_kind": "normal"|"penteki_kor","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin"
+            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","post_kind": "normal"|"penteki_kor","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -735,7 +957,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"post_kind": ["normal", "penteki_kor"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"]
+            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"post_kind": ["normal", "penteki_kor"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"]
           }
         }
 } as const
