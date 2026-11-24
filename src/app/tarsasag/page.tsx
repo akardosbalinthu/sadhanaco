@@ -267,7 +267,7 @@ const TIERS = [
       "Napi Közlöny PRO díjmentesen, amint elindul",
       "Nyílt Est 3 200 Ft-ért (4 940 Ft helyett), Élő Gyakorlónap 6 460 Ft",
       "1-on-1 konzultáció tagi áron: 15 000 Ft",
-      "A II–III. lépcső részvétellel vagy gyorsított hozzáféréssel nyílik",
+      "A II. és III. lépcső díjmentesen nyílik a rangoddal (Horgonyzó, illetve Csendőrző) — fizetni csak akkor kell, ha gyorsítanál",
     ],
   },
   {
@@ -297,8 +297,8 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
     rows: [
       ["A Ceremónia és a rended", "—", "✓", "✓"],
       ["I. Modul (Jelenlét) + IP 1 · 8+1 hét", "—", "✓ azonnal", "✓ azonnal"],
-      ["II. Modul (Tudatosság) + IP 2 · 8+1 hét", "—", "részvétellel vagy 54 940 Ft, beszélgetés után", "✓ díjmentes, beszélgetés után"],
-      ["III. Integrációs Program (IP 3) · 8+1 hét", "—", "részvétellel vagy 44 940 Ft (II+III együtt 89 940 Ft), beszélgetés után", "✓ díjmentes, beszélgetés után"],
+      ["II. Modul (Tudatosság) + IP 2 · 8+1 hét", "—", "díjmentesen nyílik, amikor elvégezted az I. lépcsőt és eléred a Horgonyzó rangot (500 XP). Ha nem várnád meg a rangot: 54 940 Ft. Mindkét esetben egy rövid beszélgetés után.", "✓ díjmentes, az I. lépcső után, beszélgetés után"],
+      ["III. Integrációs Program (IP 3) · 8+1 hét", "—", "díjmentesen nyílik, amikor elvégezted a II. lépcsőt és eléred a Csendőrző rangot (1 200 XP). Ha nem várnád meg a rangot: 44 940 Ft (a II. és III. lépcső együtt 89 940 Ft). Mindkét esetben egy rövid beszélgetés után.", "✓ díjmentes, a II. lépcső után, beszélgetés után"],
       ["Napi Küldetések és vezetett gyakorlások", "—", "✓", "✓"],
       ["Belső Tükör — privát gyakorlónapló", "—", "✓", "✓"],
       ["Karakterkártya, XP és rang", "—", "✓", "✓"],
@@ -382,7 +382,7 @@ const FAQ = [
   },
   {
     q: "Mi a különbség a két út között?",
-    a: "A Társaság Útján az első lépcső azonnal nyitva van, a továbbiak részvétellel vagy külön díjért nyílnak. A Belső Körben a teljes tananyag-ív benne van az árban, élőben kérdezhetsz, és minden élő alkalom — a Szabadság Elvonulás is — díjmentes.",
+    a: "A Társaság Útján az első lépcső azonnal nyitva van, a továbbiak pedig díjmentesen nyílnak, amikor gyakorlással eléred a hozzájuk tartozó rangot — ha gyorsítanál, külön díjért hamarabb is megnyithatod őket. A Belső Körben a teljes tananyag-ív benne van az árban, élőben kérdezhetsz, és minden élő alkalom — a Szabadság Elvonulás is — díjmentes.",
   },
   {
     q: "Hogyan működik a próbaidő?",
@@ -608,9 +608,11 @@ export default async function TarsasagHome() {
       <section>
         <SectionHeading eyebrow="Az út" title="Négy lépcső, a saját tempódban.">
           <p>
-            Belépéskor az első lépcső nyílik meg. Továbblépni részvétellel, gyorsított hozzáféréssel vagy a Belső
-            Körben külön díj nélkül lehet — a következő lépcsőt minden esetben egy rövid, díjmentes beszélgetés
-            után Bálint nyitja meg, hogy az út biztonságos és folyamatos maradjon.
+            Belépéskor az első lépcső nyílik meg. A következőre akkor léphetsz, ha az előzőt elvégezted, és
+            gyakorlással eléred a hozzá tartozó rangot: a II. lépcsőhöz a Horgonyzót (500 XP), a III.-hoz a
+            Csendőrzőt (1 200 XP). Ez díjmentes — fizetni csak akkor kell, ha nem várnád meg a rangot (54 940 Ft,
+            illetve 44 940 Ft). A Belső Körben a rang sem feltétel. A következő lépcsőt minden esetben egy rövid,
+            díjmentes beszélgetés után Bálint nyitja meg, hogy az út biztonságos és folyamatos maradjon.
           </p>
         </SectionHeading>
         <ol className="mt-10 space-y-6">
