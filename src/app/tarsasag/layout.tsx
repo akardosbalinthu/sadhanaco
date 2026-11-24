@@ -3,6 +3,7 @@ import { publicEnv } from "@/lib/env";
 import { tp } from "@/lib/site";
 import { SiteFooter } from "@/components/site-header";
 import { ThemeToggle } from "@/components/theme";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "A Társaság · Nyugodtabb idegrendszer, kedvesebb hétköznapok",
@@ -12,7 +13,14 @@ export const metadata = {
 
 const navLink = "transition-colors duration-300 hover:text-gold";
 
-export default function TarsasagLayout({ children }: { children: React.ReactNode }) {
+export default async function TarsasagLayout({ children }: { children: React.ReactNode }) {
+  let loggedIn = false;
+  try {
+    const supabase = await createClient();
+    loggedIn = Boolean((await supabase.auth.getUser()).data.user);
+  } catch {
+    loggedIn = false;
+  }
   return (
     <>
       <header className="sticky top-0 z-10 border-b border-gold/30 bg-paper/95 backdrop-blur">
@@ -33,15 +41,26 @@ export default function TarsasagLayout({ children }: { children: React.ReactNode
             <a href={publicEnv.NEXT_PUBLIC_SITE_URL} className={`${navLink} hidden sm:inline`}>
               akardosbalint.hu
             </a>
-            <Link href={tp("/belepes")} className={navLink}>
-              Belépés
-            </Link>
-            <a
-              href={`${tp("/")}#csatlakozas`}
-              className="rounded-md border border-forest bg-forest px-3 py-1.5 text-paper transition-all duration-300 hover:border-gold"
-            >
-              Csatlakozás
-            </a>
+            {loggedIn ? (
+              <Link
+                href={tp("/gyakorlas")}
+                className="rounded-md border border-forest bg-forest px-3 py-1.5 text-paper transition-all duration-300 hover:border-gold"
+              >
+                Gyakorlótér
+              </Link>
+            ) : (
+              <>
+                <Link href={tp("/belepes")} className={navLink}>
+                  Belépés
+                </Link>
+                <a
+                  href={`${tp("/")}#csatlakozas`}
+                  className="rounded-md border border-forest bg-forest px-3 py-1.5 text-paper transition-all duration-300 hover:border-gold"
+                >
+                  Csatlakozás
+                </a>
+              </>
+            )}
             <ThemeToggle />
           </nav>
         </div>

@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 /** A Társaság belső (átírt) útvonalai közül ezek nyilvánosak. */
-const PUBLIC_TARSASAG_PATHS = ["/tarsasag", "/tarsasag/belepes", "/tarsasag/auth"];
+const PUBLIC_TARSASAG_PATHS = ["/tarsasag", "/tarsasag/belepes", "/tarsasag/auth", "/tarsasag/csatlakozas"];
 
 function isPublicTarsasagPath(pathname: string) {
   return PUBLIC_TARSASAG_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
