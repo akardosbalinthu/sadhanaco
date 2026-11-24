@@ -12,7 +12,8 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:test": "supabase test db",
-    "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts"
+    "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts",
+    "test:webhook": "node --conditions=react-server --import tsx --test tests/webhook.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -36,6 +37,7 @@
     "eslint-config-next": "15.5.29",
     "supabase": "^3.3.0",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

@@ -1,0 +1,137 @@
+/**
+ * A Stripe webhook-feldolgozó integrációs tesztje a HELYI Supabase ellen, kitalált eseményekkel.
+ * Futtatás: npm run test:webhook (előtte: npx supabase start)
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { randomUUID } from "node:crypto";
+import type Stripe from "stripe";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { processStripeEvent, type WebhookDeps } from "@/lib/billing/webhook";
+
+const admin = createAdminClient();
+const run = randomUUID().slice(0, 8);
+const emailA = `anna-${run}@example.test`;
+const emailB = `bela-${run}@example.test`;
+const custA = `cus_A_${run}`;
+const custB = `cus_B_${run}`;
+const subA = `sub_A_${run}`;
+const subB = `sub_B_${run}`;
+const now = Math.floor(Date.now() / 1000);
+
+const calls = { welcome: [] as string[], failed: [] as string[], endTrial: [] as string[] };
+const PRICES: Record<string, { code: string; unitAmount: number }> = {
+  price_th: { code: "tarsasagi_havi", unitAmount: 994000 },
+  price_bh: { code: "belso_kor_havi", unitAmount: 2794000 },
+};
+const deps: WebhookDeps = {
+  admin,
+  resolvePrice: async (id) => PRICES[id] ?? { code: null, unitAmount: null },
+  getSubscription: async (id) =>
+    ({ id, status: "trialing", trial_end: now + 7 * 86400, default_payment_method: { card: { fingerprint: "fp_SAME_" + run } } }) as unknown as Stripe.Subscription,
+  endTrialNow: async (id) => void calls.endTrial.push(id),
+  sendWelcome: async (e) => void calls.welcome.push(e),
+  sendPaymentFailed: async (e) => void calls.failed.push(e),
+};
+
+let seq = 0;
+const ev = (type: string, object: object) =>
+  ({ id: `evt_${run}_${++seq}`, type, data: { object } }) as unknown as Stripe.Event;
+
+const checkout = (email: string, customer: string, subscription: string) =>
+  ev("checkout.session.completed", {
+    id: `cs_${run}_${seq + 1}`, metadata: { kind: "membership", plan: "tarsasagi_havi" },
+    customer, subscription, customer_details: { email, address: { country: "HU" } },
+  });
+
+const invoice = (type: string, customer: string, email: string, price: string, amount: number, id = `in_${run}_${seq + 1}`) =>
+  ev(type, {
+    id, customer, customer_email: email, amount_paid: type === "invoice.paid" ? amount : 0,
+    customer_address: { country: "HU" },
+    parent: { subscription_details: { subscription: subA } },
+    lines: { data: [{ amount, period: { end: now + 30 * 86400 }, pricing: { price_details: { price } } }] },
+  });
+
+const profile = async (email: string) =>
+  (await admin.from("profiles").select("*").eq("email", email).single()).data!;
+
+test("csatlakozás próbaidővel: fiók létrejön, próbaidő indul, üdvözlő levél megy", async () => {
+  const e = checkout(emailA, custA, subA);
+  assert.equal(await processStripeEvent(e, deps), "processed");
+  const p = await profile(emailA);
+  assert.equal(p.subscription_status, "trialing");
+  assert.equal(p.tier, "tarsasagi");
+  assert.equal(p.stripe_customer_id, custA);
+  assert.deepEqual(calls.welcome, [emailA]);
+  const { data: t } = await admin.from("trial_usage").select("card_fingerprint").eq("email_normalized", emailA).single();
+  assert.equal(t?.card_fingerprint, "fp_SAME_" + run);
+  assert.equal(await processStripeEvent(e, deps), "duplicate", "ugyanaz az esemény másodszor nem fut le");
+});
+
+test("ugyanazzal a kártyával második próbaidő nincs: a próbaidő azonnal lezárul", async () => {
+  await processStripeEvent(checkout(emailB, custB, subB), deps);
+  assert.deepEqual(calls.endTrial, [subB]);
+  const p = await profile(emailB);
+  assert.equal(p.subscription_status, "none", "a tagságot majd a sikeres terhelés aktiválja");
+});
+
+test("sikeres fizetés: aktív tagság, díjmentes keret, számlázandó tétel rögzítve", async () => {
+  const e = invoice("invoice.paid", custA, emailA, "price_th", 994000);
+  await processStripeEvent(e, deps);
+  const p = await profile(emailA);
+  assert.equal(p.subscription_status, "active");
+  assert.equal(p.free_messages_remaining, 1);
+  assert.equal(p.privat_kozlony_pro, true);
+  const { data: inv } = await admin.from("invoices").select("amount_huf, region, product_code").eq("stripe_invoice_id", (e.data.object as { id: string }).id).single();
+  assert.deepEqual(inv, { amount_huf: 9940, region: "HU", product_code: "tarsasagi_havi" });
+});
+
+test("szintváltás: a Belső Kör azonnal érvénybe lép, a különbözetnyi keret jóváíródik", async () => {
+  await processStripeEvent(invoice("invoice.paid", custA, emailA, "price_bh", 1800000), deps);
+  const p = await profile(emailA);
+  assert.equal(p.tier, "belso_kor");
+  assert.equal(p.free_messages_remaining, 3);
+  assert.equal(p.recurring_amount_huf, 27940);
+});
+
+test("sikertelen terhelés: türelmi idő, egyszeri e-mail", async () => {
+  await processStripeEvent(invoice("invoice.payment_failed", custA, emailA, "price_bh", 2794000), deps);
+  await processStripeEvent(invoice("invoice.payment_failed", custA, emailA, "price_bh", 2794000), deps);
+  const p = await profile(emailA);
+  assert.equal(p.subscription_status, "past_due");
+  assert.deepEqual(calls.failed, [emailA]);
+});
+
+test("lemondás a következő időszaktól, majd megszűnés", async () => {
+  await processStripeEvent(ev("customer.subscription.updated", { id: subA, customer: custA, cancel_at_period_end: true }), deps);
+  assert.equal((await profile(emailA)).cancel_at_period_end, true);
+  await processStripeEvent(ev("customer.subscription.deleted", { id: subA, customer: custA }), deps);
+  const p = await profile(emailA);
+  assert.equal(p.tier, "none");
+  assert.equal(p.subscription_status, "canceled");
+});
+
+test("visszaterhelés: admin-értesítés", async () => {
+  const id = `dp_${run}`;
+  await processStripeEvent(ev("charge.dispute.created", { id, charge: "ch_1", amount: 994000, reason: "fraudulent" }), deps);
+  const { data } = await admin.from("admin_notifications").select("kind").eq("payload->>dispute_id", id);
+  assert.equal(data?.[0]?.kind, "chargeback");
+});
+
+test("Nyílt Est külsős fizetése: a foglalás megerősítve, tétel rögzítve", async () => {
+  const { data: event } = await admin
+    .from("events")
+    .insert({ kind: "nyilt_est", title: "Teszt est " + run, starts_at: new Date(Date.now() + 9 * 86400e3).toISOString(),
+              capacity: 10, members_only: false, price_external_huf: 4940, registration_opens_at: new Date(Date.now() - 86400e3).toISOString(), is_published: true })
+    .select("id").single();
+  const { data: reg, error } = await admin.rpc("reserve_guest_seat", { p_event_id: event!.id, p_guest_name: "Vendég", p_guest_email: `vendeg-${run}@example.test` });
+  assert.equal(error, null);
+  await processStripeEvent(ev("checkout.session.completed", {
+    id: `cs_guest_${run}`, payment_status: "paid", amount_total: 494000, payment_intent: `pi_${run}`,
+    metadata: { kind: "open_evening_guest", registration_id: reg!.id }, customer_details: { address: { country: "AT" } },
+  }), deps);
+  const { data: after } = await admin.from("event_registrations").select("status").eq("id", reg!.id).single();
+  assert.equal(after?.status, "confirmed");
+  const { data: inv } = await admin.from("invoices").select("amount_huf, region").eq("stripe_payment_intent_id", `pi_${run}`).single();
+  assert.deepEqual(inv, { amount_huf: 4940, region: "EU" });
+});

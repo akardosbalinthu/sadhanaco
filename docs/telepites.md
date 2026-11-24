@@ -64,6 +64,32 @@ Hátralévő (Supabase Dashboard):
    `update public.app_settings set superadmin_emails = array['<a te e-mail-címed>'];`
    Ha a fiók már létezik: `update public.profiles set role = 'superadmin' where email = '<cím>';`
 
-## 5. Stripe
+## 5. Stripe — a fizetés élesítése
+
+A kód kész és tesztelt (`npm run test:webhook` — 8 életút a helyi adatbázison). Élesítés sorrendben:
+
+1. **Titkos kulcsok a Vercelben** (akardosbalint projekt → Settings → Environment Variables, Production):
+   `SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY`.
+2. **Saját domain** (1. pont): a `*.vercel.app` címeket a Vercel bejelentkezéssel védi, ezért a Stripe nem
+   tudja elérni a webhookot. Domain nélkül: Vercel → Settings → Deployment Protection → kivétel a
+   `/api/webhooks/stripe` útvonalra (vagy Protection Bypass).
+3. **Webhook-végpont a Stripe-ban** (Developers → Webhooks → Add endpoint):
+   URL `https://akardosbalint.hu/api/webhooks/stripe`, események:
+   `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `invoice.paid`,
+   `invoice.payment_failed`, `customer.subscription.updated`, `customer.subscription.deleted`,
+   `charge.dispute.created`. A kapott aláíró kulcs → Vercel: `STRIPE_WEBHOOK_SECRET`.
+4. **Ügyfélportál** (Settings → Billing → Customer portal): lemondás „a számlázási időszak végén”,
+   kártyacsere engedélyezve, csomagváltás a négy tagsági ár között, arányosítás azonnali számlázással
+   („Prorate and invoice immediately”). Visszatérítés kikapcsolva.
+5. **Sikertelen terhelés**: lásd `docs/stripe-katalogus.md` (10 nap, 5 újrapróbálkozás, utána lemondás).
+6. **Bekapcsolás**: Vercel → `ONLINE_PAYMENTS_ENABLED=true`, majd új telepítés. Ettől kezdve a csatlakozás
+   gombok a fizetésre visznek (addig értesítéskérő e-mailt nyitnak).
+
+Megjegyzés: a Stripe-fiók **éles módban** van — a próbavásárlás valódi terhelés. Az első vásárlás után a
+tagság az adminban lezárható.
+
+## 5b. Stripe — egyéb
+
+
 
 Sikertelen terhelés: lásd `docs/stripe-katalogus.md`. Webhook-végpont: 2. fázis.

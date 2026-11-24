@@ -19,9 +19,14 @@ export default async function PracticePage() {
       <h1 className="mt-4 font-serif text-4xl text-forest">Üdv újra itt.</h1>
       <p className="mt-3 text-ink-soft">A gyakorlótér hamarosan itt nyílik meg.</p>
       <CompassDivider className="my-10" />
-      <form action={tp("/auth/kijelentkezes")} method="post">
-        <button className={linkClass}>Kijelentkezés</button>
-      </form>
+      <div className="flex flex-wrap gap-6">
+        <form action={tp("/elofizetes")} method="post">
+          <button className={linkClass}>Előfizetés kezelése</button>
+        </form>
+        <form action={tp("/auth/kijelentkezes")} method="post">
+          <button className={linkClass}>Kijelentkezés</button>
+        </form>
+      </div>
     </main>
   );
 }

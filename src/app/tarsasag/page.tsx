@@ -17,6 +17,7 @@ import {
 import { createPublicClient } from "@/lib/supabase/public";
 import { formatHuf, tp } from "@/lib/site";
 import { notifyHref } from "@/lib/cta";
+import { onlinePaymentsEnabled } from "@/lib/stripe";
 import {
   buttonPrimary,
   buttonSecondary,
@@ -419,6 +420,7 @@ export default async function TarsasagHome() {
   const { data: prices } = await supabase.from("price_catalog").select("code, amount_huf");
   const price = (code: string) => prices?.find((p) => p.code === code)?.amount_huf;
   const notify = notifyHref("A Társaság nyitása");
+  const open = onlinePaymentsEnabled();
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
@@ -780,10 +782,23 @@ export default async function TarsasagHome() {
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <p className="text-xs uppercase tracking-[0.18em] text-gold">A csatlakozás hamarosan nyílik</p>
-                  <a href={notify} className={`${buttonPrimary} mt-3 w-full text-center`}>
-                    Értesítést kérek a nyitásról
-                  </a>
+                  {open ? (
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      <Link href={`${tp("/csatlakozas")}?csomag=${t.monthly}`} className={`${buttonPrimary} text-center`}>
+                        Csatlakozom — havi
+                      </Link>
+                      <Link href={`${tp("/csatlakozas")}?csomag=${t.yearly}`} className={`${buttonSecondary} text-center`}>
+                        Éves díjjal
+                      </Link>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-xs uppercase tracking-[0.18em] text-gold">A csatlakozás hamarosan nyílik</p>
+                      <a href={notify} className={`${buttonPrimary} mt-3 w-full text-center`}>
+                        Értesítést kérek a nyitásról
+                      </a>
+                    </>
+                  )}
                 </div>
               </GildedCard>
             );
@@ -865,9 +880,15 @@ export default async function TarsasagHome() {
           budapesti Nyílt Estre, és tapasztald meg személyesen.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href={notify} className={buttonPrimary}>
-            Értesítést kérek a nyitásról
-          </a>
+          {open ? (
+            <Link href={tp("/csatlakozas")} className={buttonPrimary}>
+              Csatlakozom
+            </Link>
+          ) : (
+            <a href={notify} className={buttonPrimary}>
+              Értesítést kérek a nyitásról
+            </a>
+          )}
           <Link href={tp("/belepes")} className={buttonSecondary}>
             Már tag vagyok — belépés
           </Link>
