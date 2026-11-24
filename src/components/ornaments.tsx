@@ -104,3 +104,42 @@ export function CrestVandorok({ className }: SvgProps) {
     </Shield>
   );
 }
+
+/** Oldalfejléc: arany felső felirat, erdőzöld címsor, opcionális bevezető. */
+export function PageHeader({
+  eyebrow,
+  title,
+  children,
+}: {
+  eyebrow?: string;
+  title: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <header className="max-w-2xl">
+      {eyebrow && <p className="text-xs uppercase tracking-[0.25em] text-gold">{eyebrow}</p>}
+      <h1 className="mt-4 font-serif text-4xl text-forest sm:text-5xl">{title}</h1>
+      {children && <div className="mt-6 space-y-4 text-ink-soft">{children}</div>}
+    </header>
+  );
+}
+
+/** Szakaszcím kisebb arany felirattal. */
+export function SectionTitle({ eyebrow, title }: { eyebrow?: string; title: string }) {
+  return (
+    <div>
+      {eyebrow && <p className="text-xs uppercase tracking-[0.2em] text-gold">{eyebrow}</p>}
+      <h2 className="mt-1 font-serif text-2xl text-forest">{title}</h2>
+    </div>
+  );
+}
+
+/** Egységes gombstílusok. */
+export const buttonPrimary =
+  "inline-block rounded-md border border-forest bg-forest px-5 py-2.5 text-sm text-paper transition-all duration-300 hover:border-gold hover:bg-forest/90 disabled:opacity-60";
+export const buttonSecondary =
+  "inline-block rounded-md border border-forest px-5 py-2.5 text-sm text-forest transition-all duration-300 hover:border-gold hover:bg-gold-soft/40";
+export const inputClass =
+  "w-full rounded-md border border-line bg-white/60 px-3 py-2.5 outline-none transition-colors duration-300 focus:border-gold";
+export const linkClass =
+  "text-sm text-forest underline decoration-gold/60 underline-offset-4 transition-colors duration-300 hover:text-gold";

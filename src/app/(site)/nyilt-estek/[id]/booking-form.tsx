@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonPrimary, inputClass } from "@/components/ornaments";
 import { useActionState } from "react";
 import { bookOpenEvening, type GuestBookingState } from "./actions";
 
@@ -17,7 +18,7 @@ export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLab
           name="name"
           required
           autoComplete="name"
-          className="w-full rounded-md border border-line bg-white/60 px-3 py-2.5 outline-none focus:border-moss"
+          className={inputClass}
         />
       </label>
       <label className="block">
@@ -27,11 +28,11 @@ export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLab
           name="email"
           required
           autoComplete="email"
-          className="w-full rounded-md border border-line bg-white/60 px-3 py-2.5 outline-none focus:border-moss"
+          className={inputClass}
         />
       </label>
       <label className="flex items-start gap-3 text-sm text-ink-soft">
-        <input type="checkbox" name="waiver" required className="mt-1 accent-moss" />
+        <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
         <span>
           Kérem a szolgáltatás teljesítését a megrendeléssel, és tudomásul veszem, hogy ezzel elveszítem
           a 14 napos elállási jogomat.
@@ -41,7 +42,7 @@ export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLab
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-md bg-moss px-5 py-2.5 text-sm text-paper hover:bg-moss-soft disabled:opacity-60"
+        className={`${buttonPrimary} w-full`}
       >
         {pending ? "Egy pillanat…" : `Jelentkezés és fizetés (${priceLabel})`}
       </button>

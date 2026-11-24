@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { CompassDivider, GildedCard, PageHeader } from "@/components/ornaments";
 
 export const metadata = { title: "Impresszum · Kardos Bálint" };
 
@@ -18,15 +19,18 @@ export default function ImprintPage() {
   ];
   return (
     <main className="py-16">
-      <h1 className="font-serif text-3xl">Impresszum</h1>
-      <dl className="mt-8 grid max-w-xl grid-cols-[auto_1fr] gap-x-8 gap-y-3 text-sm">
-        {rows.map(([k, v]) => (
-          <div key={k} className="contents">
-            <dt className="text-ink-soft">{k}</dt>
-            <dd className="text-ink">{v}</dd>
-          </div>
-        ))}
-      </dl>
+      <PageHeader eyebrow="Jogi adatok" title="Impresszum" />
+      <CompassDivider className="my-12" />
+      <GildedCard className="max-w-xl">
+        <dl className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 text-sm">
+          {rows.map(([k, v]) => (
+            <div key={k} className="contents">
+              <dt className="text-ink-soft">{k}</dt>
+              <dd className="text-ink">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </GildedCard>
     </main>
   );
 }

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { createPublicClient } from "@/lib/supabase/public";
 import { formatEventDate, formatHuf, formatTime } from "@/lib/site";
 import { BookingForm } from "./booking-form";
+import { CompassDivider, GildedCard } from "@/components/ornaments";
 
 export const metadata = { title: "Jelentkezés · Nyílt Meditációs Est" };
 
@@ -24,20 +25,22 @@ export default async function OpenEveningPage({
 
   return (
     <main className="py-16">
-      <Link href="/nyilt-estek" className="text-sm text-moss-soft hover:text-moss">
+      <Link href="/nyilt-estek" className="text-sm text-ink-soft transition-colors duration-300 hover:text-gold">
         ← Minden alkalom
       </Link>
-      <p className="mt-8 text-sm text-moss-soft">
+      <p className="mt-10 text-xs uppercase tracking-[0.2em] text-gold">
         {formatEventDate(event.starts_at)} · {formatTime(event.starts_at)}
         {event.ends_at ? `–${formatTime(event.ends_at)}` : ""}
       </p>
-      <h1 className="mt-1 font-serif text-3xl">{event.title}</h1>
+      <h1 className="mt-3 font-serif text-4xl text-forest">{event.title}</h1>
       {event.location && <p className="mt-2 text-ink-soft">{event.is_online ? "Online" : event.location}</p>}
       {event.description && <p className="mt-6 max-w-2xl whitespace-pre-line text-ink-soft">{event.description}</p>}
 
-      <div className="mt-12 max-w-md">
+      <CompassDivider className="my-12" />
+
+      <GildedCard className="max-w-md">
         {fizetes === "sikeres" ? (
-          <p className="rounded-lg border border-line bg-paper-deep/50 p-6 text-ink-soft">
+          <p className="text-ink-soft">
             Köszönjük, a fizetés megérkezett. A visszaigazolást e-mailben küldjük. Szeretettel várunk.
           </p>
         ) : canBook ? (
@@ -52,7 +55,7 @@ export default async function OpenEveningPage({
         ) : (
           <p className="text-ink-soft">Erre az alkalomra a jelentkezés most nem lehetséges.</p>
         )}
-      </div>
+      </GildedCard>
     </main>
   );
 }

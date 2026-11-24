@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { tp } from "@/lib/site";
+import { CompassDivider, linkClass } from "@/components/ornaments";
 
 export const metadata = { title: "Gyakorlás · A Társaság" };
 
@@ -14,10 +15,12 @@ export default async function PracticePage() {
 
   return (
     <main className="mx-auto max-w-2xl px-6 py-16">
-      <h1 className="font-serif text-2xl">Üdv újra itt.</h1>
+      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Gyakorlótér</p>
+      <h1 className="mt-4 font-serif text-4xl text-forest">Üdv újra itt.</h1>
       <p className="mt-3 text-ink-soft">A gyakorlótér hamarosan itt nyílik meg.</p>
-      <form action={tp("/auth/kijelentkezes")} method="post" className="mt-10">
-        <button className="text-sm text-moss underline underline-offset-4">Kijelentkezés</button>
+      <CompassDivider className="my-10" />
+      <form action={tp("/auth/kijelentkezes")} method="post">
+        <button className={linkClass}>Kijelentkezés</button>
       </form>
     </main>
   );

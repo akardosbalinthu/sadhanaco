@@ -272,7 +272,7 @@ export default async function TarsasagHome() {
                 {y !== undefined && (
                   <p className="text-sm text-ink-soft">vagy {formatHuf(y)} / év (2 hónap ajándék)</p>
                 )}
-                <p className="mt-4 text-sm text-moss-soft">{t.note}</p>
+                <p className="mt-4 text-sm text-ink-soft italic">{t.note}</p>
                 <ul className="mt-4 space-y-2 text-sm text-ink-soft">
                   {t.features.map((f) => (
                     <li key={f} className="flex gap-2">
