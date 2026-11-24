@@ -2,6 +2,9 @@
 
 import { useActionState, useState } from "react";
 import { buttonPrimary, inputClass } from "@/components/ornaments";
+import { publicEnv } from "@/lib/env";
+
+const SITE_URL = publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
 import { startCheckout, type JoinState } from "./actions";
 
 export type PlanOption = { code: string; title: string; price: string; note: string };
@@ -41,6 +44,21 @@ export function JoinForm({ plans, defaultPlan }: { plans: PlanOption[]; defaultP
       <label className="block">
         <span className="mb-1.5 block text-sm text-ink-soft">E-mail-cím — ezzel fogsz belépni</span>
         <input type="email" name="email" required autoComplete="email" className={inputClass} />
+      </label>
+
+      <label className="flex items-start gap-3 text-sm text-ink-soft">
+        <input type="checkbox" name="terms" required className="mt-1 accent-forest" />
+        <span>
+          Elfogadom az{" "}
+          <a href={`${SITE_URL}/aszf`} target="_blank" rel="noopener" className="text-forest underline decoration-gold/60 underline-offset-4">
+            ÁSZF-et
+          </a>
+          , és megismertem az{" "}
+          <a href={`${SITE_URL}/adatkezeles`} target="_blank" rel="noopener" className="text-forest underline decoration-gold/60 underline-offset-4">
+            adatkezelési tájékoztatót
+          </a>
+          .
+        </span>
       </label>
 
       <label className="flex items-start gap-3 text-sm text-ink-soft">

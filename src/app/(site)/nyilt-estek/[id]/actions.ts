@@ -17,6 +17,7 @@ const schema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().toLowerCase().email(),
   waiver: z.literal("on"),
+  terms: z.literal("on"),
 });
 
 const MESSAGES: Record<string, string> = {
@@ -43,12 +44,15 @@ export async function bookOpenEvening(
     name: formData.get("name"),
     email: formData.get("email"),
     waiver: formData.get("waiver"),
+    terms: formData.get("terms"),
   });
   if (!parsed.success) {
-    const waiverMissing = parsed.error.issues.some((i) => i.path[0] === "waiver");
+    const missing = (k: string) => parsed.error.issues.some((i) => i.path[0] === k);
     return {
       status: "error",
-      message: waiverMissing
+      message: missing("terms")
+        ? "A jelentkezéshez kérlek, fogadd el az ÁSZF-et és az adatkezelési tájékoztatót."
+        : missing("waiver")
         ? "A jelentkezéshez kérlek, fogadd el az azonnali teljesítésről szóló nyilatkozatot."
         : MESSAGES.INVALID_GUEST,
     };

@@ -1,6 +1,9 @@
 "use client";
 
 import { buttonPrimary, inputClass } from "@/components/ornaments";
+import { publicEnv } from "@/lib/env";
+
+const SITE_URL = publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
 import { useActionState } from "react";
 import { bookOpenEvening, type GuestBookingState } from "./actions";
 
@@ -31,6 +34,21 @@ export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLab
           className={inputClass}
         />
       </label>
+      <label className="flex items-start gap-3 text-sm text-ink-soft">
+        <input type="checkbox" name="terms" required className="mt-1 accent-forest" />
+        <span>
+          Elfogadom az{" "}
+          <a href={`${SITE_URL}/aszf`} target="_blank" rel="noopener" className="text-forest underline decoration-gold/60 underline-offset-4">
+            ÁSZF-et
+          </a>
+          , és megismertem az{" "}
+          <a href={`${SITE_URL}/adatkezeles`} target="_blank" rel="noopener" className="text-forest underline decoration-gold/60 underline-offset-4">
+            adatkezelési tájékoztatót
+          </a>
+          .
+        </span>
+      </label>
+
       <label className="flex items-start gap-3 text-sm text-ink-soft">
         <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
         <span>

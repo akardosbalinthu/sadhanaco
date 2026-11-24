@@ -14,6 +14,7 @@ const schema = z.object({
   plan: z.string().refine(isPlanCode),
   email: z.string().trim().toLowerCase().email(),
   waiver: z.literal("on"),
+  terms: z.literal("on"),
 });
 
 /**
@@ -25,12 +26,15 @@ export async function startCheckout(_prev: JoinState, formData: FormData): Promi
     plan: formData.get("plan"),
     email: formData.get("email"),
     waiver: formData.get("waiver"),
+    terms: formData.get("terms"),
   });
   if (!parsed.success) {
-    const waiver = parsed.error.issues.some((i) => i.path[0] === "waiver");
+    const missing = (k: string) => parsed.error.issues.some((i) => i.path[0] === k);
     return {
       status: "error",
-      message: waiver
+      message: missing("terms")
+        ? "A csatlakozáshoz kérlek, fogadd el az ÁSZF-et és az adatkezelési tájékoztatót."
+        : missing("waiver")
         ? "A csatlakozáshoz kérlek, fogadd el az azonnali teljesítésről szóló nyilatkozatot."
         : "Kérlek, válassz csomagot, és adj meg egy érvényes e-mail-címet.",
     };

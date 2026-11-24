@@ -47,14 +47,20 @@ export function SiteFooter() {
       </div>
       <div className="mx-auto flex max-w-5xl flex-wrap justify-between gap-4 px-6 py-8 text-sm text-ink-soft">
         <p className="text-xs uppercase tracking-[0.25em] text-gold">Jelenlét – Tudatosság – Szabadság</p>
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
           <a href={`mailto:${SITE.email}`} className={navLink}>
             {SITE.email}
           </a>
-          {/* Abszolút cím: a tarsasag. aldomainről is a fő oldal impresszumára vigyen. */}
-          <a href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/impresszum`} className={navLink}>
-            Impresszum
-          </a>
+          {/* Abszolút címek: a tarsasag. aldomainről is a fő oldal jogi oldalaira vigyenek. */}
+          {[
+            ["/aszf", "ÁSZF"],
+            ["/adatkezeles", "Adatkezelés"],
+            ["/impresszum", "Impresszum"],
+          ].map(([path, label]) => (
+            <a key={path} href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}${path}`} className={navLink}>
+              {label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
