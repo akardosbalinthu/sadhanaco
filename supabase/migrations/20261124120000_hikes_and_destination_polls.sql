@@ -1,14 +1,18 @@
 -- =============================================================================
--- 004 — Havi közös túra + úti cél szavazás
+-- 004 — Havi közös túra + úti cél szavazás + vendégmeghívó
 -- Havonta egy közös túra a Társaság tagjaival, Magyarországon. A következő úti
--- célt mindig a Társaság szavazza meg. A szavazás állása a lezárásig nem látszik
--- (nincs „verseny”, nincs nyomás) — csak a saját szavazatodat látod.
+-- célt mindig a Társaság szavazza meg: hónaponként egy szavazás, Bálint 5–10
+-- úti célt ír ki. A szavazás állása a lezárásig nem látszik (nincs „verseny”,
+-- nincs nyomás) — csak a saját szavazatodat látod.
+-- A túra a tagoknak ingyenes; Társaságon kívüliek csak meghívóval jöhetnek,
+-- és számukra is ingyenes.
 -- =============================================================================
 
 alter type public.event_kind add value if not exists 'tura';
 
 create table public.destination_polls (
   id                 uuid primary key default gen_random_uuid(),
+  month              date not null unique check (month = date_trunc('month', month)::date),  -- hónaponként egy
   title              text not null check (char_length(title) between 1 and 200),
   description        text check (char_length(description) <= 2000),
   opens_at           timestamptz not null default now(),
@@ -42,6 +46,23 @@ create table public.destination_votes (
   -- a választott lehetőség ugyanahhoz a szavazáshoz tartozzon
   foreign key (option_id, poll_id) references public.destination_options (id, poll_id) on delete cascade
 );
+
+-- Egy szavazáson legfeljebb 10 úti cél lehet.
+create or replace function public.guard_destination_option_limit()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
+begin
+  perform 1 from public.destination_polls where id = new.poll_id for update;
+  if (select count(*) from public.destination_options o where o.poll_id = new.poll_id) >= 10 then
+    raise exception 'Egy szavazáson legfeljebb 10 úti cél lehet.' using errcode = 'P0001', hint = 'TOO_MANY_OPTIONS';
+  end if;
+  return new;
+end;
+$$;
+create trigger destination_options_limit before insert on public.destination_options
+  for each row execute function public.guard_destination_option_limit();
 
 -- RLS — ENABLE + FORCE
 alter table public.destination_polls   enable row level security;
@@ -89,6 +110,9 @@ begin
   end if;
   if now() < v_poll.opens_at or now() >= v_poll.closes_at or v_poll.winning_option_id is not null then
     raise exception 'Ez a szavazás most nem nyitott.' using errcode = 'P0001', hint = 'POLL_CLOSED';
+  end if;
+  if (select count(*) from public.destination_options o where o.poll_id = p_poll_id) not between 5 and 10 then
+    raise exception 'A szavazás akkor indul, ha legalább 5 úti cél fel van véve.' using errcode = 'P0001', hint = 'POLL_NOT_READY';
   end if;
   if not exists (select 1 from public.destination_options o where o.id = p_option_id and o.poll_id = p_poll_id) then
     raise exception 'Ez a lehetőség nem ehhez a szavazáshoz tartozik.' using errcode = 'P0001', hint = 'INVALID_OPTION';
@@ -181,7 +205,159 @@ begin
 end;
 $$;
 
+-- -----------------------------------------------------------------------------
+-- A túra ingyenes (tagoknak és meghívott vendégeknek is), és nyilvánosan nem
+-- foglalható. (A kind::text összehasonlítás azért kell, mert az új enum-érték
+-- ugyanebben a tranzakcióban még nem használható literálként.)
+-- -----------------------------------------------------------------------------
+alter table public.events add constraint events_tura_free check (
+  kind::text <> 'tura'
+  or (price_tarsasagi_huf = 0 and price_belso_kor_huf = 0 and price_external_huf is null and members_only)
+);
+
+alter table public.app_settings
+  add column hike_guest_invites_per_member smallint not null default 2
+    check (hike_guest_invites_per_member between 0 and 20);
+
+-- Vendégmeghívó a túrára: egy tag meghív egy Társaságon kívüli embert; a vendég a
+-- (Resenddel kiküldött) egyszer használható linkkel fogadja el. Ingyenes.
+create table public.event_invitations (
+  id           uuid primary key default gen_random_uuid(),
+  event_id     uuid not null references public.events (id) on delete cascade,
+  invited_by   uuid references public.profiles (id) on delete set null,
+  guest_name   text not null check (char_length(guest_name) between 1 and 120),
+  guest_email  text not null check (guest_email = lower(btrim(guest_email))),
+  token        text not null unique default encode(extensions.gen_random_bytes(24), 'hex'),
+  status       text not null default 'invited' check (status in ('invited', 'accepted', 'cancelled')),
+  registration_id uuid references public.event_registrations (id) on delete set null,
+  created_at   timestamptz not null default now(),
+  accepted_at  timestamptz
+);
+create unique index event_invitations_one_active_per_guest
+  on public.event_invitations (event_id, guest_email) where status <> 'cancelled';
+create index event_invitations_inviter_idx on public.event_invitations (invited_by, event_id);
+
+alter table public.event_invitations enable row level security;
+alter table public.event_invitations force row level security;
+-- A meghívó a saját meghívásait látja (a tokent nem — azt csak a vendég kapja meg e-mailben).
+create policy event_invitations_select_own on public.event_invitations
+  for select to authenticated using (invited_by = (select auth.uid()) or public.is_admin());
+create policy event_invitations_admin_update on public.event_invitations
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
+-- Meghívás (aktív tag). A tokent csak a szerver (service role) kapja vissza, hogy e-mailben kiküldje.
+create or replace function public.invite_hike_guest(p_event_id uuid, p_guest_name text, p_guest_email text)
+returns uuid
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_uid    uuid := auth.uid();
+  v_event  public.events;
+  v_limit  smallint;
+  v_email  text := lower(btrim(p_guest_email));
+  v_id     uuid;
+begin
+  if v_uid is null then
+    raise exception 'Bejelentkezés szükséges.' using errcode = '28000', hint = 'NOT_AUTHENTICATED';
+  end if;
+  if not public.has_member_access() then
+    raise exception 'Vendéget a Társaság tagjai hívhatnak.' using errcode = 'P0001', hint = 'NOT_MEMBER';
+  end if;
+  if v_email !~ '^[^@\s]+@[^@\s]+\.[^@\s]+$' or nullif(btrim(p_guest_name), '') is null then
+    raise exception 'Adj meg nevet és érvényes e-mail-címet.' using errcode = 'P0001', hint = 'INVALID_GUEST';
+  end if;
+  select * into v_event from public.events where id = p_event_id for update;
+  if not found or v_event.kind::text <> 'tura' or not v_event.is_published or v_event.cancelled_at is not null then
+    raise exception 'Erre az alkalomra nem lehet vendéget hívni.' using errcode = 'P0001', hint = 'NOT_A_HIKE';
+  end if;
+  if now() >= v_event.starts_at then
+    raise exception 'A túra már elkezdődött.' using errcode = 'P0001', hint = 'REGISTRATION_CLOSED';
+  end if;
+  select hike_guest_invites_per_member into strict v_limit from public.app_settings where id;
+  if (select count(*) from public.event_invitations i
+       where i.event_id = p_event_id and i.invited_by = v_uid and i.status <> 'cancelled') >= v_limit then
+    raise exception 'Erre a túrára legfeljebb % vendéget hívhatsz.', v_limit using errcode = 'P0001', hint = 'INVITE_LIMIT';
+  end if;
+  if exists (select 1 from public.profiles p
+              where lower(p.email) = v_email and p.tier <> 'none'
+                and p.subscription_status in ('active', 'trialing', 'past_due')) then
+    raise exception 'Ő már a Társaság tagja — külön meghívó nélkül is jöhet.' using errcode = 'P0001', hint = 'ALREADY_MEMBER';
+  end if;
+  if exists (select 1 from public.event_invitations i
+              where i.event_id = p_event_id and i.guest_email = v_email and i.status <> 'cancelled') then
+    raise exception 'Őt már meghívták erre a túrára.' using errcode = 'P0001', hint = 'ALREADY_INVITED';
+  end if;
+
+  insert into public.event_invitations (event_id, invited_by, guest_name, guest_email)
+  values (p_event_id, v_uid, btrim(p_guest_name), v_email)
+  returning id into v_id;
+  return v_id;
+end;
+$$;
+
+-- Meghívó elfogadása a vendég linkjéről — CSAK service role (a weboldal szervere hívja).
+-- Ingyenes, megerősített hely; a túra létszámkorlátjába beleszámít.
+create or replace function public.accept_hike_invitation(p_token text)
+returns public.event_registrations
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_inv   public.event_invitations;
+  v_event public.events;
+  v_taken integer;
+  v_reg   public.event_registrations;
+begin
+  if coalesce(auth.role(), '') <> 'service_role' then
+    raise exception 'Csak szerveroldalról hívható.' using errcode = '42501', hint = 'FORBIDDEN';
+  end if;
+  select * into v_inv from public.event_invitations where token = p_token;
+  if not found or v_inv.status = 'cancelled' then
+    raise exception 'Ez a meghívó nem érvényes.' using errcode = 'P0001', hint = 'INVITATION_INVALID';
+  end if;
+  select * into v_event from public.events where id = v_inv.event_id for update;
+  select * into v_inv from public.event_invitations where id = v_inv.id for update;
+  if v_inv.status = 'accepted' then
+    select * into v_reg from public.event_registrations where id = v_inv.registration_id;
+    return v_reg;  -- idempotens
+  end if;
+  if v_event.cancelled_at is not null or now() >= v_event.starts_at then
+    raise exception 'Erre a túrára már nem lehet jelentkezni.' using errcode = 'P0001', hint = 'REGISTRATION_CLOSED';
+  end if;
+  if v_event.capacity is not null then
+    select count(*) into v_taken from public.event_registrations r
+     where r.event_id = v_event.id and r.status <> 'cancelled';
+    if v_taken >= v_event.capacity then
+      raise exception 'Erre a túrára minden hely betelt.' using errcode = 'P0001', hint = 'EVENT_FULL';
+    end if;
+  end if;
+
+  insert into public.event_registrations (event_id, user_id, guest_name, guest_email, is_member_seat, price_huf, status)
+  values (v_event.id, null, v_inv.guest_name, v_inv.guest_email, false, 0, 'confirmed')
+  returning * into v_reg;
+  update public.event_invitations
+     set status = 'accepted', accepted_at = now(), registration_id = v_reg.id
+   where id = v_inv.id;
+  return v_reg;
+end;
+$$;
+
 -- Jogok
+revoke all on public.event_invitations from anon, authenticated;
+-- Oszlopszintű olvasási jog: a token kimarad (azt csak a vendég kapja meg e-mailben).
+grant select (id, event_id, invited_by, guest_name, guest_email, status, registration_id, created_at, accepted_at)
+  on public.event_invitations to authenticated;
+grant update (status) on public.event_invitations to authenticated;
+grant all on public.event_invitations to service_role;
+revoke execute on function public.invite_hike_guest(uuid, text, text) from public, anon;
+revoke execute on function public.accept_hike_invitation(text) from public, anon, authenticated;
+revoke execute on function public.guard_destination_option_limit() from public, anon, authenticated;
+grant execute on function public.invite_hike_guest(uuid, text, text) to authenticated, service_role;
+grant execute on function public.accept_hike_invitation(text) to service_role;
+
 revoke all on public.destination_polls, public.destination_options, public.destination_votes from anon, authenticated;
 grant select, insert, update, delete on public.destination_polls to authenticated;
 grant select, insert, update, delete on public.destination_options to authenticated;

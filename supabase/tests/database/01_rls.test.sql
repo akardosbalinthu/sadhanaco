@@ -59,7 +59,8 @@ select is(
       and p.proname in ('run_scheduled_tasks', '_revenue_status_internal', 'purge_kind_message_phones',
                         'membership_trial_started', 'membership_payment_succeeded', 'membership_payment_failed',
                         'membership_ended', 'membership_stage_purchased', 'reserve_guest_seat',
-                        'confirm_registration_payment', 'handle_new_user')
+                        'confirm_registration_payment', 'handle_new_user',
+                        'accept_hike_invitation', 'guard_destination_option_limit')
       and (has_function_privilege('authenticated', p.oid, 'execute')
            or has_function_privilege('anon', p.oid, 'execute'))),
   0, 'belső / szerveroldali függvényekhez a kliens szerepköröknek nincs joga');

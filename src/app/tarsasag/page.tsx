@@ -14,7 +14,7 @@ const TIERS = [
     features: [
       "Közösségi tér és napi gyakorlási napló",
       "I. Modul (Jelenlét) + I. Integrációs Program — 8+1 hét, azonnal",
-      "Havi közös túra Magyarországon — az úti célt a Társaság szavazza meg",
+      "Havi ingyenes közös túra Magyarországon — az úti célt a Társaság szavazza meg, vendéget meghívóval hozhatsz",
       "Heti online közös meditáció, havi Q&A felvételek",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
       "Napi Közlöny PRO a tagság ideje alatt",
@@ -56,8 +56,9 @@ export default async function TarsasagHome() {
           alapja — egy nyugodtabb idegrendszerrel könnyebb jelen lenni és jónak lenni.
         </p>
         <p className="mt-4 text-ink-soft">
-          Havonta egyszer közösen túrázunk valahol Magyarországon. A következő úti célt mindig a
-          Társaság szavazza meg.
+          Havonta egyszer közösen túrázunk valahol Magyarországon. Az úti célt mindig a Társaság
+          szavazza meg. A túra a tagoknak ingyenes, és meghívóval Társaságon kívüli barátaidat is
+          hozhatod — nekik is ingyenes.
         </p>
         <p className="mt-4 text-ink-soft">
           Nem tanácsokat osztunk egymásnak, hanem megosztjuk, mit tapasztalunk a légzéssel, a
