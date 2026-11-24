@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/*
+ * Idegrendszer-barát paletta (CLAUDE.md 3. pont):
+ * meleg törtfehér papír, mély olajzöld akcentus, sötét antracit szöveg.
+ * Nincs sötét mód-váltás és nincs villogó animáció — szándékosan nyugodt felület.
+ */
+@theme {
+  --color-paper: #faf9f6;
+  --color-paper-deep: #f2efe8;
+  --color-moss: #2d4739;
+  --color-moss-soft: #4a6656;
+  --color-moss-tint: #e4ebe6;
+  --color-ink: #1f2421;
+  --color-ink-soft: #4d544f;
+  --color-line: #e3dfd6;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+html {
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
