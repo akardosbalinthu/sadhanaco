@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { tp } from "@/lib/site";
+import { createClient } from "@/lib/supabase/server";
 
 const ITEMS = [
   { href: "/gyakorlas", label: "Gyakorlás" },
@@ -7,10 +8,13 @@ const ITEMS = [
   { href: "/ranglista", label: "Ranglista" },
 ];
 
-export function MemberNav({ active }: { active: string }) {
+export async function MemberNav({ active }: { active: string }) {
+  const supabase = await createClient();
+  const { data: isAdmin } = await supabase.rpc("is_admin");
+  const items = isAdmin ? [...ITEMS, { href: "/admin", label: "Admin" }] : ITEMS;
   return (
     <nav className="mb-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-gold/25 pb-3 text-sm">
-      {ITEMS.map((i) => (
+      {items.map((i) => (
         <Link
           key={i.href}
           href={tp(i.href)}
