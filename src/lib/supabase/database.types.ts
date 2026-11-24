@@ -39,14 +39,14 @@ export type Database = {
                   ]
                 },"app_settings": {
                   Row: {
-                    "belso_kor_priority_hours": number,"billing_entity": NonNullable<Json>,"cohort_start_date": string | null,"consultation_carry_over": boolean,"consultation_reset_mode": string,"eur_huf_rate": number,"event_member_quota_ratio": number,"id": boolean,"kata_annual_limit_huf": number,"kata_warning_ratio": number,"lesson_unlock_mode": string,"oss_limit_eur": number,"past_due_has_access": boolean,"payment_hold_minutes": number,"registration_open": boolean,"terms_version": string,"trial_days": number,"updated_at": string,"voluntary_fees_are_service": boolean
+                    "belso_kor_priority_hours": number,"billing_entity": NonNullable<Json>,"cohort_start_date": string | null,"consultation_carry_over": boolean,"consultation_reset_mode": string,"eur_huf_rate": number,"event_member_quota_ratio": number,"id": boolean,"invoice_provider": string,"kata_annual_limit_huf": number,"kata_warning_ratio": number,"kind_message_min_huf": number,"lesson_unlock_mode": string,"oss_limit_eur": number,"past_due_has_access": boolean,"payment_hold_minutes": number,"phone_retention_days": number,"registration_open": boolean,"superadmin_emails": (string)[],"terms_version": string,"trial_days": number,"updated_at": string,"voluntary_fees_are_service": boolean
                   }
                   ComputedFields: never
                   Insert: {
-                    "belso_kor_priority_hours"?: number,"billing_entity"?: NonNullable<Json>,"cohort_start_date"?: string | null,"consultation_carry_over"?: boolean,"consultation_reset_mode"?: string,"eur_huf_rate"?: number,"event_member_quota_ratio"?: number,"id"?: boolean,"kata_annual_limit_huf"?: number,"kata_warning_ratio"?: number,"lesson_unlock_mode"?: string,"oss_limit_eur"?: number,"past_due_has_access"?: boolean,"payment_hold_minutes"?: number,"registration_open"?: boolean,"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"voluntary_fees_are_service"?: boolean
+                    "belso_kor_priority_hours"?: number,"billing_entity"?: NonNullable<Json>,"cohort_start_date"?: string | null,"consultation_carry_over"?: boolean,"consultation_reset_mode"?: string,"eur_huf_rate"?: number,"event_member_quota_ratio"?: number,"id"?: boolean,"invoice_provider"?: string,"kata_annual_limit_huf"?: number,"kata_warning_ratio"?: number,"kind_message_min_huf"?: number,"lesson_unlock_mode"?: string,"oss_limit_eur"?: number,"past_due_has_access"?: boolean,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"registration_open"?: boolean,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"voluntary_fees_are_service"?: boolean
                   }
                   Update: {
-                    "belso_kor_priority_hours"?: number,"billing_entity"?: NonNullable<Json>,"cohort_start_date"?: string | null,"consultation_carry_over"?: boolean,"consultation_reset_mode"?: string,"eur_huf_rate"?: number,"event_member_quota_ratio"?: number,"id"?: boolean,"kata_annual_limit_huf"?: number,"kata_warning_ratio"?: number,"lesson_unlock_mode"?: string,"oss_limit_eur"?: number,"past_due_has_access"?: boolean,"payment_hold_minutes"?: number,"registration_open"?: boolean,"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"voluntary_fees_are_service"?: boolean
+                    "belso_kor_priority_hours"?: number,"billing_entity"?: NonNullable<Json>,"cohort_start_date"?: string | null,"consultation_carry_over"?: boolean,"consultation_reset_mode"?: string,"eur_huf_rate"?: number,"event_member_quota_ratio"?: number,"id"?: boolean,"invoice_provider"?: string,"kata_annual_limit_huf"?: number,"kata_warning_ratio"?: number,"kind_message_min_huf"?: number,"lesson_unlock_mode"?: string,"oss_limit_eur"?: number,"past_due_has_access"?: boolean,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"registration_open"?: boolean,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"voluntary_fees_are_service"?: boolean
                   }
                   Relationships: [
                     
@@ -151,14 +151,14 @@ isOneToOne: false
                   ]
                 },"invoices": {
                   Row: {
-                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at": string,"created_by": string | null,"currency": string,"description": string,"id": string,"is_storno": boolean,"issued_at": string,"product_code": string | null,"region": Database["public"]['Enums']["revenue_region"],"storno_of": string | null,"storno_reason": string | null,"stripe_invoice_id": string | null,"stripe_payment_intent_id": string | null,"szamlazz_invoice_number": string | null,"user_id": string | null
+                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at": string,"created_by": string | null,"currency": string,"description": string,"id": string,"invoice_provider": string,"is_storno": boolean,"issued_at": string,"product_code": string | null,"provider_invoice_id": string | null,"provider_invoice_number": string | null,"region": Database["public"]['Enums']["revenue_region"],"storno_of": string | null,"storno_reason": string | null,"stripe_invoice_id": string | null,"stripe_payment_intent_id": string | null,"user_id": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at"?: string,"created_by"?: string | null,"currency"?: string,"description": string,"id"?: string,"is_storno"?: boolean,"issued_at"?: string,"product_code"?: string | null,"region": Database["public"]['Enums']["revenue_region"],"storno_of"?: string | null,"storno_reason"?: string | null,"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"szamlazz_invoice_number"?: string | null,"user_id"?: string | null
+                    "amount_huf": number,"billing_entity": NonNullable<Json>,"country": string,"created_at"?: string,"created_by"?: string | null,"currency"?: string,"description": string,"id"?: string,"invoice_provider"?: string,"is_storno"?: boolean,"issued_at"?: string,"product_code"?: string | null,"provider_invoice_id"?: string | null,"provider_invoice_number"?: string | null,"region": Database["public"]['Enums']["revenue_region"],"storno_of"?: string | null,"storno_reason"?: string | null,"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"user_id"?: string | null
                   }
                   Update: {
-                    "amount_huf"?: number,"billing_entity"?: NonNullable<Json>,"country"?: string,"created_at"?: string,"created_by"?: string | null,"currency"?: string,"description"?: string,"id"?: string,"is_storno"?: boolean,"issued_at"?: string,"product_code"?: string | null,"region"?: Database["public"]['Enums']["revenue_region"],"storno_of"?: string | null,"storno_reason"?: string | null,"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"szamlazz_invoice_number"?: string | null,"user_id"?: string | null
+                    "amount_huf"?: number,"billing_entity"?: NonNullable<Json>,"country"?: string,"created_at"?: string,"created_by"?: string | null,"currency"?: string,"description"?: string,"id"?: string,"invoice_provider"?: string,"is_storno"?: boolean,"issued_at"?: string,"product_code"?: string | null,"provider_invoice_id"?: string | null,"provider_invoice_number"?: string | null,"region"?: Database["public"]['Enums']["revenue_region"],"storno_of"?: string | null,"storno_reason"?: string | null,"stripe_invoice_id"?: string | null,"stripe_payment_intent_id"?: string | null,"user_id"?: string | null
                   }
                   Relationships: [
                     {
@@ -189,14 +189,14 @@ isOneToOne: false
                   ]
                 },"kind_messages": {
                   Row: {
-                    "amount_huf": number,"created_at": string,"delivered_at": string | null,"id": string,"invoice_id": string | null,"is_free": boolean,"message": string,"recipient_name": string,"recipient_phone": string,"sender_id": string,"status": Database["public"]['Enums']["kind_message_status"]
+                    "amount_huf": number,"created_at": string,"delivered_at": string | null,"id": string,"invoice_id": string | null,"is_free": boolean,"message": string,"phone_purged_at": string | null,"recipient_name": string,"recipient_phone": string | null,"sender_id": string,"status": Database["public"]['Enums']["kind_message_status"]
                   }
                   ComputedFields: never
                   Insert: {
-                    "amount_huf"?: number,"created_at"?: string,"delivered_at"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free": boolean,"message": string,"recipient_name": string,"recipient_phone": string,"sender_id": string,"status"?: Database["public"]['Enums']["kind_message_status"]
+                    "amount_huf"?: number,"created_at"?: string,"delivered_at"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free": boolean,"message": string,"phone_purged_at"?: string | null,"recipient_name": string,"recipient_phone"?: string | null,"sender_id": string,"status"?: Database["public"]['Enums']["kind_message_status"]
                   }
                   Update: {
-                    "amount_huf"?: number,"created_at"?: string,"delivered_at"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free"?: boolean,"message"?: string,"recipient_name"?: string,"recipient_phone"?: string,"sender_id"?: string,"status"?: Database["public"]['Enums']["kind_message_status"]
+                    "amount_huf"?: number,"created_at"?: string,"delivered_at"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free"?: boolean,"message"?: string,"phone_purged_at"?: string | null,"recipient_name"?: string,"recipient_phone"?: string | null,"sender_id"?: string,"status"?: Database["public"]['Enums']["kind_message_status"]
                   }
                   Relationships: [
                     {
@@ -327,14 +327,14 @@ isOneToOne: false
                   ]
                 },"price_catalog": {
                   Row: {
-                    "amount_huf": number,"billing_interval": Database["public"]['Enums']["billing_interval"] | null,"code": string,"is_active": boolean,"label": string,"tier": Database["public"]['Enums']["membership_tier"] | null,"updated_at": string
+                    "amount_huf": number,"billing_interval": Database["public"]['Enums']["billing_interval"] | null,"code": string,"is_active": boolean,"label": string,"stripe_product_id": string | null,"tier": Database["public"]['Enums']["membership_tier"] | null,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "amount_huf": number,"billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"code": string,"is_active"?: boolean,"label": string,"tier"?: Database["public"]['Enums']["membership_tier"] | null,"updated_at"?: string
+                    "amount_huf": number,"billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"code": string,"is_active"?: boolean,"label": string,"stripe_product_id"?: string | null,"tier"?: Database["public"]['Enums']["membership_tier"] | null,"updated_at"?: string
                   }
                   Update: {
-                    "amount_huf"?: number,"billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"code"?: string,"is_active"?: boolean,"label"?: string,"tier"?: Database["public"]['Enums']["membership_tier"] | null,"updated_at"?: string
+                    "amount_huf"?: number,"billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"code"?: string,"is_active"?: boolean,"label"?: string,"stripe_product_id"?: string | null,"tier"?: Database["public"]['Enums']["membership_tier"] | null,"updated_at"?: string
                   }
                   Relationships: [
                     
@@ -440,7 +440,7 @@ isOneToOne: false
           }
           Functions: {
             "admin_record_storno":
-{ Args: { "p_invoice_id": string,"p_reason": string,"p_szamlazz_invoice_number": string }; Returns: {
+{ Args: { "p_invoice_id": string,"p_provider_invoice_number": string,"p_reason": string }; Returns: {
               "amount_huf": number,
 "billing_entity": NonNullable<Json>,
 "country": string,
@@ -449,15 +449,17 @@ isOneToOne: false
 "currency": string,
 "description": string,
 "id": string,
+"invoice_provider": string,
 "is_storno": boolean,
 "issued_at": string,
 "product_code": string | null,
+"provider_invoice_id": string | null,
+"provider_invoice_number": string | null,
 "region": Database["public"]['Enums']["revenue_region"],
 "storno_of": string | null,
 "storno_reason": string | null,
 "stripe_invoice_id": string | null,
 "stripe_payment_intent_id": string | null,
-"szamlazz_invoice_number": string | null,
 "user_id": string | null
             }
                           SetofOptions: {
@@ -531,8 +533,14 @@ isOneToOne: false
 "is_paying_member":
 { Args: Record<PropertyKey, never>; Returns: boolean
                            },
+"is_superadmin":
+{ Args: Record<PropertyKey, never>; Returns: boolean
+                           },
 "kata_revenue_status":
 { Args: { "p_year"?: number }; Returns: Json
+                           },
+"purge_kind_message_phones":
+{ Args: Record<PropertyKey, never>; Returns: number
                            },
 "revenue_region_for":
 { Args: { "p_country": string }; Returns: Database["public"]['Enums']["revenue_region"]
@@ -546,8 +554,9 @@ isOneToOne: false
 "invoice_id": string | null,
 "is_free": boolean,
 "message": string,
+"phone_purged_at": string | null,
 "recipient_name": string,
-"recipient_phone": string,
+"recipient_phone": string | null,
 "sender_id": string,
 "status": Database["public"]['Enums']["kind_message_status"]
             }
@@ -559,7 +568,7 @@ isOneToOne: false
       } }
           }
           Enums: {
-            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","post_kind": "normal"|"penteki_kor","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"
+            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","post_kind": "normal"|"penteki_kor","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -679,7 +688,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"post_kind": ["normal", "penteki_kor"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin"]
+            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"post_kind": ["normal", "penteki_kor"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"]
           }
         }
 } as const

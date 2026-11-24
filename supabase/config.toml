@@ -252,6 +252,18 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
+# Éles környezetben a belépő leveleket a Resend küldi (balint@akardosbalint.hu).
+# Helyben a Mailpit fogja el őket. Élesben ugyanez a Supabase Dashboardon:
+# Authentication -> Emails -> SMTP Settings.
+# [auth.email.smtp]
+# enabled = true
+# host = "smtp.resend.com"
+# port = 465
+# user = "resend"
+# pass = "env(RESEND_API_KEY)"
+# admin_email = "balint@akardosbalint.hu"
+# sender_name = "Kardos Bálint · Sadhana Társaság"
+
 [auth.email.template.magic_link]
 subject = "Belépő link · Sadhana Társaság"
 content_path = "./supabase/templates/magic_link.html"

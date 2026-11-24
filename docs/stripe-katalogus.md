@@ -1,0 +1,28 @@
+# Stripe-katalógus (éles mód, `akardosbalint.hu` fiók)
+
+Létrehozva: 2026-11-24. Minden termék metaadata: `app=sadhana_tarsasag`, `code=…`.
+Az árakat a kód **`lookup_key`** alapján keresi (= `price_catalog.code`), így árváltozáskor
+új árat kell létrehozni ugyanazzal a `lookup_key`-jel (`transfer_lookup_key: true`), kódmódosítás nélkül.
+A Stripe-ban a HUF kéttizedes: `unit_amount 994000` = 9 940 Ft.
+
+| Termék | Product ID | lookup_key | Ár |
+| --- | --- | --- | --- |
+| Társasági Tagság | `prod_VgbrLOKdZgQqyM` | `tarsasagi_havi` | 9 940 Ft / hó (7 napos próba a checkoutnál) |
+| | | `tarsasagi_eves` | 99 400 Ft / év |
+| Belső Kör | `prod_VgbtwmiPVKTIme` | `belso_kor_havi` | 27 940 Ft / hó |
+| | | `belso_kor_eves` | 279 400 Ft / év |
+| II. Modul + IP 2 (gyorsított) | `prod_VgbwbICFQliZfC` | `gyorsitott_m2_ip2` | 54 940 Ft |
+| IP 3 (gyorsított) | `prod_VgbwI6pIJhOfRS` | `gyorsitott_ip3` | 44 940 Ft |
+| II. Modul + IP 2 + IP 3 csomag | `prod_VgbwymkGkEr3BR` | `gyorsitott_m2_ip3_csomag` | 89 940 Ft |
+| Nyílt Meditációs Est (tagi) | `prod_VgbwHLurwdeqiB` | `nyilt_est_tarsasagi` | 3 200 Ft |
+| Élő Gyakorlónap | `prod_VgbwzJ9WLwj3sm` | `gyakorlonap_tarsasagi` | 6 460 Ft |
+| 1-on-1 konzultáció | `prod_VgbwTM5LbEZbJp` | `konzultacio_tarsasagi` | 15 000 Ft |
+| | | `konzultacio_belso_kor` | 13 000 Ft |
+| Kedves Üzenet (kereten felüli) | `prod_VgbwF1NbmherdR` | `kedves_uzenet_extra` | szabad összeg, min. 1 000 Ft (javasolt: 3 000 Ft) |
+| Szabadság Elvonulás (önköltség) | `prod_VgbwyB3bE8BEvE` | — | eseményenként `price_data`-val |
+
+Alapítói kupon nincs. A próbaidő nem az áron, hanem a checkout-munkameneten
+(`subscription_data.trial_period_days = 7`) állítódik be, csak a `tarsasagi_havi` árhoz.
+
+A díjmentes tételek (Belső Kör: Nyílt Est, Gyakorlónap, Elvonulás) nem mennek át a Stripe-on.
+A fiókban lévő korábbi termékekhez (pl. „Elsőbbségi Kedves Üzenet”, „IMI Tréning”) nem nyúltunk.

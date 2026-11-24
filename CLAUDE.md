@@ -163,6 +163,15 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - Vercel csapat: `akardosbalint1`.
 - Minden ütemezés **Europe/Budapest** idő szerint értendő (a Vercel Cron UTC-ben fut — a nyári/téli időszámítást kezelni kell).
 
+### 7.8 Döntések (2026. november 24.)
+- **Superadmin:** `akardosbalint.hu@gmail.com` (regisztrációkor automatikusan `role = 'superadmin'`; `app_settings.superadmin_emails`). Szerepkört csak superadmin oszthat.
+- **Számlázó:** a Számlázz.hu helyett **Billingo** (a dokumentum korábbi Számlázz.hu-említései ennek megfelelően értendők). Egyelőre helyőrző; a réteg cserélhető (`app_settings.invoice_provider`, `src/lib/invoicing`). Az `AAM` / KATA szabályok változatlanok.
+- **E-mail:** Resend, feladó: `balint@akardosbalint.hu`.
+- **Stripe:** éles módban létrehozva (`docs/stripe-katalogus.md`). **Nincs alapítói kupon.** A belépési e-mail-cím a Stripe-fizetéskor megadott e-mail-cím.
+- **Szabadság Elvonulás:** önköltséges ár eseményenként megadva — jóváhagyva.
+- **Kereten felüli Kedves Üzenet:** minimum `1 000 Ft` (`app_settings.kind_message_min_huf`).
+- **Címzett telefonszáma:** legfeljebb **180 napig** tárolva, utána napi ütemezett törlés (`purge_kind_message_phones`, pg_cron).
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).
