@@ -7,10 +7,25 @@
  */
 
 /**
- * A Társaság linkjeinek előtagja, a NEXT_PUBLIC_TARSASAG_URL útvonalából:
- * helyben http://localhost:3000/tarsasag -> "/tarsasag", élesben https://tarsasag.akardosbalint.hu -> "".
+ * A webhely címe: NEXT_PUBLIC_SITE_URL, ennek hiányában (Vercel előnézet) a telepítés saját
+ * címe (NEXT_PUBLIC_VERCEL_URL), helyben http://localhost:3000.
  */
-export function tarsasagBasePath(url = process.env.NEXT_PUBLIC_TARSASAG_URL ?? "http://localhost:3000/tarsasag") {
+export function resolvedSiteUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+  return "http://localhost:3000";
+}
+
+/** A Társaság címe: NEXT_PUBLIC_TARSASAG_URL, ennek hiányában a webhely /tarsasag útvonala. */
+export function resolvedTarsasagUrl(): string {
+  return process.env.NEXT_PUBLIC_TARSASAG_URL ?? `${resolvedSiteUrl().replace(/\/$/, "")}/tarsasag`;
+}
+
+/**
+ * A Társaság linkjeinek előtagja, a Társaság címének útvonalából:
+ * helyben/előnézetben ".../tarsasag" -> "/tarsasag", élesben https://tarsasag.akardosbalint.hu -> "".
+ */
+export function tarsasagBasePath(url = resolvedTarsasagUrl()) {
   return new URL(url).pathname.replace(/\/$/, "");
 }
 export const TARSASAG_BASE = tarsasagBasePath();
