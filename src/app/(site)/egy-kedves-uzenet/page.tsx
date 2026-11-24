@@ -1,63 +1,119 @@
-import { Heart, Phone, Send } from "lucide-react";
+import { Check, Heart, Send } from "lucide-react";
 import { publicEnv } from "@/lib/env";
-import { CompassDivider, GildedCard, linkClass, PageHeader } from "@/components/ornaments";
+import { notifyHref } from "@/lib/cta";
+import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
 
 export const metadata = {
   title: "Egy Kedves Üzenet · Kardos Bálint",
-  description: "Hálaüzenetek, amelyeket meglepetés-telefonhívásban adok át annak, akinek szólnak.",
+  description:
+    "Írd meg, kinek mit köszönnél — én egy meglepetés-telefonhívásban átadom. Díjmentesen, bárkinek; A Társaság tagjainak elsőbbséggel és kézbesítési garanciával.",
 };
+
+const STEPS = [
+  { title: "Megírod", text: "Kinek szól, mit köszönnél neki, és milyen számon érhetem el. Elég néhány őszinte mondat." },
+  { title: "Megerősíted", text: "Küldünk egy e-mailt, és egy kattintással megerősíted, hogy tényleg te küldted. A Társaság tagjainak erre nincs szükség." },
+  { title: "Felhívom", text: "Élő adásban vagy rövid videóban felhívom a címzettet, és felolvasom neki az üzenetedet." },
+  { title: "Célba ér", text: "Valaki valahol váratlanul megtudja, hogy számít. Ennyi az egész — és ez sokszor elég." },
+];
 
 export default function KindMessagePage() {
   return (
     <main className="py-16">
       <PageHeader eyebrow="Egy hívás, egy mondat, egy ember" title="Egy Kedves Üzenet">
+        <p className="font-serif text-xl text-ink">
+          Vannak mondatok, amelyeket évek óta magunkban hordunk. Egy köszönet a tanárnak, aki hitt bennünk. Egy
+          „büszke vagyok rád” a testvérnek. Egy hála annak a szomszédnak, aki akkor segített, amikor senki más.
+        </p>
         <p>
-          Vannak mondatok, amelyeket régóta szeretnénk elmondani valakinek — egy köszönetet, egy
-          elismerést, valamit, ami a hétköznapokban kimarad. Az Egy Kedves Üzenetben ezeket az
-          üzeneteket egy meglepetés-telefonhívásban adom át annak, akinek szólnak.
+          Az Egy Kedves Üzenetben ezeket a mondatokat egy meglepetés-telefonhívásban adom át annak, akinek
+          szólnak. Te megírod — én felhívom, és felolvasom. A vonal másik végén pedig valaki egy hétköznap
+          délután megtudja, hogy fontos volt valakinek.
         </p>
       </PageHeader>
 
       <CompassDivider className="my-14" />
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <GildedCard>
-          <Phone className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-          <h2 className="mt-4 font-serif text-xl text-forest">Hogyan működik</h2>
-          <p className="mt-2 text-sm text-ink-soft">
-            Itt, ezen az oldalon írod meg az üzenetet, és megadod, kinek szól. A hívásokat élő adásban
-            (YouTube, TikTok Live) és rövid videókban bonyolítom le, és ott adom át az üzenetedet a
-            címzettnek.
-          </p>
-        </GildedCard>
+      <section>
+        <SectionTitle eyebrow="Hogyan működik" title="Négy lépés, és az üzeneted úton van." />
+        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <li key={s.title}>
+              <GildedCard className="h-full">
+                <span className="font-serif text-3xl text-gold">{i + 1}</span>
+                <h3 className="mt-3 font-serif text-lg text-forest">{s.title}</h3>
+                <p className="mt-2 text-sm text-ink-soft">{s.text}</p>
+              </GildedCard>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-        <GildedCard>
-          <Send className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-          <h2 className="mt-4 font-serif text-xl text-forest">Bárki küldhet — díjmentesen</h2>
-          <p className="mt-2 text-sm text-ink-soft">
-            Kedves Üzenetet bárki küldhet, ingyen. Az üzeneteket a beérkezés sorrendjében dolgozom fel.
-            Ha a címzettet három próbálkozásra sem sikerül elérni, az üzenet sikertelennek minősül, és
-            további próbálkozás nincs.
-          </p>
-        </GildedCard>
+      <CompassDivider className="my-20" />
 
-        <GildedCard className="sm:col-span-2">
-          <Heart className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
-          <h2 className="mt-4 font-serif text-xl text-forest">Elsőbbségi Kedves Üzenet — A Társaság tagjainak</h2>
-          <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-            A Társaság tagjai havonta Elsőbbségi Kedves Üzenetet küldhetnek (A Társaság Útja: havi 1, a
-            Belső Kör: havi 3), a kereten felül pedig további elsőbbségi üzeneteket, általuk választott
-            összegért (legalább 1 000 Ft; ezeket az összeg szerint csökkenő sorrendben dolgozom fel). Az
-            elsőbbségi üzeneteket kézbesítem elsőként, és kézbesítési garanciát vállalok rájuk: nem állok
-            meg három próbálkozás után, amíg az üzenet célba nem ér.
-          </p>
-          <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`mt-4 inline-block ${linkClass}`}>
-            A Társaságról
+      <section>
+        <SectionTitle eyebrow="Kétféle üzenet" title="Bárki küldhet. A tagok elsőbbséget kapnak." />
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <GildedCard className="flex flex-col p-8">
+            <Send className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
+            <h3 className="mt-4 font-serif text-2xl text-forest">Kedves Üzenet</h3>
+            <p className="mt-1 text-sm text-gold">Bárkinek · díjmentes</p>
+            <ul className="mt-5 flex-1 space-y-2 text-sm text-ink-soft">
+              {[
+                "Bárki küldhet, regisztráció nélkül — elég egy e-mailes megerősítés",
+                "Ugyanarról a címről több üzenet is mehet",
+                "A beérkezés sorrendjében dolgozom fel",
+                "Ha a címzettet három próbálkozásra sem érem el, az üzenet lezárul",
+              ].map((f) => (
+                <li key={f} className="flex gap-2">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.5} aria-hidden />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </GildedCard>
+
+          <GildedCard className="flex flex-col border-gold/50 p-8">
+            <Heart className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
+            <h3 className="mt-4 font-serif text-2xl text-forest">Elsőbbségi Kedves Üzenet</h3>
+            <p className="mt-1 text-sm text-gold">A Társaság tagjainak</p>
+            <ul className="mt-5 flex-1 space-y-2 text-sm text-ink-soft">
+              {[
+                "Elsőként kézbesítem, a díjmentes üzenetek előtt",
+                "Kézbesítési garancia: nem állok meg három próbálkozásnál",
+                "Havonta díjmentesen: A Társaság Útján 1, a Belső Körben 3",
+                "A kereten felül is küldhetsz, általad választott összegért (legalább 1 000 Ft) — ezeket az összeg szerint csökkenő sorrendben dolgozom fel",
+              ].map((f) => (
+                <li key={f} className="flex gap-2">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.5} aria-hidden />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`${buttonSecondary} mt-8 text-center`}>
+              Megnézem A Társaságot
+            </a>
+          </GildedCard>
+        </div>
+        <p className="mt-6 max-w-2xl text-xs text-ink-soft">
+          A címzett telefonszámát csak a kézbesítéshez használom, és legfeljebb 180 napig őrzöm meg. A kereten
+          felüli elsőbbségi üzenet digitális szolgáltatás, nem adomány: minden befizetésről számla készül.
+        </p>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      <section className="text-center">
+        <p className="text-xs uppercase tracking-[0.25em] text-gold">Az üzenetküldés hamarosan itt nyílik meg</p>
+        <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest">Kinek mondanál ma köszönetet?</h2>
+        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
+          Gondold végig nyugodtan. Ha szeretnéd, szólok, amint megnyílik a beküldés.
+        </p>
+        <div className="mt-8">
+          <a href={notifyHref("az Egy Kedves Üzenet beküldése")} className={buttonPrimary}>
+            Értesítést kérek
           </a>
-        </GildedCard>
-      </div>
-
-      <p className="mt-12 text-sm text-ink-soft">Az üzenetküldés hamarosan itt nyílik meg.</p>
+        </div>
+      </section>
     </main>
   );
 }

@@ -4,26 +4,43 @@ import { tp } from "@/lib/site";
 import { SiteFooter } from "@/components/site-header";
 
 export const metadata = {
-  title: "A Társaság",
+  title: "A Társaság · Nyugodtabb idegrendszer, kedvesebb hétköznapok",
   description:
-    "Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve. Kedvesség, figyelmesség, tudatosság, segítőkészség.",
+    "Online gyakorlóközösség napi 10–15 perces, tudományos alapú légzés- és figyelemgyakorlatokkal, élő közös alkalmakkal és havi közös túrával. 7 napos próbaidő.",
 };
+
+const navLink = "transition-colors duration-300 hover:text-gold";
 
 export default function TarsasagLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="border-b border-gold/30">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+      <header className="sticky top-0 z-10 border-b border-gold/30 bg-paper/95 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4">
           <Link href={tp("/")} className="font-serif text-lg text-forest">
             A Társaság
           </Link>
-          <nav className="flex gap-5 text-sm text-ink-soft">
-            <a href={publicEnv.NEXT_PUBLIC_SITE_URL} className="transition-colors duration-300 hover:text-gold">
+          <nav className="flex items-center gap-5 text-sm text-ink-soft">
+            <a href={`${tp("/")}#hogyan-mukodik`} className={`${navLink} hidden md:inline`}>
+              Hogyan működik
+            </a>
+            <a href={`${tp("/")}#rendek`} className={`${navLink} hidden md:inline`}>
+              A négy rend
+            </a>
+            <a href={`${tp("/")}#gyik`} className={`${navLink} hidden md:inline`}>
+              Kérdések
+            </a>
+            <a href={publicEnv.NEXT_PUBLIC_SITE_URL} className={`${navLink} hidden sm:inline`}>
               akardosbalint.hu
             </a>
-            <Link href={tp("/belepes")} className="transition-colors duration-300 hover:text-gold">
+            <Link href={tp("/belepes")} className={navLink}>
               Belépés
             </Link>
+            <a
+              href={`${tp("/")}#csatlakozas`}
+              className="rounded-md border border-forest bg-forest px-3 py-1.5 text-paper transition-all duration-300 hover:border-gold"
+            >
+              Csatlakozás
+            </a>
           </nav>
         </div>
       </header>

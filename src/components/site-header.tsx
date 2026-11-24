@@ -19,13 +19,16 @@ export function SiteHeader() {
         <Link href="/" className="font-serif text-lg text-forest">
           {SITE.name}
         </Link>
-        <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-soft">
+        <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft">
           {nav.map((item) => (
             <Link key={item.href} href={item.href} className={navLink}>
               {item.label}
             </Link>
           ))}
-          <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`${navLink} text-forest`}>
+          <a
+            href={publicEnv.NEXT_PUBLIC_TARSASAG_URL}
+            className="rounded-md border border-forest bg-forest px-3 py-1 text-paper transition-all duration-300 hover:border-gold"
+          >
             A Társaság
           </a>
         </nav>

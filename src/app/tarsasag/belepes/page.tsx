@@ -1,5 +1,7 @@
 import { LoginForm } from "./login-form";
-import { GildedCard } from "@/components/ornaments";
+import Link from "next/link";
+import { GildedCard, linkClass } from "@/components/ornaments";
+import { tp } from "@/lib/site";
 
 export const metadata = { title: "Belépés · A Társaság" };
 
@@ -27,6 +29,12 @@ export default async function LoginPage({
         )}
         <LoginForm tovabb={tovabb} />
       </GildedCard>
+      <p className="mt-6 text-center text-sm text-ink-soft">
+        Még nem vagy tag?{" "}
+        <Link href={`${tp("/")}#csatlakozas`} className={linkClass}>
+          Így csatlakozhatsz
+        </Link>
+      </p>
     </main>
   );
 }

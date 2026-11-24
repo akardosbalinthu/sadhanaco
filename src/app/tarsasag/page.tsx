@@ -1,8 +1,23 @@
 import Link from "next/link";
-import { BookOpen, Check, Footprints, NotebookPen, Newspaper, Sunrise, Wind } from "lucide-react";
+import {
+  BookOpen,
+  Check,
+  Ear,
+  HeartHandshake,
+  Moon,
+  Mountain,
+  Newspaper,
+  Sparkles,
+  Sun,
+  Users,
+  Wind,
+} from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
 import { formatHuf, tp } from "@/lib/site";
+import { notifyHref } from "@/lib/cta";
 import {
+  buttonPrimary,
+  buttonSecondary,
   CompassDivider,
   CrestKertorzok,
   CrestTorpok,
@@ -12,6 +27,48 @@ import {
 } from "@/components/ornaments";
 
 export const revalidate = 300;
+
+const BENEFITS = [
+  {
+    Icon: Wind,
+    title: "Megnyugodni, amikor számít",
+    text: "Néhány perces légzéstechnikák, amelyeket egy feszült megbeszélés előtt vagy egy nehéz beszélgetés közben is használhatsz — nem csak a jógaszőnyegen.",
+  },
+  {
+    Icon: Ear,
+    title: "Észrevenni, mielőtt elsodor",
+    text: "A tested korán jelez. Megtanulod időben észrevenni a feszülést, és nem az utolsó pillanatban kapkodni.",
+  },
+  {
+    Icon: Sun,
+    title: "Jobban jelen lenni",
+    text: "Kevesebb pörgés a fejben, több figyelem arra, ami előtted van: a munkádra, a szeretteidre, saját magadra.",
+  },
+  {
+    Icon: HeartHandshake,
+    title: "Kedvesebbnek lenni — magaddal is",
+    text: "Nyugodtabb idegrendszerrel könnyebb türelmesnek, figyelmesnek és segítőkésznek lenni. Ezt gyakoroljuk egymás felé is.",
+  },
+];
+
+const STEPS = [
+  {
+    title: "Csatlakozol",
+    text: "Kiválasztod az utad, és e-mailben megkapod a belépő linket — jelszó nincs. A havi tagságot 7 napig kipróbálhatod.",
+  },
+  {
+    title: "Kitöltöd az Iránytűt",
+    text: "Egy 12 kérdéses önismereti kérdőív megmutatja, melyik rendből indulsz: Tündék, Kertőrzők, Törpök vagy Vándorok.",
+  },
+  {
+    title: "Napi 10–15 perc",
+    text: "Hetente új rész nyílik: rövid elméleti videók és vezetett gyakorlások. Pipálod, amit elvégeztél, és ha akarod, naplót írsz.",
+  },
+  {
+    title: "Közösen haladsz",
+    text: "Közös meditáció, pénteki kör, budapesti alkalmak, havi túra. Amikor készen állsz, egy rövid beszélgetés után továbblépsz.",
+  },
+];
 
 const ORDERS = [
   {
@@ -24,8 +81,7 @@ const ORDERS = [
       "A tested korán szól: a gyomrod, a vállad, a légzésed jelez, mielőtt a fejed rájönne.",
       "Megérint egy jól eltalált mondat, egy fény, egy apró részlet.",
     ],
-    strength:
-      "Finomhangolt belső érzékelés és mély empátia. Ahol mások zajt hallanak, te árnyalatokat.",
+    strength: "Finomhangolt belső érzékelés és mély empátia. Ahol mások zajt hallanak, te árnyalatokat.",
     path: "Hogy az érzékenység ne árasszon el: határok, földelés, hosszabb kilégzés — érezni, de nem elsodródni.",
     practice: "Kájánupassaná — a test végigpásztázása",
   },
@@ -39,8 +95,7 @@ const ORDERS = [
       "A kis dolgokban találod meg az örömöt, és nem kell hozzá nagy esemény.",
       "Körülötted mások hamar otthon érzik magukat.",
     ],
-    strength:
-      "Nyugalmat sugárzó jelenlét. Az idegrendszered biztonságérzete a környezetedre is átragad.",
+    strength: "Nyugalmat sugárzó jelenlét. Az idegrendszered biztonságérzete a környezetedre is átragad.",
     path: "Kilépni a megszokottból, amikor a növekedés hív — és nemet mondani, hogy a kert a tiéd maradjon.",
     practice: "Sama Vritti — az egyenletes, négyütemű légzés",
   },
@@ -54,8 +109,7 @@ const ORDERS = [
       "Megnyugtat a rend, a jól átlátható terv, a megbízható szokás.",
       "Rád lehet számítani, és ezt te is fontosnak tartod másokban.",
     ],
-    strength:
-      "Kitartás és szerkezet. A nehezebb napokon is ott vagy a gyakorlásnál, és ez tart meg.",
+    strength: "Kitartás és szerkezet. A nehezebb napokon is ott vagy a gyakorlásnál, és ez tart meg.",
     path: "Lazítani a szorításon: a kontroll helyett megengedni, és a pihenést is gyakorlásnak tekinteni.",
     practice: "Nadi Shodhana — a váltott orrlyukas, rendező légzés",
   },
@@ -69,42 +123,54 @@ const ORDERS = [
       "Nyomás alatt élesebb lesz a figyelmed, nem tompább.",
       "Szívesen kipróbálsz valami újat, mielőtt minden részletét értenéd.",
     ],
-    strength:
-      "Mozgósítható energia, jó irányba fordítva: kezdeményezés, fókusz és bátorság a nehéz helyzetekben.",
+    strength: "Mozgósítható energia, jó irányba fordítva: kezdeményezés, fókusz és bátorság a nehéz helyzetekben.",
     path: "Megérkezni: lassítani úgy, hogy a nyugalom ne unalomnak, hanem erőgyűjtésnek tűnjön.",
     practice: "Anapanaszati — a légzés követése, a figyelem visszavezetése",
   },
 ];
 
-const QUESTS = [
+const DAY = [
+  {
+    Icon: Newspaper,
+    when: "Reggel",
+    name: "Analóg Reggel",
+    text: "A nap a kinyomtatott Napi Közlönnyel indul, nem a telefonnal — utána egy rövid reggeli meditációs rituálé.",
+  },
   {
     Icon: Wind,
-    name: "Napi Küldetések",
-    text: "Rövid, földelő légzőgyakorlatok — és az I. Integrációs Program (IP 1) résztvevőinek reggeli és esti meditációs rituálék.",
+    when: "Napközben",
+    name: "Napi Küldetés",
+    text: "Egy 10–15 perces vezetett gyakorlás: légzés, figyelem, testérzékelés. Ott, ahol éppen vagy.",
   },
   {
     Icon: BookOpen,
+    when: "Amikor kérdésed van",
     name: "A Tudás Ösvénye",
-    text: "Elméleti és idegtudományi hanganyagok: mi történik a légzéssel, a vagus-tónussal és a figyelemmel.",
+    text: "Rövid hanganyagok arról, mi történik ilyenkor az idegrendszereddel — mert amit értesz, azzal könnyebb dolgozni.",
   },
   {
-    Icon: Footprints,
-    name: "Testi Tapasztalás",
-    text: "Vezetett gyakorlások, amelyekben a megértés a testben válik valóssá.",
-  },
-  {
-    Icon: NotebookPen,
+    Icon: Moon,
+    when: "Este",
     name: "Belső Tükör",
-    text: "Gyakorlónapló és önreflexió — mit vettél észre ma, ami tegnap még rejtve maradt.",
-  },
-  {
-    Icon: Newspaper,
-    name: "Analóg Reggel",
-    text: "A kinyomtatott Napi Közlöny: képernyő nélküli napindítás, értesítési zaj nélkül.",
+    text: "Esti rituálé, és néhány sor a gyakorlónaplóba: mit vettél észre ma, ami tegnap még elkerülte a figyelmed?",
   },
 ];
 
-const RANKS = ["Kereső", "Figyelő", "Horgonyzó", "Csendőrző", "Egyensúlyozó"];
+const PATH = [
+  { step: "I.", title: "I. Modul — Jelenlét", sub: "I. Integrációs Program · 8+1 hét", text: "A légzés mechanikájától a test érzékeléséig.", badge: "Belépéskor nyílik" },
+  { step: "II.", title: "II. Modul — Tudatosság", sub: "II. Integrációs Program · 8+1 hét", text: "A figyelem finomabb szabályozása.", badge: "Beszélgetés után" },
+  { step: "III.", title: "III. Integrációs Program", sub: "8+1 hét", text: "Felkészülés a Szabadság Elvonulásra.", badge: "Beszélgetés után" },
+  { step: "IV.", title: "III. Modul — Szabadság Elvonulás", sub: "3–4 nap · évente háromszor", text: "Zárt, többnapos elvonulás a Társaság tagjainak.", badge: "Az IP 3 után" },
+];
+
+const RANKS = ["Kereső", "Figyelő", "Horgonyzó", "Csendőrző", "Egyensúlyozó", "Útitárs", "Őrző"];
+
+const COMMUNITY = [
+  { Icon: Users, title: "Heti online közös meditáció", text: "Élőben, együtt — bárhonnan bekapcsolódhatsz." },
+  { Icon: Sparkles, title: "Pénteki kör", text: "Három egyszerű kérdés minden péntek reggel: mi volt nehéz, mi működött, miben segíthet a Társaság." },
+  { Icon: Mountain, title: "Havi közös túra", text: "Valahol Magyarországon; az úti célt a tagok szavazzák meg. Ingyenes, és barátot is hozhatsz." },
+  { Icon: HeartHandshake, title: "Elsőbbségi Kedves Üzenet", text: "Havonta díjmentesen köszönetet küldhetsz valakinek — Bálint telefonon adja át." },
+];
 
 const TIERS = [
   {
@@ -112,15 +178,19 @@ const TIERS = [
     subtitle: "Társasági Tagság",
     monthly: "tarsasagi_havi",
     yearly: "tarsasagi_eves",
-    note: "7 napos próbaidővel (havi előfizetésnél)",
+    forWhom: "Neked való, ha most kezdenéd, és a saját tempódban, közösségben szeretnéd megtapasztalni, mit ad a rendszeres gyakorlás.",
+    note: "A havi tagság 7 napig ingyen kipróbálható.",
     features: [
-      "Közösségi tér, Küldetések és napi gyakorlónapló",
       "I. Modul (Jelenlét) + I. Integrációs Program — 8+1 hét, azonnal",
-      "Havi ingyenes közös túra Magyarországon — az úti célt a Társaság szavazza meg, vendéget meghívóval hozhatsz",
-      "Heti online közös meditáció, havi Q&A felvételek",
+      "Napi Küldetések, gyakorlónapló és saját Karakterkártya",
+      "Közösségi tér, pénteki kör, heti online közös meditáció",
+      "Havi Q&A felvételek",
+      "Havi ingyenes közös túra — vendéget is hozhatsz",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
-      "Napi Közlöny PRO a tagság ideje alatt",
-      "Kedvezményes részvétel a Nyílt Esteken és az Élő Gyakorlónapokon",
+      "Napi Közlöny PRO díjmentesen, amint elindul",
+      "Nyílt Est 3 200 Ft-ért (4 940 Ft helyett), Élő Gyakorlónap 6 460 Ft",
+      "1-on-1 konzultáció tagi áron: 15 000 Ft",
+      "A II–III. lépcső részvétellel vagy gyorsított hozzáféréssel nyílik",
     ],
   },
   {
@@ -128,14 +198,68 @@ const TIERS = [
     subtitle: "A Tanács",
     monthly: "belso_kor_havi",
     yearly: "belso_kor_eves",
+    forWhom: "Neked való, ha végig szeretnél menni az úton, személyes figyelemmel, és minden élő alkalmon díj nélkül ott lennél.",
     note: "Minden, ami A Társaság Útján, és még:",
     features: [
-      "A teljes tananyag-ív külön díj nélkül (a nyitás egyeztetéssel)",
-      "Havi élő Q&A kérdezési joggal",
+      "A teljes tananyag-ív külön díj nélkül — II. Modul, IP 2 és IP 3 is",
+      "Havi élő Q&A, ahol te is kérdezhetsz",
       "Havi 3 díjmentes Elsőbbségi Kedves Üzenet",
-      "Díjmentes Nyílt Estek, Gyakorlónapok és Szabadság Elvonulás, elsőbbségi foglalással",
-      "Éves előfizetésnél évi 4 díjmentes 1-on-1 konzultáció",
+      "Díjmentes Nyílt Estek, 48 órás elsőbbségi foglalással",
+      "Díjmentes Élő Gyakorlónapok",
+      "Díjmentes Szabadság Elvonulás, szállással és vegán ellátással",
+      "Éves tagságnál évi 4 díjmentes 1-on-1 konzultáció, egyébként 13 000 Ft",
     ],
+  },
+];
+
+const PRICE_ROWS: [string, string, string, string][] = [
+  ["Nyílt Meditációs Est", "4 940 Ft", "3 200 Ft", "díjmentes"],
+  ["Élő Gyakorlónap (évi 4)", "—", "6 460 Ft", "díjmentes"],
+  ["Szabadság Elvonulás (évi 3)", "—", "önköltség (kb. 65–85 ezer Ft)", "díjmentes"],
+  ["Havi közös túra", "meghívóval díjmentes", "díjmentes", "díjmentes"],
+  ["1-on-1 konzultáció", "—", "15 000 Ft", "13 000 Ft (éves: évi 4 díjmentes)"],
+];
+
+const FAQ = [
+  {
+    q: "Kell hozzá előzetes meditációs tapasztalat?",
+    a: "Nem. Az első lépcső a légzés alapjaitól indul, és minden gyakorlatot vezetve, lépésről lépésre végzel. Ha már gyakorolsz, a strukturált program és a közösség ad új mélységet.",
+  },
+  {
+    q: "Mennyi időt kell rászánnom?",
+    a: "Napi 10–15 percet. Ehhez jönnek a választható alkalmak: a heti közös meditáció, a budapesti esték, a havi túra. Semmi sem kötelező — a rendszeresség többet ér, mint a mennyiség.",
+  },
+  {
+    q: "Mi történik, ha kihagyok néhány napot?",
+    a: "Semmi baj. Nincs sorozatszámláló, nincs büntetés és nincs levonás: ott folytatod, ahol abbahagytad. A cél a nyugodtabb idegrendszer, nem egy újabb teljesítménykényszer.",
+  },
+  {
+    q: "Ez vallásos vagy spirituális közösség?",
+    a: "Nem. Klasszikus légzés- és figyelemgyakorlatokkal dolgozunk, de a modern idegtudomány és az életmód-orvostan felől közelítjük meg őket — dogmák, misztifikálás és ezoterikus nyelv nélkül.",
+  },
+  {
+    q: "Helyettesíti az orvosi vagy pszichológiai kezelést?",
+    a: "Nem. A Társaság gyakorlóközösség, nem terápia. Ha kezelés alatt állsz, vagy egészségi okból bizonytalan vagy, beszéld meg az orvosoddal, mielőtt elkezded.",
+  },
+  {
+    q: "Mi a különbség a két út között?",
+    a: "A Társaság Útján az első lépcső azonnal nyitva van, a továbbiak részvétellel vagy külön díjért nyílnak. A Belső Körben a teljes tananyag-ív benne van az árban, élőben kérdezhetsz, és minden élő alkalom — a Szabadság Elvonulás is — díjmentes.",
+  },
+  {
+    q: "Hogyan működik a próbaidő?",
+    a: "A havi Társasági Tagságot 7 napig ingyen kipróbálhatod (bankkártya szükséges, és e-mail-címenként egyszer jár). A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Kedves Üzenet és a foglalások az első fizetés után nyílnak meg.",
+  },
+  {
+    q: "Lemondhatom bármikor?",
+    a: "Igen. A lemondás a következő számlázási időszaktól él, addig minden elérhető marad. Ha később visszatérsz, az út elölről indul — ez a folytonosság miatt van így.",
+  },
+  {
+    q: "Mi az a rend, és miért nem lehet váltani?",
+    a: "A rend a kiindulópontod: az Iránytű-kérdőív alapján derül ki, melyik természetes hangolásból indulsz. Nem skatulya — minden rend mindent gyakorol. Azért végleges, mert az út lényege, hogy a saját kiindulópontodból haladj, ne egy kényelmesebbet keress.",
+  },
+  {
+    q: "Kapok számlát?",
+    a: "Igen, minden befizetésről alanyi adómentes számla készül. A Társasághoz magánszemélyként lehet csatlakozni.",
   },
 ];
 
@@ -153,50 +277,119 @@ export default async function TarsasagHome() {
   const supabase = createPublicClient();
   const { data: prices } = await supabase.from("price_catalog").select("code, amount_huf");
   const price = (code: string) => prices?.find((p) => p.code === code)?.amount_huf;
+  const notify = notifyHref("A Társaság nyitása");
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
       {/* Nyitány */}
-      <section className="max-w-2xl">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">Jelenlét – Tudatosság – Szabadság</p>
-        <h1 className="mt-4 font-serif text-4xl text-forest sm:text-5xl">A Társaság</h1>
-        <p className="mt-8 font-serif text-xl text-ink">
-          Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
+      <section className="max-w-3xl">
+        <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Jelenlét – Tudatosság – Szabadság</p>
+        <h1 className="mt-5 font-serif text-4xl leading-tight text-forest sm:text-5xl">
+          Nyugodtabb idegrendszer.
+          <br />
+          Kedvesebb hétköznapok.
+        </h1>
+        <p className="mt-8 font-serif text-xl leading-relaxed text-ink">
+          A Társaság online gyakorlóközösség, ahol napi 10–15 perces, tudományos alapú gyakorlatokkal tanítod
+          meg az idegrendszeredet megnyugodni — és ahol nem egyedül haladsz.
         </p>
-        <p className="mt-4 text-ink-soft">
-          Minden nagy út egy nyugodtabb idegrendszerrel kezdődik. Itt kedvességet, figyelmességet,
-          tudatosságot és segítőkészséget gyakorlunk — a légzésen, a figyelmen és a testen keresztül,
-          tudományos alapokon, dogmák nélkül.
+        <p className="mt-5 max-w-2xl text-ink-soft">
+          Nyolchetes programokban, lépésről lépésre. Élő közös meditációkkal, budapesti alkalmakkal, havonta egy
+          közös túrával — és egy közösséggel, amelynek a célja egyszerű: jobb hellyé tenni a világot, először
+          magunkkal kezdve.
         </p>
-        <p className="mt-4 text-ink-soft">
-          Nem tanácsokat osztunk egymásnak, hanem megosztjuk, mit tapasztaltunk az úton. Havonta egyszer
-          pedig szó szerint is együtt indulunk: közös túra valahol Magyarországon, az úti célt a
-          Társaság szavazza meg. A túra ingyenes, és meghívóval barátaidat is hozhatod.
-        </p>
-        <div className="mt-10">
-          <Link
-            href={tp("/belepes")}
-            className="inline-block rounded-md border border-forest px-5 py-2.5 text-sm text-forest transition-all duration-300 hover:border-gold hover:bg-gold-soft/40"
-          >
-            Már tag vagyok — belépés
-          </Link>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a href="#csatlakozas" className={buttonPrimary}>
+            Megnézem, hogyan csatlakozhatok
+          </a>
+          <a href="#hogyan-mukodik" className={buttonSecondary}>
+            Hogyan működik?
+          </a>
+        </div>
+        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
+          {["7 napos próbaidő", "Bármikor lemondható", "Nem kell előzetes tapasztalat"].map((t) => (
+            <li key={t} className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-gold" strokeWidth={1.5} aria-hidden />
+              {t}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* Ismerős? */}
+      <section className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-start">
+        <SectionHeading eyebrow="Ismerős?" title="A nap el sem kezdődött, a tested már készenlétben áll.">
+          <p>
+            Ébredés után az első mozdulat a telefon felé. Értesítések, hírek, üzenetek — és még fel sem keltél,
+            a vállad már feszes, a légzésed felszínes. Napközben tűzoltás, este pedig fáradt vagy, mégsem tudsz
+            igazán leállni.
+          </p>
+          <p>
+            Ez nem jellemhiba, és nem is gyengeség. Az idegrendszered pontosan azt teszi, amire a mai élet nap
+            mint nap tanítja: készenlétben tart. Csak éppen elfelejtett visszaváltani.
+          </p>
+        </SectionHeading>
+        <GildedCard className="p-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-gold">A jó hír</p>
+          <p className="mt-3 font-serif text-xl text-forest">A visszaváltás tanulható.</p>
+          <p className="mt-3 text-sm text-ink-soft">
+            A légzés lassításával és a figyelem irányításával közvetlenül hatsz arra a rendszerre, amely a
+            megnyugvásért felel: a vagus idegre és a szívritmus változékonyságára. Nem varázslat, hanem
+            gyakorlás — és a gyakorlás itt könnyebb, mert nem egyedül csinálod.
+          </p>
+        </GildedCard>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* Amit megtanulsz */}
+      <section>
+        <SectionHeading eyebrow="Amit az úton megtanulsz" title="Nem egy újabb feladat. Egy képesség, ami veled marad." />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {BENEFITS.map(({ Icon, title, text }) => (
+            <GildedCard key={title}>
+              <Icon className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
+              <h3 className="mt-4 font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-2 text-sm text-ink-soft">{text}</p>
+            </GildedCard>
+          ))}
         </div>
       </section>
 
       <CompassDivider className="my-20" />
 
-      {/* Az Idegrendszeri Iránytű & A 4 Rend */}
-      <section>
-        <SectionHeading eyebrow="Az első lépés" title="Az Idegrendszeri Iránytű & A 4 Rend">
+      {/* Hogyan működik */}
+      <section id="hogyan-mukodik" className="scroll-mt-24">
+        <SectionHeading eyebrow="Hogyan működik" title="Négy lépés, és már úton is vagy." />
+        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <li key={s.title}>
+              <GildedCard className="h-full">
+                <span className="font-serif text-3xl text-gold">{i + 1}</span>
+                <h3 className="mt-3 font-serif text-lg text-forest">{s.title}</h3>
+                <p className="mt-2 text-sm text-ink-soft">{s.text}</p>
+              </GildedCard>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* A 4 Rend */}
+      <section id="rendek" className="scroll-mt-24">
+        <SectionHeading eyebrow="Az Idegrendszeri Iránytű" title="A négy rend — melyikre ismersz magadra?">
           <p>
-            Minden idegrendszernek megvan a maga természetes hangolása: van, aki finoman érzékel, van,
-            aki nyugalmat teremt, van, aki kitartóan épít, és van, akit a kihívás tesz tisztává. A
-            Társaságban ezt a négy irányt négy rend őrzi.
+            Minden idegrendszernek megvan a maga természetes hangolása: van, aki finoman érzékel, van, aki
+            nyugalmat teremt, van, aki kitartóan épít, és van, akit a kihívás tesz tisztává. A Társaságban ezt
+            a négy irányt négy rend őrzi.
           </p>
           <p>
-            Belépéskor egy rövid kérdőív, az Idegrendszeri Iránytű mutatja meg, melyik rendből indulsz.
-            A rended végleges: ez a kiindulópontod, amelyhez az úton végig visszatalálsz. Nincs jó vagy
-            rossz rend — mind egyenrangú, és minden rend mindent gyakorol; csak a kezdőpont más.
+            Belépéskor egy rövid kérdőív, az Iránytű mutatja meg, melyik rendből indulsz. A rended végleges: ez a
+            kiindulópontod, amelyhez az úton végig visszatalálsz. Nincs jó vagy rossz rend — mind egyenrangú, és
+            minden rend mindent gyakorol.
           </p>
         </SectionHeading>
 
@@ -211,7 +404,6 @@ export default async function TarsasagHome() {
                 </div>
               </div>
               <p className="mt-5 font-serif italic text-ink">{motto}</p>
-
               <p className="mt-5 text-xs uppercase tracking-[0.18em] text-gold">Magadra ismersz, ha…</p>
               <ul className="mt-2 space-y-1.5 text-sm text-ink-soft">
                 {signs.map((s) => (
@@ -221,7 +413,6 @@ export default async function TarsasagHome() {
                   </li>
                 ))}
               </ul>
-
               <dl className="mt-5 space-y-3 text-sm">
                 <div>
                   <dt className="text-xs uppercase tracking-[0.18em] text-gold">Az erősséged</dt>
@@ -239,64 +430,87 @@ export default async function TarsasagHome() {
             </GildedCard>
           ))}
         </div>
-        <p className="mt-6 text-center text-xs uppercase tracking-[0.18em] text-ink-soft/80">
-          Az Iránytű belépéskor vár rád
+        <p className="mt-6 text-center text-xs text-ink-soft">
+          Az Iránytű önismereti eszköz, nem pszichológiai vizsgálat vagy diagnózis.
         </p>
       </section>
 
       <CompassDivider className="my-20" />
 
-      {/* Küldetések & Napi Hangolások */}
+      {/* Egy nap */}
       <section>
-        <SectionHeading eyebrow="A mindennapok" title="Küldetések & Napi Hangolások">
+        <SectionHeading eyebrow="Küldetések & Napi Hangolások" title="Így néz ki egy nap a Társaságban.">
           <p>
-            A gyakorlás itt nem kötelező házi feladat, hanem küldetések sora. Rövidek, a napodba
-            illeszthetők, és lépésről lépésre nyílnak meg.
+            A gyakorlás itt nem kötelező házi feladat, hanem rövid küldetések sora, amelyek beleférnek a napodba.
           </p>
         </SectionHeading>
-
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {QUESTS.map(({ Icon, name, text }) => (
-            <GildedCard key={name}>
-              <Icon className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-              <h3 className="mt-4 font-serif text-lg text-forest">{name}</h3>
-              <p className="mt-2 text-sm text-ink-soft">{text}</p>
-            </GildedCard>
+        <ol className="mt-10 space-y-4">
+          {DAY.map(({ Icon, when, name, text }) => (
+            <li key={name}>
+              <GildedCard className="flex gap-5">
+                <Icon className="mt-1 h-5 w-5 shrink-0 text-forest" strokeWidth={1.25} aria-hidden />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-gold">{when}</p>
+                  <h3 className="mt-1 font-serif text-lg text-forest">{name}</h3>
+                  <p className="mt-1 text-sm text-ink-soft">{text}</p>
+                </div>
+              </GildedCard>
+            </li>
           ))}
-          <GildedCard className="bg-paper-deep/60">
-            <Sunrise className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
-            <h3 className="mt-4 font-serif text-lg text-forest">Lépcsőzetes út</h3>
-            <p className="mt-2 text-sm text-ink-soft">
-              Az I. Modul és az IP 1 belépéskor nyílik. A további lépcsők előtt mindig beszélünk egy
-              rövidet — a továbblépést Bálint nyitja meg.
-            </p>
-          </GildedCard>
-        </div>
+        </ol>
+        <p className="mt-4 text-xs text-ink-soft">
+          A Napi Közlöny fejlesztés alatt áll; amint elindul, a tagoknak díjmentes.
+        </p>
       </section>
 
       <CompassDivider className="my-20" />
 
-      {/* Karakterkártya, XP és Szintlépés */}
-      <section className="grid items-start gap-10 lg:grid-cols-2">
-        <SectionHeading eyebrow="Az út nyomai" title="Karakterkártya, XP és Szintlépés">
+      {/* Az út */}
+      <section>
+        <SectionHeading eyebrow="Az út" title="Négy lépcső, a saját tempódban.">
           <p>
-            Minden elvégzett küldetés, meghallgatott tananyag, naplóbejegyzés és kinyomtatott reggeli
-            közlöny tapasztalati pontot (XP) ér. Ahogy haladsz, a saját Karakterkártyád és rangod is
-            fejlődik.
-          </p>
-          <p>
-            A kártyád csak a tiéd: nincs ranglista, nincs összehasonlítás. Az egyetlen mérce a
-            tegnapi önmagad.
+            Belépéskor az első lépcső nyílik meg. Továbblépni részvétellel, gyorsított hozzáféréssel vagy a Belső
+            Körben külön díj nélkül lehet — a következő lépcsőt minden esetben egy rövid, díjmentes beszélgetés
+            után Bálint nyitja meg, hogy az út biztonságos és folyamatos maradjon.
           </p>
         </SectionHeading>
+        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {PATH.map((p) => (
+            <li key={p.step}>
+              <GildedCard className="flex h-full flex-col">
+                <span className="font-serif text-2xl text-gold">{p.step}</span>
+                <h3 className="mt-2 font-serif text-lg text-forest">{p.title}</h3>
+                <p className="text-xs text-ink-soft">{p.sub}</p>
+                <p className="mt-3 flex-1 text-sm text-ink-soft">{p.text}</p>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-gold">{p.badge}</p>
+              </GildedCard>
+            </li>
+          ))}
+        </ol>
+      </section>
 
+      <CompassDivider className="my-20" />
+
+      {/* Karakterkártya */}
+      <section className="grid items-start gap-10 lg:grid-cols-2">
+        <SectionHeading eyebrow="Az út nyomai" title="Karakterkártya, XP és rang — csak neked.">
+          <p>
+            Minden elvégzett küldetés, meghallgatott tananyag, naplóbejegyzés és közös alkalom tapasztalati pontot
+            (XP) ér, és ahogy haladsz, a rangod is fejlődik. Így látod, mennyit építettél — akkor is, amikor
+            belülről lassúnak tűnik.
+          </p>
+          <p>
+            A kártyád csak a tiéd: nincs ranglista, nincs összehasonlítás, és egy kihagyott napért semmit sem
+            veszítesz. Az egyetlen mérce a tegnapi önmagad.
+          </p>
+        </SectionHeading>
         <GildedCard className="p-8">
           <p className="text-xs uppercase tracking-[0.2em] text-gold">Karakterkártya · minta</p>
           <div className="mt-4 flex items-center gap-4">
             <CrestVandorok className="h-14 w-12" />
             <div>
               <p className="font-serif text-xl text-forest">Vándor</p>
-              <p className="text-sm text-ink-soft">I. Modul · 4. hét</p>
+              <p className="text-sm text-ink-soft">I. Modul · 4. hét · Figyelő</p>
             </div>
           </div>
           <div className="mt-6 h-px bg-gold/30" />
@@ -312,37 +526,94 @@ export default async function TarsasagHome() {
                 >
                   {rank}
                 </span>
-                {i < RANKS.length - 1 && <span className="text-gold/70" aria-hidden>→</span>}
+                {i < RANKS.length - 1 && (
+                  <span className="text-gold/70" aria-hidden>
+                    →
+                  </span>
+                )}
               </li>
             ))}
-            <li className="text-ink-soft" aria-hidden>…</li>
           </ol>
         </GildedCard>
       </section>
 
       <CompassDivider className="my-20" />
 
-      {/* Tagsági utak — a meglévő árakkal és jogosultságokkal */}
+      {/* Közösség */}
       <section>
-        <SectionHeading eyebrow="Csatlakozás" title="Válaszd ki az utad" />
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <SectionHeading eyebrow="Nem egyedül" title="Tapasztalat, nem tanácsadás.">
+          <p>
+            A Társaság nem egyszemélyes színpad. A tagok nem okítják és nem diagnosztizálják egymást, hanem
+            megosztják, mi segített nekik — egy nehéz estén, egy feszült héten. A posztok alatt nincs lájk, csak
+            két csendes visszajelzés: „Köszönöm, hasznos volt” és „Hasonlót tapasztaltam”.
+          </p>
+        </SectionHeading>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {COMMUNITY.map(({ Icon, title, text }) => (
+            <GildedCard key={title} className="flex gap-4">
+              <Icon className="mt-1 h-5 w-5 shrink-0 text-forest" strokeWidth={1.25} aria-hidden />
+              <div>
+                <h3 className="font-serif text-lg text-forest">{title}</h3>
+                <p className="mt-1 text-sm text-ink-soft">{text}</p>
+              </div>
+            </GildedCard>
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-ink-soft">
+          És Budapesten: havonta <span className="text-ink">Nyílt Meditációs Estek</span>, évente négyszer{" "}
+          <span className="text-ink">Élő Gyakorlónapok</span>, háromszor pedig{" "}
+          <span className="text-ink">Szabadság Elvonulás</span>.
+        </p>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* Bálint */}
+      <section className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+        <SectionHeading eyebrow="Aki az utat vezeti" title="Kardos Bálint" />
+        <GildedCard className="p-8">
+          <p className="font-serif text-lg text-ink">
+            „Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjaival pedig azon
+            dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.”
+          </p>
+          <p className="mt-4 text-sm text-ink-soft">
+            A klasszikus légzés- és figyelemgyakorlatokat a modern idegtudomány és az életmód-orvostan felől
+            közelítem meg: mit csinál a légzés a vagus-tónussal, a szívritmus-változékonysággal, és hogyan
+            csendesedik a figyelem. Dogmák és misztifikálás nélkül.
+          </p>
+          <ul className="mt-5 space-y-1.5 text-sm text-ink-soft">
+            <li>Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy)</li>
+            <li>Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh)</li>
+          </ul>
+        </GildedCard>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* Csatlakozás */}
+      <section id="csatlakozas" className="scroll-mt-24">
+        <SectionHeading eyebrow="Csatlakozás" title="Válaszd ki az utad.">
+          <p>Mindkét út havi vagy éves díjjal választható; az éves tagság két hónapnyi díjat megspórol neked.</p>
+        </SectionHeading>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           {TIERS.map((t) => {
             const m = price(t.monthly);
             const y = price(t.yearly);
             return (
-              <GildedCard key={t.name} className="flex flex-col">
+              <GildedCard key={t.name} className="flex flex-col p-8">
                 <p className="text-xs uppercase tracking-[0.2em] text-gold">{t.subtitle}</p>
                 <h3 className="mt-1 font-serif text-2xl text-forest">{t.name}</h3>
                 {m !== undefined && (
-                  <p className="mt-3 text-ink">
-                    {formatHuf(m)} <span className="text-sm text-ink-soft">/ hó</span>
+                  <p className="mt-4 font-serif text-3xl text-ink">
+                    {formatHuf(m)} <span className="font-sans text-sm text-ink-soft">/ hó</span>
                   </p>
                 )}
                 {y !== undefined && (
                   <p className="text-sm text-ink-soft">vagy {formatHuf(y)} / év (2 hónap ajándék)</p>
                 )}
-                <p className="mt-4 text-sm text-ink-soft italic">{t.note}</p>
-                <ul className="mt-4 space-y-2 text-sm text-ink-soft">
+                <p className="mt-5 text-sm text-ink">{t.forWhom}</p>
+                <p className="mt-4 text-sm italic text-ink-soft">{t.note}</p>
+                <ul className="mt-3 flex-1 space-y-2 text-sm text-ink-soft">
                   {t.features.map((f) => (
                     <li key={f} className="flex gap-2">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.5} aria-hidden />
@@ -350,17 +621,89 @@ export default async function TarsasagHome() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-6 text-xs text-ink-soft">A csatlakozás hamarosan nyílik.</p>
+                <div className="mt-8">
+                  <p className="text-xs uppercase tracking-[0.18em] text-gold">A csatlakozás hamarosan nyílik</p>
+                  <a href={notify} className={`${buttonPrimary} mt-3 w-full text-center`}>
+                    Értesítést kérek a nyitásról
+                  </a>
+                </div>
               </GildedCard>
             );
           })}
         </div>
+
+        <GildedCard className="mt-8 overflow-x-auto">
+          <p className="text-xs uppercase tracking-[0.2em] text-gold">Élő alkalmak és díjak egy pillantásra</p>
+          <table className="mt-4 w-full min-w-[34rem] text-left text-sm">
+            <thead className="text-ink">
+              <tr className="border-b border-line">
+                <th className="py-2 pr-4 font-normal">Alkalom</th>
+                <th className="py-2 pr-4 font-normal">Külsősöknek</th>
+                <th className="py-2 pr-4 font-normal">A Társaság Útja</th>
+                <th className="py-2 font-normal">A Belső Kör</th>
+              </tr>
+            </thead>
+            <tbody className="text-ink-soft">
+              {PRICE_ROWS.map(([what, ext, t1, t2]) => (
+                <tr key={what} className="border-b border-line/60 last:border-0">
+                  <td className="py-2 pr-4 text-ink">{what}</td>
+                  <td className="py-2 pr-4">{ext}</td>
+                  <td className="py-2 pr-4">{t1}</td>
+                  <td className="py-2">{t2}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </GildedCard>
+
+        <p className="mt-6 max-w-2xl text-xs text-ink-soft">
+          Lemondás bármikor, a következő számlázási időszaktól; addig a hozzáférés megmarad. Visszatéréskor az
+          út elölről indul. Minden díj szolgáltatási díj, alanyi adómentes számlával; csatlakozni magánszemélyként
+          lehet.
+        </p>
       </section>
 
-      <p className="mt-10 max-w-2xl text-xs text-ink-soft">
-        Lemondás bármikor, a következő számlázási ciklustól; addig a hozzáférés megmarad. Visszatéréskor a
-        haladás elölről indul. Minden díj szolgáltatási díj, alanyi adómentes számlával.
-      </p>
+      <CompassDivider className="my-20" />
+
+      {/* GYIK */}
+      <section id="gyik" className="scroll-mt-24">
+        <SectionHeading eyebrow="Gyakori kérdések" title="Amit érdemes tudni, mielőtt elindulsz." />
+        <div className="mt-10 divide-y divide-line rounded-md border border-line bg-paper">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="group px-6 py-5">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-serif text-lg text-forest marker:hidden">
+                {q}
+                <span className="mt-1 text-gold transition-transform duration-300 group-open:rotate-45" aria-hidden>
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 max-w-3xl text-sm text-ink-soft">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* Zárás */}
+      <section className="text-center">
+        <p className="text-xs uppercase tracking-[0.25em] text-gold">Az első lépés mindig a legkisebb</p>
+        <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest sm:text-4xl">
+          Egy kilégzés. Egy kérdőív. Egy társaság.
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
+          Ha szeretnéd, hogy szóljunk, amikor megnyílik a csatlakozás, írj egy sort — vagy gyere el addig egy
+          budapesti Nyílt Estre, és tapasztald meg személyesen.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={notify} className={buttonPrimary}>
+            Értesítést kérek a nyitásról
+          </a>
+          <Link href={tp("/belepes")} className={buttonSecondary}>
+            Már tag vagyok — belépés
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
