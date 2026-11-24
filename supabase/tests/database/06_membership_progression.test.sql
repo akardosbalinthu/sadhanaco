@@ -148,17 +148,17 @@ select gen_random_uuid(), m.id, w, 'audio'::public.lesson_kind, 'Lecke ' || w, t
   from public.modules m, generate_series(1, 2) w where m.stage = 1;
 insert into public.lesson_completions (user_id, lesson_id)
 select :'u', l.id from public.lessons l join public.modules m on m.id = l.module_id where m.stage = 1;
-update public.app_settings set progression_points_required = '{"2": 5, "3": 999, "4": 0}';
+update public.app_settings set progression_points_required = '{"2": 25, "3": 999, "4": 0}';
 
 set local role authenticated;
 select pg_temp.act_as(:'u');
 select is((public.stage_progress(1::smallint) ->> 'completed')::boolean, true, 'az I. lépcső elvégezve');
-select is((public.participation_score() ->> 'points')::int, 1, 'pontok: 1 gyakorlási nap = 1 pont');
+select is((public.participation_score() ->> 'points')::int, 20, 'XP: 2 kipipált lecke = 20');
 select is(public.progression_status() ->> 'eligible', 'false', 'kevés pont: még nem jogosult');
 select is(pg_temp.err('select public.request_progression()'), 'NOT_ELIGIBLE', 'nem jogosult kérés elutasítva');
 reset role;
 
--- Saját tapasztalat posztolása (3 pont) + egy másik tag "Köszönöm, hasznos volt" reakciója (1 pont)
+-- Saját tapasztalat posztolása (5 XP) + egy másik tag "Köszönöm, hasznos volt" reakciója (2 XP)
 insert into public.posts (id, author_id, body) values ('00000000-0000-0000-0000-0000000bb001', :'u', 'Esti gyakorlás tapasztalata');
 insert into public.post_reactions (post_id, user_id, kind) values
   ('00000000-0000-0000-0000-0000000bb001', :'other', 'koszonom'),
@@ -166,7 +166,7 @@ insert into public.post_reactions (post_id, user_id, kind) values
 
 set local role authenticated;
 select pg_temp.act_as(:'u');
-select is((public.participation_score() ->> 'points')::int, 5, 'pontok: 1 nap + 3 poszt + 1 kapott köszönet (saját nem)');
+select is((public.participation_score() ->> 'points')::int, 27, 'XP: 20 + poszt 5 + kapott köszönet 2 (saját nem)');
 select is(public.progression_status() ->> 'basis', 'participation', 'jogosultság alapja: részvétel');
 select is(public.progression_status() ->> 'eligible', 'true', 'jogosult a továbblépés kérésére');
 select is((select status::text from public.request_progression('Szívesen beszélnék a továbblépésről')), 'requested',
@@ -184,7 +184,7 @@ select is((select count(*)::int from public.admin_notifications where kind = 'pr
 
 set local role authenticated;
 select pg_temp.act_as(:'sa');
-select is((public.participation_score(:'u') ->> 'points')::int, 5, 'az admin látja a tag pontjait');
+select is((public.participation_score(:'u') ->> 'points')::int, 27, 'az admin látja a tag pontjait');
 select is((select status::text from public.admin_decide_progression(
              (select id from public.progression_requests where user_id = :'u'), true, 'Konzultáció megvolt')),
           'approved', 'admin jóváhagyta a konzultáció után');

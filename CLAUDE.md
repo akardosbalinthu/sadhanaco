@@ -205,11 +205,12 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 ### 7.13 Döntések (2026. november 24., negyedik kör)
 - **Egy Kedves Üzenet:** egyelőre **nincs tárgyi termék** (kártyajáték, könyv, doboz) és **nincs külön weboldal** — minden, az üzenet beküldése is, ezen a rendszeren történik (`/egy-kedves-uzenet`). A 2.3 pont ennek megfelelően értendő.
-  - **Kedves Üzenet (bárki, díjmentes):** bárki küldhet, csak ingyen. A **beérkezés sorrendjében** dolgozzuk fel; **3 sikertelen próbálkozás után sikertelen**, további próbálkozás nincs.
-  - **Elsőbbségi Kedves Üzenet (Társaság tagjai, havi keret):** **elsőként** kerül kézbesítésre, **kézbesítési garanciával** (nem áll meg 3 próbálkozásnál).
+  - **Kedves Üzenet (bárki, díjmentes):** bárki küldhet, csak ingyen. A **beérkezés sorrendjében** dolgozzuk fel; **3 sikertelen próbálkozás után sikertelen**, további próbálkozás nincs. Nem tagnál **megerősítő e-mail** kell; egy e-mail-címről **több üzenet** is küldhető.
+  - **Elsőbbségi Kedves Üzenet (csak tag):** a havi keretből díjmentesen, **kereten felül fizetősen, a tag által választott összegért** (min. `kind_message_min_huf`). **Elsőként** kerül kézbesítésre, **kézbesítési garanciával**: 3 sikertelen próbálkozás után admin-utánkövetés (`followup`), sikertelennek csak admin zárhatja le.
+  - Sorrend: elsőbbségi kereten belüli (beérkezés szerint) → elsőbbségi fizetős (összeg szerint csökkenő) → díjmentes (beérkezés szerint). Implementáció: 005-ös migráció (`submit_kind_message`, `confirm_kind_message`, `admin_record_kind_message_attempt`, `admin_kind_message_queue`).
 - **Túravendég:** tagonként túránként 2 vendég — jóváhagyva; **próbaidős tag is meghívhat**.
-- **A 4 Rend:** a rendet a belépéskori kérdőív (Idegrendszeri Iránytű) eredménye adja; **a tag nem válthat rendet**.
-- **Pontrendszer:** aktivitás + haladás alapú XP és rang a beépített gamificationhöz — terv jóváhagyásra vár (privát marad, nincs ranglista, nincs büntetés kihagyott napért).
+- **A 4 Rend:** a rendet a belépéskori kérdőív (**Idegrendszeri Iránytű**, `docs/iranytu.md`) eredménye adja; **a tag nem válthat rendet**, hibát csak a **superadmin** javíthat (`superadmin_set_order`).
+- **Pontrendszer (jóváhagyva):** privát XP és rang (`xp_events`, `my_character_card`), napi felső határ 60 XP (a lépcső-bónusz kivétel), rangok: Kereső 0 · Figyelő 150 · Horgonyzó 500 · Csendőrző 1200 · Egyensúlyozó 2500 · Útitárs 4500 · Őrző 7000. Csendes mérföldkövek, nincs ranglista, nincs sorozat, nincs levonás. A továbblépési küszöb XP-ben: II. lépcső 500, III. lépcső 1200. Súlyok: `app_settings.xp_rules`. Visszatérő tagnál új ciklus, nulláról.
 
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
