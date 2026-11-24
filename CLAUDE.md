@@ -198,7 +198,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Havi 1 közös túra** a Társaság tagjaival, Magyarországon. **Hónaponként egy szavazás**: Bálint **5–10 úti célt** ír ki, a tagok választanak. A túra **a tagoknak ingyenes**; Társaságon kívüliek **csak meghívóval** jöhetnek, és **nekik is ingyenes** (meghívót aktív tag küldhet, túránként legfeljebb `app_settings.hike_guest_invites_per_member` = 2 vendéget; `invite_hike_guest`, `accept_hike_invitation`). A túra nyilvánosan nem foglalható, díj nem állítható be rá. A következő úti célt mindig **a Társaság szavazza meg** (`destination_polls` / `destination_options` / `destination_votes`, `cast_destination_vote`, `admin_close_destination_poll`; eseménytípus: `tura`). A szavazás állása a lezárásig rejtett — csak a saját szavazatodat látod —, hogy ne legyen verseny vagy nyomás. Holtversenynél Bálint dönt.
 
 ### 7.12 A Társaság arculata (2026. november 24.)
-- **A 4 Rend** (egyenrangú kiindulópontok, belépéskor önismereti iránytű segít választani): **Tündék** (finom érzékelés és tudatosság), **Kertőrzők** (jelenlét és belső béke), **Törpök** (állhatatosság és belső rend), **Vándorok** (bátorság és fókusz). A „Hobbit” elnevezés nem használható.
+- **A 4 Rend** (egyenrangú kiindulópontok, belépéskor a Ceremónia kérdőíve dönti el): **Tündék** (finom érzékelés és tudatosság), **Kertőrzők** (jelenlét és belső béke), **Törpök** (állhatatosság és belső rend), **Vándorok** (bátorság és fókusz). A „Hobbit” elnevezés nem használható.
 - Gyakorlás = **Küldetések & Napi Hangolások**; haladás = **privát Karakterkártya, XP és rang** (Kereső → Figyelő → Horgonyzó → Csendőrző → Egyensúlyozó…) — csak a tag látja, nincs ranglista.
 - Csomagnevek: **A Társaság Útja** (Társasági Tagság), **A Belső Kör · A Tanács**.
 - Vizuális nyelv: meleg törtfehér alap, erdőzöld (`#1C2520`), hajszálvékony antik arany (`#C5A059`) díszítés (`src/components/ornaments.tsx`).
@@ -209,8 +209,13 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
   - **Elsőbbségi Kedves Üzenet (csak tag):** a havi keretből díjmentesen, **kereten felül fizetősen, a tag által választott összegért** (min. `kind_message_min_huf`). **Elsőként** kerül kézbesítésre, **kézbesítési garanciával**: 3 sikertelen próbálkozás után admin-utánkövetés (`followup`), sikertelennek csak admin zárhatja le.
   - Sorrend: elsőbbségi kereten belüli (beérkezés szerint) → elsőbbségi fizetős (összeg szerint csökkenő) → díjmentes (beérkezés szerint). Implementáció: 005-ös migráció (`submit_kind_message`, `confirm_kind_message`, `admin_record_kind_message_attempt`, `admin_kind_message_queue`).
 - **Túravendég:** tagonként túránként 2 vendég — jóváhagyva; **próbaidős tag is meghívhat**.
-- **A 4 Rend:** a rendet a belépéskori kérdőív (**Idegrendszeri Iránytű**, `docs/iranytu.md`) eredménye adja; **a tag nem válthat rendet**, hibát csak a **superadmin** javíthat (`superadmin_set_order`).
+- **A 4 Rend:** a rendet a belépéskori kérdőív (**Ceremónia**, `docs/ceremonia.md`) eredménye adja; **a tag nem válthat rendet**, hibát csak a **superadmin** javíthat (`superadmin_set_order`).
 - **Pontrendszer (jóváhagyva):** privát XP és rang (`xp_events`, `my_character_card`), napi felső határ 60 XP (a lépcső-bónusz kivétel), rangok: Kereső 0 · Figyelő 150 · Horgonyzó 500 · Csendőrző 1200 · Egyensúlyozó 2500 · Útitárs 4500 · Őrző 7000. Csendes mérföldkövek, nincs ranglista, nincs sorozat, nincs levonás. A továbblépési küszöb XP-ben: II. lépcső 500, III. lépcső 1200. Súlyok: `app_settings.xp_rules`. Visszatérő tagnál új ciklus, nulláról.
+
+### 7.14 Döntések (2026. november 24., ötödik kör)
+- **Ceremónia:** a rend-beosztó kérdőív neve az „Idegrendszeri Iránytű” helyett **Ceremónia** (a technikai nevek maradnak).
+- **A tananyag bemutatása:** a felületen lépcsőnként külön szerepel a **modul** (elmélet és gyakorlatok) és a hozzá tartozó **integrációs program** (8+1 hét, a gyakorlás beépítése a hétköznapokba); az IP 3-nak nincs külön modulja.
+- **Új tagsági előnyök (mindkét szinten):** **havi élő szerepjáték- (D&D) és társasjáték-est**; **negyedévente a tíz legaktívabb tag vacsorameghívást kap Bálinttól** (a kiválasztás alapja a privát XP; a lista nem nyilvános, ranglista nincs).
 
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).

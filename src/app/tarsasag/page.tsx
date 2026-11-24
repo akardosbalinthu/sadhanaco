@@ -1,6 +1,8 @@
 import Link from "next/link";
 import {
   BookOpen,
+  Dices,
+  UtensilsCrossed,
   Check,
   Ear,
   HeartHandshake,
@@ -57,8 +59,8 @@ const STEPS = [
     text: "Kiválasztod az utad, és e-mailben megkapod a belépő linket — jelszó nincs. A havi tagságot 7 napig kipróbálhatod.",
   },
   {
-    title: "Kitöltöd az Iránytűt",
-    text: "Egy 12 kérdéses önismereti kérdőív megmutatja, melyik rendből indulsz: Tündék, Kertőrzők, Törpök vagy Vándorok.",
+    title: "Részt veszel a Ceremónián",
+    text: "Egy 12 kérdéses önismereti kérdőív — a Ceremónia — eldönti, melyik rendbe kerülsz: Tündék, Kertőrzők, Törpök vagy Vándorok.",
   },
   {
     title: "Napi 10–15 perc",
@@ -157,10 +159,81 @@ const DAY = [
 ];
 
 const PATH = [
-  { step: "I.", title: "I. Modul — Jelenlét", sub: "I. Integrációs Program · 8+1 hét", text: "A légzés mechanikájától a test érzékeléséig.", badge: "Belépéskor nyílik" },
-  { step: "II.", title: "II. Modul — Tudatosság", sub: "II. Integrációs Program · 8+1 hét", text: "A figyelem finomabb szabályozása.", badge: "Beszélgetés után" },
-  { step: "III.", title: "III. Integrációs Program", sub: "8+1 hét", text: "Felkészülés a Szabadság Elvonulásra.", badge: "Beszélgetés után" },
-  { step: "IV.", title: "III. Modul — Szabadság Elvonulás", sub: "3–4 nap · évente háromszor", text: "Zárt, többnapos elvonulás a Társaság tagjainak.", badge: "Az IP 3 után" },
+  {
+    step: "I. lépcső",
+    badge: "Belépéskor nyílik",
+    parts: [
+      {
+        kind: "Modul",
+        title: "I. Modul — Jelenlét",
+        paras: [
+          "Az alapok. Rövid elméleti videókban megérted, mi történik a testedben stressz alatt, hogyan működik a légzés mechanikája, és miért éppen a kilégzés, a vagus ideg és a szívritmus-változékonyság a kulcs a megnyugváshoz.",
+          "Megismered azt a négy klasszikus gyakorlatot, amelyre az egész út épül: az Anapanaszatit (a légzés követése), a Sama Vrittit (egyenletes légzés), a Nadi Shodhanát (váltott orrlyukas légzés) és a Kájánupassanát (a test végigpásztázása).",
+        ],
+      },
+      {
+        kind: "Integrációs program",
+        title: "I. Integrációs Program — IP 1",
+        sub: "8+1 hét",
+        paras: [
+          "Itt válik a tudásból képesség. Nyolc héten át hetente nyílik egy új rész, napi 10–15 perces vezetett hanganyagokkal; a gyakorlásaidat pipálással követed, a megfigyeléseidet a naplódba írod.",
+          "A kilencedik hét az összegzésé: visszanézel, mi változott, és mi vált a napjaid természetes részévé. Ez a lépcső a jelenlét alapja — minden későbbi erre épül.",
+        ],
+      },
+    ],
+  },
+  {
+    step: "II. lépcső",
+    badge: "Beszélgetés után nyílik",
+    parts: [
+      {
+        kind: "Modul",
+        title: "II. Modul — Tudatosság",
+        paras: [
+          "Ha a jelenlét stabil, a figyelem finomabb szabályozása következik. Megérted, hogyan működik az elkalandozó elme (az agy alapállapoti hálózata), miért ragadunk bele a gondolatainkba, és hogyan lehet a figyelmet szelíden visszavezetni — nem elnyomva, hanem észrevéve.",
+        ],
+      },
+      {
+        kind: "Integrációs program",
+        title: "II. Integrációs Program — IP 2",
+        sub: "8+1 hét",
+        paras: [
+          "Nyolc hét, amelyben a tudatosság a hétköznapokba költözik: a munkába, a beszélgetésekbe, a nehezebb pillanatokba. A gyakorlás már nemcsak a napi tíz-tizenöt percről szól, hanem arról, hogyan vagy jelen a nap többi részében.",
+          "A kilencedik héten összegzed, mit vittél át a gyakorlásból az életedbe — és beszélgetünk arról, készen állsz-e a következő lépcsőre.",
+        ],
+      },
+    ],
+  },
+  {
+    step: "III. lépcső",
+    badge: "Beszélgetés után nyílik",
+    parts: [
+      {
+        kind: "Integrációs program",
+        title: "III. Integrációs Program — IP 3",
+        sub: "8+1 hét · felkészülés",
+        paras: [
+          "A harmadik lépcsőnek nincs külön elméleti modulja: ez egy elmélyítő integrációs program, amelyben az első két lépcső gyakorlatai összeérnek. Megtanulsz önállóan, csendben, hosszabb ideig is gyakorolni.",
+          "Az IP 3 a Szabadság Elvonulás kötelező előfeltétele — úgy készít fel a többnapos, csendes gyakorlásra, hogy ott már ne az alapokkal kelljen foglalkoznod.",
+        ],
+      },
+    ],
+  },
+  {
+    step: "IV. lépcső",
+    badge: "Az IP 3 után",
+    parts: [
+      {
+        kind: "Modul",
+        title: "III. Modul — Szabadság Elvonulás",
+        sub: "3–4 nap · évente háromszor",
+        paras: [
+          "Az út csúcsa: zárt, többnapos elvonulás kis csoportban, szállással és teljes vegán ellátással. Néhány nap kiszakadva a hétköznapokból, hogy mindaz, amit eddig gyakoroltál, egyben, megszakítás nélkül is megmutatkozhasson.",
+          "Csak az IP 3 elvégzése után, Bálinttal egyeztetve lehet jelentkezni; a Társaságon kívül nem elérhető. A Belső Kör tagjainak díjmentes, A Társaság Útján önköltséges áron.",
+        ],
+      },
+    ],
+  },
 ];
 
 const RANKS = ["Kereső", "Figyelő", "Horgonyzó", "Csendőrző", "Egyensúlyozó", "Útitárs", "Őrző"];
@@ -170,6 +243,8 @@ const COMMUNITY = [
   { Icon: Sparkles, title: "Pénteki kör", text: "Három egyszerű kérdés minden péntek reggel: mi volt nehéz, mi működött, miben segíthet a Társaság." },
   { Icon: Mountain, title: "Havi közös túra", text: "Valahol Magyarországon; az úti célt a tagok szavazzák meg. Ingyenes, és barátot is hozhatsz." },
   { Icon: HeartHandshake, title: "Elsőbbségi Kedves Üzenet", text: "Havonta díjmentesen köszönetet küldhetsz valakinek — Bálint telefonon adja át." },
+  { Icon: Dices, title: "Havi élő szerepjáték- és társasjáték-est", text: "D&D-kaland vagy egy jó társasjáték: egy este, amikor együtt nevetünk, tervezünk és játszunk — mert a kapcsolódás is idegrendszer-fejlesztés." },
+  { Icon: UtensilsCrossed, title: "Negyedéves vacsorameghívás", text: "Negyedévente a tíz legaktívabb tag személyes vacsorameghívást kap Bálinttól. A listát nem tesszük közzé, és ranglista sincs." },
 ];
 
 const TIERS = [
@@ -186,6 +261,8 @@ const TIERS = [
       "Közösségi tér, pénteki kör, heti online közös meditáció",
       "Havi Q&A felvételek",
       "Havi ingyenes közös túra — vendéget is hozhatsz",
+      "Havi élő szerepjáték- (D&D) és társasjáték-est",
+      "Negyedévente vacsorameghívás Bálinttól a tíz legaktívabb tagnak",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
       "Napi Közlöny PRO díjmentesen, amint elindul",
       "Nyílt Est 3 200 Ft-ért (4 940 Ft helyett), Élő Gyakorlónap 6 460 Ft",
@@ -255,7 +332,7 @@ const FAQ = [
   },
   {
     q: "Mi az a rend, és miért nem lehet váltani?",
-    a: "A rend a kiindulópontod: az Iránytű-kérdőív alapján derül ki, melyik természetes hangolásból indulsz. Nem skatulya — minden rend mindent gyakorol. Azért végleges, mert az út lényege, hogy a saját kiindulópontodból haladj, ne egy kényelmesebbet keress.",
+    a: "A rend a kiindulópontod: a Ceremónia kérdőíve alapján derül ki, melyik természetes hangolásból indulsz. Nem skatulya — minden rend mindent gyakorol. Azért végleges, mert az út lényege, hogy a saját kiindulópontodból haladj, ne egy kényelmesebbet keress.",
   },
   {
     q: "Kapok számlát?",
@@ -380,14 +457,14 @@ export default async function TarsasagHome() {
 
       {/* A 4 Rend */}
       <section id="rendek" className="scroll-mt-24">
-        <SectionHeading eyebrow="Az Idegrendszeri Iránytű" title="A négy rend — melyikre ismersz magadra?">
+        <SectionHeading eyebrow="A Ceremónia" title="A négy rend — melyikre ismersz magadra?">
           <p>
             Minden idegrendszernek megvan a maga természetes hangolása: van, aki finoman érzékel, van, aki
             nyugalmat teremt, van, aki kitartóan épít, és van, akit a kihívás tesz tisztává. A Társaságban ezt
             a négy irányt négy rend őrzi.
           </p>
           <p>
-            Belépéskor egy rövid kérdőív, az Iránytű mutatja meg, melyik rendből indulsz. A rended végleges: ez a
+            Belépéskor egy rövid önismereti kérdőív, a Ceremónia dönti el, melyik rendbe kerülsz. A rended végleges: ez a
             kiindulópontod, amelyhez az úton végig visszatalálsz. Nincs jó vagy rossz rend — mind egyenrangú, és
             minden rend mindent gyakorol.
           </p>
@@ -431,7 +508,7 @@ export default async function TarsasagHome() {
           ))}
         </div>
         <p className="mt-6 text-center text-xs text-ink-soft">
-          Az Iránytű önismereti eszköz, nem pszichológiai vizsgálat vagy diagnózis.
+          A Ceremónia kérdőíve önismereti eszköz, nem pszichológiai vizsgálat vagy diagnózis.
         </p>
       </section>
 
@@ -474,15 +551,28 @@ export default async function TarsasagHome() {
             után Bálint nyitja meg, hogy az út biztonságos és folyamatos maradjon.
           </p>
         </SectionHeading>
-        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {PATH.map((p) => (
-            <li key={p.step}>
-              <GildedCard className="flex h-full flex-col">
-                <span className="font-serif text-2xl text-gold">{p.step}</span>
-                <h3 className="mt-2 font-serif text-lg text-forest">{p.title}</h3>
-                <p className="text-xs text-ink-soft">{p.sub}</p>
-                <p className="mt-3 flex-1 text-sm text-ink-soft">{p.text}</p>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.18em] text-gold">{p.badge}</p>
+        <ol className="mt-10 space-y-6">
+          {PATH.map((stage) => (
+            <li key={stage.step}>
+              <GildedCard className="p-7 sm:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="font-serif text-2xl text-gold">{stage.step}</h3>
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-gold">{stage.badge}</p>
+                </div>
+                <div className={`mt-5 grid gap-6 ${stage.parts.length > 1 ? "md:grid-cols-2" : ""}`}>
+                  {stage.parts.map((part) => (
+                    <div key={part.title} className="border-t border-gold/25 pt-4">
+                      <p className="text-xs uppercase tracking-[0.18em] text-ink-soft">{part.kind}</p>
+                      <h4 className="mt-1 font-serif text-lg text-forest">{part.title}</h4>
+                      {"sub" in part && part.sub && <p className="text-xs text-ink-soft">{part.sub}</p>}
+                      <div className="mt-3 space-y-3 text-sm text-ink-soft">
+                        {part.paras.map((t) => (
+                          <p key={t.slice(0, 24)}>{t}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </GildedCard>
             </li>
           ))}
@@ -500,8 +590,8 @@ export default async function TarsasagHome() {
             belülről lassúnak tűnik.
           </p>
           <p>
-            A kártyád csak a tiéd: nincs ranglista, nincs összehasonlítás, és egy kihagyott napért semmit sem
-            veszítesz. Az egyetlen mérce a tegnapi önmagad.
+            A kártyád csak a tiéd: senki más nem látja, nincs nyilvános ranglista, és egy kihagyott napért semmit
+            sem veszítesz. Az egyetlen mérce a tegnapi önmagad.
           </p>
         </SectionHeading>
         <GildedCard className="p-8">

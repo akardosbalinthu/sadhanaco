@@ -1,4 +1,6 @@
-# Az Idegrendszeri Iránytű — modell és kérdőív
+# A Ceremónia — modell és kérdőív
+
+(Korábbi munkanév: Idegrendszeri Iránytű. A technikai nevek — `compass_questions`, `submit_compass`, `compass_*` mezők — változatlanok.)
 
 Önismereti eszköz, **nem pszichológiai diagnózis**. Azt mutatja meg, milyen természetes
 hangolásból indul valaki A Társaságban. A rend végleges (CLAUDE.md 7.13); csak a superadmin
@@ -69,6 +71,6 @@ migrációban (`compass_questions`). Szerkeszteni a superadmin tudja.
 
 ## A felületen kötelező szöveg
 
-> Az Iránytű önismereti eszköz, nem pszichológiai vizsgálat vagy diagnózis. Nincs jó vagy rossz
+> A Ceremónia kérdőíve önismereti eszköz, nem pszichológiai vizsgálat vagy diagnózis. Nincs jó vagy rossz
 > eredmény: minden rend egyenrangú, és minden rend mindent gyakorol — csak a kiindulópont más.
 > A rended végleges.
