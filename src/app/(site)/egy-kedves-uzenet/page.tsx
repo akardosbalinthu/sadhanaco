@@ -1,6 +1,7 @@
 import { Check, Heart, Send } from "lucide-react";
+import { KindMessageForm } from "@/components/kind-message-form";
+import { submitGuestMessage } from "./actions";
 import { publicEnv } from "@/lib/env";
-import { notifyHref } from "@/lib/cta";
 import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
 
 export const metadata = {
@@ -28,6 +29,11 @@ export default function KindMessagePage() {
           Az Egy Kedves Üzenetben ezeket a mondatokat egy meglepetés-telefonhívásban adom át annak, akinek
           szólnak. Te megírod — én felhívom, és felolvasom. A vonal másik végén pedig valaki egy hétköznap
           délután megtudja, hogy fontos volt valakinek.
+        </p>
+        <p className="pt-2">
+          <a href="#kuldes" className={buttonPrimary}>
+            Küldök egy üzenetet
+          </a>
         </p>
       </PageHeader>
 
@@ -102,17 +108,15 @@ export default function KindMessagePage() {
 
       <CompassDivider className="my-20" />
 
-      <section className="text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">Az üzenetküldés hamarosan itt nyílik meg</p>
-        <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest">Kinek mondanál ma köszönetet?</h2>
-        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Gondold végig nyugodtan. Ha szeretnéd, szólok, amint megnyílik a beküldés.
+      <section id="kuldes" className="scroll-mt-24">
+        <SectionTitle eyebrow="Küldés" title="Kinek mondanál ma köszönetet?" />
+        <p className="mt-4 max-w-2xl text-ink-soft">
+          Gondold végig nyugodtan, és írd meg úgy, ahogy élőszóban mondanád. A Társaság tagjai elsőbbségi üzenetet a
+          gyakorlótérből küldhetnek.
         </p>
-        <div className="mt-8">
-          <a href={notifyHref("az Egy Kedves Üzenet beküldése")} className={buttonPrimary}>
-            Értesítést kérek
-          </a>
-        </div>
+        <GildedCard className="mt-8 max-w-3xl p-8">
+          <KindMessageForm action={submitGuestMessage} guest termsHref="/aszf#p11" />
+        </GildedCard>
       </section>
     </main>
   );

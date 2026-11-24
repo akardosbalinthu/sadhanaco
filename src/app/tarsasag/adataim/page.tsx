@@ -1,6 +1,7 @@
 import { requireMember } from "@/lib/member";
 import { MemberNav } from "@/components/member-nav";
-import { buttonPrimary, GildedCard } from "@/components/ornaments";
+import { buttonPrimary, buttonSecondary, GildedCard } from "@/components/ornaments";
+import { tp } from "@/lib/site";
 import { saveNames } from "./actions";
 import { NameFields } from "./name-preview";
 
@@ -33,9 +34,24 @@ export default async function MyDetailsPage({ searchParams }: { searchParams: SP
         </form>
       </GildedCard>
 
-      <p className="mt-8 text-sm text-ink-soft">
-        Belépési e-mail-címed: <span className="text-forest">{profile.email}</span>. Ennek módosításához írj nekünk.
-      </p>
+      <section className="mt-12 border-t border-gold/25 pt-8">
+        <h2 className="font-serif text-2xl text-forest">Tagság és belépés</h2>
+        <p className="mt-3 text-sm text-ink-soft">
+          Belépési e-mail-címed: <span className="text-forest">{profile.email}</span>. Ennek módosításához írj nekünk.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <form action={tp("/elofizetes")} method="post">
+            <button className={buttonSecondary}>Előfizetés kezelése</button>
+          </form>
+          <form action={tp("/auth/kijelentkezes")} method="post">
+            <button className={buttonSecondary}>Kijelentkezés</button>
+          </form>
+        </div>
+        <p className="mt-3 text-xs text-ink-soft">
+          Az előfizetés kezelésénél módosíthatod a bankkártyádat, vagy lemondhatod a tagságot (a lemondás a következő
+          számlázási időszaktól él). A számláidat e-mailben kapod meg.
+        </p>
+      </section>
     </main>
   );
 }
