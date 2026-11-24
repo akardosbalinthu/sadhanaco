@@ -3,6 +3,16 @@
 Vercel: csapat `akardosbalint1`, projekt **`akardosbalint`** (`prj_0zrZ01CMABrSU2OGOAcJcOO4Zsnw`),
 függvényrégió `dub1` (Dublin — a Supabase `eu-west-1` mellett).
 
+## 0. Előnézet (ideiglenes)
+
+Amíg a kód nincs a GitHubon, az oldal közvetlen (Git nélküli) Vercel-telepítéssel látható:
+**https://akardosbalint-akardosbalint1.vercel.app** (a Társaság: `/tarsasag`). A `*.vercel.app` címeket a
+Vercel Deployment Protection védi: csak bejelentkezett csapattag látja.
+
+Ehhez ideiglenesen: `NEXT_PUBLIC_SITE_URL=https://akardosbalint-akardosbalint1.vercel.app` és
+`NEXT_PUBLIC_TARSASAG_URL=https://akardosbalint-akardosbalint1.vercel.app/tarsasag` (production).
+**Élesítéskor vissza kell állítani:** `https://akardosbalint.hu` és `https://tarsasag.akardosbalint.hu`.
+
 ## 1. DNS (a domain szolgáltatójánál) — csak hozzáadás, a Zoho MX-rekordokhoz nem nyúlunk
 
 | Típus | Név | Érték |
