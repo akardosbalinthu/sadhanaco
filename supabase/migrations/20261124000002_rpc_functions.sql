@@ -366,12 +366,13 @@ $$;
 
 -- -----------------------------------------------------------------------------
 -- Admin sztornó rögzítése (7.2: csak hibásan kiállított számla javítására).
--- A Számlázz.hu sztornószámlát a 2. fázis hívja meg; ez a helyi nyilvántartás.
+-- A sztornószámlát a számlázó szolgáltató (Billingo) állítja ki a 2. fázisban;
+-- ez a helyi nyilvántartás.
 -- -----------------------------------------------------------------------------
 create or replace function public.admin_record_storno(
   p_invoice_id               uuid,
   p_reason                   text,
-  p_szamlazz_invoice_number  text
+  p_provider_invoice_number  text
 )
 returns public.invoices
 language plpgsql
@@ -402,15 +403,40 @@ begin
 
   insert into public.invoices (
     user_id, product_code, description, amount_huf, currency, country, region,
-    szamlazz_invoice_number, billing_entity, is_storno, storno_of, storno_reason, created_by
+    invoice_provider, provider_invoice_number, billing_entity, is_storno, storno_of, storno_reason, created_by
   ) values (
     v_orig.user_id, v_orig.product_code, 'Sztornó: ' || v_orig.description, -v_orig.amount_huf,
-    v_orig.currency, v_orig.country, v_orig.region, p_szamlazz_invoice_number,
+    v_orig.currency, v_orig.country, v_orig.region, v_orig.invoice_provider, p_provider_invoice_number,
     v_orig.billing_entity, true, v_orig.id, btrim(p_reason), auth.uid()
   )
   returning * into v_row;
 
   return v_row;
+end;
+$$;
+
+-- -----------------------------------------------------------------------------
+-- Adatminimalizálás: a Kedves Üzenet címzettjének telefonszáma legfeljebb
+-- app_settings.phone_retention_days (max. 180) napig tárolódik.
+-- Napi ütemezés: 003_scheduled_jobs.sql (pg_cron). Visszaadja a törölt számok darabszámát.
+-- -----------------------------------------------------------------------------
+create or replace function public.purge_kind_message_phones()
+returns integer
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_days  smallint;
+  v_count integer;
+begin
+  select phone_retention_days into strict v_days from public.app_settings where id;
+  update public.kind_messages
+     set recipient_phone = null, phone_purged_at = now()
+   where recipient_phone is not null
+     and created_at < now() - make_interval(days => v_days);
+  get diagnostics v_count = row_count;
+  return v_count;
 end;
 $$;
 

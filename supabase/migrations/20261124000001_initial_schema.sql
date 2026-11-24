@@ -23,7 +23,8 @@ create type public.subscription_status as enum (
   'none', 'trialing', 'active', 'past_due', 'canceled', 'unpaid',
   'incomplete', 'incomplete_expired', 'paused'
 );
-create type public.user_role as enum ('member', 'admin');
+-- superadmin: mindent, amit az admin, és ő oszthat/vonhat meg admin szerepkört.
+create type public.user_role as enum ('member', 'admin', 'superadmin');
 create type public.revenue_region as enum ('HU', 'EU', 'NON_EU');
 create type public.lesson_kind as enum ('video', 'audio', 'text');
 create type public.post_kind as enum ('normal', 'penteki_kor');
@@ -53,13 +54,16 @@ create table public.app_settings (
   -- 7.2 OSS-határ figyelése
   oss_limit_eur                    numeric(12,2) not null default 10000,
   eur_huf_rate                     numeric(10,4) not null default 400 check (eur_huf_rate > 0),
-  -- Cserélhető számlázási entitás (később Kft.) — soha ne legyen kódba égetve.
+  -- Cserélhető számlázási entitás (később Kft.) és számlázó szolgáltató — soha ne legyen kódba égetve.
   billing_entity                   jsonb not null default jsonb_build_object(
                                      'name', 'Kardos Bálint egyéni vállalkozó',
                                      'tax_mode', 'AAM',
                                      'kata', true,
                                      'b2c_only', true
                                    ),
+  invoice_provider                 text not null default 'billingo' check (invoice_provider in ('billingo', 'szamlazz', 'none')),
+  -- Ezek az e-mail-címek regisztrációkor automatikusan superadmin szerepkört kapnak.
+  superadmin_emails                text[] not null default array['akardosbalint.hu@gmail.com'],
   terms_version                    text not null default '2026-11',
   trial_days                       smallint not null default 7 check (trial_days between 0 and 30),
   -- Események
@@ -76,6 +80,9 @@ create table public.app_settings (
   -- NYITOTT (7.7): Belső Kör éves konzultációs keret nullázása és a maradék sorsa
   consultation_reset_mode          text not null default 'anniversary' check (consultation_reset_mode in ('anniversary', 'calendar_year')),
   consultation_carry_over          boolean not null default false,
+  -- Egy Kedves Üzenet: kereten felüli díj minimuma, címzett telefonszámának megőrzése (max. 180 nap)
+  kind_message_min_huf             integer not null default 1000 check (kind_message_min_huf > 0),
+  phone_retention_days             smallint not null default 180 check (phone_retention_days between 1 and 180),
   updated_at                       timestamptz not null default now()
 );
 insert into public.app_settings (id) values (true);
@@ -87,6 +94,7 @@ create table public.price_catalog (
   amount_huf       integer not null check (amount_huf >= 0),
   tier             public.membership_tier,
   billing_interval public.billing_interval,
+  stripe_product_id text,          -- az ár a Stripe-ban lookup_key = code alapján kereshető
   is_active        boolean not null default true,
   updated_at       timestamptz not null default now()
 );
@@ -155,7 +163,18 @@ set search_path = ''
 as $$
   select exists (
     select 1 from public.profiles p
-    where p.id = (select auth.uid()) and p.role = 'admin'
+    where p.id = (select auth.uid()) and p.role in ('admin', 'superadmin')
+  )
+$$;
+
+create or replace function public.is_superadmin()
+returns boolean
+language sql stable security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1 from public.profiles p
+    where p.id = (select auth.uid()) and p.role = 'superadmin'
   )
 $$;
 
@@ -271,7 +290,9 @@ create table public.invoices (
   currency                  char(3) not null default 'HUF',
   country                   char(2) not null,    -- Stripe számlázási cím
   region                    public.revenue_region not null,
-  szamlazz_invoice_number   text unique,
+  invoice_provider          text not null default 'billingo',  -- cserélhető (billingo / szamlazz)
+  provider_invoice_id       text,                -- a szolgáltató belső azonosítója
+  provider_invoice_number   text,                -- a számla sorszáma
   billing_entity            jsonb not null,      -- a kiállító entitás pillanatképe
   issued_at                 timestamptz not null default now(),
   is_storno                 boolean not null default false,
@@ -282,7 +303,8 @@ create table public.invoices (
   constraint invoices_storno_consistency check (
     (is_storno and storno_of is not null and amount_huf < 0 and storno_reason is not null)
     or (not is_storno and storno_of is null and amount_huf > 0)
-  )
+  ),
+  unique (invoice_provider, provider_invoice_number)
 );
 create index invoices_issued_idx on public.invoices (issued_at);
 create index invoices_user_idx on public.invoices (user_id);
@@ -468,7 +490,8 @@ create table public.kind_messages (
   id               uuid primary key default gen_random_uuid(),
   sender_id        uuid not null references public.profiles (id) on delete cascade,
   recipient_name   text not null check (char_length(recipient_name) between 1 and 120),
-  recipient_phone  text not null check (char_length(recipient_phone) between 6 and 30),
+  recipient_phone  text check (char_length(recipient_phone) between 6 and 30),  -- max. 180 nap után törlődik
+  phone_purged_at  timestamptz,
   message          text not null check (char_length(message) between 1 and 2000),
   is_free          boolean not null,    -- havi díjmentes Elsőbbségi Kedves Üzenet
   amount_huf       integer not null default 0 check (amount_huf >= 0),
@@ -476,7 +499,8 @@ create table public.kind_messages (
   status           public.kind_message_status not null default 'queued',
   created_at       timestamptz not null default now(),
   delivered_at     timestamptz,
-  check ((is_free and amount_huf = 0) or (not is_free and amount_huf > 0))
+  check ((is_free and amount_huf = 0) or (not is_free and amount_huf > 0)),
+  check (recipient_phone is not null or phone_purged_at is not null)
 );
 -- Feldolgozási sorrend: díjmentes elsőbbségi üzenetek, majd összeg szerint csökkenő.
 create index kind_messages_queue_idx on public.kind_messages (status, is_free desc, amount_huf desc, created_at);
@@ -505,11 +529,13 @@ language plpgsql security definer
 set search_path = ''
 as $$
 begin
-  insert into public.profiles (id, email, display_name)
+  insert into public.profiles (id, email, display_name, role)
   values (
     new.id,
     lower(new.email),
-    coalesce(new.raw_user_meta_data ->> 'display_name', split_part(new.email, '@', 1))
+    coalesce(new.raw_user_meta_data ->> 'display_name', split_part(new.email, '@', 1)),
+    case when lower(new.email) = any (select lower(e) from public.app_settings s, unnest(s.superadmin_emails) e)
+         then 'superadmin' else 'member' end::public.user_role
   );
   return new;
 end;
@@ -543,6 +569,10 @@ language plpgsql
 set search_path = ''
 as $$
 begin
+  if current_user in ('authenticated', 'anon') and new.role is distinct from old.role
+     and not public.is_superadmin() then
+    raise exception 'Szerepkört csak superadmin módosíthat.' using errcode = '42501';
+  end if;
   if current_user in ('authenticated', 'anon') and not public.is_admin() then
     if (to_jsonb(new) - array['display_name', 'bio', 'updated_at'])
        is distinct from (to_jsonb(old) - array['display_name', 'bio', 'updated_at']) then
@@ -604,6 +634,28 @@ end;
 $$;
 create trigger invoices_guard before update on public.invoices
   for each row execute function public.guard_invoice_update();
+
+-- Kereten felüli Kedves Üzenet: legalább app_settings.kind_message_min_huf (1 000 Ft).
+create or replace function public.guard_kind_message_amount()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
+declare
+  v_min integer;
+begin
+  if not new.is_free then
+    select kind_message_min_huf into v_min from public.app_settings where id;
+    if new.amount_huf < v_min then
+      raise exception 'A Kedves Üzenet díja legalább % Ft.', v_min
+        using errcode = 'P0001', hint = 'AMOUNT_TOO_LOW';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+create trigger kind_messages_amount before insert or update of amount_huf, is_free on public.kind_messages
+  for each row execute function public.guard_kind_message_amount();
 
 -- -----------------------------------------------------------------------------
 -- 11. Row Level Security — ENABLE + FORCE minden táblán
@@ -831,6 +883,7 @@ grant all on all tables in schema public to service_role;
 revoke execute on all functions in schema public from public, anon, authenticated;
 grant execute on function public.budapest_today() to authenticated;
 grant execute on function public.is_admin() to authenticated;
+grant execute on function public.is_superadmin() to authenticated;
 grant execute on function public.has_member_access() to authenticated;
 grant execute on function public.is_paying_member() to authenticated;
 grant execute on function public.can_access_stage(smallint) to authenticated;
