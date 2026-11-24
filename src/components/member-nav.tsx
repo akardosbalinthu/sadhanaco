@@ -7,6 +7,7 @@ const ITEMS = [
   { href: "/kozosseg", label: "Közösség" },
   { href: "/naplo", label: "Belső Tükör" },
   { href: "/ranglista", label: "Ranglista" },
+  { href: "/adataim", label: "Adataim" },
 ];
 
 export async function MemberNav({ active }: { active: string }) {

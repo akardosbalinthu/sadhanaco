@@ -13,6 +13,8 @@ export type JoinState = { status: "idle" } | { status: "error"; message: string 
 const schema = z.object({
   plan: z.string().refine(isPlanCode),
   email: z.string().trim().toLowerCase().email(),
+  last_name: z.string().trim().min(1).max(60),
+  first_name: z.string().trim().min(1).max(60),
   waiver: z.literal("on"),
   terms: z.literal("on"),
 });
@@ -25,6 +27,8 @@ export async function startCheckout(_prev: JoinState, formData: FormData): Promi
   const parsed = schema.safeParse({
     plan: formData.get("plan"),
     email: formData.get("email"),
+    last_name: formData.get("last_name") ?? "",
+    first_name: formData.get("first_name") ?? "",
     waiver: formData.get("waiver"),
     terms: formData.get("terms"),
   });
@@ -36,7 +40,7 @@ export async function startCheckout(_prev: JoinState, formData: FormData): Promi
         ? "A csatlakozáshoz kérlek, fogadd el az ÁSZF-et és az adatkezelési tájékoztatót."
         : missing("waiver")
         ? "A csatlakozáshoz kérlek, fogadd el az azonnali teljesítésről szóló nyilatkozatot."
-        : "Kérlek, válassz csomagot, és adj meg egy érvényes e-mail-címet.",
+        : "Kérlek, válassz csomagot, add meg a neved és egy érvényes e-mail-címet.",
     };
   }
   if (!onlinePaymentsEnabled()) {
@@ -87,7 +91,7 @@ export async function startCheckout(_prev: JoinState, formData: FormData): Promi
       ...(trialDays > 0 ? { trial_period_days: trialDays } : {}),
       metadata: { plan: planCode },
     },
-    metadata: { kind: "membership", plan: planCode },
+    metadata: { kind: "membership", plan: planCode, last_name: parsed.data.last_name, first_name: parsed.data.first_name },
     success_url: `${base}/csatlakozas/koszonjuk`,
     cancel_url: `${base}/csatlakozas?csomag=${planCode}`,
   });

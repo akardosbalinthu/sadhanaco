@@ -41,6 +41,17 @@ export function JoinForm({ plans, defaultPlan }: { plans: PlanOption[]; defaultP
         ))}
       </fieldset>
 
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="block">
+          <span className="mb-1.5 block text-sm text-ink-soft">Vezetéknév</span>
+          <input name="last_name" required maxLength={60} autoComplete="family-name" className={inputClass} />
+        </label>
+        <label className="block">
+          <span className="mb-1.5 block text-sm text-ink-soft">Keresztnév</span>
+          <input name="first_name" required maxLength={60} autoComplete="given-name" className={inputClass} />
+        </label>
+      </div>
+
       <label className="block">
         <span className="mb-1.5 block text-sm text-ink-soft">E-mail-cím — ezzel fogsz belépni</span>
         <input type="email" name="email" required autoComplete="email" className={inputClass} />

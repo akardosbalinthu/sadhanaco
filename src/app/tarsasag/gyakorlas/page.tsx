@@ -93,6 +93,15 @@ export default async function PracticePage() {
         </p>
       )}
 
+      {(!profile.last_name || !profile.first_name) && (
+        <p className="mt-6 text-sm text-ink-soft">
+          Add meg a neved, hogy a közösségben is tudjuk, kivel beszélgetünk:{" "}
+          <Link href={tp("/adataim")} className="text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
+            Adataim
+          </Link>
+        </p>
+      )}
+
       {!card?.order && (
         <GildedCard className="mt-8 border-gold/50 p-8">
           <Sparkles className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />

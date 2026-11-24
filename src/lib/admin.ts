@@ -32,7 +32,7 @@ export function fmtDate(iso: string | null | undefined) {
 }
 
 export const huf = (n: number | null | undefined) =>
-  n == null ? "—" : `${new Intl.NumberFormat("hu-HU").format(Math.round(n))} Ft`;
+  n == null ? "—" : `${new Intl.NumberFormat("hu-HU", { useGrouping: "always" }).format(Math.round(n))} Ft`;
 
 /** A Budapest és az UTC közti eltérés percben az adott pillanatban. */
 function budapestOffsetMinutes(at: Date) {

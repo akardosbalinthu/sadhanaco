@@ -42,7 +42,8 @@ export const SITE = {
   egyKedvesUzenetUrl: "https://egykedvesuzenet.hu",
 } as const;
 
-const hufFormatter = new Intl.NumberFormat("hu-HU", { maximumFractionDigits: 0 });
+// useGrouping "always": a négyjegyű összegek is tagolva (9 940 Ft), ahogy a nyomtatott árakban.
+const hufFormatter = new Intl.NumberFormat("hu-HU", { maximumFractionDigits: 0, useGrouping: "always" });
 export function formatHuf(amount: number): string {
   return `${hufFormatter.format(amount)} Ft`;
 }

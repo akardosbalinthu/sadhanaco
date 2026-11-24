@@ -40,7 +40,7 @@ const ev = (type: string, object: object) =>
 
 const checkout = (email: string, customer: string, subscription: string) =>
   ev("checkout.session.completed", {
-    id: `cs_${run}_${seq + 1}`, metadata: { kind: "membership", plan: "tarsasagi_havi" },
+    id: `cs_${run}_${seq + 1}`, metadata: { kind: "membership", plan: "tarsasagi_havi", last_name: "Kovács", first_name: "Anna" },
     customer, subscription, customer_details: { email, address: { country: "HU" } },
   });
 
@@ -62,6 +62,7 @@ test("csatlakozás próbaidővel: fiók létrejön, próbaidő indul, üdvözlő
   assert.equal(p.subscription_status, "trialing");
   assert.equal(p.tier, "tarsasagi");
   assert.equal(p.stripe_customer_id, custA);
+  assert.equal(p.display_name, "Kovács Anna", "a csatlakozáskor megadott név");
   assert.deepEqual(calls.welcome, [emailA]);
   const { data: t } = await admin.from("trial_usage").select("card_fingerprint").eq("email_normalized", emailA).single();
   assert.equal(t?.card_fingerprint, "fp_SAME_" + run);
@@ -134,4 +135,11 @@ test("Nyílt Est külsős fizetése: a foglalás megerősítve, tétel rögzítv
   assert.equal(after?.status, "confirmed");
   const { data: inv } = await admin.from("invoices").select("amount_huf, region").eq("stripe_payment_intent_id", `pi_${run}`).single();
   assert.deepEqual(inv, { amount_huf: 4940, region: "EU" });
+});
+
+test("visszatérő tag: a már megadott nevet a csatlakozás nem írja felül", async () => {
+  const p = await profile(emailB);
+  await admin.from("profiles").update({ last_name: "Nagy", first_name: "Béla", nickname: "Béci" }).eq("id", p.id);
+  await processStripeEvent(checkout(emailB, custB, subB), deps);
+  assert.equal((await profile(emailB)).display_name, 'Nagy Béla "Béci"');
 });

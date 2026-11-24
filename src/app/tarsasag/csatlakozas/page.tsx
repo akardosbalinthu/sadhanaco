@@ -30,7 +30,7 @@ export default async function JoinPage({ searchParams }: { searchParams: Promise
     <main className="mx-auto max-w-3xl px-6 py-16">
       <PageHeader eyebrow="Csatlakozás" title="Válaszd ki az utad">
         <p>
-          Néhány lépés, és indulhatsz: kiválasztod a csomagot, megadod az e-mail-címed, a fizetés után pedig
+          Néhány lépés, és indulhatsz: kiválasztod a csomagot, megadod a neved és az e-mail-címed, a fizetés után pedig
           e-mailben megkapod a belépő linket. Az első lépés a Ceremónia lesz.
         </p>
       </PageHeader>

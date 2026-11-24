@@ -1,0 +1,41 @@
+import { requireMember } from "@/lib/member";
+import { MemberNav } from "@/components/member-nav";
+import { buttonPrimary, GildedCard } from "@/components/ornaments";
+import { saveNames } from "./actions";
+import { NameFields } from "./name-preview";
+
+export const metadata = { title: "Adataim · A Társaság", robots: { index: false, follow: false } };
+
+type SP = Promise<Record<string, string | string[] | undefined>>;
+
+export default async function MyDetailsPage({ searchParams }: { searchParams: SP }) {
+  const sp = await searchParams;
+  const { profile } = await requireMember();
+  const hiba = typeof sp.hiba === "string" ? sp.hiba : "";
+
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <MemberNav active="/adataim" />
+      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Adataim</p>
+      <h1 className="mt-3 font-serif text-4xl text-forest">Hogyan szólíthatunk?</h1>
+      <p className="mt-4 max-w-2xl text-ink-soft">
+        A Társaságban a teljes neveddel jelensz meg. Ha van beceneved, amit szívesen hallasz, add meg — a neved után,
+        idézőjelben látszik majd.
+      </p>
+
+      {sp.ok && <p role="status" className="mt-6 rounded-md border border-gold/50 px-4 py-3 text-sm text-forest">Elmentve.</p>}
+      {hiba && <p role="status" className="mt-6 rounded-md border border-alert/40 px-4 py-3 text-sm text-alert">{hiba}</p>}
+
+      <GildedCard className="mt-8 p-7">
+        <form action={saveNames} className="space-y-6">
+          <NameFields last={profile.last_name ?? ""} first={profile.first_name ?? ""} nick={profile.nickname ?? ""} />
+          <button className={buttonPrimary}>Mentés</button>
+        </form>
+      </GildedCard>
+
+      <p className="mt-8 text-sm text-ink-soft">
+        Belépési e-mail-címed: <span className="text-forest">{profile.email}</span>. Ennek módosításához írj nekünk.
+      </p>
+    </main>
+  );
+}

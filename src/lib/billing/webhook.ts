@@ -25,10 +25,23 @@ const iso = (unix: number | null | undefined) => (unix ? new Date(unix * 1000).t
 const idOf = (v: string | { id: string } | null | undefined) => (typeof v === "string" ? v : v?.id ?? null);
 
 /** Megkeresi vagy létrehozza a tagot a Stripe-ban megadott e-mail-cím alapján. */
-export async function ensureUser(admin: Admin, email: string | null | undefined, customerId: string | null) {
+type Names = { last_name?: string | null; first_name?: string | null };
+
+/** A csatlakozáskor megadott nevet csak akkor írjuk be, ha a profilban még nincs név. */
+async function fillMissingNames(admin: Admin, id: string, names?: Names) {
+  const last = names?.last_name?.trim().slice(0, 60);
+  const first = names?.first_name?.trim().slice(0, 60);
+  if (!last || !first) return;
+  await admin.from("profiles").update({ last_name: last, first_name: first }).eq("id", id).is("last_name", null).is("first_name", null);
+}
+
+export async function ensureUser(admin: Admin, email: string | null | undefined, customerId: string | null, names?: Names) {
   if (customerId) {
     const { data } = await admin.from("profiles").select("id, email").eq("stripe_customer_id", customerId).maybeSingle();
-    if (data) return { id: data.id, email: data.email, created: false };
+    if (data) {
+      await fillMissingNames(admin, data.id, names);
+      return { id: data.id, email: data.email, created: false };
+    }
   }
   const normalized = email?.trim().toLowerCase();
   if (!normalized) throw new Error("A Stripe-eseményben nincs e-mail-cím.");
@@ -38,10 +51,15 @@ export async function ensureUser(admin: Admin, email: string | null | undefined,
     if (customerId && !existing.stripe_customer_id) {
       await admin.from("profiles").update({ stripe_customer_id: customerId }).eq("id", existing.id);
     }
+    await fillMissingNames(admin, existing.id, names);
     return { id: existing.id, email: existing.email, created: false };
   }
 
-  const { data: created, error } = await admin.auth.admin.createUser({ email: normalized, email_confirm: true });
+  const { data: created, error } = await admin.auth.admin.createUser({
+    email: normalized,
+    email_confirm: true,
+    user_metadata: { last_name: names?.last_name ?? undefined, first_name: names?.first_name ?? undefined },
+  });
   if (error || !created.user) throw new Error(`A fiók létrehozása nem sikerült: ${error?.message}`);
   if (customerId) {
     await admin.from("profiles").update({ stripe_customer_id: customerId }).eq("id", created.user.id);
@@ -105,7 +123,7 @@ async function onCheckoutCompleted(s: Stripe.Checkout.Session, d: WebhookDeps) {
   const email = (s.customer_details?.email ?? s.customer_email ?? "").toLowerCase();
   const customerId = idOf(s.customer);
   const subscriptionId = idOf(s.subscription);
-  const user = await ensureUser(d.admin, email, customerId);
+  const user = await ensureUser(d.admin, email, customerId, { last_name: s.metadata?.last_name, first_name: s.metadata?.first_name });
 
   await d.admin
     .from("profiles")
