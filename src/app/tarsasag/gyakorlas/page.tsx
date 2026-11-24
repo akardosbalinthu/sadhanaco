@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Check, Circle, Lock, Sparkles } from "lucide-react";
 import { requireMember, ORDER_INFO, TRACK_LABEL, type OrderKey } from "@/lib/member";
-import { SITE, tp } from "@/lib/site";
+import { tp } from "@/lib/site";
 import { MemberNav } from "@/components/member-nav";
 import { OrderCrest } from "@/components/order-crest";
-import { buttonPrimary, CompassDivider, GildedCard, inputClass } from "@/components/ornaments";
-import { requestProgression, toggleCompletion } from "./actions";
+import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, inputClass } from "@/components/ornaments";
+import { onlinePaymentsEnabled } from "@/lib/stripe";
+import { buyAcceleration, requestProgression, toggleCompletion } from "./actions";
 
 export const metadata = { title: "Gyakorlás · A Társaság" };
 export const dynamic = "force-dynamic";
@@ -21,7 +22,8 @@ type Card = {
   milestones: { key: string; label: string }[];
 };
 
-export default async function PracticePage() {
+export default async function PracticePage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const sp = await searchParams;
   const { supabase, profile, hasAccess } = await requireMember();
 
   if (!hasAccess) {
@@ -49,6 +51,11 @@ export default async function PracticePage() {
     supabase.rpc("progression_status"),
   ]);
   const card = cardRaw as unknown as Card;
+  const { data: priceRows } = await supabase
+    .from("price_catalog")
+    .select("code, amount_huf")
+    .in("code", ["gyorsitott_m2_ip2", "gyorsitott_ip3", "gyorsitott_m2_ip3_csomag"]);
+  const prices = Object.fromEntries((priceRows ?? []).map((r) => [r.code, r.amount_huf])) as Record<string, number>;
   const stages = await Promise.all(
     (modules ?? []).map(async (m) => {
       const [{ data: open }, { data: week }] = await Promise.all([
@@ -217,8 +224,10 @@ export default async function PracticePage() {
       {p && !p.all_unlocked && p.target_stage && (
         <>
           <CompassDivider className="my-14" />
-          <section>
+          <section id="tovabblepes" className="scroll-mt-24">
             <p className="text-xs uppercase tracking-[0.2em] text-gold">Továbblépés</p>
+            {typeof sp.ok === "string" && <p role="status" className="mt-4 rounded-md border border-gold/50 px-4 py-3 text-sm text-forest">{sp.ok}</p>}
+            {typeof sp.hiba === "string" && <p role="status" className="mt-4 rounded-md border border-alert/40 px-4 py-3 text-sm text-alert">{sp.hiba}</p>}
             <h2 className="mt-2 font-serif text-2xl text-forest">A következő lépcső</h2>
             <GildedCard className="mt-6 p-7">
               {p.open_request_status ? (
@@ -239,18 +248,85 @@ export default async function PracticePage() {
                   <li>
                     {p.basis ? "✓" : "○"} A rang vagy a gyorsított hozzáférés: {p.points} / {p.points_required} XP
                   </li>
-                  {!p.basis && (
-                    <li className="pt-2 text-xs">
-                      Ha nem várnád meg a rangot, a gyorsított hozzáférésről írj nekem:{" "}
-                      <a href={`mailto:${SITE.email}?subject=${encodeURIComponent("Gyorsított hozzáférés")}`} className="text-forest underline decoration-gold/60 underline-offset-4">{SITE.email}</a>
-                    </li>
-                  )}
                 </ul>
+              )}
+              {!p.basis && !p.open_request_status && (
+                <Acceleration
+                  target={p.target_stage}
+                  required={p.points_required}
+                  prices={prices}
+                  open={onlinePaymentsEnabled() && profile.subscription_status !== "trialing" && profile.tier === "tarsasagi"}
+                  m2Purchased={profile.m2_purchased}
+                  ip3Purchased={profile.ip3_purchased}
+                />
               )}
             </GildedCard>
           </section>
         </>
       )}
     </main>
+  );
+}
+
+const fmtHuf = (n: number | undefined) => (n ? `${new Intl.NumberFormat("hu-HU", { useGrouping: "always" }).format(n)} Ft` : "");
+
+/** Gyorsított hozzáférés: nem kötelező; a rangot váltja ki, a nyitás továbbra is kézi. */
+function Acceleration({
+  target,
+  required,
+  prices,
+  open,
+  m2Purchased,
+  ip3Purchased,
+}: {
+  target: number;
+  required: number;
+  prices: Record<string, number>;
+  open: boolean;
+  m2Purchased: boolean;
+  ip3Purchased: boolean;
+}) {
+  const options =
+    target === 2 && !m2Purchased
+      ? [
+          { code: "gyorsitott_m2_ip2", title: "II. lépcső", text: "Tudatosság tréningnap + IP 2 (8+1 hét)" },
+          ...(!ip3Purchased ? [{ code: "gyorsitott_m2_ip3_csomag", title: "II. és III. lépcső együtt", text: "kedvezményes csomag" }] : []),
+        ]
+      : target === 3 && !ip3Purchased
+      ? [{ code: "gyorsitott_ip3", title: "III. lépcső", text: "IP 3 (8+1 hét)" }]
+      : [];
+  if (options.length === 0) return null;
+  return (
+    <div className="mt-6 border-t border-line pt-5">
+      <p className="text-sm text-forest">Nem várnád meg a rangot?</p>
+      <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+        Nem kötelező: a lépcső {required} XP-nél díjmentesen is elérhetővé válik. A gyorsított hozzáférés a rangot váltja
+        ki — a lépcsőt ettől függetlenül az előző elvégzése és egy rövid, díjmentes beszélgetés után nyitom meg. Ha a
+        tagságod megszűnik, a vásárolt hozzáférés nem marad meg.
+      </p>
+      {open ? (
+        <form action={buyAcceleration} className="mt-4 space-y-3">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {options.map((o, i) => (
+              <label key={o.code} className="flex cursor-pointer gap-3 rounded-md border border-line p-4 transition-colors duration-300 hover:border-gold/60 has-[:checked]:border-gold has-[:checked]:bg-gold-soft/30">
+                <input type="radio" name="code" value={o.code} defaultChecked={i === 0} className="mt-1 accent-forest" />
+                <span>
+                  <span className="block font-serif text-lg text-forest">{o.title}</span>
+                  <span className="block text-xs text-ink-soft">{o.text}</span>
+                  <span className="mt-1 block text-sm text-gold">{fmtHuf(prices[o.code])}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+          <label className="flex items-start gap-3 text-xs text-ink-soft">
+            <input type="checkbox" name="waiver" required className="mt-0.5 accent-forest" />
+            <span>Kérem a szolgáltatás azonnali teljesítését, és tudomásul veszem, hogy ezzel elveszítem a 14 napos elállási jogomat.</span>
+          </label>
+          <button className={buttonSecondary}>Tovább a fizetéshez</button>
+        </form>
+      ) : (
+        <p className="mt-3 text-xs text-ink-soft">Az online vásárlás hamarosan nyílik (próbaidő alatt még nem érhető el).</p>
+      )}
+    </div>
   );
 }

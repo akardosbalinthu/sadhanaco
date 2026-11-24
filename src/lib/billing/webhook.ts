@@ -148,6 +148,27 @@ async function onCheckoutCompleted(s: Stripe.Checkout.Session, d: WebhookDeps) {
     return;
   }
 
+  if (kind === "stage_purchase") {
+    const code = s.metadata?.code;
+    const userId = s.metadata?.user_id;
+    if (s.payment_status !== "paid" || !code || !userId) return;
+    // Idempotens: a jelzők csak bekapcsolódnak (OR), a tétel fizetésenként egyszer rögzül.
+    await rpcOrThrow(d.admin.rpc("membership_stage_purchased", { p_user: userId, p_code: code }), "Gyorsított hozzáférés rögzítése");
+    const pi = idOf(s.payment_intent);
+    const { data: existing } = pi ? await d.admin.from("invoices").select("id").eq("stripe_payment_intent_id", pi).limit(1) : { data: [] };
+    if (!existing?.length) {
+      await recordInvoice(d.admin, {
+        userId,
+        code,
+        amount: hufFromStripe(s.amount_total ?? 0),
+        country: s.customer_details?.address?.country ?? null,
+        stripeInvoiceId: null,
+        paymentIntentId: pi,
+      });
+    }
+    return;
+  }
+
   if (kind === "consultation") {
     if (s.payment_status !== "paid" || !s.metadata?.consultation_id) return;
     const id = s.metadata.consultation_id;

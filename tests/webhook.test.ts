@@ -200,3 +200,16 @@ test("fizetős konzultáció: fizetés után kérésként jelenik meg, egy szám
   const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_c_${run}`);
   assert.deepEqual(invs, [{ amount_huf: 13000, product_code: "konzultacio_belso_kor" }]);
 });
+
+test("gyorsított hozzáférés: a vásárlás rögzül, a lépcső nem nyílik meg magától, egy számlatétel", async () => {
+  const member = await profile(emailA);
+  await admin.from("profiles").update({ tier: "tarsasagi", subscription_status: "active", m2_purchased: false, ip3_purchased: false, m2_unlocked: false }).eq("id", member.id);
+  const session = { id: `cs_st_${run}`, payment_status: "paid", amount_total: 8994000, payment_intent: `pi_st_${run}`,
+    metadata: { kind: "stage_purchase", code: "gyorsitott_m2_ip3_csomag", user_id: member.id }, customer_details: { address: { country: "HU" } } };
+  assert.equal(await processStripeEvent(ev("checkout.session.completed", session), deps), "processed");
+  await processStripeEvent(ev("checkout.session.async_payment_succeeded", session), deps);
+  const p = await profile(emailA);
+  assert.deepEqual({ m2: p.m2_purchased, ip3: p.ip3_purchased, unlocked: p.m2_unlocked }, { m2: true, ip3: true, unlocked: false });
+  const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_st_${run}`);
+  assert.deepEqual(invs, [{ amount_huf: 89940, product_code: "gyorsitott_m2_ip3_csomag" }]);
+});
