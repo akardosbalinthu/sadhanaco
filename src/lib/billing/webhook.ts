@@ -148,6 +148,27 @@ async function onCheckoutCompleted(s: Stripe.Checkout.Session, d: WebhookDeps) {
     return;
   }
 
+  if (kind === "consultation") {
+    if (s.payment_status !== "paid" || !s.metadata?.consultation_id) return;
+    const id = s.metadata.consultation_id;
+    const { data: c } = await d.admin.from("consultations").select("user_id, invoice_id").eq("id", id).maybeSingle();
+    if (!c) throw new Error(`Ismeretlen konzultáció: ${id}`);
+    if (!c.invoice_id) {
+      const { data: p } = await d.admin.from("profiles").select("tier").eq("id", c.user_id).single();
+      const invoiceId = await recordInvoice(d.admin, {
+        userId: c.user_id,
+        code: p?.tier === "belso_kor" ? "konzultacio_belso_kor" : "konzultacio_tarsasagi",
+        amount: hufFromStripe(s.amount_total ?? 0),
+        country: s.customer_details?.address?.country ?? null,
+        stripeInvoiceId: null,
+        paymentIntentId: idOf(s.payment_intent),
+      });
+      if (invoiceId) await d.admin.from("consultations").update({ invoice_id: invoiceId }).eq("id", id);
+    }
+    await rpcOrThrow(d.admin.rpc("confirm_paid_consultation", { p_consultation: id }), "Konzultáció véglegesítése");
+    return;
+  }
+
   if (kind === "kind_message") {
     if (s.payment_status !== "paid" || !s.metadata?.message_id) return;
     const messageId = s.metadata.message_id;

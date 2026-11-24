@@ -1,7 +1,8 @@
 import { requireMember } from "@/lib/member";
 import { MemberNav } from "@/components/member-nav";
 import { buttonPrimary, GildedCard, inputClass } from "@/components/ornaments";
-import { bookFreeConsultation } from "./actions";
+import { onlinePaymentsEnabled } from "@/lib/stripe";
+import { bookFreeConsultation, payConsultation } from "./actions";
 
 export const metadata = { title: "Konzultáció · A Társaság", robots: { index: false, follow: false } };
 
@@ -25,7 +26,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
   const belso = profile.tier === "belso_kor";
   const [{ data: paying }, { data: mine }] = await Promise.all([
     supabase.rpc("is_paying_member"),
-    supabase.from("consultations").select("*").eq("user_id", profile.id).order("created_at", { ascending: false }).limit(10),
+    supabase.from("consultations").select("*").eq("user_id", profile.id).neq("status", "pending_payment").order("created_at", { ascending: false }).limit(10),
   ]);
   const free = paying ? profile.free_consultations_remaining : 0;
   const price = belso ? 13000 : 15000;
@@ -71,7 +72,26 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
               {belso && " (A Belső Kör tagjainak kedvezményes ár)"}.
             </p>
             {belso && profile.billing_interval === "year" && <p>Az idei díjmentes alkalmaidat már felhasználtad; az évfordulón újraindulnak.</p>}
-            <p>Az online foglalás és fizetés hamarosan itt nyílik meg.</p>
+            {onlinePaymentsEnabled() && paying ? (
+              <form action={payConsultation} className="space-y-4 pt-3">
+                <label className="block max-w-xs">
+                  <span className="mb-1.5 block text-sm text-ink-soft">Javasolt időpont (nem kötelező)</span>
+                  <input type="datetime-local" name="requested_for" className={inputClass} />
+                </label>
+                <label className="block">
+                  <span className="mb-1.5 block text-sm text-ink-soft">Miről beszélgetnél? (nem kötelező)</span>
+                  <textarea name="note" rows={4} maxLength={2000} className={inputClass} />
+                </label>
+                <label className="flex items-start gap-3 text-sm text-ink-soft">
+                  <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
+                  <span>Kérem a szolgáltatás azonnali teljesítését, és tudomásul veszem, hogy ezzel elveszítem a 14 napos elállási jogomat.</span>
+                </label>
+                <button className={buttonPrimary}>Foglalok és fizetek ({huf(price)})</button>
+                <p className="text-xs text-ink-soft">A pontos időpontot a fizetés után e-mailben egyeztetjük.</p>
+              </form>
+            ) : (
+              <p>Az online foglalás és fizetés hamarosan itt nyílik meg.</p>
+            )}
           </div>
         )}
       </GildedCard>

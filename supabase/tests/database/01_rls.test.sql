@@ -64,7 +64,7 @@ select is(
                         'submit_kind_message', 'confirm_kind_message', '_award_xp', 'award_external_xp',
                         'xp_on_lesson_completion', 'xp_on_journal_entry', 'xp_on_post', 'xp_on_comment',
                         'xp_on_reaction', 'xp_on_attendance', 'xp_on_kind_message', 'xp_on_progression',
-                        '_period_start', '_leaderboard_scores', 'compose_display_name', '_member_week', '_stage_label', 'create_paid_kind_message', 'confirm_paid_kind_message', 'purge_unpaid_kind_messages')
+                        '_period_start', '_leaderboard_scores', 'compose_display_name', '_member_week', '_stage_label', 'create_paid_kind_message', 'confirm_paid_kind_message', 'purge_unpaid_kind_messages', 'create_paid_consultation', 'confirm_paid_consultation', 'purge_unpaid_consultations')
       and (has_function_privilege('authenticated', p.oid, 'execute')
            or has_function_privilege('anon', p.oid, 'execute'))),
   0, 'belső / szerveroldali függvényekhez a kliens szerepköröknek nincs joga');

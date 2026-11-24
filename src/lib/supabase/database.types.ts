@@ -963,6 +963,24 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"confirm_paid_consultation":
+{ Args: { "p_consultation": string,"p_invoice"?: string }; Returns: {
+              "created_at": string,
+"id": string,
+"invoice_id": string | null,
+"is_free": boolean,
+"note": string | null,
+"price_huf": number,
+"requested_for": string | null,
+"status": Database["public"]['Enums']["consultation_status"],
+"user_id": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "consultations"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "confirm_paid_kind_message":
 { Args: { "p_invoice"?: string,"p_message": string }; Returns: {
               "amount_huf": number,
@@ -1012,6 +1030,24 @@ isOneToOne: false
                           SetofOptions: {
         from: "*"
         to: "event_registrations"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
+"create_paid_consultation":
+{ Args: { "p_note"?: string,"p_requested_for"?: string,"p_user": string }; Returns: {
+              "created_at": string,
+"id": string,
+"invoice_id": string | null,
+"is_free": boolean,
+"note": string | null,
+"price_huf": number,
+"requested_for": string | null,
+"status": Database["public"]['Enums']["consultation_status"],
+"user_id": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "consultations"
         isOneToOne: true
         isSetofReturn: false
       } },
@@ -1263,6 +1299,9 @@ isOneToOne: false
 "purge_kind_message_phones":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
+"purge_unpaid_consultations":
+{ Args: Record<PropertyKey, never>; Returns: number
+                           },
 "purge_unpaid_kind_messages":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
@@ -1405,7 +1444,7 @@ isOneToOne: false
       } }
           }
           Enums: {
-            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok","post_kind": "normal"|"penteki_kor","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
+            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok","post_kind": "normal"|"penteki_kor","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -1525,7 +1564,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok"],"post_kind": ["normal", "penteki_kor"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
+            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok"],"post_kind": ["normal", "penteki_kor"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
           }
         }
 } as const

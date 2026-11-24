@@ -183,3 +183,20 @@ test("tagi foglalás fizetése: a hely véglegessé válik, a tétel kódja szin
   const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_ev_${run}`);
   assert.deepEqual(invs, [{ amount_huf: 6460, product_code: "gyakorlonap_tarsasagi" }]);
 });
+
+test("fizetős konzultáció: fizetés után kérésként jelenik meg, egy számlatétel", async () => {
+  const member = await profile(emailA);
+  await admin.from("profiles").update({ tier: "belso_kor", subscription_status: "active" }).eq("id", member.id);
+  const { data: row, error } = await admin.rpc("create_paid_consultation", { p_user: member.id, p_note: "Téma" });
+  assert.equal(error, null);
+  const session = { id: `cs_c_${run}`, payment_status: "paid", amount_total: 1300000, payment_intent: `pi_c_${run}`,
+    metadata: { kind: "consultation", consultation_id: row!.id }, customer_details: { address: { country: "HU" } } };
+  assert.equal(await processStripeEvent(ev("checkout.session.completed", session), deps), "processed");
+  await processStripeEvent(ev("checkout.session.async_payment_succeeded", session), deps);
+  const { data: c } = await admin.from("consultations").select("status, invoice_id, price_huf").eq("id", row!.id).single();
+  assert.equal(c?.status, "requested");
+  assert.equal(c?.price_huf, 13000);
+  assert.ok(c?.invoice_id);
+  const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_c_${run}`);
+  assert.deepEqual(invs, [{ amount_huf: 13000, product_code: "konzultacio_belso_kor" }]);
+});
