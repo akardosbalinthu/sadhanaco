@@ -61,7 +61,7 @@ const PRINCIPLES = [
   {
     icon: Footprints,
     title: "Gyakorlás, nem teljesítmény",
-    text: "Rövid, rendszeres lépések, büntetés és hajtás nélkül. A nyugodtabb idegrendszer nem verseny.",
+    text: "Rövid, rendszeres lépések, büntetés és hajtás nélkül — a saját tempódban.",
   },
   {
     icon: Users,

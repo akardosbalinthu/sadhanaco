@@ -63,7 +63,8 @@ select is(
                         'accept_hike_invitation', 'guard_destination_option_limit',
                         'submit_kind_message', 'confirm_kind_message', '_award_xp', 'award_external_xp',
                         'xp_on_lesson_completion', 'xp_on_journal_entry', 'xp_on_post', 'xp_on_comment',
-                        'xp_on_reaction', 'xp_on_attendance', 'xp_on_kind_message', 'xp_on_progression')
+                        'xp_on_reaction', 'xp_on_attendance', 'xp_on_kind_message', 'xp_on_progression',
+                        '_period_start', '_leaderboard_scores')
       and (has_function_privilege('authenticated', p.oid, 'execute')
            or has_function_privilege('anon', p.oid, 'execute'))),
   0, 'belső / szerveroldali függvényekhez a kliens szerepköröknek nincs joga');

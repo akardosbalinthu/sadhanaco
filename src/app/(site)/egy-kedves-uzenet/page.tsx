@@ -80,7 +80,7 @@ export default function KindMessagePage() {
               {[
                 "Elsőként kézbesítem, a díjmentes üzenetek előtt",
                 "Kézbesítési garancia: nem állok meg három próbálkozásnál",
-                "Havonta díjmentesen: A Társaság Útján 1, a Belső Körben 3",
+                "Havonta díjmentesen: A Társaság Tagjainak 1, A Belső Kör Tagjainak 3",
                 "A kereten felül is küldhetsz, általad választott összegért (legalább 1 000 Ft) — ezeket az összeg szerint csökkenő sorrendben dolgozom fel",
               ].map((f) => (
                 <li key={f} className="flex gap-2">

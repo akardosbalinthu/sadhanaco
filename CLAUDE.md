@@ -50,7 +50,7 @@ A **Sadhana Idegrendszerfejlesztő Társaság** egy összehangolt ökoszisztéma
   - A Társaság nem egy egyszemélyes színház, ahol Bálint mindent megmond, hanem egy **öntevékeny, kölcsönös megtartó közösség (peer-to-peer ökoszisztéma)**.
   - A tagok nem diagnosztizálják és nem okítják egymást — saját gyakorlati tapasztalataikat, megfigyeléseiket osztják meg (pl. mi segített egy nehezebb esti gyakorlásnál).
   - **UI/UX tervezési törvények (Idegrendszer-barát felület):**
-    - **TILOS** a nyilvános ranglista (leaderboard), a versengést keltő pontrendszer, a villogó jelvények és a tolakodó push/e-mail értesítések.
+    - **TILOS** a villogó jelvények és a tolakodó push/e-mail értesítések. *(A ranglistára vonatkozó korábbi tilalmat a 7.16 felülírja: tagi ranglista van.)*
     - Nyugodt, papírszerű, minimalista dizájn: meleg törtfehér háttér (`#FAF9F6`), mély olajzöld/földszínű akcentusok (`#2D4739`), sötét antracit szöveg (`#1F2421`).
     - A posztoknál a klasszikus „Like” helyett két nyugodt reakciógomb van: **`Köszönöm, hasznos volt`** és **`Hasonlót tapasztaltam`**.
     - A hozzászólók neve mellett diszkréten megjelenik az aktuális gyakorlási fázisuk (`current_stage_label`, pl. `I. Modul · 4. hét` vagy `IP 3 Felkészülő`).
@@ -200,7 +200,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 ### 7.12 A Társaság arculata (2026. november 24.)
 - **A 4 Rend** (egyenrangú kiindulópontok, belépéskor a Ceremónia kérdőíve dönti el): **Tündék** (finom érzékelés és tudatosság), **Kertőrzők** (jelenlét és belső béke), **Törpök** (állhatatosság és belső rend), **Vándorok** (bátorság és fókusz). A „Hobbit” elnevezés nem használható.
 - Gyakorlás = **Küldetések & Napi Hangolások**; haladás = **privát Karakterkártya, XP és rang** (Kereső → Figyelő → Horgonyzó → Csendőrző → Egyensúlyozó…) — csak a tag látja, nincs ranglista.
-- Csomagnevek: **A Társaság Útja** (Társasági Tagság), **A Belső Kör · A Tanács**.
+- Csomagnevek: lásd 7.16 (**A Társaság Tagja**, **A Belső Kör Tagja**).
 - Vizuális nyelv: meleg törtfehér alap, erdőzöld (`#1C2520`), hajszálvékony antik arany (`#C5A059`) díszítés (`src/components/ornaments.tsx`).
 
 ### 7.13 Döntések (2026. november 24., negyedik kör)
@@ -219,6 +219,11 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 ### 7.15 Napi Közlöny (2026. november 24.)
 - A Napi Közlöny **a tag e-mailjeiből és naptárbejegyzéseiből** állítja össze (mesterséges intelligenciával) a személyes napi újságot, hogy telefon nélkül is felkészülhessen a napra. A kommunikációban **nem promotáljuk a kávéfogyasztást**.
+
+### 7.16 Ranglista és csomagnevek (2026. november 24.)
+- **Csomagnevek:** **A Társaság Tagja** (`tier = 'tarsasagi'`) és **A Belső Kör Tagja** (`tier = 'belso_kor'`).
+- **Tagi ranglista:** heti (hétfő–vasárnap), havi és negyedéves, Budapest-idő szerint; mindig **csak az adott időszakban szerzett XP** számít. Csak bejelentkezett, aktív (próbaidős is) tag látja; az **első 10** látszik és a **saját helyed**; megjelenik: név, rend, rang, időszak XP-je. A tag **elrejtheti magát** (`profiles.leaderboard_hidden`) — a saját helyét így is látja. Rendek közti összesítő nincs. Implementáció: 006-os migráció (`leaderboard`, `admin_quarter_top10`).
+- **Negyedéves vacsorameghívás:** a negyedéves ranglista **első tíz helyezettje** kapja, az elrejtett tagokat is beszámítva.
 
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).

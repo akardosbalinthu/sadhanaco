@@ -229,7 +229,7 @@ const PATH = [
         sub: "3–4 nap · évente háromszor",
         paras: [
           "Az út csúcsa: zárt, többnapos elvonulás kis csoportban, szállással és teljes vegán ellátással. Néhány nap kiszakadva a hétköznapokból, hogy mindaz, amit eddig gyakoroltál, egyben, megszakítás nélkül is megmutatkozhasson.",
-          "Csak az IP 3 elvégzése után, Bálinttal egyeztetve lehet jelentkezni; a Társaságon kívül nem elérhető. A Belső Kör tagjainak díjmentes, A Társaság Útján önköltséges áron.",
+          "Csak az IP 3 elvégzése után, Bálinttal egyeztetve lehet jelentkezni; a Társaságon kívül nem elérhető. A Belső Kör Tagjainak díjmentes, A Társaság Tagjainak önköltséges áron.",
         ],
       },
     ],
@@ -244,13 +244,13 @@ const COMMUNITY = [
   { Icon: Mountain, title: "Havi közös túra", text: "Valahol Magyarországon; az úti célt a tagok szavazzák meg. Ingyenes, és barátot is hozhatsz." },
   { Icon: HeartHandshake, title: "Elsőbbségi Kedves Üzenet", text: "Havonta díjmentesen köszönetet küldhetsz valakinek — Bálint telefonon adja át." },
   { Icon: Dices, title: "Havi élő szerepjáték- és társasjáték-est", text: "D&D-kaland vagy egy jó társasjáték: egy este, amikor együtt nevetünk, tervezünk és játszunk — mert a kapcsolódás is idegrendszer-fejlesztés." },
-  { Icon: UtensilsCrossed, title: "Negyedéves vacsorameghívás", text: "Negyedévente a tíz legaktívabb tag személyes vacsorameghívást kap Bálinttól. A listát nem tesszük közzé, és ranglista sincs." },
+  { Icon: UtensilsCrossed, title: "Negyedéves vacsorameghívás", text: "Negyedévente a negyedéves ranglista első tíz helyezettje személyes vacsorameghívást kap Bálinttól — akkor is, ha elrejtette magát a listáról." },
 ];
 
 const TIERS = [
   {
-    name: "A Társaság Útja",
-    subtitle: "Társasági Tagság",
+    name: "A Társaság Tagja",
+    subtitle: "Tagsági szint I.",
     monthly: "tarsasagi_havi",
     yearly: "tarsasagi_eves",
     forWhom: "Neked való, ha most kezdenéd, és a saját tempódban, közösségben szeretnéd megtapasztalni, mit ad a rendszeres gyakorlás.",
@@ -262,7 +262,8 @@ const TIERS = [
       "Havi Q&A felvételek",
       "Havi ingyenes közös túra — vendéget is hozhatsz",
       "Havi élő szerepjáték- (D&D) és társasjáték-est",
-      "Negyedévente vacsorameghívás Bálinttól a tíz legaktívabb tagnak",
+      "Heti, havi és negyedéves ranglista a tagoknak — elrejtheted magad",
+      "Negyedévente vacsorameghívás Bálinttól a ranglista első tíz helyezettjének",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
       "Napi Közlöny PRO díjmentesen, amint elindul",
       "Nyílt Est 3 200 Ft-ért (4 940 Ft helyett), Élő Gyakorlónap 6 460 Ft",
@@ -271,12 +272,12 @@ const TIERS = [
     ],
   },
   {
-    name: "A Belső Kör",
-    subtitle: "A Tanács",
+    name: "A Belső Kör Tagja",
+    subtitle: "Tagsági szint II.",
     monthly: "belso_kor_havi",
     yearly: "belso_kor_eves",
     forWhom: "Neked való, ha végig szeretnél menni az úton, személyes figyelemmel, és minden élő alkalmon díj nélkül ott lennél.",
-    note: "Minden, ami A Társaság Útján, és még:",
+    note: "Minden, ami A Társaság Tagjának jár, és még:",
     features: [
       "A teljes tananyag-ív külön díj nélkül — II. Modul, IP 2 és IP 3 is",
       "Havi élő Q&A, ahol te is kérdezhetsz",
@@ -313,7 +314,8 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
       ["Heti online közös meditáció", "—", "✓ élőben", "✓ élőben"],
       ["Havi élő kérdezz-felelek (Q&A)", "—", "a felvétel visszanézhető; élőben nem vehetsz részt, nem kérdezhetsz", "✓ élő részvétel és kérdezési jog"],
       ["Havi élő szerepjáték- (D&D) és társasjáték-est", "—", "✓", "✓"],
-      ["Negyedéves vacsorameghívás Bálinttól", "—", "✓ a negyedév tíz legaktívabb tagjának", "✓ a negyedév tíz legaktívabb tagjának"],
+      ["Ranglista a tagoknak — heti, havi, negyedéves", "—", "✓ az első 10 és a saját helyed; elrejtheted magad", "✓ az első 10 és a saját helyed; elrejtheted magad"],
+      ["Negyedéves vacsorameghívás Bálinttól", "—", "✓ a negyedéves ranglista első tíz helyezettjének", "✓ a negyedéves ranglista első tíz helyezettjének"],
     ],
   },
   {
@@ -382,11 +384,11 @@ const FAQ = [
   },
   {
     q: "Mi a különbség a két út között?",
-    a: "A Társaság Útján az első lépcső azonnal nyitva van, a továbbiak pedig díjmentesen nyílnak, amikor gyakorlással eléred a hozzájuk tartozó rangot — ha gyorsítanál, külön díjért hamarabb is megnyithatod őket. A Belső Körben a teljes tananyag-ív benne van az árban, élőben kérdezhetsz, és minden élő alkalom — a Szabadság Elvonulás is — díjmentes.",
+    a: "A Társaság Tagjaként az első lépcső azonnal nyitva van, a továbbiak pedig díjmentesen nyílnak, amikor gyakorlással eléred a hozzájuk tartozó rangot — ha gyorsítanál, külön díjért hamarabb is megnyithatod őket. A Belső Körben a teljes tananyag-ív benne van az árban, élőben kérdezhetsz, és minden élő alkalom — a Szabadság Elvonulás is — díjmentes.",
   },
   {
     q: "Hogyan működik a próbaidő?",
-    a: "A havi Társasági Tagságot 7 napig ingyen kipróbálhatod (bankkártya szükséges, és e-mail-címenként egyszer jár). A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Kedves Üzenet és a foglalások az első fizetés után nyílnak meg.",
+    a: "A Társaság Tagja havi tagságot 7 napig ingyen kipróbálhatod (bankkártya szükséges, és e-mail-címenként egyszer jár). A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Kedves Üzenet és a foglalások az első fizetés után nyílnak meg.",
   },
   {
     q: "Lemondhatom bármikor?",
@@ -647,15 +649,17 @@ export default async function TarsasagHome() {
 
       {/* Karakterkártya */}
       <section className="grid items-start gap-10 lg:grid-cols-2">
-        <SectionHeading eyebrow="Az út nyomai" title="Karakterkártya, XP és rang — csak neked.">
+        <SectionHeading eyebrow="Az út nyomai" title="Karakterkártya, XP, rang — és ranglista.">
           <p>
             Minden elvégzett küldetés, meghallgatott tananyag, naplóbejegyzés és közös alkalom tapasztalati pontot
             (XP) ér, és ahogy haladsz, a rangod is fejlődik. Így látod, mennyit építettél — akkor is, amikor
             belülről lassúnak tűnik.
           </p>
           <p>
-            A kártyád csak a tiéd: senki más nem látja, nincs nyilvános ranglista, és egy kihagyott napért semmit
-            sem veszítesz. Az egyetlen mérce a tegnapi önmagad.
+            A tagok között heti, havi és negyedéves ranglista is van. Mindig csak az adott időszakban szerzett XP
+            számít, így minden időszakban mindenki tiszta lappal indul, és a napi felső határ miatt senki sem
+            gyűjthet behozhatatlan előnyt. Ha nem szeretnél szerepelni rajta, egy kattintással elrejtheted magad —
+            a saját helyedet akkor is látod. Egy kihagyott napért pedig semmit sem veszítesz.
           </p>
         </SectionHeading>
         <GildedCard className="p-8">
@@ -793,8 +797,8 @@ export default async function TarsasagHome() {
               <tr className="border-b border-line">
                 <th className="w-[34%] py-2 pr-4 font-normal">Szolgáltatás</th>
                 <th className="w-[18%] py-2 pr-4 font-normal">Külsősöknek</th>
-                <th className="w-[24%] py-2 pr-4 font-normal">A Társaság Útja</th>
-                <th className="w-[24%] py-2 font-normal">A Belső Kör</th>
+                <th className="w-[24%] py-2 pr-4 font-normal">A Társaság Tagja</th>
+                <th className="w-[24%] py-2 font-normal">A Belső Kör Tagja</th>
               </tr>
             </thead>
             {COMPARE.map(({ group, rows }) => (
