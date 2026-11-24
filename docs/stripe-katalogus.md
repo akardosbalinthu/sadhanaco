@@ -27,3 +27,10 @@ Alapítói kupon nincs. A próbaidő nem az áron, hanem a checkout-munkameneten
 
 A díjmentes tételek (Belső Kör: Nyílt Est, Gyakorlónap, Elvonulás) nem mennek át a Stripe-on.
 A fiókban lévő korábbi termékekhez (pl. „Elsőbbségi Kedves Üzenet”, „IMI Tréning”) nem nyúltunk.
+
+## Takarítás (2026-11-24)
+
+A fiók nem Társasági termékei a Stripe-ban nem törölhetők véglegesen (áraik vannak), ezért archiválva lettek:
+IMI Tréning 1. Jelenlét modul, Csoportos Integrációs Program 1, Egyéni IP 1 – Kiegészítő csomag,
+Személyes Kalibráció. Bálint döntése alapján **megmaradt**: Okoskonyha Alaptagság (aktív előfizetők)
+és Elsőbbségi Kedves Üzenet (élő fizetési link). Az archivált termékek a Dashboardon visszaállíthatók.
