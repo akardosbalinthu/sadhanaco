@@ -193,6 +193,10 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Végzettségek (pontos megnevezés):** Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy); Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh). Bemutatkozó mondat: „Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjainak pedig az idegrendszer-fejlesztésben.”
 - **A fő weboldalon saját aloldal** van az Egy Kedves Üzenetnek (`/egy-kedves-uzenet`) és a Napi Közlönynek (`/napi-kozlony`).
 
+### 7.11 Küldetés és közös túra (2026. november 24.)
+- **A Társaság küldetése:** „A Társaság tagjaival azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.” Az idegrendszer-fejlesztés ennek egy része (az alapja); mellette a kedvesség, a figyelmesség, a tudatosság és a segítőkészség.
+- **Havi 1 közös túra** a Társaság tagjaival, Magyarországon. A következő úti célt mindig **a Társaság szavazza meg** (`destination_polls` / `destination_options` / `destination_votes`, `cast_destination_vote`, `admin_close_destination_poll`; eseménytípus: `tura`). A szavazás állása a lezárásig rejtett — csak a saját szavazatodat látod —, hogy ne legyen verseny vagy nyomás. Holtversenynél Bálint dönt.
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

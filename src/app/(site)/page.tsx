@@ -36,7 +36,7 @@ const paths = [
   {
     icon: Leaf,
     title: "A Társaság",
-    text: "Közös gyakorlótér: idegrendszer-fejlesztés, és mellette kedvesség, figyelmesség, tudatosság és segítőkészség.",
+    text: "Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve. Kedvesség, figyelmesség, tudatosság, segítőkészség, és havonta egy közös túra.",
     href: publicEnv.NEXT_PUBLIC_TARSASAG_URL,
     cta: "A Társaságról",
     external: true,
@@ -50,8 +50,8 @@ export default function HomePage() {
         <p className="text-sm tracking-wide text-moss-soft">Jelenlét – Tudatosság – Szabadság</p>
         <h1 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">Kardos Bálint</h1>
         <p className="mt-4 max-w-2xl text-lg text-ink-soft">
-          Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjainak
-          pedig az idegrendszer-fejlesztésben.
+          Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjaival
+          pedig azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
         </p>
         <p className="mt-8 max-w-2xl text-ink-soft">
           A légzésszabályozás, a meditáció és a testre irányuló figyelem klasszikus gyakorlatait a

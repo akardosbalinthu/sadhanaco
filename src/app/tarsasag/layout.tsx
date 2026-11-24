@@ -5,7 +5,7 @@ import { tp } from "@/lib/site";
 export const metadata = {
   title: "A Társaság",
   description:
-    "Közös gyakorlótér Kardos Bálinttal: idegrendszer-fejlesztés, kedvesség, figyelmesség, tudatosság és segítőkészség.",
+    "Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve. Kedvesség, figyelmesség, tudatosság, segítőkészség.",
 };
 
 export default function TarsasagLayout({ children }: { children: React.ReactNode }) {

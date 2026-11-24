@@ -14,6 +14,7 @@ const TIERS = [
     features: [
       "Közösségi tér és napi gyakorlási napló",
       "I. Modul (Jelenlét) + I. Integrációs Program — 8+1 hét, azonnal",
+      "Havi közös túra Magyarországon — az úti célt a Társaság szavazza meg",
       "Heti online közös meditáció, havi Q&A felvételek",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
       "Napi Közlöny PRO a tagság ideje alatt",
@@ -46,10 +47,17 @@ export default async function TarsasagHome() {
         <Leaf className="mb-8 h-6 w-6 text-moss" strokeWidth={1.5} aria-hidden />
         <h1 className="font-serif text-3xl sm:text-4xl">A Társaság</h1>
         <p className="mt-3 text-sm tracking-wide text-moss-soft">Jelenlét – Tudatosság – Szabadság</p>
-        <p className="mt-8 text-ink-soft">
-          Csendes, közös gyakorlótér. Az idegrendszer-fejlesztés mellett négy dologra figyelünk
-          különösen: a kedvességre, a figyelmességre, a tudatosságra és a segítőkészségre — egymás
-          felé és a hétköznapokban is.
+        <p className="mt-8 font-serif text-xl text-ink">
+          Azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
+        </p>
+        <p className="mt-4 text-ink-soft">
+          Ehhez négy dolgot gyakorlunk, egymás felé és a hétköznapokban is: a kedvességet, a
+          figyelmességet, a tudatosságot és a segítőkészséget. Az idegrendszer-fejlesztés ennek az
+          alapja — egy nyugodtabb idegrendszerrel könnyebb jelen lenni és jónak lenni.
+        </p>
+        <p className="mt-4 text-ink-soft">
+          Havonta egyszer közösen túrázunk valahol Magyarországon. A következő úti célt mindig a
+          Társaság szavazza meg.
         </p>
         <p className="mt-4 text-ink-soft">
           Nem tanácsokat osztunk egymásnak, hanem megosztjuk, mit tapasztalunk a légzéssel, a
