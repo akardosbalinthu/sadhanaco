@@ -7,7 +7,7 @@ import { buttonPrimary, buttonSecondary, GildedCard } from "@/components/ornamen
 import { submitCeremony } from "./actions";
 
 type Q = { id: number; prompt: string; options: { key: string; text: string }[] };
-type Info = Record<string, { name: string; single: string; gift: string; motto: string; practice: string }>;
+type Info = Record<string, { name: string; single: string; gift: string; motto: string }>;
 
 const TIEBREAK: Record<string, string> = {
   tundek: "Finomabb érzékelést",
@@ -43,7 +43,6 @@ export function Ceremony({ questions, info, practiceHref }: { questions: Q[]; in
         <h2 className="mt-4 font-serif text-4xl text-forest">{o?.name}</h2>
         <p className="mt-2 text-gold">{o?.gift}</p>
         <p className="mx-auto mt-6 max-w-md font-serif italic text-ink">{o?.motto}</p>
-        <p className="mx-auto mt-4 max-w-md text-sm text-ink-soft">A rended kedvelt gyakorlata: {o?.practice}</p>
         <Link href={practiceHref} className={`${buttonPrimary} mt-8`}>
           Indulhat az első hét
         </Link>

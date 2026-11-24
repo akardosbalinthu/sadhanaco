@@ -64,8 +64,8 @@ const STEPS = [
     text: "Egy 12 kérdéses önismereti kérdőív — a Ceremónia — eldönti, melyik rendbe kerülsz: Tündék, Kertőrzők, Törpök vagy Vándorok.",
   },
   {
-    title: "Napi 10–15 perc",
-    text: "Hetente új rész nyílik: rövid elméleti videók és vezetett gyakorlások. Pipálod, amit elvégeztél, és ha akarod, naplót írsz.",
+    title: "Tréningnap, aztán nyolc hét",
+    text: "Az első lépcső egy tréningnappal indul, utána nyolc hétig reggel és este gyakorolsz, hetente beszámolsz, és egy gyakorlótárs kísér az úton.",
   },
   {
     title: "Közösen haladsz",
@@ -86,7 +86,6 @@ const ORDERS = [
     ],
     strength: "Finomhangolt belső érzékelés és mély empátia. Ahol mások zajt hallanak, te árnyalatokat.",
     path: "Hogy az érzékenység ne árasszon el: határok, földelés, hosszabb kilégzés — érezni, de nem elsodródni.",
-    practice: "Kájánupassaná — a test végigpásztázása",
   },
   {
     name: "Kertőrzők",
@@ -100,7 +99,6 @@ const ORDERS = [
     ],
     strength: "Nyugalmat sugárzó jelenlét. Az idegrendszered biztonságérzete a környezetedre is átragad.",
     path: "Kilépni a megszokottból, amikor a növekedés hív — és nemet mondani, hogy a kert a tiéd maradjon.",
-    practice: "Sama Vritti — az egyenletes, négyütemű légzés",
   },
   {
     name: "Törpök",
@@ -114,7 +112,6 @@ const ORDERS = [
     ],
     strength: "Kitartás és szerkezet. A nehezebb napokon is ott vagy a gyakorlásnál, és ez tart meg.",
     path: "Lazítani a szorításon: a kontroll helyett megengedni, és a pihenést is gyakorlásnak tekinteni.",
-    practice: "Nadi Shodhana — a váltott orrlyukas, rendező légzés",
   },
   {
     name: "Vándorok",
@@ -128,7 +125,6 @@ const ORDERS = [
     ],
     strength: "Mozgósítható energia, jó irányba fordítva: kezdeményezés, fókusz és bátorság a nehéz helyzetekben.",
     path: "Megérkezni: lassítani úgy, hogy a nyugalom ne unalomnak, hanem erőgyűjtésnek tűnjön.",
-    practice: "Anapanaszati — a légzés követése, a figyelem visszavezetése",
   },
 ];
 
@@ -143,7 +139,7 @@ const DAY = [
     Icon: Wind,
     when: "Napközben",
     name: "Napi Küldetés",
-    text: "Egy 10–15 perces vezetett gyakorlás: légzés, figyelem, testérzékelés. Ott, ahol éppen vagy.",
+    text: "Egy elmélyültebb meditáció — az első lépcsőben 15–45 perc, hetente 3–7 alkalommal. Ott, ahol éppen vagy.",
   },
   {
     Icon: BookOpen,
@@ -165,20 +161,21 @@ const PATH = [
     badge: "Belépéskor nyílik",
     parts: [
       {
-        kind: "Modul",
+        kind: "Tréning",
         title: "I. Modul — Jelenlét",
+        sub: "IMI Tréning 1 · egy teljes tréningnap",
         paras: [
-          "Az alapok. Rövid elméleti videókban megérted, mi történik a testedben stressz alatt, hogyan működik a légzés mechanikája, és miért éppen a kilégzés, a vagus ideg és a szívritmus-változékonyság a kulcs a megnyugváshoz.",
-          "Megismered azt a négy klasszikus gyakorlatot, amelyre az egész út épül: az Anapanaszatit (a légzés követése), a Sama Vrittit (egyenletes légzés), a Nadi Shodhanát (váltott orrlyukas légzés) és a Kájánupassanát (a test végigpásztázása).",
+          "Egy teljes nap, amely a jelenlét alapjait rakja le. Megtanulod, hogyan nyithatod újra a tüdőd teljes kapacitását a rekeszizom tudatos használatával, és hogyan kapcsolhatod be másodpercek alatt a nyugalomért felelős paraszimpatikus idegrendszert — például egy nyilvános beszéd vagy egy konfliktus előtt.",
+          "Megismered, hogyan csökkentheted a szenzoros túlterheltséget, és hogyan csendesítheted el a túlgondolásért felelős agyi hálózatot — a mélyebb alvásért és a tisztább jelenlétért. A nap egy megérkezést segítő meditációval indul, és egy rövid, elcsendesedés előtti felkészítő sorral zárul, amelyet otthon is használhatsz.",
         ],
       },
       {
         kind: "Integrációs program",
         title: "I. Integrációs Program — IP 1",
-        sub: "8+1 hét",
+        sub: "8+1 hét · heti beszámolóval",
         paras: [
-          "Itt válik a tudásból képesség. Nyolc héten át hetente nyílik egy új rész, napi 10–15 perces vezetett hanganyagokkal; a gyakorlásaidat pipálással követed, a megfigyeléseidet a naplódba írod.",
-          "A kilencedik hét az összegzésé: visszanézel, mi változott, és mi vált a napjaid természetes részévé. Ez a lépcső a jelenlét alapja — minden későbbi erre épül.",
+          "Itt válik a tréningnap tapasztalata mindennapi képességgé. Nyolc héten át reggel és este gyakorolsz, és hetente 3–7 alkalommal egy 15–45 perces, elmélyültebb meditációt végzel. Minden héten rövid beszámolót adsz, és váltakozó gyakorlótársakkal kísérjük egymást, hogy senki ne maradjon egyedül az úton.",
+          "A +1. alkalom a közös lezárás. Ehhez a vállalt gyakorlások legalább 80%-át kell teljesítened; a lépcsőt személyes áldással zárjuk.",
         ],
       },
     ],
@@ -188,19 +185,21 @@ const PATH = [
     badge: "Beszélgetés után nyílik",
     parts: [
       {
-        kind: "Modul",
+        kind: "Tréning",
         title: "II. Modul — Tudatosság",
+        sub: "IMI Tréning 2 · egy teljes tréningnap",
         paras: [
-          "Ha a jelenlét stabil, a figyelem finomabb szabályozása következik. Megérted, hogyan működik az elkalandozó elme (az agy alapállapoti hálózata), miért ragadunk bele a gondolatainkba, és hogyan lehet a figyelmet szelíden visszavezetni — nem elnyomva, hanem észrevéve.",
+          "Az alapozáson túl ez a nap a szívritmus-változékonyság (HRV) mély stabilizálására, a két agyfélteke összehangolására és az „üss vagy fuss” reakció tudatos leállítására épül — a tartós idegrendszeri áthuzalozásért.",
+          "Megtanulod a légzésfigyelés teljes ívét: a nyugodt, tiszta megfigyeléstől az elemző elmélyülésig, amellyel a belső csend tartósan fenntartható. A nap egy összesen hatvanperces, elmélyült üléssel csúcsosodik ki.",
         ],
       },
       {
         kind: "Integrációs program",
         title: "II. Integrációs Program — IP 2",
-        sub: "8+1 hét",
+        sub: "8+1 hét · heti beszámolóval",
         paras: [
-          "Nyolc hét, amelyben a tudatosság a hétköznapokba költözik: a munkába, a beszélgetésekbe, a nehezebb pillanatokba. A gyakorlás már nemcsak a napi tíz-tizenöt percről szól, hanem arról, hogyan vagy jelen a nap többi részében.",
-          "A kilencedik héten összegzed, mit vittél át a gyakorlásból az életedbe — és beszélgetünk arról, készen állsz-e a következő lépcsőre.",
+          "Fókuszban a belső kritikus elhalkítása és az érzelmi stabilitás. Elméletben megismered az elme működését, szintjeit és állapotait, a jóga nyolc ágát — egy fa példáján —, valamint a hagyomány etikai alapelveit.",
+          "Reggel és este gyakorolsz, hetente 3–7 alkalommal egy 30–60 perces meditációval. A 4. héttől egy együttérzés-gyakorlat is csatlakozik, amelyben a jóindulatot hétről hétre szélesebb körre terjeszted ki: önmagadtól a szeretteiden és a számodra semleges embereken át a nehéz kapcsolataidig, végül minden élőlényig. A +1. alkalom a közös lezárás, személyes áldással.",
         ],
       },
     ],
@@ -212,10 +211,10 @@ const PATH = [
       {
         kind: "Integrációs program",
         title: "III. Integrációs Program — IP 3",
-        sub: "8+1 hét · felkészülés",
+        sub: "8+1 hét · felkészülés az elvonulásra · heti beszámolóval",
         paras: [
-          "A harmadik lépcsőnek nincs külön elméleti modulja: ez egy elmélyítő integrációs program, amelyben az első két lépcső gyakorlatai összeérnek. Megtanulsz önállóan, csendben, hosszabb ideig is gyakorolni.",
-          "Az IP 3 a Szabadság Elvonulás kötelező előfeltétele — úgy készít fel a többnapos, csendes gyakorlásra, hogy ott már ne az alapokkal kelljen foglalkoznod.",
+          "Fókuszban az öt mentális akadály tudatos, elemző szétbontása, és az út a kikezdhetetlen, tiszta jelenlétig — ahhoz a minőséghez, amikor másoknak is biztonságos teret tudsz tartani. Elméletben az elme „mérgeivel”, a háromtest-elmélettel és a filozófia hat nagy kérdésével foglalkozunk.",
+          "Reggel és este gyakorolsz, hetente 3–7 alkalommal egy 45–90 perces meditációval, mellette rövid, elemző és kérdező elmélyülésekkel. A feltétel a II. lépcső elvégzése, a +1. alkalom a közös lezárás, személyes áldással. Az IP 3 a Szabadság Elvonulás előfeltétele.",
         ],
       },
     ],
@@ -225,17 +224,18 @@ const PATH = [
     badge: "Az IP 3 után",
     parts: [
       {
-        kind: "Modul",
-        title: "III. Modul — Szabadság Elvonulás",
-        sub: "3–4 nap · évente háromszor",
+        kind: "Elvonulás",
+        title: "III. Modul — Szabadság",
+        sub: "IMI Tréning 3 · kétnapos elvonulás · évente háromszor",
         paras: [
-          "Az út csúcsa: zárt, többnapos elvonulás kis csoportban, szállással és teljes vegán ellátással. Néhány nap kiszakadva a hétköznapokból, hogy mindaz, amit eddig gyakoroltál, egyben, megszakítás nélkül is megmutatkozhasson.",
-          "Csak az IP 3 elvégzése után, Bálinttal egyeztetve lehet jelentkezni; a Társaságon kívül nem elérhető. A Belső Kör Tagjainak díjmentes, A Társaság Tagjainak önköltséges áron.",
+          "Intenzív, haladó neurobiológiai és szomatikus tréning két napban. A cél a valóság három rétege — a testi, a mentális és a tudati — közötti merev határok feloldása: hogy se a fizikai azonosulásba, se a valóság elől való menekülésbe ne ragadj bele, hanem szabadon mozogj a rétegek között.",
+          "Megismered a jógahagyomány finomenergetikai fogalmait és neurobiológiai megfelelőiket — a sejtszintű energiától a szimpatikus és paraszimpatikus idegrendszeren át az idegfonatokig —, valamint a tudat négy állapotát az ébrenléttől a tiszta megfigyelőig. Csak az IP 3 után, Bálinttal egyeztetve lehet jelentkezni; a Belső Kör Tagjainak díjmentes, A Társaság Tagjainak önköltséges áron.",
         ],
       },
     ],
   },
 ];
+
 
 const RANKS = ["Kereső", "Figyelő", "Horgonyzó", "Csendőrző", "Egyensúlyozó", "Útitárs", "Őrző"];
 
@@ -369,11 +369,11 @@ const FAQ = [
   },
   {
     q: "Mennyi időt kell rászánnom?",
-    a: "Napi 10–15 percet. Ehhez jönnek a választható alkalmak: a heti közös meditáció, a budapesti esték, a havi túra. Semmi sem kötelező — a rendszeresség többet ér, mint a mennyiség.",
+    a: "Az első lépcsőben reggel és este egy-egy rövid gyakorlást, és hetente 3–7 alkalommal egy 15–45 perces, elmélyültebb meditációt. A későbbi lépcsőkben az ülések fokozatosan hosszabbak. Ehhez jönnek a választható alkalmak: a heti közös meditáció, a budapesti esték, a havi túra.",
   },
   {
     q: "Mi történik, ha kihagyok néhány napot?",
-    a: "Semmi baj. Nincs sorozatszámláló, nincs büntetés és nincs levonás: ott folytatod, ahol abbahagytad. A cél a nyugodtabb idegrendszer, nem egy újabb teljesítménykényszer.",
+    a: "Az élet néha közbeszól, és ez rendben van. Nincs sorozatszámláló és nincs pontlevonás. Az integrációs program lezárásához a vállalt gyakorlások nagy részét kell teljesítened (az első lépcsőben legalább 80%-át), így egy-egy kihagyott nap belefér — a heti beszámoló és a gyakorlótársad abban segít, hogy visszatalálj a ritmusodhoz.",
   },
   {
     q: "Ez vallásos vagy spirituális közösség?",
@@ -433,7 +433,7 @@ export default async function TarsasagHome() {
           Kedvesebb hétköznapok.
         </h1>
         <p className="mt-8 font-serif text-xl leading-relaxed text-ink">
-          A Társaság online gyakorlóközösség, ahol napi 10–15 perces, tudományos alapú gyakorlatokkal tanítod
+          A Társaság online gyakorlóközösség, ahol tréningnapokon és nyolchetes integrációs programokban, tudományos alapokon tanítod
           meg az idegrendszeredet megnyugodni — és ahol nem egyedül haladsz.
         </p>
         <p className="mt-5 max-w-2xl text-ink-soft">
@@ -537,7 +537,7 @@ export default async function TarsasagHome() {
         </SectionHeading>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {ORDERS.map(({ name, Crest, gift, motto, signs, strength, path, practice }) => (
+          {ORDERS.map(({ name, Crest, gift, motto, signs, strength, path }) => (
             <GildedCard key={name} className="flex flex-col p-7">
               <div className="flex items-center gap-4">
                 <Crest className="h-16 w-14 shrink-0" />
@@ -564,10 +564,6 @@ export default async function TarsasagHome() {
                 <div>
                   <dt className="text-xs uppercase tracking-[0.18em] text-gold">Amit az úton tanulsz</dt>
                   <dd className="mt-1 text-ink-soft">{path}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-gold">A rend kedvelt gyakorlata</dt>
-                  <dd className="mt-1 text-ink-soft">{practice}</dd>
                 </div>
               </dl>
             </GildedCard>

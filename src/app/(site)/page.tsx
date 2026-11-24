@@ -14,7 +14,7 @@ const PATHS = [
     need: "Rendszeresen gyakorolnál, közösségben",
     icon: Leaf,
     title: "A Társaság",
-    text: "Online gyakorlóközösség napi 10–15 perces, vezetett gyakorlatokkal, élő közös alkalmakkal és havi túrával. Lépésről lépésre tanítod meg az idegrendszeredet megnyugodni.",
+    text: "Online gyakorlóközösség tréningnapokkal, nyolchetes integrációs programokkal, élő közös alkalmakkal és havi túrával. Lépésről lépésre tanítod meg az idegrendszeredet megnyugodni.",
     href: publicEnv.NEXT_PUBLIC_TARSASAG_URL,
     cta: "Megnézem A Társaságot",
     external: true,

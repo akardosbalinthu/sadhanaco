@@ -18,7 +18,7 @@ export default function ThanksPage() {
         <ol className="mt-4 space-y-2 text-sm text-ink-soft">
           <li><span className="text-gold">1.</span> Belépsz az e-mailben kapott linkkel.</li>
           <li><span className="text-gold">2.</span> Részt veszel a Ceremónián, és kiderül, melyik rendbe kerülsz.</li>
-          <li><span className="text-gold">3.</span> Megnyílik az első hét: napi 10–15 perc, a saját tempódban.</li>
+          <li><span className="text-gold">3.</span> Megnyílik az első lépcső: a Jelenlét tréning és az első integrációs program.</li>
         </ol>
         <Link href={tp("/belepes")} className={`${buttonSecondary} mt-8`}>
           Belépés

@@ -225,6 +225,11 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Tagi ranglista:** heti (hétfő–vasárnap), havi és negyedéves, Budapest-idő szerint; mindig **csak az adott időszakban szerzett XP** számít. Csak bejelentkezett, aktív (próbaidős is) tag látja; az **első 10** látszik és a **saját helyed**; megjelenik: név, rend, rang, időszak XP-je. A tag **elrejtheti magát** (`profiles.leaderboard_hidden`) — a saját helyét így is látja. Rendek közti összesítő nincs. Implementáció: 006-os migráció (`leaderboard`, `admin_quarter_top10`).
 - **Negyedéves vacsorameghívás:** a negyedéves ranglista **első tíz helyezettje** kapja, az elrejtett tagokat is beszámítva.
 
+### 7.17 A tananyag pontos szerkezete (2026. november 24.)
+- A szakmai leírás: `docs/tananyag.md` (belső). **A nyilvános felületen konkrét gyakorlatot (gyakorlatnevet) sehol nem említünk** — csak a célt, a működést és a formátumot.
+- **I. lépcső:** IMI Tréning 1 (Jelenlét, egy tréningnap) + IP 1. **II. lépcső:** IMI Tréning 2 (Tudatosság, egy tréningnap) + IP 2. **III. lépcső:** IP 3 (külön tréning nélkül). **IV. lépcső:** IMI Tréning 3 — Szabadság, **kétnapos** elvonulás (a korábbi „3–4 napos” helyett), előfeltétel az IP 3.
+- **Integrációs programok:** 8+1 hét, **heti beszámolóval** és **váltakozó gyakorlótársakkal (accountability partner)**; reggeli-esti gyakorlás + heti 3–7 elmélyültebb ülés (IP 1: 15–45, IP 2: 30–60, IP 3: 45–90 perc). A **+1. alkalom a lezárás** (IP 1: legalább 80%-os teljesítés).
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

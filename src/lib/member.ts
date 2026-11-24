@@ -18,9 +18,9 @@ export async function requireMember() {
 }
 
 export const ORDER_INFO = {
-  tundek: { name: "Tündék", single: "Tünde", gift: "Finom érzékelés és tudatosság", motto: "Ők veszik észre elsőként, ha megváltozik a levegő.", practice: "Kájánupassaná — a test végigpásztázása" },
-  kertorzok: { name: "Kertőrzők", single: "Kertőrző", gift: "Jelenlét és belső béke", motto: "Számukra a világ egy kertben kezdődik: amit gondozol, az megnő.", practice: "Sama Vritti — az egyenletes, négyütemű légzés" },
-  torpok: { name: "Törpök", single: "Törp", gift: "Állhatatosság és belső rend", motto: "Mélyre ásnak, és amit építenek, az megmarad.", practice: "Nadi Shodhana — a váltott orrlyukas, rendező légzés" },
-  vandorok: { name: "Vándorok", single: "Vándor", gift: "Bátorság és fókusz", motto: "Az út az otthonuk; a kihívás kitisztítja őket.", practice: "Anapanaszati — a légzés követése, a figyelem visszavezetése" },
+  tundek: { name: "Tündék", single: "Tünde", gift: "Finom érzékelés és tudatosság", motto: "Ők veszik észre elsőként, ha megváltozik a levegő." },
+  kertorzok: { name: "Kertőrzők", single: "Kertőrző", gift: "Jelenlét és belső béke", motto: "Számukra a világ egy kertben kezdődik: amit gondozol, az megnő." },
+  torpok: { name: "Törpök", single: "Törp", gift: "Állhatatosság és belső rend", motto: "Mélyre ásnak, és amit építenek, az megmarad." },
+  vandorok: { name: "Vándorok", single: "Vándor", gift: "Bátorság és fókusz", motto: "Az út az otthonuk; a kihívás kitisztítja őket." },
 } as const;
 export type OrderKey = keyof typeof ORDER_INFO;
