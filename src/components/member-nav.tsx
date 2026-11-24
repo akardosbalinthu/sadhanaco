@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 
 const ITEMS = [
   { href: "/gyakorlas", label: "Gyakorlás" },
+  { href: "/kozosseg", label: "Közösség" },
   { href: "/naplo", label: "Belső Tükör" },
   { href: "/ranglista", label: "Ranglista" },
 ];

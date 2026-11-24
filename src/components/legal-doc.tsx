@@ -42,7 +42,7 @@ export function LegalDoc({
               <span className="mr-2 text-gold">{i + 1}.</span>
               {s.title}
             </h2>
-            <div className="legal mt-4 space-y-3 text-[15px] leading-relaxed text-ink [&_li]:ml-5 [&_li]:list-disc [&_li]:pl-1 [&_strong]:font-medium [&_strong]:text-forest [&_ul]:space-y-1.5 [&_a]:text-forest [&_a]:underline [&_a]:decoration-gold/60 [&_a]:underline-offset-4 hover:[&_a]:text-gold">
+            <div className="legal mt-4 space-y-3 text-[15px] leading-relaxed text-ink [&_li]:ml-5 [&_li]:list-disc [&_li]:pl-1 [&_strong]:font-medium [&_strong]:text-forest [&_ul]:space-y-1.5 [&_a]:text-forest [&_a]:underline [&_a]:decoration-gold/60 [&_a]:underline-offset-4 [&_a:hover]:text-gold">
               {s.body}
             </div>
           </section>
