@@ -4,7 +4,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { formatHuf, tp } from "@/lib/site";
 import {
   CompassDivider,
-  CrestHobbitok,
+  CrestKertorzok,
   CrestTorpok,
   CrestTundek,
   CrestVandorok,
@@ -21,8 +21,8 @@ const ORDERS = [
     focus: "Észrevenni a test halk jelzéseit, mielőtt hangossá válnak.",
   },
   {
-    name: "Hobbitok",
-    Crest: CrestHobbitok,
+    name: "Kertőrzők",
+    Crest: CrestKertorzok,
     gift: "Jelenlét és belső béke",
     focus: "Otthon lenni a mostban — egy lassabb kilégzés, egy csendesebb reggel.",
   },

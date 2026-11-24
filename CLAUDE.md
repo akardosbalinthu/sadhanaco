@@ -197,6 +197,12 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **A Társaság küldetése:** „A Társaság tagjaival azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.” Az idegrendszer-fejlesztés ennek egy része (az alapja); mellette a kedvesség, a figyelmesség, a tudatosság és a segítőkészség.
 - **Havi 1 közös túra** a Társaság tagjaival, Magyarországon. **Hónaponként egy szavazás**: Bálint **5–10 úti célt** ír ki, a tagok választanak. A túra **a tagoknak ingyenes**; Társaságon kívüliek **csak meghívóval** jöhetnek, és **nekik is ingyenes** (meghívót aktív tag küldhet, túránként legfeljebb `app_settings.hike_guest_invites_per_member` = 2 vendéget; `invite_hike_guest`, `accept_hike_invitation`). A túra nyilvánosan nem foglalható, díj nem állítható be rá. A következő úti célt mindig **a Társaság szavazza meg** (`destination_polls` / `destination_options` / `destination_votes`, `cast_destination_vote`, `admin_close_destination_poll`; eseménytípus: `tura`). A szavazás állása a lezárásig rejtett — csak a saját szavazatodat látod —, hogy ne legyen verseny vagy nyomás. Holtversenynél Bálint dönt.
 
+### 7.12 A Társaság arculata (2026. november 24.)
+- **A 4 Rend** (egyenrangú kiindulópontok, belépéskor önismereti iránytű segít választani): **Tündék** (finom érzékelés és tudatosság), **Kertőrzők** (jelenlét és belső béke), **Törpök** (állhatatosság és belső rend), **Vándorok** (bátorság és fókusz). A „Hobbit” elnevezés nem használható.
+- Gyakorlás = **Küldetések & Napi Hangolások**; haladás = **privát Karakterkártya, XP és rang** (Kereső → Figyelő → Horgonyzó → Csendőrző → Egyensúlyozó…) — csak a tag látja, nincs ranglista.
+- Csomagnevek: **A Társaság Útja** (Társasági Tagság), **A Belső Kör · A Tanács**.
+- Vizuális nyelv: meleg törtfehér alap, erdőzöld (`#1C2520`), hajszálvékony antik arany (`#C5A059`) díszítés (`src/components/ornaments.tsx`).
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

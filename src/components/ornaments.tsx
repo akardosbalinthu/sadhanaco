@@ -73,8 +73,8 @@ export function CrestTundek({ className }: SvgProps) {
   );
 }
 
-/** Hobbitok — jelenlét és belső béke: makk, a nyugalom magja. */
-export function CrestHobbitok({ className }: SvgProps) {
+/** Kertőrzők — jelenlét és belső béke: makk, a türelmesen gondozott növekedés magja. */
+export function CrestKertorzok({ className }: SvgProps) {
   return (
     <Shield className={className}>
       <path d="M17 25h14c0-3.5-3-6-7-6s-7 2.5-7 6Z" />
