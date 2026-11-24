@@ -653,8 +653,10 @@ create policy app_settings_admin_update on public.app_settings
   for update to authenticated using (public.is_admin()) with check (public.is_admin());
 
 -- price_catalog: nyilvános árlista (anon is), csak admin írja.
+create policy price_catalog_select_anon on public.price_catalog
+  for select to anon using (is_active);
 create policy price_catalog_select on public.price_catalog
-  for select to anon, authenticated using (is_active or public.is_admin());
+  for select to authenticated using (is_active or public.is_admin());
 create policy price_catalog_admin_all on public.price_catalog
   for all to authenticated using (public.is_admin()) with check (public.is_admin());
 
