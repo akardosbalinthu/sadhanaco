@@ -46,8 +46,10 @@ export default function KindMessagePage() {
           <h2 className="mt-4 font-serif text-xl text-forest">Elsőbbségi Kedves Üzenet — A Társaság tagjainak</h2>
           <p className="mt-2 max-w-2xl text-sm text-ink-soft">
             A Társaság tagjai havonta Elsőbbségi Kedves Üzenetet küldhetnek (A Társaság Útja: havi 1, a
-            Belső Kör: havi 3). Ezeket kézbesítem elsőként, és kézbesítési garanciát vállalok rájuk: nem
-            állok meg három próbálkozás után, amíg az üzenet célba nem ér.
+            Belső Kör: havi 3), a kereten felül pedig további elsőbbségi üzeneteket, általuk választott
+            összegért (legalább 1 000 Ft; ezeket az összeg szerint csökkenő sorrendben dolgozom fel). Az
+            elsőbbségi üzeneteket kézbesítem elsőként, és kézbesítési garanciát vállalok rájuk: nem állok
+            meg három próbálkozás után, amíg az üzenet célba nem ér.
           </p>
           <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`mt-4 inline-block ${linkClass}`}>
             A Társaságról
