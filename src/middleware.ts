@@ -1,9 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
+import { tarsasagBasePath } from "@/lib/site";
 
 const TARSASAG_HOST_PREFIX = "tarsasag.";
-/** Élesben "" (aldomain), helyben "/tarsasag". */
-const BASE = process.env.NEXT_PUBLIC_TARSASAG_BASE_PATH ?? "/tarsasag";
+/** Élesben "" (aldomain), helyben "/tarsasag" — a NEXT_PUBLIC_TARSASAG_URL-ből. */
+const BASE = tarsasagBasePath();
 
 export async function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";

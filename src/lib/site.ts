@@ -6,8 +6,14 @@
  * Helyi fejlesztésben a Társaság a http://localhost:3000/tarsasag címen érhető el.
  */
 
-/** A Társaság linkjeinek előtagja: helyben "/tarsasag", élesben (aldomain) "". */
-export const TARSASAG_BASE = process.env.NEXT_PUBLIC_TARSASAG_BASE_PATH ?? "/tarsasag";
+/**
+ * A Társaság linkjeinek előtagja, a NEXT_PUBLIC_TARSASAG_URL útvonalából:
+ * helyben http://localhost:3000/tarsasag -> "/tarsasag", élesben https://tarsasag.akardosbalint.hu -> "".
+ */
+export function tarsasagBasePath(url = process.env.NEXT_PUBLIC_TARSASAG_URL ?? "http://localhost:3000/tarsasag") {
+  return new URL(url).pathname.replace(/\/$/, "");
+}
+export const TARSASAG_BASE = tarsasagBasePath();
 
 /** Társasági útvonal a böngészőnek (link, redirect). */
 export function tp(path: string = "/"): string {
