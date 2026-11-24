@@ -44,7 +44,7 @@ const PATHS = [
     need: "Telefon nélkül kezdenéd a napot",
     icon: Newspaper,
     title: "Napi Közlöny",
-    text: "Reggeli, kinyomtatott újság, amely kiváltja a hajnali görgetést. Fejlesztés alatt.",
+    text: "Személyes reggeli újság a leveleidből és a naptáradból, kinyomtatva — hogy telefon nélkül is felkészülhess a napra. Fejlesztés alatt.",
     href: "/napi-kozlony",
     cta: "Bővebben",
     external: false,

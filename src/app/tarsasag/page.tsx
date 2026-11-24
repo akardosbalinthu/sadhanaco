@@ -136,7 +136,7 @@ const DAY = [
     Icon: Newspaper,
     when: "Reggel",
     name: "Analóg Reggel",
-    text: "A nap a kinyomtatott Napi Közlönnyel indul, nem a telefonnal — utána egy rövid reggeli meditációs rituálé.",
+    text: "A nap a kinyomtatott Napi Közlönnyel indul — a leveleidből és a naptáradból összeállított napi lappal —, nem a telefonnal. Utána egy rövid reggeli meditációs rituálé.",
   },
   {
     Icon: Wind,

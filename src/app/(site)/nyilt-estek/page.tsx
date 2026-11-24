@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Coffee, MapPin, Shirt, Ticket, Users } from "lucide-react";
+import { MapPin, Shirt, Sprout, Ticket, Users } from "lucide-react";
 import { publicEnv } from "@/lib/env";
 import { createPublicClient } from "@/lib/supabase/public";
 import { formatEventDate, formatHuf, formatTime } from "@/lib/site";
@@ -14,7 +14,7 @@ const FLOW = [
 
 const GOOD_TO_KNOW = [
   { Icon: Users, title: "Kis csoport", text: "Legfeljebb 15 fő, hogy mindenkire jusson figyelem. A helyek fele mindig külsősöknek marad." },
-  { Icon: Coffee, title: "Nem kell tapasztalat", text: "Ha még sosem meditáltál, pont jó helyen vagy. Ha már gyakorolsz, elmélyítheted." },
+  { Icon: Sprout, title: "Nem kell tapasztalat", text: "Ha még sosem meditáltál, pont jó helyen vagy. Ha már gyakorolsz, elmélyítheted." },
   { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni." },
   { Icon: Ticket, title: "Részvételi díj: 4 940 Ft", text: "Online, előre fizetve. A Társaság tagjainak kedvezményes, a Belső Körnek díjmentes." },
 ];

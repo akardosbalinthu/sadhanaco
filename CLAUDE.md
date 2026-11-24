@@ -217,6 +217,9 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **A tananyag bemutatása:** a felületen lépcsőnként külön szerepel a **modul** (elmélet és gyakorlatok) és a hozzá tartozó **integrációs program** (8+1 hét, a gyakorlás beépítése a hétköznapokba); az IP 3-nak nincs külön modulja.
 - **Új tagsági előnyök (mindkét szinten):** **havi élő szerepjáték- (D&D) és társasjáték-est**; **negyedévente a tíz legaktívabb tag vacsorameghívást kap Bálinttól** (a kiválasztás alapja a privát XP; a lista nem nyilvános, ranglista nincs).
 
+### 7.15 Napi Közlöny (2026. november 24.)
+- A Napi Közlöny **a tag e-mailjeiből és naptárbejegyzéseiből** állítja össze (mesterséges intelligenciával) a személyes napi újságot, hogy telefon nélkül is felkészülhessen a napra. A kommunikációban **nem promotáljuk a kávéfogyasztást**.
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).
