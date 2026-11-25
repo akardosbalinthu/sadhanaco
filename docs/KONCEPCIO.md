@@ -117,3 +117,13 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 - **Fizetés:** egyelőre nincs a rendszerben. Mindig egyedileg beszéljük meg; a résztvevőt az admin kézzel aktiválja.
 - **Nyílt Est:** 4 940 Ft mindenkinek; a program résztvevőinek díjmentes (a 2026. decemberi est adomány alapú).
 - **Egészségügyi adatok:** a felmérés előtt kötelező, külön, kifejezett hozzájárulás (GDPR 9. cikk), időbélyeggel tárolva; az adatkezelési tájékoztató kiegészítése Bálint jóváhagyásával, ügyvédi átnézés javasolt.
+
+## 9. Megvalósítás állapota (2026. november 25.)
+
+Elkészült a fejlesztői ágon (élesítés és az éles adatbázis-migráció Bálint jóváhagyására vár):
+
+- **Adatbázis:** `20261125180000_program.sql` — `applications`, `consultation_slots`, `program_enrollments`, `program_sessions`, `weekly_reports`; `submit_application`, `application_booking_info`, `book_consultation_slot`, `my_program`, `submit_weekly_report`, `is_program_participant`; a régi tagsági jogosultságok kiegészítve a résztvevőkkel; Nyílt Est díjmentes a résztvevőknek; automatikus adattörlés (180 nap / a program vége + 1 év); `registration_open = false`. Teszt: `20_program.test.sql`.
+- **Nyilvános oldal:** új főoldal, `/jelentkezes` (felmérés), `/jelentkezes/idopont` (foglalás, Google Naptár-link, .ics), Rólam, Nyílt Est és Egy Kedves Üzenet frissítve; a Napi Közlöny és a túrameghívó oldala megszűnt (átirányítás).
+- **Résztvevői felület** (`tarsasag.akardosbalint.hu`): Programom, Gyakorlás, Heti beszámoló, Napló, Adataim; a régi Társaság-oldalak a Programomra irányítanak.
+- **Admin:** Jelentkezések, Időpontok, Résztvevők (felvétel, alkalmak menetrendje, gyakorlási terv, beszámolók megválaszolása).
+- **Nyitott:** az ÁSZF és az adatkezelési tájékoztató Társaság- és Napi Közlöny-részei (csak jóváhagyással); az aldomain neve (`tarsasag.`) később cserélhető.
