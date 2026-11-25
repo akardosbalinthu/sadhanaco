@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   BookOpen,
@@ -16,7 +17,7 @@ import {
 } from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
 import { publicEnv } from "@/lib/env";
-import { Sprout, WindingPath } from "@/components/illustrations";
+import { WindingPath } from "@/components/illustrations";
 import { formatHuf, tp } from "@/lib/site";
 import { notifyHref } from "@/lib/cta";
 import { onlinePaymentsEnabled } from "@/lib/stripe";
@@ -731,7 +732,14 @@ export default async function TarsasagHome() {
       <section className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <div>
           <SectionHeading eyebrow="Aki az utat vezeti" title="Kardos Bálint" />
-          <Sprout className="mt-8 hidden h-28 w-28 lg:block" />
+          <Image
+            src="/images/rolam/portre.webp"
+            alt="Kardos Bálint portréja"
+            width={500}
+            height={499}
+            sizes="200px"
+            className="mt-8 h-44 w-44 rounded-full border border-gold/40 bg-white object-cover"
+          />
         </div>
         <GildedCard className="p-8">
           <p className="font-serif text-lg text-ink">

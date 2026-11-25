@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { publicEnv } from "@/lib/env";
 import { buttonPrimary, buttonSecondary, CompassDivider, CrestMagusok, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
-import { DawnLandscape, KindCall, MorningPaper, Sprout, WindingPath } from "@/components/illustrations";
+import { KindCall, MorningPaper, Sprout, WindingPath } from "@/components/illustrations";
 
 export const metadata = {
   title: "Rólam · Kardos Bálint",
@@ -10,7 +11,14 @@ export const metadata = {
     "A kukoricaföldtől a multinacionális irodán és a nagykonyhán át Rishikeshig — és hogyan ér össze mindez A Társaságban.",
 };
 
-type Station = { when: string; title: string; paras: string[]; Art?: (p: { className?: string }) => React.ReactElement };
+type Photo = { src: string; alt: string; caption: string; width: number; height: number };
+type Station = {
+  when: string;
+  title: string;
+  paras: string[];
+  Art?: (p: { className?: string }) => React.ReactElement;
+  photos?: Photo[];
+};
 
 const STATIONS: Station[] = [
   {
@@ -61,6 +69,7 @@ const STATIONS: Station[] = [
       "A huszonegyedik születésnapom körül megfogalmazódott bennem egy kérdés: most akkor még kétszer annyi ideig, ahány éves vagyok, ezt kell csinálnom? Évente kétszer elmehetek egy rövid pihenésre, és ennyi? Szerettem volna azt hinni, hogy az élet ennél több.",
       "Tanulni kezdtem — webfejlesztést, keresőoptimalizálást, közösségimédia-marketinget, projektmenedzsmentet —, pár év múlva pedig kiléptem, és szabadúszó online marketing- és projektmenedzserként dolgoztam tovább. Csapatokat vezettem, izgalmas projekteken, szinte bárhonnan dolgozhattam. Elértem az akkori álmomat.",
     ],
+    photos: [{ src: "/images/rolam/eloadas.webp", alt: "Kardos Bálint előadást tart egy teremnyi hallgatóságnak", caption: "Előadás közben, a marketinges évek alatt", width: 1000, height: 1244 }],
   },
   {
     when: "A járvány évei",
@@ -74,8 +83,12 @@ const STATIONS: Station[] = [
     when: "Utána",
     title: "Vacsoraestek egy tetőteraszon, aztán a nagykonyha",
     paras: [
-      "Egy barátommal kibéreltünk egy elképesztően szép belvárosi tetőlakást, harminc négyzetméteres terasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
+      "Egy barátommal kibéreltünk egy elképesztően szép belvárosi tetőlakást, harminc négyzetméteres terasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek: összesen több mint 11,5 millió forint gyűlt össze kórházban fekvő gyerekek foglalkozásaira. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
       "Otthagytam a jól fizető marketingprojekteket, és elmentem szakácsnak. Kevesebb pénz, több és keményebb munka, alig szabadidő — mégis boldogabb voltam, mint addig bármikor. Végigjártam a konyhai ranglétrát a mosogatótól a konyhafőnökig. Néhány év után viszont azt éreztem: többre vagyok képes.",
+    ],
+    photos: [
+      { src: "/images/rolam/jotekonysag.webp", alt: "Kardos Bálint egy oklevéllel, amely a jótékonysági vacsorákon összegyűlt adományt igazolja", caption: "A jótékonysági vacsorák eredménye: több mint 11,5 millió forint a gyerekeknek", width: 1000, height: 1333 },
+      { src: "/images/rolam/konyha.webp", alt: "Kardos Bálint szakácsként tálal egy étteremben", caption: "A nagykonyhán", width: 1000, height: 1333 },
     ],
   },
   {
@@ -165,7 +178,15 @@ export default function AboutPage() {
           </p>
           <p>A Társaság az a hely, ahol mindez összeér. Ez az oldal arról szól, hogyan jutottam idáig.</p>
         </PageHeader>
-        <DawnLandscape className="mx-auto hidden w-full max-w-sm lg:block" />
+        <Image
+          src="/images/rolam/portre.webp"
+          alt="Kardos Bálint portréja"
+          width={500}
+          height={499}
+          priority
+          sizes="(min-width: 1024px) 360px, 70vw"
+          className="mx-auto w-full max-w-xs rounded-full border border-gold/40 bg-white lg:max-w-sm"
+        />
       </div>
 
       <CompassDivider className="my-16" />
@@ -176,7 +197,7 @@ export default function AboutPage() {
           Az utam
         </h2>
         <ol className="relative mt-12 max-w-3xl border-l border-gold/35 pl-8 sm:pl-10">
-          {STATIONS.map(({ when, title, paras, Art }) => (
+          {STATIONS.map(({ when, title, paras, Art, photos }) => (
             <li key={title} className="relative pb-14 last:pb-0">
               <span className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rotate-45 border border-gold bg-paper sm:-left-[45px]" aria-hidden />
               <p className="text-xs uppercase tracking-[0.18em] text-gold">{when}</p>
@@ -189,6 +210,23 @@ export default function AboutPage() {
                   <p key={p.slice(0, 32)}>{p}</p>
                 ))}
               </div>
+              {photos && (
+                <div className={`mt-6 grid gap-4 ${photos.length > 1 ? "grid-cols-2" : "max-w-sm"}`}>
+                  {photos.map((ph) => (
+                    <figure key={ph.src}>
+                      <Image
+                        src={ph.src}
+                        alt={ph.alt}
+                        width={ph.width}
+                        height={ph.height}
+                        sizes="(min-width: 768px) 360px, 45vw"
+                        className="aspect-[4/5] w-full rounded-lg border border-line object-cover"
+                      />
+                      <figcaption className="mt-2 text-xs text-ink-soft">{ph.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              )}
             </li>
           ))}
         </ol>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { publicEnv } from "@/lib/env";
@@ -112,7 +113,16 @@ export default function HomePage() {
         <DawnLandscape className="mx-auto w-full max-w-md opacity-90 lg:max-w-none" />
       </section>
 
-      <section className="max-w-2xl">
+      <section className="grid max-w-3xl items-start gap-8 sm:grid-cols-[auto_1fr]">
+        <Image
+          src="/images/rolam/portre.webp"
+          alt="Kardos Bálint portréja"
+          width={500}
+          height={499}
+          sizes="128px"
+          className="h-28 w-28 rounded-full border border-gold/40 bg-white object-cover sm:h-32 sm:w-32"
+        />
+        <div>
         <p className="font-serif text-xl leading-relaxed text-ink">
           Kardos Bálint vagyok. Kedves üzeneteket kézbesítek, segítek telefon nélkül kezdeni a napot, A Társaság
           tagjaival pedig azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
@@ -126,6 +136,7 @@ export default function HomePage() {
         <Link href="/rolam" className="mt-5 inline-flex items-center gap-1.5 text-forest underline decoration-gold/50 underline-offset-4 transition-colors duration-500 hover:decoration-gold">
           Az én történetem <ArrowRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
         </Link>
+        </div>
       </section>
 
       <CompassDivider className="my-20" />
