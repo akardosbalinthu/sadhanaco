@@ -1,6 +1,6 @@
 # Koncepció: egyéni idegrendszer-fejlesztő program
 
-> Rögzítve: 2026. november 25. Ez a dokumentum felülírja a CLAUDE.md-ben a Társaságra (tagság, szintek, közösség, XP, rendek, túra) vonatkozó üzleti döntéseket, valamint a `docs/ARCULAT.md`-t, amint az új arculati alap (5. pont) jóváhagyásra kerül.
+> Rögzítve: 2026. november 25. Ez a dokumentum felülírja a CLAUDE.md-ben a Társaságra (tagság, szintek, közösség, XP, rendek, túra) vonatkozó üzleti döntéseket, valamint a `docs/ARCULAT.md`-t, amint az új arculati alap (6. pont) jóváhagyásra kerül.
 
 ## 1. A szolgáltatás
 
@@ -53,22 +53,33 @@
   - Napi Közlöny.
 - Az adatbázisban a régi táblák maradhatnak, a felületről kikerülnek.
 
-## 5. Új arculati alap — JAVASLAT, jóváhagyásra vár
+## 5. A módszertan — Bálint egyedi módszere (JAVASLAT, jóváhagyásra vár)
 
-- **A fő üzenet:** egyéni vezetés egy szabályozottabb, nyugodtabb idegrendszer felé, a saját életedre szabva.
+A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a belső munka teljes ívét adja (értékek, test, légzés, figyelem, meditáció), az életmód-orvostan hat pillére pedig a hétköznapi élet mérhető alapjait. Az egyik a belső, a másik a külső oldal — együtt az egész embert fogják át, nem egy tünetet.
+
+| A jóga nyolc ága (magyarul, nyilvánosan így) | Az életmód-orvostan pillére, amelyhez kapcsolódik |
+|---|---|
+| Bánásmód másokkal (jama) | Társas kapcsolódás |
+| Bánásmód önmagunkkal: önfegyelem, mértékletesség, önápolás (nijama) | Táplálkozás; kockázatos szerek kerülése |
+| Test és tartás (ászana) | Mozgás |
+| Légzés (pránájáma) | Stresszkezelés |
+| Az érzékek befelé fordítása, ingercsökkentés (pratjáhára) | Alvás |
+| Összpontosítás, meditáció, elmélyült jelenlét (dháraná, dhjána, szamádhi) | Stresszkezelés, figyelem |
+
+- A párosítás Bálint jóváhagyására vár — ez az ő módszertana, ő véglegesíti.
+- A nyilvános felületen az ágakat **magyarul** nevezzük meg, a szanszkrit név legfeljebb kisebb betűvel, zárójelben szerepelhet. Konkrét gyakorlatnevet továbbra sem.
+- Négy réteg, amelyről a program beszél: **meditáció**, **idegrendszer-szabályozás**, **életmódváltás**, **értékek és kapcsolatok**. Egyik sem kerül a többi fölé.
+
+## 6. Új arculati alap — JAVASLAT, jóváhagyásra vár
+
+- **A fő üzenet:** egy teljes, holisztikus út — meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
 - **A cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával.
-- **Ígéret (gyógyulási ígéret nélkül):** nyolc hónap alatt megtanulod, hogyan szabályozd a saját idegrendszered, és hogyan építsd be ezt a hétköznapjaidba. Közben végig személyesen kísérlek.
-- **Hangnem:** nyugodt, szakszerű, személyes és egyenes. Kevesebb költészet, több konkrétum: kinek szól, mit kap, hogyan zajlik, mennyi időt kér.
-- **Vizuális nyelv:** a paletta marad (törtfehér, erdőzöld, arany), de letisztultabb és „rendelőszerűbb”, kevesebb meseszerű díszítéssel.
-- **Erkölcsi korlátok (változatlanok):**
-  - nincs kitalált vélemény;
-  - nincs hamis sürgetés vagy szűkösség;
-  - nincs gyógyulási vagy terápiás ígéret;
-  - nincs ezoterikus nyelv;
-  - nincs új, nem ellenőrzött tudományos állítás;
-  - a szűrés őszinte: aki most nem kezdene, azt nem győzködjük.
+- **Ígéret (gyógyulási ígéret nélkül):** nyolc hónap alatt felépíted a saját gyakorlásodat és életmódodat — a meditációtól az alvásig —, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
+- **Hangnem:** nyugodt, szakszerű, személyes és egyenes; konkrét (kinek szól, mit kap, hogyan zajlik, mennyi időt kér), de átfogó képet fest.
+- **Vizuális nyelv:** a paletta marad (törtfehér, erdőzöld, arany), letisztultabban, kevesebb meseszerű díszítéssel.
+- **Erkölcsi korlátok (változatlanok):** nincs kitalált vélemény; nincs hamis sürgetés vagy szűkösség; nincs gyógyulási vagy terápiás ígéret; nincs ezoterikus nyelv; nincs új, nem ellenőrzött tudományos állítás; a szűrés őszinte — aki most nem kezdene, azt nem győzködjük.
 
-## 6. Megvalósítási terv (sorrendben, mindegyik lépés jóváhagyással)
+## 7. Megvalósítási terv (sorrendben, mindegyik lépés jóváhagyással)
 
 1. **Arculati alap véglegesítése:** vezérmondat és hangnem → `docs/ARCULAT.md` frissítése.
 2. **Kivezetés a nyilvános felületről:**
@@ -98,7 +109,7 @@
 9. **Oldalankénti szövegírás** az új arculattal (főoldal, Rólam, Nyílt Est, Egy Kedves Üzenet).
 10. **Élesítés** csak Bálint engedélyével.
 
-## 7. Nyitott kérdések
+## 8. Nyitott kérdések
 
 - Konzultációfoglalás: Google Naptár időpontfoglaló oldal vagy saját időpontrendszer?
 - Fizetés: egyedi Stripe fizetési link a konzultáció után, vagy átutalás? Egy összegben vagy részletben?
