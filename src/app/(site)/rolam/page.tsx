@@ -8,7 +8,7 @@ import { KindCall, MorningPaper, Sprout, WindingPath } from "@/components/illust
 export const metadata = {
   title: "Rólam · Kardos Bálint",
   description:
-    "A kukoricaföldtől a multinacionális irodán és a nagykonyhán át Rishikeshig — és hogyan ér össze mindez A Társaságban.",
+    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig — és hogyan vezetett mindez a kapcsolódás felé.",
 };
 
 type Photo = { src: string; alt: string; caption: string; width: number; height: number };
@@ -27,7 +27,7 @@ const STATIONS: Station[] = [
     title: "Falun, szeretetben",
     Art: Sprout,
     paras: [
-      "Vidéken, falusi közegben nőttem fel, és nagyon jó gyerekkorom volt. Másfél éves koromtól édesanyám egyedül nevelt. Anyagilag nem volt gondtalan az élet, de gyerekként ebből semmit sem éreztem: mindig volt mit ennem, mindig volt tiszta ruhám, tető a fejem fölött, és bárhová fordultam, hatalmas szeretet vett körül. Tízéves koromig én voltam a család szeme fénye, minden figyelem középpontja.",
+      "Babócsán nőttem fel, és nagyon jó gyerekkorom volt. Másfél éves koromtól édesanyám egyedül nevelt. Anyagilag nem volt gondtalan az élet, de gyerekként ebből semmit sem éreztem: mindig volt mit ennem, mindig volt tiszta ruhám, tető a fejem fölött, és bárhová fordultam, hatalmas szeretet vett körül. Tízéves koromig én voltam a család szeme fénye, minden figyelem középpontja.",
       "Kíváncsi, gyors észjárású gyerek voltam: hamar átláttam a helyzeteket, és már ugrottam is volna a következőre — tartósan lekötni a figyelmemet nem volt könnyű. Nagycsoportos óvodásként magamtól tanultam meg olvasni.",
     ],
   },
@@ -111,8 +111,7 @@ const STATIONS: Station[] = [
     note: {
       summary: "Mi az ECO?",
       paras: [
-        "Az ECO (Energy of Consciousness) régi korok energiagyógyászatán alapuló modern harmonizálási technika, készségfejlesztés, független spirituális irányzat és önismereti út. Vallás- és dogmamentes, őszinte megtapasztalási út, amelyben a gyakorló kinyithatja a saját tudatában és energetikai rendszerében rejlő lehetőségeket.",
-        "Az ECO útja sokszintű, változatos gyakorlatok és módszerek elsajátításán keresztül ad lehetőséget arra, hogy a gyakorlók egyre inkább rendbe tegyék a saját egészségüket, életüket és kapcsolataikat, és sikeressé váljanak életük minden területén. A modulokon átbeszélt témakörökkel együtt kiváló spirituális életvezetési támasz: önismereti és tapasztalati megértéseken alapuló útmutató egy boldog élethez.",
+        "Az ECO (Energy of Consciousness) vallás- és dogmamentes önismereti út: gyakorlatok és módszerek sora, amelyekkel a gyakorló a saját tapasztalatán keresztül ismerheti meg jobban önmagát, és tehet rendet az életében és a kapcsolataiban.",
       ],
     },
   },
@@ -187,13 +186,19 @@ export default function AboutPage() {
   return (
     <main className="py-16">
       <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-        <PageHeader eyebrow="Rólam" title="Kardos Bálintnak hívnak.">
+        <PageHeader eyebrow="Rólam" title="A nevem Kardos Bálint.">
           <p className="font-serif text-xl text-ink">
-            Évekig kerestem, hol a helyem. Kipróbáltam szinte mindent — a kukoricaföldtől a nemzetközi irodán át a
-            nagykonyháig —, mire megértettem, hogy egyetlen dolog érdekel igazán: hogyan válhatunk tudatosabb,
-            nyugodtabb és kedvesebb emberekké.
+            Integratív meditációs és idegrendszer-fejlesztő tréner, életmód-tanácsadó és jógaoktató vagyok. Babócsán,
+            egy somogyi faluban nőttem fel.
           </p>
-          <p>A Társaság az a hely, ahol mindez összeér. Ez az oldal arról szól, hogyan jutottam idáig.</p>
+          <p>
+            Azért dolgozom, hogy egyre több ember kapcsolódjon önmagához és egymáshoz. Hiszem, hogy a magányra a
+            kapcsolódás a válasz: befelé, a saját testünk és légzésünk felé, és kifelé, egymás felé.
+          </p>
+          <p>
+            Évekig kerestem, hol a helyem, és szinte mindent kipróbáltam a kukoricaföldtől a nagykonyháig. Ez az oldal
+            arról szól, hogyan jutottam idáig.
+          </p>
         </PageHeader>
         <Image
           src="/images/rolam/portre.webp"
@@ -270,8 +275,8 @@ export default function AboutPage() {
         <SectionTitle eyebrow="Ahol minden összeér" title="A Társaság összeköti a múltamat a jelenemmel." />
         <p className="mt-4 max-w-2xl text-ink-soft">
           Komoly témában segít, tudományosan megalapozott eszközökkel — de nem veszi túl komolyan önmagát. Nem orvosi
-          kezelés és nem vallás, hanem közös értékek mentén működő önismereti közösség. Benne van minden, ami fontos
-          nekem:
+          kezelés és nem vallás, hanem hely, ahová tartozni lehet: befelé kapcsolódunk önmagunkhoz, kifelé egymáshoz.
+          Benne van minden, ami fontos nekem:
         </p>
         <ul className="mt-10 grid gap-x-10 gap-y-6 md:grid-cols-2">
           {CONVERGE.map(({ from, to }) => (
@@ -284,6 +289,30 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      <section id="miert" className="scroll-mt-24">
+        <SectionTitle eyebrow="Miért?" title="A kapcsolódásról" />
+        <div className="mt-6 max-w-2xl space-y-4 text-ink-soft">
+          <p className="font-serif text-xl text-ink">
+            A magány korunk egyik legnagyobb, mégis láthatatlan egészségügyi veszélye. Az Egészségügyi Világszervezet
+            (WHO) 2025-ös jelentése szerint világszerte minden hatodik ember magányos, és a magány évente több mint
+            871 000 halálesettel hozható összefüggésbe: óránként mintegy százzal.
+          </p>
+          <p>Az idegrendszer kapcsolatban nyugszik meg: önmagunkkal és egymással.</p>
+          <p>
+            <strong className="font-normal text-forest">Befelé</strong> ez kapcsolódás a testünkkel, a légzésünkkel és a
+            belső hangunkkal. Ezt gyakoroljuk nap mint nap a Társaságban.
+          </p>
+          <p>
+            <strong className="font-normal text-forest">Kifelé</strong> ez kapcsolódás a többi emberrel, a
+            barátainkkal, a közösségünkkel és minden élőlénnyel. A társas kapcsolódás az életmód-orvostan hat
+            alappillérének egyike.
+          </p>
+          <p>Úgy tapasztalom, hogy a kettő összetartozik: aki jobban kapcsolódik önmagához, kedvesebben fordul a másik felé is.</p>
+        </div>
       </section>
 
       <CompassDivider className="my-20" />
@@ -330,7 +359,7 @@ export default function AboutPage() {
       <section className="text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha magadra ismertél</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest sm:text-4xl">
-          Gyere, haladjunk együtt.
+          Gyere, tartozz közénk.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
           Ha valamelyik állomásban magadra ismertél, A Társaságban jó helyen leszel. Ha előbb személyesen
@@ -345,6 +374,16 @@ export default function AboutPage() {
           </Link>
         </div>
       </section>
+
+      <footer className="mt-20 border-t border-line pt-6 text-xs text-ink-soft">
+        <p className="uppercase tracking-[0.16em] text-gold">Források</p>
+        <ul className="mt-2 space-y-1">
+          <li>WHO Commission on Social Connection (2025): From loneliness to social connection: charting a path to healthier societies</li>
+          <li>American College of Lifestyle Medicine – az életmód-orvostan hat pillére</li>
+          <li>Holt-Lunstad, J., Smith, T. B., Layton, J. B. (2010): Social Relationships and Mortality Risk: A Meta-analytic Review. PLoS Medicine</li>
+          <li>U.S. Surgeon General (2023): Our Epidemic of Loneliness and Isolation</li>
+        </ul>
+      </footer>
     </main>
   );
 }
