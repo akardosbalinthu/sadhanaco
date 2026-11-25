@@ -339,7 +339,7 @@ async function announceEvent(supabase: Admin, id: string) {
   const { data: e } = await supabase.from("events").select("title, kind, starts_at, is_online, location, description").eq("id", id).single();
   if (!e) return;
   const label = EVENT_KIND_LABEL[e.kind];
-  const where = e.is_online ? "online, A Társaság felületén élőben" : e.location ?? "a helyszínt hamarosan megírom";
+  const where = e.is_online ? "online, élőben" : e.location ?? "a helyszínt hamarosan megírom";
   announceToMembers("event", id, {
     subject: `Új alkalom: ${e.title}`,
     paragraphs: [
@@ -521,4 +521,18 @@ export async function setRecording(formData: FormData) {
   if (videoId && !/^[A-Za-z0-9-]{1,64}$/.test(videoId)) back(`/esemenyek?esemeny=${id}`, { hiba: "A videó-azonosító csak betűt, számot és kötőjelet tartalmazhat." });
   const { error } = await supabase.from("events").update({ recording_bunny_id: videoId || null }).eq("id", id);
   done(`/esemenyek?esemeny=${id}`, error, videoId ? "A felvétel hozzárendelve — a tagok az Események oldalon érik el." : "A felvétel eltávolítva.");
+}
+
+/** Online alkalom belépő linkje (pl. Google Meet). Csak az admin látja; a tag a kezdés előtt 15 perccel kapja meg. */
+export async function setLiveLink(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(formData.get("id"));
+  const url = str(formData, "join_url");
+  if (!url) {
+    const { error } = await supabase.from("event_live_links").delete().eq("event_id", id);
+    done(`/esemenyek?esemeny=${id}`, error, "A belépő link eltávolítva.");
+  }
+  if (!/^https:\/\/\S+$/.test(url) || url.length > 500) back(`/esemenyek?esemeny=${id}`, { hiba: "Adj meg egy teljes, https://-sel kezdődő linket (pl. https://meet.google.com/abc-defg-hij)." });
+  const { error } = await supabase.from("event_live_links").upsert({ event_id: id, join_url: url, updated_at: new Date().toISOString() });
+  done(`/esemenyek?esemeny=${id}`, error, "A belépő link elmentve — a tagok a kezdés előtt 15 perccel érik el.");
 }

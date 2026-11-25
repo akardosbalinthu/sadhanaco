@@ -233,6 +233,26 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"event_live_links": {
+                  Row: {
+                    "event_id": string,"join_url": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "event_id": string,"join_url": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "event_id"?: string,"join_url"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "event_live_links_event_id_fkey"
+      columns: ["event_id"]
+isOneToOne: true
+      referencedRelation: "events"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"event_registrations": {
                   Row: {
                     "attended_at": string | null,"cancelled_at": string | null,"created_at": string,"details_purged_at": string | null,"event_id": string,"guest_email": string | null,"guest_name": string | null,"health_consent_at": string | null,"hold_expires_at": string | null,"id": string,"is_member_seat": boolean,"phone": string | null,"price_huf": number,"safety_note": string | null,"status": Database["public"]['Enums']["registration_status"],"tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,"user_id": string | null
@@ -1109,7 +1129,7 @@ isOneToOne: false
                            },
 "join_live_event":
 { Args: { "p_event_id": string }; Returns: {
-              "ends_at": string,"role": string,"room": string,"title": string
+              "ends_at": string,"join_url": string,"role": string,"room": string,"title": string
             }[]
                            },
 "kata_revenue_status":

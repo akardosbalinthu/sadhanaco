@@ -2,7 +2,7 @@ import Link from "next/link";
 import { EVENT_KIND_LABEL, fmtDateTime, huf, profilesById, requireAdmin } from "@/lib/admin";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
-import { cancelEvent, createEvent, markAttended, publishEvent, setDonationBased, setRecording, unpublishEvent } from "../actions";
+import { cancelEvent, createEvent, markAttended, publishEvent, setDonationBased, setLiveLink, setRecording, unpublishEvent } from "../actions";
 import { Empty, Flash, H2, label, one, smallButton, smallInput, smallPrimary, type SP } from "../ui";
 import { SubmitButton } from "../submit-button";
 
@@ -22,6 +22,9 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
       : Promise.resolve({ data: [] as never[] }),
   ]);
   const e = selected.data;
+  const { data: liveLink } = e?.is_online
+    ? await supabase.from("event_live_links").select("join_url").eq("event_id", e.id).maybeSingle()
+    : { data: null };
   const registrations = regs.data ?? [];
   const people = await profilesById(supabase, registrations.map((r) => r.user_id));
   const confirmed = registrations.filter((r) => r.status === "confirmed");
@@ -87,10 +90,19 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               <div className="mt-8 space-y-4 border-t border-line pt-6">
                 <h3 className="font-serif text-lg text-forest">Élő közvetítés</h3>
                 <p className="text-sm text-ink-soft">
-                  Az élő szoba A Társaság felületén fut. Házigazdaként bármikor beléphetsz (pl. hangpróbára); a tagoknak a
-                  kezdés előtt 15 perccel nyílik. A belépés jelenlétnek számít, és XP-t ad.
+                  Hozz létre egy Google Meet-hívást erre az időpontra, és másold be ide a linkjét. A tagok csak a kezdés előtt
+                  15 perccel kapják meg (a Társaság felületén át, ami a jelenlétet is rögzíti, és XP-t ad); előre sehol nem
+                  látszik. Ingyenes Gmail-fiókkal a 3+ fős hívás 60 percig tart.
                 </p>
-                <a href={tp(`/esemenyek/${e.id}/elo`)} className={smallPrimary}>
+                <form action={setLiveLink} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="id" value={e.id} />
+                  <label className="text-sm">
+                    <span className="block text-xs text-ink-soft">Google Meet-link</span>
+                    <input name="join_url" type="url" placeholder="https://meet.google.com/abc-defg-hij" defaultValue={liveLink?.join_url ?? ""} className={`${smallInput} mt-1 w-80`} />
+                  </label>
+                  <SubmitButton className={smallButton}>Mentés</SubmitButton>
+                </form>
+                <a href={tp(`/esemenyek/${e.id}/elo`)} target="_blank" rel="noopener" className={smallPrimary}>
                   Belépés házigazdaként
                 </a>
                 <form action={setRecording} className="flex flex-wrap items-end gap-2">
@@ -218,7 +230,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               <input name="location" placeholder="pl. Udgama ECO Központ" className={`${smallInput} mt-1 w-full`} />
             </label>
             <label className="flex items-end gap-2 pb-2 text-sm sm:col-span-2">
-              <input type="checkbox" name="is_online" className="accent-[var(--color-gold)]" /> Online — élő szoba A Társaság felületén (közös meditáció, Q&amp;A)
+              <input type="checkbox" name="is_online" className="accent-[var(--color-gold)]" /> Online — Google Meet (a linket létrehozás után az esemény részleteinél adod meg)
             </label>
             <label className="sm:col-span-2">
               <span className={label}>A Társaság Tagja (Ft)</span>

@@ -326,18 +326,18 @@ function LiveBlock({
       <p className="flex items-start gap-2 text-sm text-ink-soft">
         <Radio className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} aria-hidden />
         <span>
-          Élőben, itt A Társaság felületén. Előre jelentkezni nem kell — a belépés a kezdés előtt 15 perccel nyílik.{note}
+          Online, élőben. Előre jelentkezni nem kell — a belépés itt nyílik, a kezdés előtt 15 perccel.{note}
         </span>
       </p>
     );
   }
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <Link href={tp(`/esemenyek/${eventId}/elo`)} className={buttonPrimary}>
+      <a href={tp(`/esemenyek/${eventId}/elo`)} target="_blank" rel="noopener" className={buttonPrimary}>
         {live ? "Belépés — most zajlik" : "Belépés az élő alkalomra"}
-      </Link>
+      </a>
       <span className="text-xs text-ink-soft">
-        {attended ? "Már bent voltál — bármikor visszaléphetsz." : "Némítva érkezel; a kamera választható."}
+        {attended ? "Már bent voltál — bármikor visszaléphetsz." : "Új lapon nyílik meg a Google Meet-hívás. Kérlek, némítva lépj be."}
         {note}
       </span>
     </div>

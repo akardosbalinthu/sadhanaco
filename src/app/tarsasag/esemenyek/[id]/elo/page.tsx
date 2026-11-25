@@ -25,6 +25,8 @@ export default async function LivePage({ params }: { params: Promise<{ id: strin
 
   const { data, error } = await supabase.rpc("join_live_event", { p_event_id: id }).single();
   const problem = error ? (LIVE_ERROR[error.hint ?? ""] ?? "A belépés most nem sikerült. Próbáld újra egy perc múlva.") : null;
+  // Google Meet (vagy más külső hívás): a jogosultság és a jelenlét rögzítése után oda irányítunk.
+  if (data?.join_url) redirect(data.join_url);
   const configured = liveKitConfigured();
 
   return (
@@ -41,7 +43,11 @@ export default async function LivePage({ params }: { params: Promise<{ id: strin
       {problem || !data ? (
         <GildedCard className="max-w-xl text-sm text-ink-soft">{problem}</GildedCard>
       ) : !configured ? (
-        <GildedCard className="max-w-xl text-sm text-ink-soft">Az élő közvetítés még nincs beállítva. Hamarosan nyílik.</GildedCard>
+        <GildedCard className="max-w-xl text-sm text-ink-soft">
+          {data.role === "host"
+            ? "Ehhez az alkalomhoz még nincs megadva a Google Meet-link — az esemény adminoldalán, az „Élő közvetítés” résznél adhatod meg."
+            : "A belépő link még nincs megadva. Kérlek, nézz vissza pár perc múlva."}
+        </GildedCard>
       ) : (
         <LiveRoom
           serverUrl={process.env.LIVEKIT_URL!}

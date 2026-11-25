@@ -106,20 +106,21 @@ Sikertelen terhelés: lásd `docs/stripe-katalogus.md`. Webhook-végpont: 2. fá
 5. A feltöltött videó azonosítóját (Video GUID) az admin **Tananyag** oldalán, a leckénél a
    „Bunny videó-azonosító” mezőbe írd. A tagok 3 óráig érvényes, aláírt linket kapnak.
 
-## 7. LiveKit — élő alkalmak (közös meditáció, Q&A) a Társaság felületén
+## 7. Élő online alkalmak — Google Meet
 
-1. Regisztrálj a **LiveKit Cloud**-on (cloud.livekit.io), és hozz létre egy projektet (régió: **EU**).
-2. A projekt *Settings → Keys* oldalán hozz létre egy API-kulcsot.
-3. A Vercel környezeti változói közé (Production; a kulcsot és a titkot **Sensitive**-ként):
-   - `LIVEKIT_URL` — a projekt WebSocket-címe (`wss://<projekt>.livekit.cloud`),
-   - `LIVEKIT_API_KEY` — az API key,
-   - `LIVEKIT_API_SECRET` — az API secret.
-4. Mentés után indíts új élesítést (Redeploy), hogy a változók életbe lépjenek.
-5. Az adminban hozz létre egy eseményt „Online” jelöléssel (pl. heti közös meditáció). Az esemény
-   részleteinél a **Belépés házigazdaként** gombbal bármikor beléphetsz hangpróbára; a tagoknak a
-   kezdés előtt 15 perccel nyílik. A belépés jelenlétnek számít (XP).
-6. Felvétel: az alkalom után töltsd fel a felvételt a Bunny Streamre, és az esemény részleteinél
-   írd be a videó-azonosítót — a tagok az Események oldal „Felvételek” részén érik el.
+1. Hozz létre a Google Naptárban (vagy a meet.google.com-on) egy Meet-hívást az alkalom időpontjára.
+   Ingyenes Gmail-fiókkal a 3 vagy több fős hívás legfeljebb 60 percig tart; korlátlanul Google Workspace kell.
+2. Az adminban hozd létre az eseményt „Online” jelöléssel, majd az esemény részleteinél, az **Élő közvetítés**
+   résznél másold be a Meet-linket.
+3. A tagok a linket előre sehol nem látják: a kezdés előtt 15 perccel az Események oldalon jelenik meg a
+   „Belépés az élő alkalomra” gomb, amely a jogosultság ellenőrzése és a jelenlét rögzítése (XP) után új lapon
+   nyitja meg a Meetet. A tag a linket a Meetből továbbküldheti — a Meet *Házigazda-kezelés* (Host management)
+   beállításánál a „Gyors hozzáférés” kikapcsolásával a nem meghívottakat te engeded be.
+4. Felvétel: az alkalom után töltsd fel a felvételt a Bunny Streamre, és az esemény részleteinél írd be a
+   videó-azonosítót — a tagok az Események oldal „Felvételek” részén érik el.
+
+(Tartalék: a natív, beágyazott szoba LiveKittel is működik — ha egy eseménynél nincs Meet-link, és a
+`LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET` változók be vannak állítva, a szoba a Társaság felületén nyílik.)
 
 ## 8. Értesítő levelek
 
