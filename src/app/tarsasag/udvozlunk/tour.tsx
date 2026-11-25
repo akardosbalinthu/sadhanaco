@@ -47,7 +47,7 @@ const STEPS = [
     eyebrow: "És még",
     title: "Élő alkalmak, kedves üzenetek",
     text: [
-      "Az Események között találod a Nyílt Esteket, a Gyakorlónapokat, a közös online meditációkat és a havi túrát — a túra úti célját a tagok szavazzák meg, és vendéget is hívhatsz. A Kedves Üzenet menüben elsőbbséggel küldhetsz köszönő üzenetet bárkinek — én egy meglepetés-telefonhívásban adom át.",
+      "Az Események között találod a Nyílt Esteket, a Gyakorlónapokat, a közös online meditációkat és a havi túrát — a túra úti célját a tagok szavazzák meg, és vendéget is hívhatsz. A Kedves Üzenet menüben elsőbbséggel küldhetsz kedves üzenetet bárkinek — én egy meglepetés-telefonhívásban adom át.",
       "Az Adataim oldalon állíthatod be a neved és a beceneved, és ott kezelheted az előfizetésedet. Ha elakadsz, írj nyugodtan: info@akardosbalint.hu.",
     ],
   },

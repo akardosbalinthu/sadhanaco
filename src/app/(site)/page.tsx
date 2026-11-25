@@ -14,7 +14,7 @@ const PATHS = [
     need: "Rendszeresen gyakorolnál, közösségben",
     icon: Leaf,
     title: "A Társaság",
-    text: "Online gyakorlóközösség tréningnapokkal, nyolchetes integrációs programokkal, élő közös alkalmakkal és havi túrával. Lépésről lépésre tanítod meg az idegrendszeredet megnyugodni.",
+    text: "Online gyakorlóközösség: a tudást a platformon kapod, nyolchetes integrációs programokban gyakorolsz, mellette élő közös alkalmak, Gyakorlónapok és havi túra. Lépésről lépésre tanítod meg az idegrendszeredet megnyugodni.",
     href: publicEnv.NEXT_PUBLIC_TARSASAG_URL,
     cta: "Megnézem A Társaságot",
     external: true,
@@ -31,10 +31,10 @@ const PATHS = [
     featured: false,
   },
   {
-    need: "Valakinek köszönetet mondanál",
+    need: "Mondanál valakinek valami kedveset",
     icon: Heart,
     title: "Egy Kedves Üzenet",
-    text: "Megírod, kinek mit köszönnél, én pedig egy meglepetés-telefonhívásban átadom. Díjmentesen, bárkinek.",
+    text: "Megírod, kinek mit üzennél — köszönetet, bátorítást, egy rég kimondatlan mondatot —, én pedig egy meglepetés-telefonhívásban átadom. Díjmentesen, bárkinek.",
     href: "/egy-kedves-uzenet",
     cta: "Hogyan működik",
     external: false,
@@ -44,7 +44,7 @@ const PATHS = [
     need: "Telefon nélkül kezdenéd a napot",
     icon: Newspaper,
     title: "Napi Közlöny",
-    text: "Személyes reggeli újság a leveleidből és a naptáradból, kinyomtatva — hogy telefon nélkül is felkészülhess a napra. Fejlesztés alatt.",
+    text: "Személyes reggeli újság a leveleidből és a naptáradból, kinyomtatva — hogy telefon nélkül is felkészülhess a napra. A Társaságban, várhatóan karácsonytól.",
     href: "/napi-kozlony",
     cta: "Bővebben",
     external: false,
@@ -56,7 +56,7 @@ const PRINCIPLES = [
   {
     icon: FlaskConical,
     title: "Tudomány, nem dogma",
-    text: "Klasszikus légzés- és figyelemgyakorlatok, a modern idegtudomány és az életmód-orvostan nyelvén elmagyarázva.",
+    text: "Ősi meditációs gyakorlatok, a modern idegtudomány és az életmód-orvostan nyelvén elmagyarázva.",
   },
   {
     icon: Footprints,
@@ -81,7 +81,7 @@ export default function HomePage() {
           dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
         </p>
         <p className="mt-6 max-w-2xl text-ink-soft">
-          A légzés, a figyelem és a testérzékelés klasszikus gyakorlatait tanítom, a modern idegtudomány és az
+          A légzés, a figyelem és a testérzékelés ősi meditációs gyakorlatait tanítom, a modern idegtudomány és az
           életmód-orvostan felől megközelítve: mit csinál a légzés a vagus-tónussal, a szívritmus-változékonysággal,
           és hogyan csendesedik el a figyelem. Dogmák és misztifikálás nélkül — úgy, hogy a hétköznapokban is
           működjön.

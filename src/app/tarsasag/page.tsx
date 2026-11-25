@@ -64,8 +64,8 @@ const STEPS = [
     text: "Egy 12 kérdéses önismereti kérdőív — a Ceremónia — eldönti, melyik rendbe kerülsz: Tündék, Kertőrzők, Törpök vagy Vándorok.",
   },
   {
-    title: "Tréningnap, aztán nyolc hét",
-    text: "Az első lépcső egy tréningnappal indul, utána nyolc hétig reggel és este gyakorolsz, hetente beszámolsz, és egy gyakorlótárs kísér az úton.",
+    title: "Online modul, aztán nyolc hét",
+    text: "Az első lépcső egy online modullal indul a platformon, utána nyolc hétig reggel és este gyakorolsz, hetente beszámolsz, és egy gyakorlótárs kísér az úton.",
   },
   {
     title: "Közösen haladsz",
@@ -161,12 +161,12 @@ const PATH = [
     badge: "Belépéskor nyílik",
     parts: [
       {
-        kind: "Tréning",
+        kind: "Online modul",
         title: "I. Modul — Jelenlét",
-        sub: "IMI Tréning 1 · egy teljes tréningnap",
+        sub: "Online, a platformon · videók és vezetett gyakorlások",
         paras: [
-          "Egy teljes nap, amely a jelenlét alapjait rakja le. Megtanulod, hogyan nyithatod újra a tüdőd teljes kapacitását a rekeszizom tudatos használatával, és hogyan kapcsolhatod be másodpercek alatt a nyugalomért felelős paraszimpatikus idegrendszert — például egy nyilvános beszéd vagy egy konfliktus előtt.",
-          "Megismered, hogyan csökkentheted a szenzoros túlterheltséget, és hogyan csendesítheted el a túlgondolásért felelős agyi hálózatot — a mélyebb alvásért és a tisztább jelenlétért. A nap egy megérkezést segítő meditációval indul, és egy rövid, elcsendesedés előtti felkészítő sorral zárul, amelyet otthon is használhatsz.",
+          "Egy online modul, amely a jelenlét alapjait rakja le. Megtanulod, hogyan nyithatod újra a tüdőd teljes kapacitását a rekeszizom tudatos használatával, és hogyan kapcsolhatod be másodpercek alatt a nyugalomért felelős paraszimpatikus idegrendszert — például egy nyilvános beszéd vagy egy konfliktus előtt.",
+          "Megismered, hogyan csökkentheted a szenzoros túlterheltséget, és hogyan csendesítheted el a túlgondolásért felelős agyi hálózatot — a mélyebb alvásért és a tisztább jelenlétért. A modul egy megérkezést segítő meditációval indul, és egy rövid, elcsendesedés előtti felkészítő sorral zárul, amelyet bármikor használhatsz.",
         ],
       },
       {
@@ -174,7 +174,7 @@ const PATH = [
         title: "I. Integrációs Program — IP 1",
         sub: "8+1 hét · heti beszámolóval",
         paras: [
-          "Itt válik a tréningnap tapasztalata mindennapi képességgé. Nyolc héten át reggel és este gyakorolsz, és hetente 3–7 alkalommal egy 15–45 perces, elmélyültebb meditációt végzel. Minden héten rövid beszámolót adsz, és váltakozó gyakorlótársakkal kísérjük egymást, hogy senki ne maradjon egyedül az úton.",
+          "Itt válik a modul tapasztalata mindennapi képességgé. Nyolc héten át reggel és este gyakorolsz, és hetente 3–7 alkalommal egy 15–45 perces, elmélyültebb meditációt végzel. Minden héten rövid beszámolót adsz, és váltakozó gyakorlótársakkal kísérjük egymást, hogy senki ne maradjon egyedül az úton.",
           "A +1. alkalom a közös lezárás. Ehhez a vállalt gyakorlások legalább 80%-át kell teljesítened; a lépcsőt személyes áldással zárjuk.",
         ],
       },
@@ -185,12 +185,12 @@ const PATH = [
     badge: "Beszélgetés után nyílik",
     parts: [
       {
-        kind: "Tréning",
+        kind: "Online modul",
         title: "II. Modul — Tudatosság",
-        sub: "IMI Tréning 2 · egy teljes tréningnap",
+        sub: "Online, a platformon · videók és vezetett gyakorlások",
         paras: [
-          "Az alapozáson túl ez a nap a szívritmus-változékonyság (HRV) mély stabilizálására, a két agyfélteke összehangolására és az „üss vagy fuss” reakció tudatos leállítására épül — a tartós idegrendszeri áthuzalozásért.",
-          "Megtanulod a légzésfigyelés teljes ívét: a nyugodt, tiszta megfigyeléstől az elemző elmélyülésig, amellyel a belső csend tartósan fenntartható. A nap egy összesen hatvanperces, elmélyült üléssel csúcsosodik ki.",
+          "Az alapozáson túl ez a modul a szívritmus-változékonyság (HRV) mély stabilizálására, a két agyfélteke összehangolására és az „üss vagy fuss” reakció tudatos leállítására épül — a tartós idegrendszeri áthuzalozásért.",
+          "Megtanulod a légzésfigyelés teljes ívét: a nyugodt, tiszta megfigyeléstől az elemző elmélyülésig, amellyel a belső csend tartósan fenntartható. A modul egy összesen hatvanperces, elmélyült üléssel csúcsosodik ki.",
         ],
       },
       {
@@ -226,9 +226,9 @@ const PATH = [
       {
         kind: "Elvonulás",
         title: "III. Modul — Szabadság",
-        sub: "IMI Tréning 3 · kétnapos elvonulás · évente háromszor",
+        sub: "Kétnapos élő elvonulás · évente háromszor",
         paras: [
-          "Intenzív, haladó neurobiológiai és szomatikus tréning két napban. A cél a valóság három rétege — a testi, a mentális és a tudati — közötti merev határok feloldása: hogy se a fizikai azonosulásba, se a valóság elől való menekülésbe ne ragadj bele, hanem szabadon mozogj a rétegek között.",
+          "Intenzív, haladó neurobiológiai és szomatikus elmélyülés két napban, személyesen. A cél a valóság három rétege — a testi, a mentális és a tudati — közötti merev határok feloldása: hogy se a fizikai azonosulásba, se a valóság elől való menekülésbe ne ragadj bele, hanem szabadon mozogj a rétegek között.",
           "Megismered a jógahagyomány finomenergetikai fogalmait és neurobiológiai megfelelőiket — a sejtszintű energiától a szimpatikus és paraszimpatikus idegrendszeren át az idegfonatokig —, valamint a tudat négy állapotát az ébrenléttől a tiszta megfigyelőig. Csak az IP 3 után, Bálinttal egyeztetve lehet jelentkezni; a Belső Kör Tagjainak díjmentes, A Társaság Tagjainak önköltséges áron.",
         ],
       },
@@ -243,7 +243,7 @@ const COMMUNITY = [
   { Icon: Users, title: "Heti online közös meditáció", text: "Élőben, együtt — bárhonnan bekapcsolódhatsz." },
   { Icon: Sparkles, title: "Pénteki kör", text: "Három egyszerű kérdés minden péntek reggel: mi volt nehéz, mi működött, miben segíthet a Társaság." },
   { Icon: Mountain, title: "Havi közös túra", text: "Valahol Magyarországon; az úti célt a tagok szavazzák meg. Ingyenes, és barátot is hozhatsz." },
-  { Icon: HeartHandshake, title: "Elsőbbségi Kedves Üzenet", text: "Havonta díjmentesen köszönetet küldhetsz valakinek — Bálint telefonon adja át." },
+  { Icon: HeartHandshake, title: "Elsőbbségi Kedves Üzenet", text: "Havonta díjmentesen küldhetsz valakinek egy kedves üzenetet — Bálint telefonon adja át." },
   { Icon: Dices, title: "Havi élő szerepjáték- és társasjáték-est", text: "D&D-kaland vagy egy jó társasjáték: egy este, amikor együtt nevetünk, tervezünk és játszunk — mert a kapcsolódás is idegrendszer-fejlesztés." },
   { Icon: UtensilsCrossed, title: "Negyedéves vacsorameghívás", text: "Negyedévente a negyedéves ranglista első tíz helyezettje személyes vacsorameghívást kap Bálinttól — akkor is, ha elrejtette magát a listáról." },
 ];
@@ -266,7 +266,7 @@ const TIERS = [
       "Heti, havi és negyedéves ranglista a tagoknak — elrejtheted magad",
       "Negyedévente vacsorameghívás Bálinttól a ranglista első tíz helyezettjének",
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
-      "Napi Közlöny PRO díjmentesen, amint elindul",
+      "Napi Közlöny díjmentesen — várhatóan karácsonytól",
       "Nyílt Est 3 200 Ft-ért (4 940 Ft helyett), Élő Gyakorlónap 6 460 Ft",
       "1-on-1 konzultáció tagi áron: 15 000 Ft",
       "A II. és III. lépcső díjmentesen nyílik a rangoddal (Horgonyzó, illetve Csendőrző) — fizetni csak akkor kell, ha gyorsítanál",
@@ -335,7 +335,7 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
       ["Kedves Üzenet (beérkezési sorrendben)", "✓ díjmentes", "✓ díjmentes", "✓ díjmentes"],
       ["Elsőbbségi Kedves Üzenet, kézbesítési garanciával", "—", "havi 1 díjmentes", "havi 3 díjmentes"],
       ["Elsőbbségi üzenet a kereten felül", "—", "választott összegért, legalább 1 000 Ft", "választott összegért, legalább 1 000 Ft"],
-      ["Napi Közlöny PRO", "—", "✓ díjmentes, amint elindul", "✓ díjmentes, amint elindul"],
+      ["Napi Közlöny (várhatóan karácsonytól)", "—", "✓ díjmentes", "✓ díjmentes"],
     ],
   },
   {
@@ -377,7 +377,7 @@ const FAQ = [
   },
   {
     q: "Ez vallásos vagy spirituális közösség?",
-    a: "Nem. Klasszikus légzés- és figyelemgyakorlatokkal dolgozunk, de a modern idegtudomány és az életmód-orvostan felől közelítjük meg őket — dogmák, misztifikálás és ezoterikus nyelv nélkül.",
+    a: "Nem. Ősi meditációs gyakorlatokkal dolgozunk, de a modern idegtudomány és az életmód-orvostan felől közelítjük meg őket — dogmák, misztifikálás és ezoterikus nyelv nélkül.",
   },
   {
     q: "Helyettesíti az orvosi vagy pszichológiai kezelést?",
@@ -433,7 +433,7 @@ export default async function TarsasagHome() {
           Kedvesebb hétköznapok.
         </h1>
         <p className="mt-8 font-serif text-xl leading-relaxed text-ink">
-          A Társaság online gyakorlóközösség, ahol tréningnapokon és nyolchetes integrációs programokban, tudományos alapokon tanítod
+          A Társaság online gyakorlóközösség, ahol online modulokban és nyolchetes integrációs programokban, tudományos alapokon tanítod
           meg az idegrendszeredet megnyugodni — és ahol nem egyedül haladsz.
         </p>
         <p className="mt-5 max-w-2xl text-ink-soft">
@@ -598,7 +598,7 @@ export default async function TarsasagHome() {
           ))}
         </ol>
         <p className="mt-4 text-xs text-ink-soft">
-          A Napi Közlöny fejlesztés alatt áll; amint elindul, a tagoknak díjmentes.
+          A Napi Közlöny várhatóan karácsonytól érhető el A Társaságban; a tagoknak díjmentes.
         </p>
       </section>
 

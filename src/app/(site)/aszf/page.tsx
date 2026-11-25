@@ -98,7 +98,7 @@ const sections: LegalSection[] = [
         <li>Egy e-mail-cím és egy bankkártya csak egyszer kaphat próbaidőt; ismételt próbálkozásnál a tagság azonnal fizetős időszakkal indul.</li>
         <li>
           A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Elsőbbségi Kedves Üzenet, az
-          eseményfoglalás, a konzultációfoglalás és a Napi Közlöny PRO az első sikeres fizetés napjától jár.
+          eseményfoglalás, a konzultációfoglalás és a Napi Közlöny az első sikeres fizetés napjától jár.
         </li>
       </ul>
     ),

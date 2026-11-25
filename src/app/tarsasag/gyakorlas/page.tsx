@@ -297,7 +297,7 @@ function Acceleration({
   const options =
     target === 2 && !m2Purchased
       ? [
-          { code: "gyorsitott_m2_ip2", title: "II. lépcső", text: "Tudatosság tréningnap + IP 2 (8+1 hét)" },
+          { code: "gyorsitott_m2_ip2", title: "II. lépcső", text: "Tudatosság online modul + IP 2 (8+1 hét)" },
           ...(!ip3Purchased ? [{ code: "gyorsitott_m2_ip3_csomag", title: "II. és III. lépcső együtt", text: "kedvezményes csomag" }] : []),
         ]
       : target === 3 && !ip3Purchased

@@ -7,11 +7,11 @@ import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, PageHeader,
 export const metadata = {
   title: "Egy Kedves Üzenet · Kardos Bálint",
   description:
-    "Írd meg, kinek mit köszönnél — én egy meglepetés-telefonhívásban átadom. Díjmentesen, bárkinek; A Társaság tagjainak elsőbbséggel és kézbesítési garanciával.",
+    "Írd meg, kinek mit üzennél — én egy meglepetés-telefonhívásban átadom. Díjmentesen, bárkinek; A Társaság tagjainak elsőbbséggel és kézbesítési garanciával.",
 };
 
 const STEPS = [
-  { title: "Megírod", text: "Kinek szól, mit köszönnél neki, és milyen számon érhetem el. Elég néhány őszinte mondat." },
+  { title: "Megírod", text: "Kinek szól, mit üzennél neki, és milyen számon érhetem el. Elég néhány őszinte mondat." },
   { title: "Megerősíted", text: "Küldünk egy e-mailt, és egy kattintással megerősíted, hogy tényleg te küldted. A Társaság tagjainak erre nincs szükség." },
   { title: "Felhívom", text: "Élő adásban vagy rövid videóban felhívom a címzettet, és felolvasom neki az üzenetedet." },
   { title: "Célba ér", text: "Valaki valahol váratlanul megtudja, hogy számít. Ennyi az egész — és ez sokszor elég." },
@@ -23,7 +23,8 @@ export default function KindMessagePage() {
       <PageHeader eyebrow="Egy hívás, egy mondat, egy ember" title="Egy Kedves Üzenet">
         <p className="font-serif text-xl text-ink">
           Vannak mondatok, amelyeket évek óta magunkban hordunk. Egy köszönet a tanárnak, aki hitt bennünk. Egy
-          „büszke vagyok rád” a testvérnek. Egy hála annak a szomszédnak, aki akkor segített, amikor senki más.
+          „büszke vagyok rád” a testvérnek. Egy bátorító szó egy barátnak a nehéz napja előtt. Egy „gondolok rád”
+          annak, akivel rég nem beszéltünk.
         </p>
         <p>
           Az Egy Kedves Üzenetben ezeket a mondatokat egy meglepetés-telefonhívásban adom át annak, akinek
@@ -109,7 +110,7 @@ export default function KindMessagePage() {
       <CompassDivider className="my-20" />
 
       <section id="kuldes" className="scroll-mt-24">
-        <SectionTitle eyebrow="Küldés" title="Kinek mondanál ma köszönetet?" />
+        <SectionTitle eyebrow="Küldés" title="Kinek mondanál ma valami kedveset?" />
         <p className="mt-4 max-w-2xl text-ink-soft">
           Gondold végig nyugodtan, és írd meg úgy, ahogy élőszóban mondanád. A Társaság tagjai elsőbbségi üzenetet a
           gyakorlótérből küldhetnek.

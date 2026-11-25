@@ -1,7 +1,6 @@
 import { BellOff, CalendarDays, Mail, Newspaper, Printer, Sparkles, Sunrise } from "lucide-react";
 import { publicEnv } from "@/lib/env";
-import { notifyHref } from "@/lib/cta";
-import { buttonPrimary, CompassDivider, GildedCard, linkClass, PageHeader, SectionTitle } from "@/components/ornaments";
+import { buttonPrimary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
 
 export const metadata = {
   title: "Napi Közlöny · Kardos Bálint",
@@ -59,7 +58,7 @@ const WHY = [
 export default function DailyGazettePage() {
   return (
     <main className="py-16">
-      <PageHeader eyebrow="Fejlesztés alatt · Analóg reggel" title="Napi Közlöny">
+      <PageHeader eyebrow="Várhatóan karácsonytól · Analóg reggel" title="Napi Közlöny">
         <p className="font-serif text-xl text-ink">
           Mi lenne, ha reggel úgy tudnád, mi vár rád aznap, hogy közben egyszer sem nyúlsz a telefonodhoz?
         </p>
@@ -123,26 +122,17 @@ export default function DailyGazettePage() {
 
       <CompassDivider className="my-20" />
 
-      <GildedCard className="mx-auto max-w-2xl p-8">
-        <Newspaper className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
-        <h2 className="mt-4 font-serif text-2xl text-forest">A Társaság tagjainak díjmentes</h2>
-        <p className="mt-3 text-sm text-ink-soft">
-          Amint a Napi Közlöny elindul, A Társaság aktív tagjai külön díj nélkül, automatikusan megkapják a teljes
-          PRO változatot. A Társaságban ez az „Analóg Reggel” — a nap első küldetése.
-        </p>
-        <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`mt-5 inline-block ${linkClass}`}>
-          A Társaságról
-        </a>
-      </GildedCard>
-
-      <CompassDivider className="my-20" />
-
       <section className="text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">Fejlesztés alatt</p>
-        <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest">Szólunk, amint az első lap elkészül.</h2>
+        <Newspaper className="mx-auto h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
+        <p className="mt-4 text-xs uppercase tracking-[0.25em] text-gold">A Társaságban · várhatóan karácsonytól</p>
+        <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest">A Napi Közlöny A Társaság része.</h2>
+        <p className="mx-auto mt-4 max-w-xl text-sm text-ink-soft">
+          Egyetlen változata van, és A Társaság tagjai külön díj nélkül kapják meg. A Társaságban ez az „Analóg
+          Reggel” — a nap első küldetése.
+        </p>
         <div className="mt-8">
-          <a href={notifyHref("a Napi Közlöny indulása")} className={buttonPrimary}>
-            Értesítést kérek az indulásról
+          <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={buttonPrimary}>
+            Benézek a Társaságba
           </a>
         </div>
       </section>

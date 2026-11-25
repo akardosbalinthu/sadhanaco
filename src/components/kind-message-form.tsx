@@ -88,7 +88,7 @@ export function KindMessageForm({
           required
           rows={6}
           maxLength={2000}
-          placeholder="Mit köszönnél meg neki? Néhány őszinte mondat elég."
+          placeholder="Mit üzennél neki? Néhány őszinte, kedves mondat elég."
           className={inputClass}
         />
       </label>

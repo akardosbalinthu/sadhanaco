@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/server";
 export const metadata = {
   title: "A Társaság · Nyugodtabb idegrendszer, kedvesebb hétköznapok",
   description:
-    "Online gyakorlóközösség tréningnapokkal, nyolchetes integrációs programokkal, tudományos alapú légzés- és figyelemgyakorlatokkal, élő közös alkalmakkal és havi közös túrával. 7 napos próbaidő.",
+    "Online gyakorlóközösség online modulokkal, nyolchetes integrációs programokkal, tudományos alapú légzés- és figyelemgyakorlatokkal, élő közös alkalmakkal és havi közös túrával. 7 napos próbaidő.",
 };
 
 const navLink = "transition-colors duration-300 hover:text-gold";

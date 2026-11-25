@@ -7,12 +7,12 @@
 insert into public.modules (stage, slug, title, subtitle, description, total_weeks) values
   (1, 'jelenlet',
    'I. Modul — Jelenlét',
-   'IMI Tréning 1 + I. Integrációs Program (IP 1) · 8+1 hét',
-   'Egy tréningnap a jelenlét alapjairól — a légzés, a paraszimpatikus idegrendszer és a figyelem —, utána nyolc hét reggeli és esti gyakorlás, heti beszámolóval és gyakorlótársakkal.',
+   'Online modul + I. Integrációs Program (IP 1) · 8+1 hét',
+   'Online modul a jelenlét alapjairól — a légzés, a paraszimpatikus idegrendszer és a figyelem —, utána nyolc hét reggeli és esti gyakorlás, heti beszámolóval és gyakorlótársakkal.',
    9),
   (2, 'tudatossag',
    'II. Modul — Tudatosság',
-   'IMI Tréning 2 + II. Integrációs Program (IP 2) · 8+1 hét',
+   'Online modul + II. Integrációs Program (IP 2) · 8+1 hét',
    'A szívritmus-változékonyság stabilizálása, az agyféltekék összehangolása és a belső csend; utána nyolc hét az érzelmi stabilitásért. Admin jóváhagyással nyílik meg.',
    9),
   (3, 'ip3',
@@ -22,7 +22,7 @@ insert into public.modules (stage, slug, title, subtitle, description, total_wee
    9),
   (4, 'szabadsag-elvonulas',
    'III. Modul — Szabadság Elvonulás',
-   'IMI Tréning 3 · évente 3 alkalom · kétnapos zárt elvonulás',
+   'Évente 3 alkalom · kétnapos zárt, élő elvonulás',
    'Az IP 3 elvégzése és jóváhagyás után válik láthatóvá és foglalhatóvá.',
    null)
 on conflict (stage) do update set
