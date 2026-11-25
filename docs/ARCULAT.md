@@ -8,7 +8,7 @@
 
 **Leíró mondat (alcím, meta description):** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
 
-**Fő cím (headline):** a haszonról beszél, nem a módszerről — kiválasztás alatt.
+**Fő cím (headline, jóváhagyva 2026. november 25.):** Találd meg a nyugalmad — és tartsd is meg a hétköznapokban.
 
 **Üzleti cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával (5. pont).
 
