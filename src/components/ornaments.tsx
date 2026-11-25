@@ -105,6 +105,18 @@ export function CrestVandorok({ className }: SvgProps) {
   );
 }
 
+/** Mágusok — az út megtartása és továbbadása: láng egy nyitott könyv fölött („ők tartják a tüzet”). */
+export function CrestMagusok({ className }: SvgProps) {
+  return (
+    <Shield className={className}>
+      <path d="M24 26c-4.2-1.8-4.6-6.4-1.2-11 .4 2.6 1.9 3.3 3 1.8 2.6 3.4 2.9 7.5-1.8 9.2Z" />
+      <path d="M24 24c-1.6-.9-1.7-2.7-.2-4.4 1.5 1.7 1.6 3.5.2 4.4Z" />
+      <path d="M15 31c3-1.5 6-1.5 9 0.5 3-2 6-2 9-0.5v8c-3-1.5-6-1.5-9 0.5-3-2-6-2-9-0.5Z" />
+      <path d="M24 31.5v8" />
+    </Shield>
+  );
+}
+
 /** Oldalfejléc: arany felső felirat, erdőzöld címsor, opcionális bevezető. */
 export function PageHeader({
   eyebrow,

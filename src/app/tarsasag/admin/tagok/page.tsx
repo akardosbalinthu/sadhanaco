@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { fmtDate, requireAdmin, STATUS_LABEL, TIER_LABEL } from "@/lib/admin";
-import { ORDER_INFO, type OrderKey } from "@/lib/member";
+import { MEMBER_ORDERS, ORDER_INFO, type OrderKey } from "@/lib/member";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
 import { setOrder, setRole, setUnlocks } from "../actions";
@@ -110,7 +110,7 @@ export default async function AdminMembers({ searchParams }: { searchParams: SP 
                   <label>
                     <span className={label}>Rend javítása</span>
                     <select name="order" defaultValue={t.order_key ?? "tundek"} className={`${smallInput} mt-1`}>
-                      {(Object.keys(ORDER_INFO) as OrderKey[]).map((k) => (
+                      {(t.role === "member" ? [...MEMBER_ORDERS] : (["magusok"] as OrderKey[])).map((k) => (
                         <option key={k} value={k}>
                           {ORDER_INFO[k].name}
                         </option>

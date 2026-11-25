@@ -94,7 +94,7 @@ export async function setRole(formData: FormData) {
 export async function setOrder(formData: FormData) {
   const { supabase, isSuperadmin } = await requireAdmin();
   const id = uuid.parse(formData.get("id"));
-  const order = z.enum(["tundek", "kertorzok", "torpok", "vandorok"]).parse(formData.get("order"));
+  const order = z.enum(["tundek", "kertorzok", "torpok", "vandorok", "magusok"]).parse(formData.get("order"));
   if (!isSuperadmin) back(`/tagok?tag=${id}`, { hiba: "A rendet csak superadmin javíthatja." });
   const { error } = await supabase.rpc("superadmin_set_order", { p_user: id, p_order: order });
   done(`/tagok?tag=${id}`, error, "A rend javítva.");
