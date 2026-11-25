@@ -22,7 +22,7 @@ type Station = {
 
 const STATIONS: Station[] = [
   {
-    when: "Gyerekkor",
+    when: "1995–2005",
     title: "Falun, szeretetben",
     Art: Sprout,
     paras: [
@@ -31,17 +31,17 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "10 évesen",
+    when: "2005–2006 · 10 évesen",
     title: "Menedék a fantáziavilágokban",
     Art: CrestMagusok,
     paras: [
-      "Édesanyám később újraházasodott, és tízéves koromtól másfél éven belül megszületett a húgom és az öcsém (édesapám ágáról pedig van még egy húgom). Nem hibáztatok érte senkit, de a világ közepéből hirtelen a legidősebb testvér lettem: egészen más szerep, más felelősséggel és jóval kevesebb figyelemmel, törődéssel.",
+      "Édesanyám később újraházasodott, és tízéves koromtól másfél éven belül megszületett a húgom és az öcsém (édesapám ágáról pedig van még egy húgom). Ma már nem hibáztatok érte senkit, de a világ közepéből hirtelen a legidősebb testvér lettem: egészen más szerep, más felelősséggel és jóval kevesebb figyelemmel, törődéssel.",
       "Ekkor fordultam a fantáziavilágok felé. Nem csak olvastam őket — éltem bennük. A fejemben minden főszereplőhöz volt valamilyen viszonyom; én is a világ része voltam.",
-      "A Harry Potterrel kezdődött, aztán jött a Warcraft, a Gyűrűk Ura és a Magus, és onnan egyenes út vezetett a világok mélyére. Kamaszként egy online szerepjátékban éreztem először, hogy lehetek nagy, különleges és erős — szinte mindig mágussal játszottam. Felnőttként egyre kevesebb idő jutott rá. Pedig mennyire szerettem…",
+      "A Harry Potterrel kezdődött, aztán jött a Warcraft, a Gyűrűk Ura és a Magus, és onnan egyenes út vezetett a világok mélyére. Kamaszként a World of Warcraft online szerepjátékban éreztem először, hogy lehetek nagy, különleges és erős — szinte mindig mágussal játszottam.",
     ],
   },
   {
-    when: "12 évesen",
+    when: "2007 · 12 évesen",
     title: "Százig számolni, a légzésre figyelve",
     paras: [
       "Két kisebbik testvérem tíz és tizenegy évvel fiatalabb nálam, és a korkülönbség miatt sokszor az őrületbe kergettek. Tizenkét évesen rájöttem valamire: ha ilyenkor bemegyek a szobámba, leülök az ágyra, becsukom a szemem, és csak a légzésemre figyelve elszámolok százig, utána megnyugszom — és sokkal kedvesebb tudok lenni velük.",
@@ -49,7 +49,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "15 évesen",
+    when: "2010–2014 · 15 és 19 éves korom között",
     title: "Kukoricaföld, pénztár, éjszakai műszak",
     paras: [
       "Tizenöt évesen kezdtem dolgozni: három nyáron át a dél-somogyi kukoricaföldeken címereztem, tizennyolc évesen pedig a szomszéd város hipermarketében ültem a pénztárnál.",
@@ -64,7 +64,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "21 évesen",
+    when: "2016 · 21 évesen",
     title: "„Ez az élet?”",
     paras: [
       "A huszonegyedik születésnapom körül megfogalmazódott bennem egy kérdés: most akkor még kétszer annyi ideig, ahány éves vagyok, ezt kell csinálnom? Évente kétszer elmehetek egy rövid pihenésre, és ennyi? Szerettem volna azt hinni, hogy az élet ennél több.",
@@ -73,7 +73,7 @@ const STATIONS: Station[] = [
     photos: [{ src: "/images/rolam/eloadas.webp", alt: "Kardos Bálint előadást tart egy teremnyi hallgatóságnak", caption: "Előadás közben, a marketinges évek alatt", width: 1000, height: 1244 }],
   },
   {
-    when: "Ugyanebben az évben",
+    when: "2016–2018",
     title: "„Szeretlek, apa”",
     paras: [
       "Édesapámat huszonegy évesen ismertem meg. Az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
@@ -81,7 +81,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "A járvány évei",
+    when: "2020",
     title: "Az első kiégés",
     paras: [
       "Épp kiköltöztünk volna néhány barátommal Balira, amikor jött a járvány, és elsöpörte a terveinket. Ekkor égtem ki először.",
@@ -89,7 +89,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "Utána",
+    when: "2020-tól",
     title: "Vacsoraestek egy tetőteraszon, aztán a nagykonyha",
     paras: [
       "Egy barátommal kibéreltünk egy elképesztően szép belvárosi tetőlakást, harminc négyzetméteres terasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek: összesen több mint 11,5 millió forint gyűlt össze kórházban fekvő gyerekek foglalkozásaira. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
@@ -101,7 +101,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "Közben",
+    when: "2010–2026",
     title: "Sok minden — és egyetlen dolog",
     paras: [
       "Dolgoztam a kereskedelemben és telefonos értékesítőként, voltam értékesítéstámogató egy multinál, kis- és középvállalkozások marketing- és értékesítési vezetője, közösségszervező, jótékonysági vacsorák házigazdája, egy gyerekeket segítő alapítvány kuratóriumi elnöke, privát séf, sofőr, raktáros és podcaster — egyszer még szinkronszínésznek is jelentkeztem. Építettem vályogházat Marokkóban, és több országban vigyáztam macskákra, „hivatásszerűen”.",
@@ -109,7 +109,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "Idén nyáron",
+    when: "2026 nyara",
     title: "Egy mély pont, és egy felismerés",
     paras: [
       "Egy szakítás után nagyon mélyre kerültem — annyira, hogy sürgősen beszélgetést kértem az egyik önismereti oktatómtól. Ott vált világossá, ami évek óta érlelődött bennem: semmi nem érdekel igazán, ami nem az emberi tudat fejlődéséről szól. Ezért tudtam kitartani az önismereti gyakorlás mellett — és ezért nem ment hosszan semmi más.",
@@ -117,7 +117,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "Ősz",
+    when: "2026 ősze",
     title: "Rishikesh: két hónap a forrásnál",
     Art: WindingPath,
     paras: [
@@ -126,7 +126,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "Indiában",
+    when: "2026 ősze · Indiában",
     title: "Egy kedves üzenet",
     Art: KindCall,
     paras: [
@@ -135,7 +135,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "Ma",
+    when: "2026",
     title: "Visszavenni a figyelmünket",
     Art: MorningPaper,
     paras: [
