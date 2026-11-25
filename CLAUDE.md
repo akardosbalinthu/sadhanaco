@@ -230,6 +230,13 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **I. lépcső:** IMI Tréning 1 (Jelenlét, egy tréningnap) + IP 1. **II. lépcső:** IMI Tréning 2 (Tudatosság, egy tréningnap) + IP 2. **III. lépcső:** IP 3 (külön tréning nélkül). **IV. lépcső:** IMI Tréning 3 — Szabadság, **kétnapos** elvonulás (a korábbi „3–4 napos” helyett), előfeltétel az IP 3.
 - **Integrációs programok:** 8+1 hét, **heti beszámolóval** és **váltakozó gyakorlótársakkal (accountability partner)**; reggeli-esti gyakorlás + heti 3–7 elmélyültebb ülés (IP 1: 15–45, IP 2: 30–60, IP 3: 45–90 perc). A **+1. alkalom a lezárás** (IP 1: legalább 80%-os teljesítés).
 
+### 7.18 Döntések (2026. november 25.)
+- **Nincsenek tréningnapok:** a tudásátadás (a modulok) teljesen online, a platformon zajlik; élő alkalom a Gyakorlónap, a Nyílt Est, a túra és a kétnapos Szabadság Elvonulás. A nyilvános felületen az „IMI Tréning” elnevezés nem szerepel.
+- **Bemutatkozás:** „A légzés, a figyelem és a testérzékelés **ősi meditációs gyakorlatait** tanítom…”
+- **Egy Kedves Üzenet:** nem csak köszönet — bármilyen kedves üzenet küldhető. A küldő **névtelenséget kérhet** (`kind_messages.anonymous`, `set_kind_message_anonymous`): a hívásban a nevét nem mondjuk ki, az adatait továbbra is tároljuk.
+- **Nyílt Estek:** a részvétel fizetős (külsős 4 940 Ft, tag 3 200 Ft, Belső Kör díjmentes); **kivétel a 2026. decemberi est, amely adomány alapú**.
+- **Napi Közlöny:** nincs PRO változat — egyetlen változat, A Társaságban érhető el, a tagoknak díjmentes, várhatóan karácsonytól. A CTA: „Benézek a Társaságba”.
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

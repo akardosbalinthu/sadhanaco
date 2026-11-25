@@ -16,7 +16,7 @@ const GOOD_TO_KNOW = [
   { Icon: Users, title: "Kis csoport", text: "Legfeljebb 15 fő, hogy mindenkire jusson figyelem. A helyek fele mindig külsősöknek marad." },
   { Icon: Sprout, title: "Nem kell tapasztalat", text: "Ha még sosem meditáltál, pont jó helyen vagy. Ha már gyakorolsz, elmélyítheted." },
   { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni." },
-  { Icon: Ticket, title: "Részvételi díj: adomány alapú", text: "A részvétel adomány alapú: a helyszínen belátásod szerint támogathatod az estet. A helyedet előre, online foglalod le." },
+  { Icon: Ticket, title: "Részvételi díj: 4 940 Ft", text: "Online, előre fizetve. A Társaság tagjainak kedvezményes, a Belső Körnek díjmentes. A decemberi est kivételesen adomány alapú." },
 ];
 
 export const metadata = { title: "Nyílt Meditációs Estek · Kardos Bálint" };
