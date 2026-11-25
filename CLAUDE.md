@@ -133,6 +133,8 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 ## 7. Rögzített üzleti döntések (2026. november — kötelező érvényű)
 
+> **Irányváltás (2026. november 25.):** A Társaság megszűnik. A fő szolgáltatás egy egyéni, 4+4 hónapos online idegrendszer-fejlesztő program, nem nyilvános árral, kötelező felmérés és konzultáció után. A Napi Közlöny megszűnik; a Nyílt Est és az Egy Kedves Üzenet marad. Részletek: `docs/KONCEPCIO.md` — ahol ütközik az alábbiakkal, az az irányadó.
+
 > **Arculat (2026. november 25-től mérvadó):** minden felhasználónak látható szövegnek a `docs/ARCULAT.md` arculati alapjához kell illeszkednie (cél: kapcsolódás; a meditáció és az idegrendszer-fejlesztés eszköz, nem cél). Ahol ez és a korábbi pontok (pl. 7.10 bemutatkozó mondat, 7.11 küldetés) ütköznek, az ARCULAT.md az irányadó.
 
 ### 7.1 KATA bevételi határ
