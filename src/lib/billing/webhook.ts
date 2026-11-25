@@ -7,7 +7,7 @@ import { eventPriceCode } from "@/lib/events";
 
 type Admin = SupabaseClient<Database>;
 
-/** A feldolgozó külső függőségei — a tesztekben helyettesíthetők. */
+/** A feldolgozó külső függőségei – a tesztekben helyettesíthetők. */
 export interface WebhookDeps {
   admin: Admin;
   /** Ár azonosító → { lookup_key, egységár (Stripe-egységben) } */
@@ -338,7 +338,7 @@ async function onDispute(dispute: Stripe.Dispute, d: WebhookDeps) {
 
 /**
  * Idempotens feldolgozás: minden esemény egyszer fut le sikeresen (stripe_events).
- * Hiba esetén a hibát rögzítjük és továbbdobjuk — a Stripe később újrapróbálja.
+ * Hiba esetén a hibát rögzítjük és továbbdobjuk – a Stripe később újrapróbálja.
  */
 export async function processStripeEvent(event: Stripe.Event, d: WebhookDeps): Promise<"processed" | "duplicate" | "ignored"> {
   const { data: existing } = await d.admin.from("stripe_events").select("processed_at").eq("id", event.id).maybeSingle();

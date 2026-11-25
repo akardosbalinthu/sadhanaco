@@ -3,14 +3,14 @@ import { updateSession } from "@/lib/supabase/middleware";
 import { tarsasagBasePath } from "@/lib/site";
 
 const TARSASAG_HOST_PREFIX = "tarsasag.";
-/** Élesben "" (aldomain), helyben "/tarsasag" — a NEXT_PUBLIC_TARSASAG_URL-ből. */
+/** Élesben "" (aldomain), helyben "/tarsasag" – a NEXT_PUBLIC_TARSASAG_URL-ből. */
 const BASE = tarsasagBasePath();
 
 export async function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
   const { pathname } = request.nextUrl;
 
-  // 1) tarsasag.akardosbalint.hu — minden kérés a belső /tarsasag útvonalakra
+  // 1) tarsasag.akardosbalint.hu – minden kérés a belső /tarsasag útvonalakra
   if (host.startsWith(TARSASAG_HOST_PREFIX)) {
     if (pathname === "/tarsasag" || pathname.startsWith("/tarsasag/")) {
       const url = request.nextUrl.clone();

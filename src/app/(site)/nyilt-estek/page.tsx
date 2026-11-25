@@ -38,7 +38,7 @@ export default async function OpenEveningsPage() {
     <main className="py-16">
       <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
         <PageHeader eyebrow="Havonta egyszer, Budapesten" title="Nyílt Meditációs Estek">
-          <p className="font-serif text-xl text-ink">Egy este, amikor nem kell megfelelned semminek — csak megérkezned és lélegezned.</p>
+          <p className="font-serif text-xl text-ink">Egy este, amikor nem kell megfelelned semminek – csak megérkezned és lélegezned.</p>
           <p>
             Ha még sosem meditáltál, vagy egyszerűen kíváncsi vagy, hogyan dolgozunk, ez a legjobb kezdőpont. Kis
             csoportban, vezetett légzés- és figyelemgyakorlással tapasztalod meg, milyen, amikor a tested a készenlétből
@@ -56,7 +56,7 @@ export default async function OpenEveningsPage() {
           {error && <p className="text-ink-soft">Az alkalmak listája most nem érhető el. Kérlek, nézz vissza egy kicsit később.</p>}
           {!error && (events ?? []).length === 0 && (
             <GildedCard className="text-ink-soft">
-              Most nincs meghirdetett alkalom. Az új időpontok itt jelennek meg — érdemes hamarosan visszanézni.
+              Most nincs meghirdetett alkalom. Az új időpontok itt jelennek meg – érdemes hamarosan visszanézni.
             </GildedCard>
           )}
           {(events ?? []).map((e) => {
@@ -130,7 +130,7 @@ export default async function OpenEveningsPage() {
       <section className="text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha jólesett az este</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest">
-          Vidd haza a nyugalmat — és tartsd is meg.
+          Vidd haza a nyugalmat – és tartsd is meg.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
           Nyolc hónapos egyéni programomban személyesen kísérlek: a meditációtól a légzésen és a mozgáson át az alvásig

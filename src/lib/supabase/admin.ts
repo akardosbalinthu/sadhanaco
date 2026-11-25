@@ -4,7 +4,7 @@ import { publicEnv } from "@/lib/env";
 import type { Database } from "./database.types";
 
 /**
- * Service role kliens — megkerüli az RLS-t.
+ * Service role kliens – megkerüli az RLS-t.
  * KIZÁRÓLAG megbízható szerveroldali kódból: Stripe webhook, cron, belső API.
  * Soha ne használd felhasználói bemenet alapján jogosultság-ellenőrzés nélkül.
  */

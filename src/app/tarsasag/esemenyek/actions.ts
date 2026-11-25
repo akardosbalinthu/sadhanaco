@@ -48,13 +48,13 @@ async function checkoutFor(registrationId: string, userId: string, email: string
     metadata: { kind: "member_event", registration_id: reg.id, user_id: userId },
     expires_at: Math.floor(Date.now() / 1000) + 31 * 60,
     success_url: `${base}/esemenyek?ok=${encodeURIComponent("Köszönöm! A fizetés után a helyed véglegessé válik.")}`,
-    cancel_url: `${base}/esemenyek?hiba=${encodeURIComponent("A fizetés megszakadt. A helyed még rövid ideig fenntartom — a „Fizetés” gombbal folytathatod.")}`,
+    cancel_url: `${base}/esemenyek?hiba=${encodeURIComponent("A fizetés megszakadt. A helyed még rövid ideig fenntartom – a „Fizetés” gombbal folytathatod.")}`,
     });
     url = session.url;
   } catch {
     url = null;
   }
-  if (!url) back({ hiba: "A fizetési oldal most nem nyílt meg. A helyed rövid ideig fenntartva marad — próbáld újra a „Fizetés” gombbal." });
+  if (!url) back({ hiba: "A fizetési oldal most nem nyílt meg. A helyed rövid ideig fenntartva marad – próbáld újra a „Fizetés” gombbal." });
   redirect(url);
 }
 
@@ -65,7 +65,7 @@ export async function bookEvent(fd: FormData) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect(tp("/belepes"));
-  // A telefonszám és a biztonsági megjegyzés minden jelentkezéshez kell — előbb ellenőrizzük.
+  // A telefonszám és a biztonsági megjegyzés minden jelentkezéshez kell – előbb ellenőrizzük.
   const details = parseDetails(fd);
   if (!details.success) back({ hiba: details.error.issues[0]?.message ?? "Kérlek, ellenőrizd a mezőket." }, `#e-${eventId}`);
   const { data: reg, error } = await supabase.rpc("book_event", { p_event_id: eventId });
@@ -81,7 +81,7 @@ export async function bookEvent(fd: FormData) {
     back({ hiba: detailsError(detErr.hint) }, `#e-${eventId}`);
   }
   revalidatePath(tp("/esemenyek"));
-  if (reg.status === "confirmed") back({ ok: "Ott leszel — a helyed le van foglalva." }, `#e-${eventId}`);
+  if (reg.status === "confirmed") back({ ok: "Ott leszel – a helyed le van foglalva." }, `#e-${eventId}`);
   if (!onlinePaymentsEnabled()) back({ hiba: "Az online fizetés hamarosan nyílik. A helyed rövid ideig fenntartva marad." });
   await checkoutFor(reg.id, user.id, user.email ?? "");
 }
@@ -128,7 +128,7 @@ export async function inviteGuest(fd: FormData) {
   const sent = inv
     ? await sendEmail(
         email.data,
-        `Meghívó egy közös túrára — ${ev?.title ?? "A Társaság"}`,
+        `Meghívó egy közös túrára – ${ev?.title ?? "A Társaság"}`,
         [
           `Kedves ${name.data}!`,
           `${me?.display_name ?? "Egy barátod"} meghívott A Társaság közös túrájára: ${ev?.title ?? ""}, ${when}${ev?.location ? `, ${ev.location}` : ""}.`,
@@ -168,7 +168,7 @@ export async function cancelRegistration(fd: FormData) {
     back({ hiba: error.hint === "EVENT_STARTED" ? "Az alkalom már elkezdődött, a foglalás nem mondható le." : "A lemondás most nem sikerült." }, `#e-${eventId}`);
   }
   revalidatePath(tp("/esemenyek"));
-  back({ ok: "Lemondtad a helyed — így valaki más jöhet helyetted. Köszönöm, hogy szóltál." }, `#e-${eventId}`);
+  back({ ok: "Lemondtad a helyed – így valaki más jöhet helyetted. Köszönöm, hogy szóltál." }, `#e-${eventId}`);
 }
 
 export async function cancelInvitation(fd: FormData) {

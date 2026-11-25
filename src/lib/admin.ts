@@ -22,17 +22,17 @@ export function back(path: string, msg: { ok?: string; hiba?: string } = {}): ne
 const TZ = "Europe/Budapest";
 
 export function fmtDateTime(iso: string | null | undefined) {
-  if (!iso) return "—";
+  if (!iso) return "–";
   return new Intl.DateTimeFormat("hu-HU", { timeZone: TZ, dateStyle: "medium", timeStyle: "short" }).format(new Date(iso));
 }
 
 export function fmtDate(iso: string | null | undefined) {
-  if (!iso) return "—";
+  if (!iso) return "–";
   return new Intl.DateTimeFormat("hu-HU", { timeZone: TZ, dateStyle: "medium" }).format(new Date(iso));
 }
 
 export const huf = (n: number | null | undefined) =>
-  n == null ? "—" : `${new Intl.NumberFormat("hu-HU", { useGrouping: "always" }).format(Math.round(n))} Ft`;
+  n == null ? "–" : `${new Intl.NumberFormat("hu-HU", { useGrouping: "always" }).format(Math.round(n))} Ft`;
 
 /** A Budapest és az UTC közti eltérés percben az adott pillanatban. */
 function budapestOffsetMinutes(at: Date) {
@@ -83,7 +83,7 @@ export async function profilesById(
   return new Map((data ?? []).map((p) => [p.id, { display_name: p.display_name, email: p.email }]));
 }
 
-export const TIER_LABEL = { none: "—", tarsasagi: "A Társaság Tagja", belso_kor: "A Belső Kör Tagja" } as const;
+export const TIER_LABEL = { none: "–", tarsasagi: "A Társaság Tagja", belso_kor: "A Belső Kör Tagja" } as const;
 export const STATUS_LABEL: Record<string, string> = {
   none: "nincs",
   trialing: "próbaidő",

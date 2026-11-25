@@ -37,7 +37,7 @@ export default async function AdminInvoices({ searchParams }: { searchParams: SP
                       <p className="font-serif text-xl text-forest">{huf(i.amount_huf)}</p>
                     </div>
                     <p className="mt-1 text-xs text-ink-soft">
-                      {fmtDate(i.issued_at)} · {p ? `${p.display_name || p.email} (${p.email})` : "Külsős vásárló — az adatok a Stripe-ban"} ·{" "}
+                      {fmtDate(i.issued_at)} · {p ? `${p.display_name || p.email} (${p.email})` : "Külsős vásárló – az adatok a Stripe-ban"} ·{" "}
                       {i.country} ({REGION[i.region]}) · {i.stripe_invoice_id ?? i.stripe_payment_intent_id}
                     </p>
                     <form action={setInvoiceNumber} className="mt-4 flex flex-wrap gap-2">

@@ -92,7 +92,7 @@ function Stage() {
     ],
     { onlySubscribed: false },
   );
-  // A kamerát nem használó, csak hallgató résztvevők ne foglaljanak helyet a képen — kivéve, ha senki más nincs.
+  // A kamerát nem használó, csak hallgató résztvevők ne foglaljanak helyet a képen – kivéve, ha senki más nincs.
   const visible = tracks.filter((t) => t.publication || t.participant.permissions?.canPublish);
   return (
     <div className="min-h-0 flex-1">

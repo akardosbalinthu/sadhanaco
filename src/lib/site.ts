@@ -1,7 +1,7 @@
 /**
  * Egy Next.js app két felülettel:
- *  - akardosbalint.hu           — fő weboldal (nyilvános)
- *  - tarsasag.akardosbalint.hu  — A Társaság (élesben aldomain; a middleware
+ *  - akardosbalint.hu           – fő weboldal (nyilvános)
+ *  - tarsasag.akardosbalint.hu  – A Társaság (élesben aldomain; a middleware
  *                                 belsőleg a /tarsasag útvonalakra írja át)
  * Helyi fejlesztésben a Társaság a http://localhost:3000/tarsasag címen érhető el.
  */
@@ -44,7 +44,7 @@ export const SITE = {
   egyKedvesUzenetUrl: "https://egykedvesuzenet.hu",
 } as const;
 
-/** A szolgáltató (számlázási entitás) jogi adatai — ÁSZF, Adatkezelés, Impresszum. Kft.-váltáskor itt kell módosítani. */
+/** A szolgáltató (számlázási entitás) jogi adatai – ÁSZF, Adatkezelés, Impresszum. Kft.-váltáskor itt kell módosítani. */
 export const LEGAL = {
   name: "Kardos Bálint e. v.",
   fullName: "Kardos Bálint egyéni vállalkozó",

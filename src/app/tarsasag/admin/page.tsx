@@ -101,7 +101,7 @@ export default async function AdminHome({ searchParams }: { searchParams: SP }) 
 
       {r && (
         <section>
-          <H2>Bevételi határ — {r.year}</H2>
+          <H2>Bevételi határ – {r.year}</H2>
           <p className="mt-2 max-w-2xl text-sm text-ink-soft">
             A kiállítandó számlák összege a várható megújulásokkal együtt. A kötő határ a KATA- és az alanyi
             adómentességi határ közül a kisebb ({r.binding_limit_kind === "kata" ? "most a KATA-határ" : "most az áfamentességi határ"}).
@@ -148,7 +148,7 @@ export default async function AdminHome({ searchParams }: { searchParams: SP }) 
             </dl>
             <p className={`mt-6 border-t border-line pt-4 text-sm ${r.oss.warning ? "text-alert" : "text-ink-soft"}`}>
               Uniós OSS-határ: {huf(r.oss.eu_projected_total_huf)} várható / {huf(r.oss.warning_threshold_huf)} figyelmeztetési szint
-              {r.oss.warning && " — a határ közelében vagy, egyeztess a könyvelőddel."}
+              {r.oss.warning && " – a határ közelében vagy, egyeztess a könyvelőddel."}
             </p>
           </GildedCard>
         </section>

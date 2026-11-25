@@ -11,7 +11,7 @@ const STEPS = [
     eyebrow: "Üdv itt",
     title: "Jó, hogy itt vagy.",
     text: [
-      "A Társaság tagjaival azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve. Ennek alapja egy nyugodtabb, rugalmasabb idegrendszer; mellette a kedvesség, a figyelmesség és a segítőkészség.",
+      "A Társaság tagjaival azon dolgozunk, hogy jobb hellyé tegyük a világot – először magunkkal kezdve. Ennek alapja egy nyugodtabb, rugalmasabb idegrendszer; mellette a kedvesség, a figyelmesség és a segítőkészség.",
       "Nem kell semmit teljesítened. Napi néhány perc gyakorlás, egy közösség, amely mellett haladsz, és élő alkalmak, amikor találkozunk. Két perc, és megmutatom, mi hol van.",
     ],
   },
@@ -21,7 +21,7 @@ const STEPS = [
     title: "A Ceremónia és a rended",
     text: [
       "Tizenkét kérdés arról, hogyan működik az idegrendszered a hétköznapokban: mi történik benned feszült helyzetben, mi tölt vissza, merre jár a figyelmed.",
-      "A válaszaid megmutatják, a négy rend közül melyikbe tartozol — Tündék, Kertőrzők, Törpök vagy Vándorok —, és részletes, személyre szóló kiértékelést kapsz. A rend a kiindulópontod: minden rend egyenrangú, és mindenki mindent gyakorol.",
+      "A válaszaid megmutatják, a négy rend közül melyikbe tartozol – Tündék, Kertőrzők, Törpök vagy Vándorok –, és részletes, személyre szóló kiértékelést kapsz. A rend a kiindulópontod: minden rend egyenrangú, és mindenki mindent gyakorol.",
     ],
   },
   {
@@ -30,7 +30,7 @@ const STEPS = [
     title: "Heti küldetések, napi hangolások",
     text: [
       "A tananyag a belépésed napjától hetente nyílik: rövid elméleti videók, vezetett hanganyagok és napi 10–15 perces gyakorlások. Ami aznap megvolt, azt egy kattintással kipipálod.",
-      "A haladásodat a karakterkártyád mutatja: XP és rang (Tanonc, Inas, Legény…). A ranglistán heti, havi és negyedéves bontásban látszik, kik gyakoroltak a legtöbbet — ha nem szeretnél szerepelni, elrejtheted magad. A Belső Tükör a saját, csak általad látható naplód.",
+      "A haladásodat a karakterkártyád mutatja: XP és rang (Tanonc, Inas, Legény…). A ranglistán heti, havi és negyedéves bontásban látszik, kik gyakoroltak a legtöbbet – ha nem szeretnél szerepelni, elrejtheted magad. A Belső Tükör a saját, csak általad látható naplód.",
     ],
   },
   {
@@ -38,7 +38,7 @@ const STEPS = [
     eyebrow: "Közösség",
     title: "Tapasztalat, nem tanácsadás",
     text: [
-      "A közösségi térben azt osztjuk meg, amit a saját gyakorlásunkban észrevettünk — mi segített egy nehezebb estén, mi működött élesben. Nem diagnosztizálunk és nem okítunk.",
+      "A közösségi térben azt osztjuk meg, amit a saját gyakorlásunkban észrevettünk – mi segített egy nehezebb estén, mi működött élesben. Nem diagnosztizálunk és nem okítunk.",
       "A „Köszönöm, hasznos volt” és a „Hasonlót tapasztaltam” gombokkal jelezheted, ha valaki szavai elértek. A „Megválaszolatlan posztok” szűrő megmutatja, kinek jólesne most egy válasz. Péntekenként közös körkérdés indul.",
     ],
   },
@@ -47,7 +47,7 @@ const STEPS = [
     eyebrow: "És még",
     title: "Élő alkalmak, kedves üzenetek",
     text: [
-      "Az Események között találod a Nyílt Esteket, a Gyakorlónapokat, a közös online meditációkat és a havi túrát — a túra úti célját a tagok szavazzák meg, és vendéget is hívhatsz. A Kedves Üzenet menüben elsőbbséggel küldhetsz kedves üzenetet bárkinek — én egy meglepetés-telefonhívásban adom át.",
+      "Az Események között találod a Nyílt Esteket, a Gyakorlónapokat, a közös online meditációkat és a havi túrát – a túra úti célját a tagok szavazzák meg, és vendéget is hívhatsz. A Kedves Üzenet menüben elsőbbséggel küldhetsz kedves üzenetet bárkinek – én egy meglepetés-telefonhívásban adom át.",
       "Az Adataim oldalon állíthatod be a neved és a beceneved, és ott kezelheted az előfizetésedet. Ha elakadsz, írj nyugodtan: info@akardosbalint.hu.",
     ],
   },
@@ -90,7 +90,7 @@ export function Tour({ hasOrder }: { hasOrder: boolean }) {
         )}
         {last ? (
           <form action={finishOnboarding}>
-            <button className={buttonPrimary}>{hasOrder ? "Irány a gyakorlótér" : "Kezdjük — irány a Ceremónia"}</button>
+            <button className={buttonPrimary}>{hasOrder ? "Irány a gyakorlótér" : "Kezdjük – irány a Ceremónia"}</button>
           </form>
         ) : (
           <button type="button" onClick={() => setI(i + 1)} className={buttonPrimary}>

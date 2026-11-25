@@ -45,7 +45,7 @@ export default async function LivePage({ params }: { params: Promise<{ id: strin
       ) : !configured ? (
         <GildedCard className="max-w-xl text-sm text-ink-soft">
           {data.role === "host"
-            ? "Ehhez az alkalomhoz még nincs megadva a Google Meet-link — az esemény adminoldalán, az „Élő közvetítés” résznél adhatod meg."
+            ? "Ehhez az alkalomhoz még nincs megadva a Google Meet-link – az esemény adminoldalán, az „Élő közvetítés” résznél adhatod meg."
             : "A belépő link még nincs megadva. Kérlek, nézz vissza pár perc múlva."}
         </GildedCard>
       ) : (

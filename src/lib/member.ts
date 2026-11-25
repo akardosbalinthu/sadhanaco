@@ -12,7 +12,7 @@ export async function requireMember() {
   if (!user) redirect(tp("/belepes"));
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single();
   if (!profile) redirect(tp("/belepes"));
-  // Hozzáférés: aktív programrészvétel (vagy a régi tagság) — ugyanaz a szabály, mint az RLS-ben.
+  // Hozzáférés: aktív programrészvétel (vagy a régi tagság) – ugyanaz a szabály, mint az RLS-ben.
   const { data: access } = await supabase.rpc("has_member_access");
   const hasAccess = Boolean(access);
   // Az admin (tagság nélkül is) a közösségben és az eseményeknél ott lehet: ír, hozzászól, élő alkalmat vezet.

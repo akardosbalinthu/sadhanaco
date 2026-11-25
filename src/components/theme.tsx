@@ -62,7 +62,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={cycle}
-      title={`${LABEL[choice]} — kattints a váltáshoz`}
+      title={`${LABEL[choice]} – kattints a váltáshoz`}
       aria-label={`Megjelenés: ${LABEL[choice]}. Kattints a váltáshoz.`}
       className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-line text-ink-soft transition-colors duration-300 hover:border-gold hover:text-gold"
     >

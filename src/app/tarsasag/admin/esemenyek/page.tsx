@@ -48,7 +48,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
                   {e.kind === "tura"
                     ? "Tagoknak és meghívott vendégeknek díjmentes"
                     : e.donation_based
-                    ? "Adomány alapú — a részvétel díjmentes, a helyszínen belátás szerint támogatható"
+                    ? "Adomány alapú – a részvétel díjmentes, a helyszínen belátás szerint támogatható"
                     : `A Társaság Tagja: ${huf(e.price_tarsasagi_huf)} · A Belső Kör Tagja: ${huf(e.price_belso_kor_huf)}${
                         e.price_external_huf != null ? ` · Külsős: ${huf(e.price_external_huf)}` : " · csak tagoknak"
                       }`}
@@ -108,7 +108,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
                 <form action={setRecording} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="id" value={e.id} />
                   <label className="text-sm">
-                    <span className="block text-xs text-ink-soft">Felvétel — Bunny Stream videó-azonosító (utólag)</span>
+                    <span className="block text-xs text-ink-soft">Felvétel – Bunny Stream videó-azonosító (utólag)</span>
                     <input name="recording_bunny_id" defaultValue={e.recording_bunny_id ?? ""} className={`${smallInput} mt-1 w-72`} />
                   </label>
                   <SubmitButton className={smallButton}>Mentés</SubmitButton>
@@ -230,7 +230,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               <input name="location" placeholder="pl. Udgama ECO Központ" className={`${smallInput} mt-1 w-full`} />
             </label>
             <label className="flex items-end gap-2 pb-2 text-sm sm:col-span-2">
-              <input type="checkbox" name="is_online" className="accent-[var(--color-gold)]" /> Online — Google Meet (a linket létrehozás után az esemény részleteinél adod meg)
+              <input type="checkbox" name="is_online" className="accent-[var(--color-gold)]" /> Online – Google Meet (a linket létrehozás után az esemény részleteinél adod meg)
             </label>
             <label className="sm:col-span-2">
               <span className={label}>A Társaság Tagja (Ft)</span>
@@ -255,7 +255,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
             <label className="flex items-start gap-2 text-sm sm:col-span-6">
               <input type="checkbox" name="donation_based" className="mt-1 accent-[var(--color-gold)]" />
               <span>
-                Adomány alapú — a részvétel díjmentes, a résztvevők a helyszínen, belátásuk szerint támogathatják (az árak
+                Adomány alapú – a részvétel díjmentes, a résztvevők a helyszínen, belátásuk szerint támogathatják (az árak
                 ilyenkor 0 Ft-ra állnak; túránál nem értelmezett)
               </span>
             </label>

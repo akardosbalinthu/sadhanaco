@@ -67,7 +67,7 @@ function Shield({ children, className = "" }: { children: React.ReactNode; class
   );
 }
 
-/** Tündék — finom érzékelés: csillag a levél fölött. */
+/** Tündék – finom érzékelés: csillag a levél fölött. */
 export function CrestTundek({ className }: SvgProps) {
   return (
     <Shield className={className}>
@@ -78,7 +78,7 @@ export function CrestTundek({ className }: SvgProps) {
   );
 }
 
-/** Kertőrzők — jelenlét és belső béke: makk, a türelmesen gondozott növekedés magja. */
+/** Kertőrzők – jelenlét és belső béke: makk, a türelmesen gondozott növekedés magja. */
 export function CrestKertorzok({ className }: SvgProps) {
   return (
     <Shield className={className}>
@@ -89,7 +89,7 @@ export function CrestKertorzok({ className }: SvgProps) {
   );
 }
 
-/** Törpök — állhatatosság és belső rend: hegy, alatta szilárd alap. */
+/** Törpök – állhatatosság és belső rend: hegy, alatta szilárd alap. */
 export function CrestTorpok({ className }: SvgProps) {
   return (
     <Shield className={className}>
@@ -100,7 +100,7 @@ export function CrestTorpok({ className }: SvgProps) {
   );
 }
 
-/** Vándorok — bátorság és fókusz: kanyargó ösvény egy vezércsillag felé. */
+/** Vándorok – bátorság és fókusz: kanyargó ösvény egy vezércsillag felé. */
 export function CrestVandorok({ className }: SvgProps) {
   return (
     <Shield className={className}>
@@ -110,7 +110,7 @@ export function CrestVandorok({ className }: SvgProps) {
   );
 }
 
-/** Mágusok — az út megtartása és továbbadása: láng egy nyitott könyv fölött („ők tartják a tüzet”). */
+/** Mágusok – az út megtartása és továbbadása: láng egy nyitott könyv fölött („ők tartják a tüzet”). */
 export function CrestMagusok({ className }: SvgProps) {
   return (
     <Shield className={className}>

@@ -55,7 +55,7 @@ export default async function AdminHikes({ searchParams }: { searchParams: SP })
                         <li key={r.option_id} className="flex gap-3">
                           <span className={r.is_winner ? "text-gold" : "text-forest"}>
                             {r.name}
-                            {r.is_winner && " — a cél"}
+                            {r.is_winner && " – a cél"}
                           </span>
                           <span className="ml-auto text-ink-soft">{r.votes}</span>
                         </li>
@@ -128,12 +128,12 @@ export default async function AdminHikes({ searchParams }: { searchParams: SP })
               <textarea name="description" rows={2} className={`${smallInput} mt-1 w-full`} />
             </label>
             <label className="sm:col-span-6">
-              <span className={label}>Úti célok — soronként egy (5–10); leírás „ — ” után</span>
+              <span className={label}>Úti célok – soronként egy (5–10); leírás „ – ” után</span>
               <textarea
                 name="options"
                 rows={7}
                 required
-                placeholder={"Pilis, Dobogókő — könnyű, 12 km\nBörzsöny, Csóványos — közepes, 16 km\n…"}
+                placeholder={"Pilis, Dobogókő – könnyű, 12 km\nBörzsöny, Csóványos – közepes, 16 km\n…"}
                 className={`${smallInput} mt-1 w-full font-mono text-xs`}
               />
             </label>

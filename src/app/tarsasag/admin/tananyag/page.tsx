@@ -129,7 +129,7 @@ export default async function AdminCurriculum({ searchParams }: { searchParams: 
 
           {[...byWeek.entries()].map(([week, list]) => (
             <section key={week}>
-              <h3 className="font-serif text-lg text-forest">{week === 9 ? "+1. hét — lezárás" : `${week}. hét`}</h3>
+              <h3 className="font-serif text-lg text-forest">{week === 9 ? "+1. hét – lezárás" : `${week}. hét`}</h3>
               <ul className="mt-4 space-y-3">
                 {list.map((l) => (
                   <li key={l.id}>

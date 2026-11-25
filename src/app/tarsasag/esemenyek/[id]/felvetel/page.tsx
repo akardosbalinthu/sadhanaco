@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 const dayFmt = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", dateStyle: "long" });
 
-/** Egy élő alkalom felvétele (pl. havi Q&A) — minden aktív tagnak. */
+/** Egy élő alkalom felvétele (pl. havi Q&A) – minden aktív tagnak. */
 export default async function RecordingPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, hasAccess, isAdmin } = await requireMember();

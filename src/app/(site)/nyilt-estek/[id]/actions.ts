@@ -104,7 +104,7 @@ export async function bookOpenEvening(
   if (reg.status === "confirmed") {
     // Díjmentes alkalom: a hely azonnal a vendégé; visszaigazoló levél (ha nem megy ki, a foglalás attól még él).
     const when = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", dateStyle: "full", timeStyle: "short" }).format(new Date(ev.starts_at));
-    const mail = await sendEmail(email, `Visszaigazolás — ${ev.title}`, [
+    const mail = await sendEmail(email, `Visszaigazolás – ${ev.title}`, [
       `Kedves ${name}!`,
       `Örömmel várlak: ${ev.title}, ${when}${ev.is_online ? " (online)" : ev.location ? `, ${ev.location}` : ""}.`,
       ev.donation_based

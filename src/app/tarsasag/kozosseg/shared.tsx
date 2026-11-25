@@ -14,7 +14,7 @@ export async function loadAuthors(supabase: Supabase, ids: (string | null)[]) {
 const whenFmt = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 export const when = (iso: string) => whenFmt.format(new Date(iso));
 
-/** Név és — csak aktív tagnál — diszkrét gyakorlási fázis. Volt tagnál csak a név, link nélkül. */
+/** Név és – csak aktív tagnál – diszkrét gyakorlási fázis. Volt tagnál csak a név, link nélkül. */
 export function AuthorLine({ author, at, edited }: { author: Author | undefined; at: string; edited?: string | null }) {
   return (
     <p className="text-xs text-ink-soft">

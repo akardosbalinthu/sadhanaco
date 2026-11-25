@@ -20,13 +20,13 @@ export async function bookingInfo(token: string): Promise<BookingInfo | null> {
   return (data as unknown as BookingInfo) ?? null;
 }
 
-/** A konzultáció naptáreseménye — a jelentkezőnek (forAdmin=false) vagy nekem. */
+/** A konzultáció naptáreseménye – a jelentkezőnek (forAdmin=false) vagy nekem. */
 export function consultationEvent(info: BookingInfo, forAdmin = false): CalendarEvent | null {
   if (!info.booked) return null;
   const start = new Date(info.booked.starts_at);
   return {
     uid: `konzultacio-${info.booked.slot_id}`,
-    title: forAdmin ? `Ismerkedő konzultáció — ${info.full_name}` : "Ismerkedő konzultáció — Kardos Bálint",
+    title: forAdmin ? `Ismerkedő konzultáció – ${info.full_name}` : "Ismerkedő konzultáció – Kardos Bálint",
     start,
     end: new Date(start.getTime() + info.booked.duration_minutes * 60_000),
     description: forAdmin
@@ -71,7 +71,7 @@ export async function notifyBooking(token: string) {
     `Új konzultáció: ${info.full_name}, ${when}`,
     [
       `${info.full_name} (${info.email}) lefoglalta az ismerkedő konzultációt: ${when}, ${info.booked.duration_minutes} perc.`,
-      info.booked.meet_url ? `Meet-link: ${info.booked.meet_url}` : "Ehhez az időponthoz még nincs Meet-link — a konzultáció előtt küldd el neki.",
+      info.booked.meet_url ? `Meet-link: ${info.booked.meet_url}` : "Ehhez az időponthoz még nincs Meet-link – a konzultáció előtt küldd el neki.",
       `A felmérése: ${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/jelentkezesek/${info.application_id}`,
     ],
     { href: googleCalendarUrl(mine), label: "Beteszem a Google Naptáramba" },

@@ -37,7 +37,7 @@ export async function saveNames(formData: FormData) {
   redirect(`${tp("/adataim")}?ok=1`);
 }
 
-/** Értesítő levelek az újdonságokról (új esemény, bejegyzés, szavazás) — be- és kikapcsolás. */
+/** Értesítő levelek az újdonságokról (új esemény, bejegyzés, szavazás) – be- és kikapcsolás. */
 export async function setNotifications(formData: FormData) {
   const on = formData.get("on") === "true";
   const supabase = await createClient();

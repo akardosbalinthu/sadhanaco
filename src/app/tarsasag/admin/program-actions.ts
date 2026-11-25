@@ -59,7 +59,7 @@ export async function addSlots(fd: FormData) {
       if (at.getTime() > Date.now()) rows.push({ starts_at: at.toISOString(), duration_minutes: minutes });
     }
   }
-  if (rows.length === 0) back("/idopontok", { hiba: "Nem keletkezett jövőbeli időpont — ellenőrizd a napot és az órákat." });
+  if (rows.length === 0) back("/idopontok", { hiba: "Nem keletkezett jövőbeli időpont – ellenőrizd a napot és az órákat." });
   const { error } = await supabase.from("consultation_slots").upsert(rows, { onConflict: "starts_at", ignoreDuplicates: true });
   done("/idopontok", error, `${rows.length} időpont felvéve.`);
 }
@@ -102,7 +102,7 @@ export async function cancelBooking(fd: FormData) {
         "Új időpontot kérek a konzultációhoz",
         [
           `Kedves ${app.full_name.split(/\s+/).slice(-1)[0]}!`,
-          `Sajnos a ${fmtFull(slot.starts_at)}-i időpont nekem nem jó. Kérlek, válassz egy újat ezen a linken — elnézést a kényelmetlenségért.`,
+          `Sajnos a ${fmtFull(slot.starts_at)}-i időpont nekem nem jó. Kérlek, válassz egy újat ezen a linken – elnézést a kényelmetlenségért.`,
         ],
         { href: `${site}/jelentkezes/idopont?t=${app.token}`, label: "Új időpontot választok" },
       );
@@ -225,7 +225,7 @@ export async function enrollParticipant(fd: FormData) {
   );
   revalidatePath(tp("/admin"), "layout");
   back(`/resztvevok/${enr!.id}`, {
-    ok: `Felvettem.${sessions ? ` ${sessions} alkalom beütemezve.` : ""}${res.ok ? " Az üdvözlő levél kiment." : " Az üdvözlő levél nem ment ki — kérlek, szólj neki te."}`,
+    ok: `Felvettem.${sessions ? ` ${sessions} alkalom beütemezve.` : ""}${res.ok ? " Az üdvözlő levél kiment." : " Az üdvözlő levél nem ment ki – kérlek, szólj neki te."}`,
   });
 }
 

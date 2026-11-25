@@ -35,7 +35,7 @@ export async function sendMagicLink(_prev: LoginState, formData: FormData): Prom
   const sent: LoginState = { status: "sent", email };
   const admin = createAdminClient();
 
-  // Fiókot csak sikeres fizetés hoz létre — belépéssel nem regisztrálunk. Ismeretlen címre nem
+  // Fiókot csak sikeres fizetés hoz létre – belépéssel nem regisztrálunk. Ismeretlen címre nem
   // küldünk levelet, de ugyanazt válaszoljuk, hogy ne derüljön ki, kinek van fiókja.
   const { data: profile } = await admin.from("profiles").select("id, first_name").eq("email", email).maybeSingle();
   if (!profile) return sent;
@@ -51,10 +51,10 @@ export async function sendMagicLink(_prev: LoginState, formData: FormData): Prom
   }
   const res = await sendEmail(
     email,
-    "Belépő link — Programom",
+    "Belépő link – Programom",
     [
       profile.first_name ? `Kedves ${profile.first_name}!` : "Kedves Résztvevő!",
-      "Ezzel a linkkel léphetsz be a programod felületére. A link egyszer használható, és egy órán át érvényes — bármelyik eszközön megnyithatod.",
+      "Ezzel a linkkel léphetsz be a programod felületére. A link egyszer használható, és egy órán át érvényes – bármelyik eszközön megnyithatod.",
       "Ha nem te kérted, nyugodtan hagyd figyelmen kívül ezt a levelet.",
     ],
     { href: link, label: "Belépek" },

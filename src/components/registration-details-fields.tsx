@@ -1,7 +1,7 @@
 import { HEALTH_CONSENT, SAFETY_QUESTION } from "@/lib/registration-details";
 import { inputClass } from "@/components/ornaments";
 
-/** Telefonszám, biztonsági kérdés és egészségi hozzájárulás — minden jelentkezésnél. */
+/** Telefonszám, biztonsági kérdés és egészségi hozzájárulás – minden jelentkezésnél. */
 export function RegistrationDetailsFields({ phone = "" }: { phone?: string }) {
   return (
     <div className="space-y-4">

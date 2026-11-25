@@ -35,7 +35,7 @@ export async function submitReport(fd: FormData) {
   const who = [me?.last_name, me?.first_name].filter(Boolean).join(" ") || me?.email || "Egy résztvevő";
   await sendEmail(
     SITE.adminEmail,
-    `Heti beszámoló — ${who}`,
+    `Heti beszámoló – ${who}`,
     [`${who} megírta a heti beszámolóját (${parsed.data.practice_days} gyakorlónap).`, parsed.data.question ? `Kérdése is van: ${parsed.data.question}` : ""].filter(Boolean),
     { href: `${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/resztvevok/${r.enrollment_id}`, label: "Megnézem" },
   );

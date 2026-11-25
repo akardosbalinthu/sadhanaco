@@ -37,7 +37,7 @@ export function DawnLandscape({ className = "" }: Props) {
   );
 }
 
-/** Csíra két levéllel — a lassú, türelmes növekedés. */
+/** Csíra két levéllel – a lassú, türelmes növekedés. */
 export function Sprout({ className = "" }: Props) {
   return (
     <svg viewBox="0 0 64 64" className={className} aria-hidden {...line} strokeWidth={1.2}>
@@ -49,7 +49,7 @@ export function Sprout({ className = "" }: Props) {
   );
 }
 
-/** Kanyargó ösvény egy kis zászlóig — a lépcsőzetes út. */
+/** Kanyargó ösvény egy kis zászlóig – a lépcsőzetes út. */
 export function WindingPath({ className = "" }: Props) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden {...line} strokeWidth={1.2}>
@@ -60,7 +60,7 @@ export function WindingPath({ className = "" }: Props) {
   );
 }
 
-/** Ülő kör: középen egy pont, körülötte a társak — közösség, nem színpad. */
+/** Ülő kör: középen egy pont, körülötte a társak – közösség, nem színpad. */
 export function SittingCircle({ className = "" }: Props) {
   const seats = Array.from({ length: 7 }, (_, i) => {
     const a = (i / 7) * Math.PI * 2 - Math.PI / 2;
@@ -77,7 +77,7 @@ export function SittingCircle({ className = "" }: Props) {
   );
 }
 
-/** Telefonkagyló apró levéllel — egy kedves üzenet útja. */
+/** Telefonkagyló apró levéllel – egy kedves üzenet útja. */
 export function KindCall({ className = "" }: Props) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden {...line} strokeWidth={1.2}>
@@ -91,7 +91,7 @@ export function KindCall({ className = "" }: Props) {
   );
 }
 
-/** Összehajtott újság a kelő nap előtt — telefon nélküli reggel. */
+/** Összehajtott újság a kelő nap előtt – telefon nélküli reggel. */
 export function MorningPaper({ className = "" }: Props) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden {...line} strokeWidth={1.2}>
@@ -103,7 +103,7 @@ export function MorningPaper({ className = "" }: Props) {
   );
 }
 
-/** Mécses — az esti, csendes közös gyakorlás. */
+/** Mécses – az esti, csendes közös gyakorlás. */
 export function EveningLamp({ className = "" }: Props) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden {...line} strokeWidth={1.2}>

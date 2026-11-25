@@ -54,7 +54,7 @@ export default async function ApplicationDetail({ params, searchParams }: { para
               <a
                 href={googleCalendarUrl({
                   uid: `konzultacio-${slot.id}`,
-                  title: `Ismerkedő konzultáció — ${a.full_name}`,
+                  title: `Ismerkedő konzultáció – ${a.full_name}`,
                   start: new Date(slot.starts_at),
                   end: new Date(new Date(slot.starts_at).getTime() + slot.duration_minutes * 60_000),
                   description: `Jelentkező: ${a.full_name} (${a.email})`,
@@ -76,7 +76,7 @@ export default async function ApplicationDetail({ params, searchParams }: { para
       </GildedCard>
 
       <section>
-        <H2>1. rész — a hat pillér</H2>
+        <H2>1. rész – a hat pillér</H2>
         <dl className="mt-5 grid gap-4 sm:grid-cols-2">
           {PILLARS.map((p) => {
             const v = pillars[p.key] ?? {};
@@ -84,7 +84,7 @@ export default async function ApplicationDetail({ params, searchParams }: { para
               <div key={p.key} className="rounded-lg border border-line p-4">
                 <dt className="flex items-baseline justify-between gap-3">
                   <span className="font-serif text-lg text-forest">{p.title}</span>
-                  <span className="text-sm text-gold">{v.rating ? `${v.rating}/5 · ${RATING_LABELS[v.rating - 1]}` : "—"}</span>
+                  <span className="text-sm text-gold">{v.rating ? `${v.rating}/5 · ${RATING_LABELS[v.rating - 1]}` : "–"}</span>
                 </dt>
                 {p.key === "alvas" && v.hours != null && <dd className="mt-1 text-sm text-ink">Átlagosan {v.hours} óra alvás</dd>}
                 {v.note && <dd className="mt-1 whitespace-pre-line text-sm text-ink-soft">{v.note}</dd>}
@@ -95,7 +95,7 @@ export default async function ApplicationDetail({ params, searchParams }: { para
       </section>
 
       <section>
-        <H2>2. rész — helyzet és szándék</H2>
+        <H2>2. rész – helyzet és szándék</H2>
         <GildedCard className="mt-5 space-y-4 p-6">
           <p className="whitespace-pre-line text-ink">{a.problem}</p>
           <dl className="grid gap-3 border-t border-line pt-4 text-sm sm:grid-cols-3">

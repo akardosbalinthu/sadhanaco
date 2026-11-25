@@ -35,7 +35,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     `DTSTART:${icsDate(start)}`,
     `DTEND:${icsDate(end)}`,
     `SUMMARY:${icsText(e.title)}`,
-    `LOCATION:${icsText(e.is_online ? "Online — A Társaság felületén" : (e.location ?? ""))}`,
+    `LOCATION:${icsText(e.is_online ? "Online – A Társaság felületén" : (e.location ?? ""))}`,
     `DESCRIPTION:${icsText([e.description ?? "", e.is_online ? `Belépés: ${url}` : url].filter(Boolean).join("\n\n"))}`,
     `URL:${url}`,
     "END:VEVENT",

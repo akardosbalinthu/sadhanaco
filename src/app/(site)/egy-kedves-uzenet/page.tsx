@@ -7,18 +7,18 @@ import { KindCall } from "@/components/illustrations";
 export const metadata = {
   title: "Egy Kedves Üzenet · Kardos Bálint",
   description:
-    "Írd meg, mit üzennél valakinek — én egy meglepetés-telefonhívásban átadom. Bárkinek, díjmentesen.",
+    "Írd meg, mit üzennél valakinek – én egy meglepetés-telefonhívásban átadom. Bárkinek, díjmentesen.",
 };
 
 const STEPS = [
   { title: "Megírod", text: "Kinek szól, mit üzennél neki, és milyen számon érem el. Néhány őszinte mondat elég." },
   { title: "Megerősíted", text: "Küldök egy e-mailt, és egy kattintással megerősíted, hogy tényleg te küldted." },
   { title: "Felhívom", text: "Élő adásban vagy rövid videóban felhívom a címzettet, és felolvasom neki az üzenetedet. Ha szeretnéd, a nevedet nem mondom ki." },
-  { title: "Célba ér", text: "Valaki egy átlagos hétköznapon váratlanul megtudja, hogy számít. Ennyi az egész — és sokszor ennyi is elég." },
+  { title: "Célba ér", text: "Valaki egy átlagos hétköznapon váratlanul megtudja, hogy számít. Ennyi az egész – és sokszor ennyi is elég." },
 ];
 
 const FREE = [
-  "Bárki küldhet, regisztráció nélkül — elég egy e-mailes megerősítés",
+  "Bárki küldhet, regisztráció nélkül – elég egy e-mailes megerősítés",
   "Ugyanarról a címről több üzenetet is küldhetsz",
   "A beérkezés sorrendjében kézbesítem",
   "Ha a címzettet három próbálkozásra sem érem el, az üzenet lezárul",

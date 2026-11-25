@@ -20,7 +20,7 @@ export const INVEST = [
 ] as const;
 
 export const START_OPTIONS = [
-  { value: "azonnal", label: "Azonnal — ma vagy holnap" },
+  { value: "azonnal", label: "Azonnal – ma vagy holnap" },
   { value: "egy_heten_belul", label: "Egy héten belül" },
   { value: "egy_honapon_belul", label: "Egy hónapon belül" },
   { value: "kesobb", label: "Később" },

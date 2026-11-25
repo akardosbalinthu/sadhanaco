@@ -5,7 +5,7 @@ import { GildedCard } from "@/components/ornaments";
 import { approveProgression, declineProgression, scheduleConsultation } from "../actions";
 import { Empty, Flash, H2, label, smallButton, smallInput, smallPrimary, type SP } from "../ui";
 
-const STAGE = { 2: "II. lépcső — Tudatosság", 3: "III. lépcső — IP 3", 4: "IV. lépcső — Szabadság Elvonulás" } as Record<number, string>;
+const STAGE = { 2: "II. lépcső – Tudatosság", 3: "III. lépcső – IP 3", 4: "IV. lépcső – Szabadság Elvonulás" } as Record<number, string>;
 const STATUS = { requested: "Új kérés", scheduled: "Konzultáció egyeztetve", approved: "Megnyitva", declined: "Elutasítva", cancelled: "Visszavonva" } as Record<string, string>;
 
 export default async function AdminProgression({ searchParams }: { searchParams: SP }) {

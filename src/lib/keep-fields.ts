@@ -1,7 +1,7 @@
 import { startTransition, type FormEvent } from "react";
 
 /**
- * A React 19 egy űrlapművelet (form action) után kiüríti a mezőket — hibaüzenetnél így a
+ * A React 19 egy űrlapművelet (form action) után kiüríti a mezőket – hibaüzenetnél így a
  * kitöltő elveszítené, amit begépelt. Ezzel a beküldéssel a műveletet kézzel indítjuk,
  * így a mezők megmaradnak; a böngésző beépített ellenőrzése (required, min…) változatlanul fut.
  */

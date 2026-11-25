@@ -51,12 +51,12 @@ export default async function AdminKindMessages({ searchParams }: { searchParams
                       </p>
                       {m.anonymous && (
                         <p className="w-full rounded-md border border-alert/50 px-3 py-1.5 text-sm text-alert">
-                          Névtelen — a hívásban ne mondd ki a küldő nevét.
+                          Névtelen – a hívásban ne mondd ki a küldő nevét.
                         </p>
                       )}
                     </div>
                     <p className="mt-1 text-xs text-ink-soft">
-                      Küldő: {s ? `${s.display_name || s.email} (${s.email})` : `${m.guest_name ?? "—"} (${m.guest_email ?? "—"})`} ·{" "}
+                      Küldő: {s ? `${s.display_name || s.email} (${s.email})` : `${m.guest_name ?? "–"} (${m.guest_email ?? "–"})`} ·{" "}
                       {fmtDateTime(m.created_at)} · próbálkozás: {m.attempts}/{max}
                       {m.last_attempt_at && ` · utoljára: ${fmtDateTime(m.last_attempt_at)}`}
                     </p>

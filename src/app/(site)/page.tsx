@@ -5,9 +5,9 @@ import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, SectionTitl
 import { DawnLandscape, EveningLamp, KindCall, Sprout, WindingPath } from "@/components/illustrations";
 
 export const metadata = {
-  title: "Kardos Bálint · Találd meg a nyugalmad — és tartsd is meg a hétköznapokban",
+  title: "Kardos Bálint · Találd meg a nyugalmad – és tartsd is meg a hétköznapokban",
   description:
-    "Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva. Nyolc hónapos egyéni, online program meditációval, légzéssel, mozgással, alvással, étkezéssel és kapcsolatokkal.",
+    "Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva. Nyolc hónapos egyéni, online program meditációval, légzéssel, mozgással, alvással, étkezéssel és kapcsolatokkal.",
 };
 
 const BENEFITS = [
@@ -20,7 +20,7 @@ const FOR_WHOM = [
   "sokáig bírod a terhelést, de a nyugalom egyre ritkábban jön magától,",
   "próbáltál már meditálni vagy életmódot váltani, de nem maradt meg,",
   "nem egy újabb alkalmazásra vágysz, hanem személyes kísérésre,",
-  "készen állsz arra, hogy időt és figyelmet szánj magadra — most.",
+  "készen állsz arra, hogy időt és figyelmet szánj magadra – most.",
 ];
 
 const PAIRS = [
@@ -35,7 +35,7 @@ const PAIRS = [
 const LAYERS = [
   { title: "Meditáció", text: "Megtanulod szándékosan irányítani a figyelmedet, és olyan rendszeres gyakorlást építesz, amely belefér a napodba." },
   { title: "Idegrendszer-szabályozás", text: "Megérted, mi zajlik a testedben terhelés alatt, és eszközöket kapsz ahhoz, hogy vissza tudj találni a nyugalomba." },
-  { title: "Életmódváltás", text: "Az alvás, a mozgás, az étkezés és a szerekhez fűződő viszonyod — lépésről lépésre, a saját tempódban." },
+  { title: "Életmódváltás", text: "Az alvás, a mozgás, az étkezés és a szerekhez fűződő viszonyod – lépésről lépésre, a saját tempódban." },
   { title: "Értékek és kapcsolatok", text: "Ahogyan magaddal és másokkal bánsz. A nyugalom a kapcsolatainkban mutatkozik meg igazán." },
 ];
 
@@ -68,10 +68,10 @@ export default function HomePage() {
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-gold">Egyéni program · 8 hónap · online</p>
           <h1 className="mt-5 text-balance font-serif text-4xl leading-tight text-forest sm:text-5xl">
-            Találd meg a nyugalmad — és tartsd is meg a hétköznapokban.
+            Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.
           </h1>
           <p className="mt-5 font-serif text-xl leading-relaxed text-ink">
-            Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
+            Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.
           </p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
             Nyolc hónapos egyéni programomban a meditációt, a légzést, a mozgást, az alvást, az étkezést és a
@@ -122,7 +122,7 @@ export default function HomePage() {
             hogyan kezeljük a terhelést, mihez nyúlunk, és kikhez kapcsolódunk.
           </p>
           <p>
-            A kettőt egyedi módszerré ötvözöm. Az egyik a belső, a másik a külső oldal — együtt az egész embert fogják át,
+            A kettőt egyedi módszerré ötvözöm. Az egyik a belső, a másik a külső oldal – együtt az egész embert fogják át,
             nem egy tünetet. Ebben van a program ereje.
           </p>
         </div>
@@ -211,7 +211,7 @@ export default function HomePage() {
         </ol>
         <p className="mt-10 max-w-3xl rounded-lg bg-paper-deep/70 px-6 py-5 text-ink-soft">
           Őszinte leszek: a konzultációra azokat várom, akik most szeretnének elkezdeni. Ha még nem jött el az ideje, az is
-          rendben van — addig szeretettel várlak egy Nyílt Meditációs Esten.
+          rendben van – addig szeretettel várlak egy Nyílt Meditációs Esten.
         </p>
         <div className="mt-8">
           <Link href="/jelentkezes" className={buttonPrimary}>

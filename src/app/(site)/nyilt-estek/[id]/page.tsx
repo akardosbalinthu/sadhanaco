@@ -47,7 +47,7 @@ export default async function OpenEveningPage({
           <>
             {fizetes === "megszakitva" && (
               <p className="mb-6 text-sm text-ink-soft">
-                A fizetés megszakadt. A helyedet még egy rövid ideig fenntartom — nyugodtan próbáld újra.
+                A fizetés megszakadt. A helyedet még egy rövid ideig fenntartom – nyugodtan próbáld újra.
               </p>
             )}
             {event.donation_based && (

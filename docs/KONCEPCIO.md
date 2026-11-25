@@ -53,9 +53,9 @@
   - Napi Közlöny.
 - Az adatbázisban a régi táblák maradhatnak, a felületről kikerülnek.
 
-## 5. A módszertan — Bálint egyedi módszere (jóváhagyva)
+## 5. A módszertan – Bálint egyedi módszere (jóváhagyva)
 
-A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a belső munka teljes ívét adja (értékek, test, légzés, figyelem, meditáció), az életmód-orvostan hat pillére pedig a hétköznapi élet mérhető alapjait. Az egyik a belső, a másik a külső oldal — együtt az egész embert fogják át, nem egy tünetet.
+A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a belső munka teljes ívét adja (értékek, test, légzés, figyelem, meditáció), az életmód-orvostan hat pillére pedig a hétköznapi élet mérhető alapjait. Az egyik a belső, a másik a külső oldal – együtt az egész embert fogják át, nem egy tünetet.
 
 | A jóga nyolc ága (magyarul, nyilvánosan így) | Az életmód-orvostan pillére, amelyhez kapcsolódik |
 |---|---|
@@ -70,16 +70,16 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 - A nyilvános felületen az ágak **magyarul és szanszkritul is** szerepelnek (magyar, zárójelben szanszkrit). Konkrét gyakorlatnevet továbbra sem.
 - Négy réteg, amelyről a program beszél: **meditáció**, **idegrendszer-szabályozás**, **életmódváltás**, **értékek és kapcsolatok**. Egyik sem kerül a többi fölé.
 
-## 6. Új arculati alap — jóváhagyva, részletek: `docs/ARCULAT.md`
+## 6. Új arculati alap – jóváhagyva, részletek: `docs/ARCULAT.md`
 
-- **Leíró mondat (alcím):** Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva. Fő cím (jóváhagyva): „Találd meg a nyugalmad — és tartsd is meg a hétköznapokban.”
+- **Leíró mondat (alcím):** Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva. Fő cím (jóváhagyva): „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”
 
-- **A fő üzenet:** egy teljes, holisztikus út — meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
+- **A fő üzenet:** egy teljes, holisztikus út – meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
 - **A cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával.
-- **Ígéret (gyógyulási ígéret nélkül):** nyolc hónap alatt felépíted a saját gyakorlásodat és életmódodat — a meditációtól az alvásig —, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
+- **Ígéret (gyógyulási ígéret nélkül):** nyolc hónap alatt felépíted a saját gyakorlásodat és életmódodat – a meditációtól az alvásig —, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
 - **Hangnem:** nyugodt, szakszerű, személyes és egyenes; konkrét (kinek szól, mit kap, hogyan zajlik, mennyi időt kér), de átfogó képet fest.
 - **Vizuális nyelv:** a paletta marad (törtfehér, erdőzöld, arany), letisztultabban, kevesebb meseszerű díszítéssel.
-- **Erkölcsi korlátok (változatlanok):** nincs kitalált vélemény; nincs hamis sürgetés vagy szűkösség; nincs gyógyulási vagy terápiás ígéret; nincs ezoterikus nyelv; nincs új, nem ellenőrzött tudományos állítás; a szűrés őszinte — aki most nem kezdene, azt nem győzködjük.
+- **Erkölcsi korlátok (változatlanok):** nincs kitalált vélemény; nincs hamis sürgetés vagy szűkösség; nincs gyógyulási vagy terápiás ígéret; nincs ezoterikus nyelv; nincs új, nem ellenőrzött tudományos állítás; a szűrés őszinte – aki most nem kezdene, azt nem győzködjük.
 
 ## 7. Megvalósítási terv (sorrendben, mindegyik lépés jóváhagyással)
 
@@ -122,7 +122,7 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 
 Elkészült a fejlesztői ágon (élesítés és az éles adatbázis-migráció Bálint jóváhagyására vár):
 
-- **Adatbázis:** `20261125180000_program.sql` — `applications`, `consultation_slots`, `program_enrollments`, `program_sessions`, `weekly_reports`; `submit_application`, `application_booking_info`, `book_consultation_slot`, `my_program`, `submit_weekly_report`, `is_program_participant`; a régi tagsági jogosultságok kiegészítve a résztvevőkkel; Nyílt Est díjmentes a résztvevőknek; automatikus adattörlés (180 nap / a program vége + 1 év); `registration_open = false`. Teszt: `20_program.test.sql`.
+- **Adatbázis:** `20261125180000_program.sql` – `applications`, `consultation_slots`, `program_enrollments`, `program_sessions`, `weekly_reports`; `submit_application`, `application_booking_info`, `book_consultation_slot`, `my_program`, `submit_weekly_report`, `is_program_participant`; a régi tagsági jogosultságok kiegészítve a résztvevőkkel; Nyílt Est díjmentes a résztvevőknek; automatikus adattörlés (180 nap / a program vége + 1 év); `registration_open = false`. Teszt: `20_program.test.sql`.
 - **Nyilvános oldal:** új főoldal, `/jelentkezes` (felmérés), `/jelentkezes/idopont` (foglalás, Google Naptár-link, .ics), Rólam, Nyílt Est és Egy Kedves Üzenet frissítve; a Napi Közlöny és a túrameghívó oldala megszűnt (átirányítás).
 - **Résztvevői felület** (`tarsasag.akardosbalint.hu`): Programom, Gyakorlás, Heti beszámoló, Napló, Adataim; a régi Társaság-oldalak a Programomra irányítanak.
 - **Admin:** Jelentkezések, Időpontok, Résztvevők (felvétel, alkalmak menetrendje, gyakorlási terv, beszámolók megválaszolása).

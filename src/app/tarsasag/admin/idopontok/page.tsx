@@ -79,7 +79,7 @@ export default async function SlotsPage({ searchParams }: { searchParams: SP }) 
                       <a
                         href={googleCalendarUrl({
                           uid: `konzultacio-${s.id}`,
-                          title: `Ismerkedő konzultáció — ${app.full_name}`,
+                          title: `Ismerkedő konzultáció – ${app.full_name}`,
                           start: new Date(s.starts_at),
                           end: new Date(new Date(s.starts_at).getTime() + s.duration_minutes * 60_000),
                           description: `Jelentkező: ${app.full_name} (${app.email})`,

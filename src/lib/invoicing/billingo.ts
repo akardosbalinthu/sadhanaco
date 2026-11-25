@@ -8,7 +8,7 @@ import {
 } from "./types";
 
 /**
- * Billingo (API v3) — HELYŐRZŐ.
+ * Billingo (API v3) – HELYŐRZŐ.
  * A tényleges bekötés a 2. fázisban: POST /documents (AAM áfakulcs, magánszemély vevő),
  * sztornó: POST /documents/{id}/cancel. Kulcs: BILLINGO_API_KEY (X-API-KEY fejléc).
  */

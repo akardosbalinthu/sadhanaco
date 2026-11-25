@@ -25,7 +25,7 @@ export async function createClient() {
               cookieStore.set(name, value, options),
             );
           } catch {
-            // Server Componentből hívva a cookie nem írható — a middleware frissíti a munkamenetet.
+            // Server Componentből hívva a cookie nem írható – a middleware frissíti a munkamenetet.
           }
         },
       },

@@ -6,9 +6,9 @@
 
 **Egy teljes, személyre szabott út:** meditáció, légzés, test, életmód és kapcsolatok egyetlen programban. Az alapja Bálint egyedi módszertana, amely a jóga nyolc ágát az életmód-orvostan hat pillérével vegyíti, személyes vezetéssel, a résztvevő saját életére szabva.
 
-**Leíró mondat (alcím, meta description):** Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
+**Leíró mondat (alcím, meta description):** Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.
 
-**Fő cím (headline, jóváhagyva 2026. november 25.):** Találd meg a nyugalmad — és tartsd is meg a hétköznapokban.
+**Fő cím (headline, jóváhagyva 2026. november 25.):** Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.
 
 **Üzleti cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával (5. pont).
 
@@ -76,7 +76,7 @@ Gyógyulási vagy terápiás ígéretet nem teszünk.
 
 ## 8. Szolgáltatások
 
-**Az egyéni program** — JAVASLAT, jóváhagyásra vár:
+**Az egyéni program** – JAVASLAT, jóváhagyásra vár:
 Nyolc hónapos egyéni program, amelyben a jóga nyolc ágát az életmód-orvostan hat pillérével ötvözöm, a te életedre szabva. Az első négy hónapban hetente találkozunk online, és lépésről lépésre felépítjük a gyakorlásodat: a meditációt, a légzést, a mozgást, az alvást és az étkezést. A második négy hónapban havonta egyszer beszélünk, te pedig önállóan építed be mindezt a hétköznapjaidba. A programba ismerkedő konzultáció után lehet bekerülni.
 
 **Nyílt Meditációs Estek** (szó szerint):

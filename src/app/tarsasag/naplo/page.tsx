@@ -23,7 +23,7 @@ export default async function JournalPage() {
       <MemberNav active="/naplo" />
       <PageHeader eyebrow="Napló" title="Gyakorlónapló">
         <p>
-          Néhány sor arról, mit vettél észre ma — a légzésedben, a testedben, egy helyzetben. A naplódat csak te
+          Néhány sor arról, mit vettél észre ma – a légzésedben, a testedben, egy helyzetben. A naplódat csak te
           látod; még én sem.
         </p>
       </PageHeader>

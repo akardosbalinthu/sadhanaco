@@ -76,7 +76,7 @@ export default async function AdminMembers({ searchParams }: { searchParams: SP 
                   [
                     ["m2_unlocked", "II. lépcső", t.m2_unlocked, t.m2_purchased],
                     ["ip3_unlocked", "III. lépcső", t.ip3_unlocked, t.ip3_purchased],
-                    ["retreat_unlocked", "IV. lépcső — Szabadság Elvonulás", t.retreat_unlocked, false],
+                    ["retreat_unlocked", "IV. lépcső – Szabadság Elvonulás", t.retreat_unlocked, false],
                   ] as const
                 ).map(([name, text, on, bought]) => (
                   <label key={name} className="flex items-center gap-2">
@@ -165,7 +165,7 @@ export default async function AdminMembers({ searchParams }: { searchParams: SP 
                       {STATUS_LABEL[m.subscription_status] ?? m.subscription_status}
                       {m.cancel_at_period_end && " (lemondva)"}
                     </td>
-                    <td className="py-2.5 pr-4 text-ink-soft">{m.order_key ? ORDER_INFO[m.order_key as OrderKey].name : "—"}</td>
+                    <td className="py-2.5 pr-4 text-ink-soft">{m.order_key ? ORDER_INFO[m.order_key as OrderKey].name : "–"}</td>
                     <td className="py-2.5 text-ink-soft">{fmtDate(m.subscription_status === "trialing" ? m.trial_ends_at : m.current_period_end)}</td>
                   </tr>
                 ))}

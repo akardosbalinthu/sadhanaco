@@ -67,7 +67,7 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
   // Értesítő nekem (a részleteket csak a védett admin felületen mutatjuk).
   await sendEmail(
     SITE.adminEmail,
-    `Új jelentkezés${app.qualified ? " (azonnal kezdene)" : ""} — ${d.full_name}`,
+    `Új jelentkezés${app.qualified ? " (azonnal kezdene)" : ""} – ${d.full_name}`,
     [
       `${d.full_name} kitöltötte a felmérést.`,
       `Mikor kezdene: ${START_LABEL[d.start_when]}. ${app.qualified ? "Konzultációt foglalhat." : "Konzultációt nem foglalhat; a Nyílt Estre hívtam."}`,
@@ -78,7 +78,7 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
   if (app.qualified) {
     await sendEmail(
       d.email,
-      "A felmérésed megérkezett — válassz időpontot",
+      "A felmérésed megérkezett – válassz időpontot",
       [
         `Kedves ${first}!`,
         "Köszönöm, hogy kitöltötted a felmérést. Átolvasom, mielőtt beszélünk, így a konzultáción rögtön a lényegre térhetünk.",
@@ -94,7 +94,7 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
     "Köszönöm, hogy kitöltötted a felmérést",
     [
       `Kedves ${first}!`,
-      "Köszönöm, hogy időt szántál a felmérésre. Azt írtad, most még nem kezdenéd el — és ez teljesen rendben van. Az egyéni programot azoknak ajánlom, akik most szeretnének belevágni, mert akkor tudom igazán jól kísérni.",
+      "Köszönöm, hogy időt szántál a felmérésre. Azt írtad, most még nem kezdenéd el – és ez teljesen rendben van. Az egyéni programot azoknak ajánlom, akik most szeretnének belevágni, mert akkor tudom igazán jól kísérni.",
       "Addig is szeretettel várlak egy Nyílt Meditációs Esten, ahol kipróbálhatod, hogyan dolgozom. Ha később úgy érzed, eljött az ideje, töltsd ki újra a felmérést.",
     ],
     { href: `${siteBase()}/nyilt-estek`, label: "Közelgő Nyílt Estek" },

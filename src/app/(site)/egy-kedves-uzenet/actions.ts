@@ -59,7 +59,7 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
     "Erősítsd meg a Kedves Üzenetedet",
     [
       `Kedves ${d.guest_name}!`,
-      `Köszönöm, hogy üzenetet küldenél ${d.recipient_name} részére${wantsAnonymity(fd) ? " — névtelenül, a neved a hívásban nem hangzik el" : ""}. Egy kattintással erősítsd meg, hogy tényleg te küldted — utána bekerül a kézbesítési sorba.`,
+      `Köszönöm, hogy üzenetet küldenél ${d.recipient_name} részére${wantsAnonymity(fd) ? " – névtelenül, a neved a hívásban nem hangzik el" : ""}. Egy kattintással erősítsd meg, hogy tényleg te küldted – utána bekerül a kézbesítési sorba.`,
       "A link 48 óráig érvényes. Ha nem te küldted, egyszerűen hagyd figyelmen kívül ezt a levelet.",
     ],
     { href: link, label: "Megerősítem az üzenetet" },
@@ -69,7 +69,7 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
   }
   return {
     status: "done",
-    message: `Köszönöm! Küldtem egy megerősítő e-mailt erre a címre: ${d.guest_email}. A benne lévő linkkel erősítsd meg az üzenetet — utána bekerül a sorba.`,
+    message: `Köszönöm! Küldtem egy megerősítő e-mailt erre a címre: ${d.guest_email}. A benne lévő linkkel erősítsd meg az üzenetet – utána bekerül a sorba.`,
   };
 }
 

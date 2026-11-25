@@ -100,7 +100,7 @@ export function KindMessageForm({
             <input name="guest_name" required maxLength={120} autoComplete="name" className={inputClass} />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-sm text-ink-soft">Az e-mail-címed — ide küldöm a megerősítést</span>
+            <span className="mb-1.5 block text-sm text-ink-soft">Az e-mail-címed – ide küldöm a megerősítést</span>
             <input name="guest_email" required type="email" autoComplete="email" className={inputClass} />
           </label>
           {/* Csapda a robotoknak: ember nem látja, nem tölti ki. */}
@@ -137,7 +137,7 @@ export function KindMessageForm({
       <label className="flex items-start gap-3 text-sm text-ink-soft">
         <input type="checkbox" name="anonymous" className="mt-1 accent-forest" />
         <span>
-          <span className="text-forest">Névtelen maradnék.</span> A hívásban nem mondom ki a neved — a címzett csak az
+          <span className="text-forest">Névtelen maradnék.</span> A hívásban nem mondom ki a neved – a címzett csak az
           üzenetet hallja, azt nem, hogy ki küldte.
         </span>
       </label>

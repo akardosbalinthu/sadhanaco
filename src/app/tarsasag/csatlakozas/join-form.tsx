@@ -54,7 +54,7 @@ export function JoinForm({ plans, defaultPlan }: { plans: PlanOption[]; defaultP
       </div>
 
       <label className="block">
-        <span className="mb-1.5 block text-sm text-ink-soft">E-mail-cím — ezzel fogsz belépni</span>
+        <span className="mb-1.5 block text-sm text-ink-soft">E-mail-cím – ezzel fogsz belépni</span>
         <input type="email" name="email" required autoComplete="email" className={inputClass} />
       </label>
 

@@ -2,7 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 
-/** Beküldés közben letiltott gomb — egy dupla kattintás ne hozzon létre két bejegyzést. */
+/** Beküldés közben letiltott gomb – egy dupla kattintás ne hozzon létre két bejegyzést. */
 export function SubmitButton({ children, className }: { children: React.ReactNode; className?: string }) {
   const { pending } = useFormStatus();
   return (

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-/** A Kedves Üzenet mezői — ugyanazok a korlátok, mint az adatbázisban. */
+/** A Kedves Üzenet mezői – ugyanazok a korlátok, mint az adatbázisban. */
 export const messageFields = {
   recipient_name: z.string().trim().min(1, "Add meg, kinek szól az üzenet.").max(120),
   recipient_phone: z

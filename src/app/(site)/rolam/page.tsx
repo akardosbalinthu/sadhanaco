@@ -7,7 +7,7 @@ import { KindCall, Sprout, WindingPath } from "@/components/illustrations";
 export const metadata = {
   title: "Rólam · Kardos Bálint",
   description:
-    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig — és hogyan született belőle a módszerem.",
+    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig – és hogyan született belőle a módszerem.",
 };
 
 type Photo = { src: string; alt: string; caption: string; width: number; height: number };
@@ -27,7 +27,7 @@ const STATIONS: Station[] = [
     Art: Sprout,
     paras: [
       "Babócsán nőttem fel, és nagyon jó gyerekkorom volt. Másfél éves koromtól édesanyám egyedül nevelt. Anyagilag nem volt gondtalan az élet, de gyerekként ebből semmit sem éreztem: mindig volt mit ennem, mindig volt tiszta ruhám, tető a fejem fölött, és bárhová fordultam, hatalmas szeretet vett körül. Tízéves koromig én voltam a család szeme fénye, minden figyelem középpontja.",
-      "Kíváncsi, gyors észjárású gyerek voltam: hamar átláttam a helyzeteket, és már ugrottam is volna a következőre — tartósan lekötni a figyelmemet nem volt könnyű. Nagycsoportos óvodásként magamtól tanultam meg olvasni.",
+      "Kíváncsi, gyors észjárású gyerek voltam: hamar átláttam a helyzeteket, és már ugrottam is volna a következőre – tartósan lekötni a figyelmemet nem volt könnyű. Nagycsoportos óvodásként magamtól tanultam meg olvasni.",
     ],
   },
   {
@@ -36,15 +36,15 @@ const STATIONS: Station[] = [
     Art: CrestMagusok,
     paras: [
       "Édesanyám később újraházasodott, és tízéves koromtól másfél éven belül megszületett a húgom és az öcsém (édesapám ágáról pedig van még egy húgom). Ma már nem hibáztatok érte senkit, de a világ közepéből hirtelen a legidősebb testvér lettem: egészen más szerep, más felelősséggel és jóval kevesebb figyelemmel, törődéssel.",
-      "Ekkor fordultam a fantáziavilágok felé. Nem csak olvastam őket — éltem bennük. A fejemben minden főszereplőhöz volt valamilyen viszonyom; én is a világ része voltam.",
-      "A Harry Potterrel kezdődött, aztán jött a Warcraft, a Gyűrűk Ura és a Magus, és onnan egyenes út vezetett a világok mélyére. Kamaszként a World of Warcraft online szerepjátékban éreztem először, hogy lehetek nagy, különleges és erős — szinte mindig mágussal játszottam.",
+      "Ekkor fordultam a fantáziavilágok felé. Nem csak olvastam őket – éltem bennük. A fejemben minden főszereplőhöz volt valamilyen viszonyom; én is a világ része voltam.",
+      "A Harry Potterrel kezdődött, aztán jött a Warcraft, a Gyűrűk Ura és a Magus, és onnan egyenes út vezetett a világok mélyére. Kamaszként a World of Warcraft online szerepjátékban éreztem először, hogy lehetek nagy, különleges és erős – szinte mindig mágussal játszottam.",
     ],
   },
   {
     when: "2007 · 12 évesen",
     title: "Százig számolni, a légzésre figyelve",
     paras: [
-      "Két kisebbik testvérem tíz és tizenegy évvel fiatalabb nálam, és a korkülönbség miatt sokszor az őrületbe kergettek. Tizenkét évesen rájöttem valamire: ha ilyenkor bemegyek a szobámba, leülök az ágyra, becsukom a szemem, és csak a légzésemre figyelve elszámolok százig, utána megnyugszom — és sokkal kedvesebb tudok lenni velük.",
+      "Két kisebbik testvérem tíz és tizenegy évvel fiatalabb nálam, és a korkülönbség miatt sokszor az őrületbe kergettek. Tizenkét évesen rájöttem valamire: ha ilyenkor bemegyek a szobámba, leülök az ágyra, becsukom a szemem, és csak a légzésemre figyelve elszámolok százig, utána megnyugszom – és sokkal kedvesebb tudok lenni velük.",
       "Néhány évvel később kaptam a születésnapomra egy könyvet a buddhizmusról, és meglepve olvastam, hogy amit évek óta csinálok, annak neve van: meditáció. Legalábbis a legegyszerűbb, kezdő változata.",
     ],
   },
@@ -60,7 +60,7 @@ const STATIONS: Station[] = [
     when: "2015",
     title: "Budapest, és a legfiatalabb kolléga",
     paras: [
-      "Felvettek egy budapesti egyetem gazdasági karára. Felköltöztem, és dolgoznom kellett, hogy fenntartsam magam: előbb egy gyorsétteremben, aztán gyakornokként egy rendezvényszervező cégnél, alig fél évvel a költözés után pedig egy nemzetközi telekommunikációs vállalat brit piacot támogató csapatában — a cég történetének legfiatalabb főállású munkatársaként.",
+      "Felvettek egy budapesti egyetem gazdasági karára. Felköltöztem, és dolgoznom kellett, hogy fenntartsam magam: előbb egy gyorsétteremben, aztán gyakornokként egy rendezvényszervező cégnél, alig fél évvel a költözés után pedig egy nemzetközi telekommunikációs vállalat brit piacot támogató csapatában – a cég történetének legfiatalabb főállású munkatársaként.",
     ],
   },
   {
@@ -68,7 +68,7 @@ const STATIONS: Station[] = [
     title: "„Ez az élet?”",
     paras: [
       "A huszonegyedik születésnapom körül megfogalmazódott bennem egy kérdés: most akkor még kétszer annyi ideig, ahány éves vagyok, ezt kell csinálnom? Évente kétszer elmehetek egy rövid pihenésre, és ennyi? Szerettem volna azt hinni, hogy az élet ennél több.",
-      "Tanulni kezdtem — webfejlesztést, keresőoptimalizálást, közösségimédia-marketinget, projektmenedzsmentet —, pár év múlva pedig kiléptem, és szabadúszó online marketing- és projektmenedzserként dolgoztam tovább. Csapatokat vezettem, izgalmas projekteken, szinte bárhonnan dolgozhattam. Elértem az akkori álmomat.",
+      "Tanulni kezdtem – webfejlesztést, keresőoptimalizálást, közösségimédia-marketinget, projektmenedzsmentet –, pár év múlva pedig kiléptem, és szabadúszó online marketing- és projektmenedzserként dolgoztam tovább. Csapatokat vezettem, izgalmas projekteken, szinte bárhonnan dolgozhattam. Elértem az akkori álmomat.",
     ],
     photos: [{ src: "/images/rolam/eloadas.webp", alt: "Kardos Bálint előadást tart egy teremnyi hallgatóságnak", caption: "Előadás közben, a marketinges évek alatt", width: 1000, height: 1244 }],
   },
@@ -76,8 +76,8 @@ const STATIONS: Station[] = [
     when: "2016–2018",
     title: "„Szeretlek, apa”",
     paras: [
-      "Édesapámat huszonegy évesen ismertem meg. Kisgyerekkoromban elhagyott, és két évtizedig nem is keresett — ezért az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
-      "Aztán a kitartó felelősségvállalása, és ahogyan a tetteivel próbálta helyrehozni a hibáit, meggyőzött. Jóban lettünk — igazi apa–fia kapcsolatunk lett. Alig másfél évvel később egyszer munkából hazafelé azzal hívtam fel: „Szeretlek, apa.” Három hónappal később már nem élt — gyomorrákban és annak szövődményeiben hunyt el.",
+      "Édesapámat huszonegy évesen ismertem meg. Kisgyerekkoromban elhagyott, és két évtizedig nem is keresett – ezért az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
+      "Aztán a kitartó felelősségvállalása, és ahogyan a tetteivel próbálta helyrehozni a hibáit, meggyőzött. Jóban lettünk – igazi apa–fia kapcsolatunk lett. Alig másfél évvel később egyszer munkából hazafelé azzal hívtam fel: „Szeretlek, apa.” Három hónappal később már nem élt – gyomorrákban és annak szövődményeiben hunyt el.",
     ],
   },
   {
@@ -85,7 +85,7 @@ const STATIONS: Station[] = [
     title: "Az első kiégés",
     paras: [
       "Épp kiköltöztünk volna néhány barátommal Balira, amikor jött a járvány, és elsöpörte a terveinket. Ekkor égtem ki először.",
-      "Egyre jobban zavart, hogy a munkám értéke egyetlen dolgon múlik: a megtérülésen. Az volt a dolgom, hogy néhány számot alacsonyabban, néhányat magasabban tartsak egy kijelzőn. Nem éreztem, hogy valódi értéket teremtek — inkább csak pörgettem a fogyasztói társadalmat.",
+      "Egyre jobban zavart, hogy a munkám értéke egyetlen dolgon múlik: a megtérülésen. Az volt a dolgom, hogy néhány számot alacsonyabban, néhányat magasabban tartsak egy kijelzőn. Nem éreztem, hogy valódi értéket teremtek – inkább csak pörgettem a fogyasztói társadalmat.",
     ],
   },
   {
@@ -93,7 +93,7 @@ const STATIONS: Station[] = [
     title: "Vacsoraestek egy tetőteraszon, aztán a nagykonyha",
     paras: [
       "Egy barátommal kibéreltünk egy elképesztően szép, háromszintes belvárosi penthouse-t, harminc négyzetméteres saját tetőterasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek. Egy kórházban fekvő gyerekeket támogató adománygyűjtő kampány nagyköveteként ezeken a vacsorákon valamivel több mint félmillió forintot gyűjtöttem, amivel a kampány második legtöbbet gyűjtő nagykövete lettem. A kampányt követő öt hónapban pedig további közel egymillió forintot gyűjtöttünk ugyanilyen vacsorákon. A csúcs egy 2021. márciusi jótékonysági fine dining gálavacsora volt: hét fogás, harmincöt vendég. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
-      "Ezután otthagytam a jól fizető marketingprojekteket, és elmentem szakácsnak. Kevesebb pénz, több és keményebb munka, alig szabadidő — mégis boldogabb voltam, mint addig bármikor. Végigjártam a konyhai ranglétrát a mosogatótól a konyhafőnökig. Néhány év után viszont azt éreztem: többre vagyok képes.",
+      "Ezután otthagytam a jól fizető marketingprojekteket, és elmentem szakácsnak. Kevesebb pénz, több és keményebb munka, alig szabadidő – mégis boldogabb voltam, mint addig bármikor. Végigjártam a konyhai ranglétrát a mosogatótól a konyhafőnökig. Néhány év után viszont azt éreztem: többre vagyok képes.",
     ],
     photos: [
       { src: "/images/rolam/jotekonysag.webp", alt: "Kardos Bálint az adománygyűjtő kampány nagyköveti oklevelével", caption: "Nagyköveti oklevél: a teljes kampány több mint 11,5 millió forintot gyűjtött a gyerekeknek", width: 1000, height: 1333 },
@@ -102,9 +102,9 @@ const STATIONS: Station[] = [
   },
   {
     when: "2010–2026",
-    title: "Sok minden — és egyetlen dolog",
+    title: "Sok minden – és egyetlen dolog",
     paras: [
-      "Dolgoztam a kereskedelemben és telefonos értékesítőként, voltam értékesítéstámogató egy multinál, kis- és középvállalkozások marketing- és értékesítési vezetője, közösségszervező, jótékonysági vacsorák házigazdája, egy gyerekeket segítő alapítvány kuratóriumi elnöke, privát séf, sofőr, raktáros és podcaster — egyszer még szinkronszínésznek is jelentkeztem. Építettem vályogházat Marokkóban, és több országban vigyáztam macskákra, „hivatásszerűen”.",
+      "Dolgoztam a kereskedelemben és telefonos értékesítőként, voltam értékesítéstámogató egy multinál, kis- és középvállalkozások marketing- és értékesítési vezetője, közösségszervező, jótékonysági vacsorák házigazdája, egy gyerekeket segítő alapítvány kuratóriumi elnöke, privát séf, sofőr, raktáros és podcaster – egyszer még szinkronszínésznek is jelentkeztem. Építettem vályogházat Marokkóban, és több országban vigyáztam macskákra, „hivatásszerűen”.",
       "Ha van tankönyvi példája annak, akit mindig elcsábít a következő izgalmas dolog, az én vagyok. Egyetlen kivétellel: három és fél éve minden áldott nap, kihagyás nélkül gyakorlok egy dogma- és vallásmentes önismereti technikát, az ECO-t. Ez az egyetlen, amely mellett valóban kitartottam.",
     ],
     note: {
@@ -118,8 +118,8 @@ const STATIONS: Station[] = [
     when: "2026 nyara",
     title: "Egy mély pont, és egy felismerés",
     paras: [
-      "Egy szakítás után nagyon mélyre kerültem — annyira, hogy sürgősen beszélgetést kértem az egyik önismereti oktatómtól. Ott vált világossá, ami évek óta érlelődött bennem: semmi nem érdekel igazán, ami nem az emberi tudat fejlődéséről szól. Ezért tudtam kitartani az önismereti gyakorlás mellett — és ezért nem ment hosszan semmi más.",
-      "Egy több százalékkal sikeresebb kampánytól nem csillan fel a szemem. Attól viszont igen, ha valaki egy önismereti folyamat végén felismer magában egy mintát, megdolgozik vele, és ettől kedvesebben szól a társához, ki meri mutatni a szeretetét a gyerekeinek, vagy önazonosabban húzza meg a határait. Szerintem ezek tesznek minket tartósan boldogabbá — nem a több pénz, a szebb autó vagy a két szobával nagyobb ház.",
+      "Egy szakítás után nagyon mélyre kerültem – annyira, hogy sürgősen beszélgetést kértem az egyik önismereti oktatómtól. Ott vált világossá, ami évek óta érlelődött bennem: semmi nem érdekel igazán, ami nem az emberi tudat fejlődéséről szól. Ezért tudtam kitartani az önismereti gyakorlás mellett – és ezért nem ment hosszan semmi más.",
+      "Egy több százalékkal sikeresebb kampánytól nem csillan fel a szemem. Attól viszont igen, ha valaki egy önismereti folyamat végén felismer magában egy mintát, megdolgozik vele, és ettől kedvesebben szól a társához, ki meri mutatni a szeretetét a gyerekeinek, vagy önazonosabban húzza meg a határait. Szerintem ezek tesznek minket tartósan boldogabbá – nem a több pénz, a szebb autó vagy a két szobával nagyobb ház.",
     ],
   },
   {
@@ -127,7 +127,7 @@ const STATIONS: Station[] = [
     title: "Rishikesh: két hónap a forrásnál",
     Art: WindingPath,
     paras: [
-      "Ezért döntöttem úgy — minden racionalitást félretéve, szinte teljes anyagi és lelki csődben —, hogy két hónapra Indiába utazom, egy 500 órás jógaoktatói képzésre. A jóga elvei közeli rokonai annak, amit addig is naponta gyakoroltam; korábban elvégeztem egy életmód-orvostani tanácsadói képzést, és tizenkét éves korom óta meditálok. Minden a helyére került.",
+      "Ezért döntöttem úgy – minden racionalitást félretéve, szinte teljes anyagi és lelki csődben –, hogy két hónapra Indiába utazom, egy 500 órás jógaoktatói képzésre. A jóga elvei közeli rokonai annak, amit addig is naponta gyakoroltam; korábban elvégeztem egy életmód-orvostani tanácsadói képzést, és tizenkét éves korom óta meditálok. Minden a helyére került.",
       "Közvetlenül a forrásnál akartam tanulni, és közben megtalálni, ki is vagyok valójában.",
     ],
   },
@@ -137,7 +137,7 @@ const STATIONS: Station[] = [
     Art: KindCall,
     paras: [
       "Indiában bukkantam rá egy amerikai kezdeményezésre, amely meglepetés-telefonhívásokban ad át kedves üzeneteket. Írtam nekik, és megkaptam az engedélyt, hogy magyarul is elindítsam.",
-      "Hiszem, hogy egy-egy ilyen üzenettel bearanyozhatjuk egymás napjait. Olyan ritkán mondjuk ki, ami szép, jó és szeretetteljes — melengeti a szívemet, hogy ezt visszahozhatom az emberek életébe. Így született az Egy Kedves Üzenet.",
+      "Hiszem, hogy egy-egy ilyen üzenettel bearanyozhatjuk egymás napjait. Olyan ritkán mondjuk ki, ami szép, jó és szeretetteljes – melengeti a szívemet, hogy ezt visszahozhatom az emberek életébe. Így született az Egy Kedves Üzenet.",
     ],
   },
 
@@ -146,19 +146,30 @@ const STATIONS: Station[] = [
 const CONVERGE = [
   { from: "A százig számolás tizenkét évesen", to: "a meditáció, amely a program gerince" },
   { from: "A rishikeshi jógaoktató-képzés", to: "a módszer belső oldala: a jóga nyolc ága, az értékektől a meditációig" },
-  { from: "Az életmód-orvostan és az idegtudomány", to: "a módszer külső oldala: alvás, mozgás, étkezés, stresszkezelés és kapcsolatok — mindig a magyarázattal, hogy tudd, mit miért csinálsz" },
+  { from: "Az életmód-orvostan és az idegtudomány", to: "a módszer külső oldala: alvás, mozgás, étkezés, stresszkezelés és kapcsolatok – mindig a magyarázattal, hogy tudd, mit miért csinálsz" },
   { from: "A közösségszervezés", to: "a Nyílt Meditációs Estek, ahol személyesen is találkozunk" },
   { from: "Egy kedves üzenet", to: "az Egy Kedves Üzenet, amely emlékeztet: valaki gondol ránk" },
+];
+
+/** Az oklevelek képei (kattintásra nagyban nyílnak). A jógaoktatói oklevél a megérkezése után kerül ide. */
+const CERTIFICATES = [
+  {
+    src: "/images/oklevelek/lifestyle-medicine-consultant.webp",
+    alt: "A LifestylePro Academy tanúsítványa: Kardos Bálint sikeresen teljesítette a Lifestyle Medicine Consultant (Életmód-tanácsadó) online képzést, 2026. június 30.",
+    label: "Életmód-tanácsadó · LifestylePro Academy",
+    w: 2000,
+    h: 1414,
+  },
 ];
 
 const LESSONS = [
   "A jóga nem a hajlékonyságról és a tökéletes pózokról szól, hanem a meditációról és a figyelemről.",
   "A „tökéletes” teljesen szubjektív, és folyamatosan változik.",
-  "Az idegrendszerem irányítja az életemet — ha változtatni szeretnék, érdemes ott kezdeni.",
+  "Az idegrendszerem irányítja az életemet – ha változtatni szeretnék, érdemes ott kezdeni.",
   "A valódi tudatosság a hétköznapok sűrűjében is jelen van, nem csak gyakorlás közben.",
   "Az empátia, az őszinteség, a nemet mondás és a határok az egészséges kapcsolatok alapjai.",
   "Az életnek nem az a célja, hogy sikeres legyek, hanem hogy értékes. A siker ennek csak a mellékterméke.",
-  "Nem kell feltétel nélkül elhinnem minden gondolatomat és érzésemet. Egyik sem én vagyok — csak néha azonosulok velük.",
+  "Nem kell feltétel nélkül elhinnem minden gondolatomat és érzésemet. Egyik sem én vagyok – csak néha azonosulok velük.",
   "Senkinél sem vagyok jobb, de nálam sem jobb senki.",
   "Minden az én felelősségem, de nem minden az én hibám.",
   "A fájdalom elkerülhetetlen, a szenvedés választható.",
@@ -262,7 +273,7 @@ export default function AboutPage() {
       <section>
         <SectionTitle eyebrow="Ahol minden összeér" title="A program összeköti a múltamat a jelenemmel." />
         <p className="mt-4 max-w-2xl text-ink-soft">
-          Komoly témában segít, tudományosan megalapozott eszközökkel — de nem veszi túl komolyan önmagát. Nem orvosi
+          Komoly témában segít, tudományosan megalapozott eszközökkel – de nem veszi túl komolyan önmagát. Nem orvosi
           kezelés és nem vallás, hanem személyes út, amelyen végig kísérlek. Benne van minden, ami fontos nekem:
         </p>
         <ul className="mt-10 grid gap-x-10 gap-y-6 md:grid-cols-2">
@@ -326,7 +337,7 @@ export default function AboutPage() {
         <div>
           <SectionTitle eyebrow="Amiben hiszek" title="Figyeljünk jobban arra, ami tényleg számít." />
           <p className="mt-4 text-ink-soft">
-            Szeretném, ha tudatosabbak lennénk, és jobban odafigyelnénk azokra a dolgokra, amelyek igazán fontosak —
+            Szeretném, ha tudatosabbak lennénk, és jobban odafigyelnénk azokra a dolgokra, amelyek igazán fontosak –
             például egymásra. Hiszem, hogy ez nem nagy fogadalmakkal kezdődik, hanem egy lassú kilégzéssel, egy kedves
             mondattal, egy telefon nélküli reggellel. Napról napra.
           </p>
@@ -338,6 +349,21 @@ export default function AboutPage() {
             <li>Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh)</li>
             <li>Tizenkét éves korom óta meditálok, három és fél éve minden nap gyakorlom az ECO önismereti technikát</li>
           </ul>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            {CERTIFICATES.map((c) => (
+              <a key={c.src} href={c.src} target="_blank" rel="noopener" className="group block" title="Megnyitás nagyban">
+                <Image
+                  src={c.src}
+                  alt={c.alt}
+                  width={c.w}
+                  height={c.h}
+                  sizes="(min-width: 1024px) 220px, 45vw"
+                  className="w-full rounded-md border border-line transition-colors duration-500 group-hover:border-gold/60"
+                />
+                <span className="mt-1.5 block text-xs text-ink-soft">{c.label}</span>
+              </a>
+            ))}
+          </div>
         </GildedCard>
       </section>
 
@@ -350,7 +376,7 @@ export default function AboutPage() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
           Ha valamelyik állomásban magadra ismertél, és most kezdenél, töltsd ki a felmérést. Ha előbb személyesen
-          ismerkednél, gyere el egy Nyílt Meditációs Estre — szeretettel várlak.
+          ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/jelentkezes" className={buttonPrimary}>

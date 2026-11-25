@@ -97,7 +97,7 @@ export default async function MyProgramPage() {
                 <a
                   href={googleCalendarUrl({
                     uid: next.id,
-                    title: "Egyéni alkalom — Kardos Bálint",
+                    title: "Egyéni alkalom – Kardos Bálint",
                     start: new Date(next.starts_at),
                     end: new Date(new Date(next.starts_at).getTime() + next.duration_minutes * 60_000),
                     description: "Online, Google Meeten. A belépés a Programom oldalon.",

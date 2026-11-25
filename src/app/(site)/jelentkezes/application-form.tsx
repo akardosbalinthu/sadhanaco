@@ -56,7 +56,7 @@ export function ApplicationForm() {
         <Check className="h-6 w-6 text-gold" strokeWidth={1.5} aria-hidden />
         <h2 className="font-serif text-3xl text-forest">Köszönöm{state.name ? `, ${state.name}` : ""}!</h2>
         <p className="text-lg leading-relaxed text-ink-soft">
-          Azt írtad, most még nem kezdenéd el — és ez teljesen rendben van. Az egyéni programot azoknak ajánlom, akik
+          Azt írtad, most még nem kezdenéd el – és ez teljesen rendben van. Az egyéni programot azoknak ajánlom, akik
           most szeretnének belevágni, mert akkor tudom igazán jól kísérni.
         </p>
         <p className="text-lg leading-relaxed text-ink-soft">
