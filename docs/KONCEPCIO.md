@@ -72,7 +72,7 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 
 ## 6. Új arculati alap — jóváhagyva, részletek: `docs/ARCULAT.md`
 
-- **Vezérmondat:** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
+- **Leíró mondat (alcím):** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva. A fő cím a haszonról szól (kiválasztás alatt).
 
 - **A fő üzenet:** egy teljes, holisztikus út — meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
 - **A cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával.

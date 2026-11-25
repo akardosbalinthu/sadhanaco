@@ -6,7 +6,9 @@
 
 **Egy teljes, személyre szabott út:** meditáció, légzés, test, életmód és kapcsolatok egyetlen programban. Az alapja Bálint egyedi módszertana, amely a jóga nyolc ágát az életmód-orvostan hat pillérével vegyíti, személyes vezetéssel, a résztvevő saját életére szabva.
 
-**Vezérmondat:** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
+**Leíró mondat (alcím, meta description):** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
+
+**Fő cím (headline):** a haszonról beszél, nem a módszerről — kiválasztás alatt.
 
 **Üzleti cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával (5. pont).
 
