@@ -74,7 +74,7 @@ export default async function MyOrderPage() {
       <MemberNav active="" />
 
       <header className="text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">A Ceremónia kiértékelése</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">A Ceremónia kiértékelése</p>
         <OrderCrest order={primary} className="mx-auto mt-6 h-32 w-28" />
         <h1 className="mt-4 font-serif text-4xl text-forest sm:text-5xl">{o.single} vagy</h1>
         <p className="mt-2 text-gold">{o.name} · {o.gift}</p>
@@ -86,7 +86,7 @@ export default async function MyOrderPage() {
       <CompassDivider className="my-12" />
 
       <section>
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">A hangolásod</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">A hangolásod</p>
         <h2 className="mt-2 font-serif text-2xl text-forest">Négy hang, különböző erővel</h2>
         <p className="mt-2 text-sm text-ink-soft">
           Mindenkiben mind a négy rend hangja megszólal — a kérdőív azt mutatja, melyik a legerősebb. A tizenkét
@@ -114,7 +114,7 @@ export default async function MyOrderPage() {
       <CompassDivider className="my-12" />
 
       <section>
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">Rólad, a válaszaid alapján</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Rólad, a válaszaid alapján</p>
         <div className="mt-6 space-y-7">
           {sections.map(([title, text]) => (
             <div key={title}>
@@ -127,7 +127,7 @@ export default async function MyOrderPage() {
 
       {strongSecond && (
         <GildedCard className="mt-12 p-7">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">A második hangod</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">A második hangod</p>
           <div className="mt-3 flex items-center gap-4">
             <OrderCrest order={second} className="h-14 w-12 shrink-0" />
             <h3 className="font-serif text-2xl text-forest">
@@ -143,7 +143,7 @@ export default async function MyOrderPage() {
       )}
 
       <section className="mt-12">
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">Ahol a legtöbbet tanulhatsz</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Ahol a legtöbbet tanulhatsz</p>
         <div className="mt-3 flex items-center gap-4">
           <OrderCrest order={lowest} className="h-14 w-12 shrink-0" />
           <h3 className="font-serif text-2xl text-forest">{ORDER_INFO[lowest].name} · {pct(lowest)}%</h3>
@@ -157,7 +157,7 @@ export default async function MyOrderPage() {
       <CompassDivider className="my-12" />
 
       <section>
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">A válaszaid</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">A válaszaid</p>
         <h2 className="mt-2 font-serif text-2xl text-forest">Amit a tizenkét kérdés megmutatott</h2>
         <ol className="mt-6 space-y-4">
           {mine.map((a) => (
@@ -174,7 +174,7 @@ export default async function MyOrderPage() {
       </section>
 
       <GildedCard className="mt-12 p-7">
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">Gyakorlás neked</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Gyakorlás neked</p>
         <p className="mt-3 leading-relaxed text-ink">{p.practice}</p>
         <p className="mt-3 text-sm text-ink-soft">
           Minden rend mindent gyakorol — a heti küldetések mindenkinek ugyanazok. A rended csak azt mutatja, mi lesz

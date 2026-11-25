@@ -26,9 +26,9 @@ export default async function OpenEveningPage({
   return (
     <main className="py-16">
       <Link href="/nyilt-estek" className="text-sm text-ink-soft transition-colors duration-300 hover:text-gold">
-        ← Minden alkalom
+        ← Vissza az alkalmakhoz
       </Link>
-      <p className="mt-10 text-xs uppercase tracking-[0.2em] text-gold">
+      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-gold">
         {formatEventDate(event.starts_at)} · {formatTime(event.starts_at)}
         {event.ends_at ? `–${formatTime(event.ends_at)}` : ""}
       </p>
@@ -38,16 +38,16 @@ export default async function OpenEveningPage({
 
       <CompassDivider className="my-12" />
 
-      <GildedCard className="max-w-md">
+      <GildedCard ornate className="max-w-lg p-8">
         {fizetes === "sikeres" ? (
           <p className="text-ink-soft">
-            Köszönjük, a fizetés megérkezett. A visszaigazolást e-mailben küldjük. Szeretettel várunk.
+            Köszönöm, a fizetés megérkezett. A visszaigazolást e-mailben küldöm. Szeretettel várlak!
           </p>
         ) : canBook ? (
           <>
             {fizetes === "megszakitva" && (
               <p className="mb-6 text-sm text-ink-soft">
-                A fizetés megszakadt. A helyedet egy rövid ideig még tartjuk, nyugodtan próbáld újra.
+                A fizetés megszakadt. A helyedet még egy rövid ideig fenntartom — nyugodtan próbáld újra.
               </p>
             )}
             {event.donation_based && (
@@ -63,7 +63,7 @@ export default async function OpenEveningPage({
             />
           </>
         ) : (
-          <p className="text-ink-soft">Erre az alkalomra a jelentkezés most nem lehetséges.</p>
+          <p className="text-ink-soft">Erre az alkalomra most nem lehet jelentkezni.</p>
         )}
       </GildedCard>
     </main>

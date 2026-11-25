@@ -14,13 +14,12 @@ export default async function LoginPage({
   return (
     <main className="mx-auto flex max-w-sm flex-col justify-center px-6 py-24">
       <GildedCard className="p-8">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">
           A Társaság
         </p>
         <h1 className="mt-3 font-serif text-3xl text-forest">Belépés</h1>
         <p className="mt-2 mb-8 text-sm text-ink-soft">
-          Jelszó nincs. Küldünk egy egyszer használatos linket az
-          e-mail-címedre.
+          Jelszóra nincs szükség: egy egyszer használható belépő linket küldök az e-mail-címedre.
         </p>
         {hiba && (
           <p className="mb-6 rounded-md border border-gold/40 bg-gold-soft/20 p-3 text-sm text-ink-soft">

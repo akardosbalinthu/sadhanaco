@@ -40,9 +40,9 @@ export default async function HikeInvitationPage({ searchParams }: { searchParam
       {ev && (
         <GildedCard className="mt-10 max-w-xl p-8">
           {ev.cancelled_at ? (
-            <p className="text-sm text-ink-soft">Ezt a túrát sajnos lemondtuk.</p>
+            <p className="text-sm text-ink-soft">Ez a túra sajnos elmarad.</p>
           ) : inv!.status === "accepted" ? (
-            <p className="text-sm text-forest">Ezt a meghívót már elfogadtad — várunk!</p>
+            <p className="text-sm text-forest">Ezt a meghívót már elfogadtad — várunk szeretettel!</p>
           ) : (
             <AcceptForm token={token} />
           )}

@@ -1,11 +1,12 @@
 import { BellOff, CalendarDays, Mail, Newspaper, Printer, Sparkles, Sunrise } from "lucide-react";
 import { publicEnv } from "@/lib/env";
-import { buttonPrimary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
+import { buttonPrimary, CompassDivider, PageHeader, SectionTitle } from "@/components/ornaments";
+import { MorningPaper } from "@/components/illustrations";
 
 export const metadata = {
   title: "Napi Közlöny · Kardos Bálint",
   description:
-    "Személyes reggeli újság a leveleidből és a naptáradból: a mesterséges intelligencia éjjel összeállítja, 4:30-kor kinyomtatja — így telefon nélkül is felkészülhetsz a napra.",
+    "Személyes reggeli újság a leveleidből és a naptáradból: a mesterséges intelligencia éjjel összeállítja, hajnalban kinyomtatja — így telefon nélkül is felkészülhetsz a napra.",
 };
 
 const STEPS = [
@@ -21,8 +22,8 @@ const STEPS = [
   },
   {
     Icon: Printer,
-    title: "4:30-kor kinyomtatódik",
-    text: "A kész lap minden éjjel automatikusan kinyomtatódik a nyomtatódon — A4-es, fekete-fehér oldalon. E-mailről nyomtatásra (Email-to-Print) képes nyomtatóval is működik.",
+    title: "Hajnali fél ötkor kinyomtatja",
+    text: "A kész lapot minden éjjel automatikusan kinyomtatja a nyomtatód — A4-es, fekete-fehér oldalon. E-mailről nyomtatásra (Email-to-Print) képes nyomtatóval is működik.",
   },
   {
     Icon: Sunrise,
@@ -34,7 +35,7 @@ const STEPS = [
 const WHAT = [
   { Icon: CalendarDays, title: "A napod menetrendje", text: "A naptárbejegyzéseidből: mikor, hol, kivel — egy pillantással átlátható sorrendben." },
   { Icon: Mail, title: "Ami a levelekből számít", text: "A beérkezett üzenetek lényege röviden, hogy ne a teljes postafiókot kelljen reggel átnézned." },
-  { Icon: Newspaper, title: "Egyetlen lap, eleje és vége", text: "Nem hírfolyam: elolvasod, és tudod, amit tudnod kell. A többi megvár, amíg te döntesz úgy, hogy foglalkozol vele." },
+  { Icon: Newspaper, title: "Egyetlen lap, amelynek vége is van", text: "Nem hírfolyam: elolvasod, és tudod, amit tudnod kell. A többi megvár, amíg te döntesz úgy, hogy foglalkozol vele." },
 ];
 
 const WHY = [
@@ -58,6 +59,7 @@ const WHY = [
 export default function DailyGazettePage() {
   return (
     <main className="py-16">
+      <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
       <PageHeader eyebrow="Várhatóan karácsonytól · Analóg reggel" title="Napi Közlöny">
         <p className="font-serif text-xl text-ink">
           Mi lenne, ha reggel úgy tudnád, mi vár rád aznap, hogy közben egyszer sem nyúlsz a telefonodhoz?
@@ -69,22 +71,24 @@ export default function DailyGazettePage() {
           és kinyomtatja, hogy reggel telefon nélkül is felkészülhess a napra.
         </p>
       </PageHeader>
+        <MorningPaper className="mx-auto hidden h-48 w-48 lg:block" />
+      </div>
 
       <CompassDivider className="my-14" />
 
       <section>
         <SectionTitle eyebrow="Hogyan működik" title="Négy lépés — ebből csak az elsőt kell neked megtenned." />
-        <ol className="mt-10 grid gap-5 sm:grid-cols-2">
+        <ol className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2">
           {STEPS.map(({ Icon, title, text }, i) => (
             <li key={title}>
-              <GildedCard className="h-full">
+              <div className="h-full border-t border-gold/30 pt-5">
                 <div className="flex items-center gap-3">
-                  <span className="font-serif text-2xl text-gold">{i + 1}</span>
-                  <Icon className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
+                  <span className="font-serif text-2xl text-gold">{i + 1}.</span>
+                  <Icon className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
                 </div>
-                <h3 className="mt-3 font-serif text-lg text-forest">{title}</h3>
-                <p className="mt-2 text-sm text-ink-soft">{text}</p>
-              </GildedCard>
+                <h3 className="mt-2 font-serif text-xl text-forest">{title}</h3>
+                <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
+              </div>
             </li>
           ))}
         </ol>
@@ -94,13 +98,13 @@ export default function DailyGazettePage() {
 
       <section>
         <SectionTitle eyebrow="Mi kerül a lapra" title="A te napod, papíron." />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
           {WHAT.map(({ Icon, title, text }) => (
-            <GildedCard key={title}>
-              <Icon className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-              <h3 className="mt-4 font-serif text-lg text-forest">{title}</h3>
-              <p className="mt-2 text-sm text-ink-soft">{text}</p>
-            </GildedCard>
+            <div key={title} className="border-t border-gold/30 pt-5">
+              <Icon className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
+              <h3 className="mt-3 font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -109,13 +113,13 @@ export default function DailyGazettePage() {
 
       <section>
         <SectionTitle eyebrow="Miért papír?" title="Mert a reggelnek nem kell sürgősnek lennie." />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
           {WHY.map(({ Icon, title, text }) => (
-            <GildedCard key={title}>
-              <Icon className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-              <h3 className="mt-4 font-serif text-lg text-forest">{title}</h3>
-              <p className="mt-2 text-sm text-ink-soft">{text}</p>
-            </GildedCard>
+            <div key={title} className="border-t border-gold/30 pt-5">
+              <Icon className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
+              <h3 className="mt-3 font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -124,7 +128,7 @@ export default function DailyGazettePage() {
 
       <section className="text-center">
         <Newspaper className="mx-auto h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
-        <p className="mt-4 text-xs uppercase tracking-[0.25em] text-gold">A Társaságban · várhatóan karácsonytól</p>
+        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-gold">A Társaságban · várhatóan karácsonytól</p>
         <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest">A Napi Közlöny A Társaság része.</h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-ink-soft">
           Egyetlen változata van, és A Társaság tagjai külön díj nélkül kapják meg. A Társaságban ez az „Analóg

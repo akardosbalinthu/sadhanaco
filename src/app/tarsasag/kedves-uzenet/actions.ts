@@ -23,7 +23,7 @@ export async function sendMemberMessage(_prev: FormState, fd: FormData): Promise
   } = await supabase.auth.getUser();
   if (!user) return { status: "error", message: "Kérlek, lépj be újra." };
   const { data: access } = await supabase.rpc("has_member_access");
-  if (!access) return { status: "error", message: "Az üzenetküldés a Társaságból aktív tagsággal érhető el." };
+  if (!access) return { status: "error", message: "Az üzenetküldéshez aktív tagság szükséges." };
 
   if (d.kind === "paid") return startPaidMessage(user.id, user.email ?? "", d, fd);
 

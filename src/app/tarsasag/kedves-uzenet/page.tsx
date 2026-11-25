@@ -59,7 +59,7 @@ export default async function MemberKindMessagePage({ searchParams }: { searchPa
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <MemberNav active="/kedves-uzenet" />
-      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Egy Kedves Üzenet</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Egy Kedves Üzenet</p>
       <h1 className="mt-3 font-serif text-4xl text-forest">Kinek mondanál ma valami kedveset?</h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         Megírod, én pedig egy meglepetés-telefonhívásban átadom. Tagként nem kell megerősítened az üzenetet, és a havi

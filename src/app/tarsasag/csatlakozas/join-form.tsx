@@ -19,7 +19,7 @@ export function JoinForm({ plans, defaultPlan }: { plans: PlanOption[]; defaultP
   return (
     <form onSubmit={keepFields(action)} className="space-y-6">
       <fieldset className="grid gap-3 sm:grid-cols-2">
-        <legend className="mb-3 text-sm text-ink-soft">Válassz csomagot</legend>
+        <legend className="mb-3 text-sm text-ink-soft">Válassz tagságot</legend>
         {plans.map((p) => (
           <label
             key={p.code}

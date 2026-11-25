@@ -77,7 +77,7 @@ export async function bookOpenEvening(
   if (paid && !onlinePaymentsEnabled()) {
     return {
       status: "error",
-      message: `Az online jelentkezés hamarosan nyílik. Addig írj nekünk: ${SITE.email}`,
+      message: `Az online jelentkezés hamarosan nyílik. Addig írj nekem: ${SITE.email}`,
     };
   }
 
@@ -106,16 +106,16 @@ export async function bookOpenEvening(
     const when = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", dateStyle: "full", timeStyle: "short" }).format(new Date(ev.starts_at));
     const mail = await sendEmail(email, `Visszaigazolás — ${ev.title}`, [
       `Kedves ${name}!`,
-      `Örömmel várunk: ${ev.title}, ${when}${ev.is_online ? " (online)" : ev.location ? `, ${ev.location}` : ""}.`,
+      `Örömmel várlak: ${ev.title}, ${when}${ev.is_online ? " (online)" : ev.location ? `, ${ev.location}` : ""}.`,
       ev.donation_based
-        ? "Az est adomány alapú: a részvétel díjmentes, a helyszínen belátásod szerint támogathatod. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassuk."
-        : "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassuk.",
+        ? "Az est adomány alapú: a részvétel díjmentes, a helyszínen belátásod szerint támogathatod. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassam."
+        : "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassam.",
     ]);
     return {
       status: "done",
       message: mail.ok
-        ? "Köszönöm, a helyed le van foglalva. A visszaigazolást e-mailben is elküldtem. Szeretettel várunk!"
-        : "Köszönöm, a helyed le van foglalva. Szeretettel várunk!",
+        ? "Köszönöm, a helyed le van foglalva. A visszaigazolást e-mailben is elküldtem. Szeretettel várlak!"
+        : "Köszönöm, a helyed le van foglalva. Szeretettel várlak!",
     };
   }
 

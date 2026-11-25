@@ -29,9 +29,9 @@ export function liveWebhookDeps(): WebhookDeps {
         email,
         "Üdv A Társaságban",
         [
-          "Kedves Társ!",
-          "Örülök, hogy csatlakoztál. A Társaságban jelszó nincs: ezzel a gombbal most beléphetsz, később pedig a belépés oldalon bármikor kérhetsz új belépő linket erre az e-mail-címre.",
-          "Az első lépés a Ceremónia: egy rövid önismereti kérdőív, amely eldönti, melyik rendbe kerülsz. Utána már indulhat is az első hét.",
+          "Kedves Tagtárs!",
+          "Örülök, hogy csatlakoztál! A Társaságba jelszó nélkül lépsz be: ezzel a gombbal most beléphetsz, később pedig a belépés oldalon bármikor kérhetsz új belépő linket erre az e-mail-címre.",
+          "Az első lépés a Ceremónia: egy rövid önismereti kérdőív, amely megmutatja, melyik rendbe tartozol. Utána már indulhat is az első hét.",
           "A link biztonsági okból egy óráig érvényes.",
         ],
         link ? { href: link, label: "Belépek A Társaságba" } : undefined,
@@ -39,7 +39,7 @@ export function liveWebhookDeps(): WebhookDeps {
     },
     async sendPaymentFailed(email) {
       await sendEmail(email, "Nem sikerült a tagsági díj terhelése", [
-        "Kedves Társ!",
+        "Kedves Tagtárs!",
         "A legutóbbi tagsági díj terhelése nem sikerült. Semmi gond: a hozzáférésed megmarad, és a Stripe a következő napokban automatikusan újrapróbálja.",
         "Ha közben lejárt vagy megváltozott a kártyád, a fiókodban az „Előfizetés kezelése” gombbal frissítheted.",
       ]);

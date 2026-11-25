@@ -10,7 +10,7 @@ export default async function WelcomePage() {
   if (!hasAccess) redirect(tp("/gyakorlas"));
   return (
     <main className="mx-auto max-w-2xl px-4 py-16 sm:px-6">
-      <p className="text-center text-xs uppercase tracking-[0.25em] text-gold">
+      <p className="text-center text-xs uppercase tracking-[0.18em] text-gold">
         Üdv A Társaságban{profile.first_name ? `, ${profile.first_name}` : ""}
       </p>
       <div className="mt-8">

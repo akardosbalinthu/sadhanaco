@@ -5,38 +5,43 @@
 
 type SvgProps = { className?: string };
 
-/** Szekcióelválasztó: két arany vonal, középen apró iránytűrózsa. */
+/** Szekcióelválasztó: egy csendes, hajszálvékony vonal, középen apró rombusszal. */
 export function CompassDivider({ className = "" }: SvgProps) {
   return (
-    <div className={`flex items-center gap-4 ${className}`} aria-hidden>
-      <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/60" />
-      <svg viewBox="0 0 24 24" className="h-5 w-5 text-gold" fill="none" stroke="currentColor" strokeWidth={1}>
-        <circle cx="12" cy="12" r="9.5" strokeOpacity={0.6} />
-        <path d="M12 3.5 13.6 12 12 20.5 10.4 12Z" fill="currentColor" fillOpacity={0.35} />
-        <path d="M3.5 12 12 10.6 20.5 12 12 13.4Z" />
+    <div className={`flex items-center gap-3 ${className}`} aria-hidden>
+      <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/35" />
+      <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 text-gold/70" fill="none" stroke="currentColor" strokeWidth={1}>
+        <path d="M6 1 11 6 6 11 1 6Z" />
       </svg>
-      <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/60" />
+      <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/35" />
     </div>
   );
 }
 
-/** Kártyakeret apró arany sarokdíszekkel. */
+/**
+ * Nyugodt kártya. Alapból egyszerű, vékony keret, mozgás nélkül; az `ornate` változat
+ * (kiemelt elemekhez) apró arany sarokdíszt kap.
+ */
 export function GildedCard({
   children,
   className = "",
+  ornate = false,
 }: {
   children: React.ReactNode;
   className?: string;
+  ornate?: boolean;
 }) {
-  const corner = "pointer-events-none absolute h-3 w-3 border-gold/70";
+  const corner = "pointer-events-none absolute h-2.5 w-2.5 border-gold/60";
   return (
-    <div
-      className={`relative rounded-md border border-line bg-paper p-6 transition-all duration-300 hover:border-gold/60 ${className}`}
-    >
-      <span className={`${corner} left-1.5 top-1.5 border-l border-t`} aria-hidden />
-      <span className={`${corner} right-1.5 top-1.5 border-r border-t`} aria-hidden />
-      <span className={`${corner} bottom-1.5 left-1.5 border-b border-l`} aria-hidden />
-      <span className={`${corner} bottom-1.5 right-1.5 border-b border-r`} aria-hidden />
+    <div className={`relative rounded-lg border border-line bg-paper p-6 ${className}`}>
+      {ornate && (
+        <>
+          <span className={`${corner} left-2 top-2 border-l border-t`} aria-hidden />
+          <span className={`${corner} right-2 top-2 border-r border-t`} aria-hidden />
+          <span className={`${corner} bottom-2 left-2 border-b border-l`} aria-hidden />
+          <span className={`${corner} bottom-2 right-2 border-b border-r`} aria-hidden />
+        </>
+      )}
       {children}
     </div>
   );
@@ -117,7 +122,7 @@ export function CrestMagusok({ className }: SvgProps) {
   );
 }
 
-/** Oldalfejléc: arany felső felirat, erdőzöld címsor, opcionális bevezető. */
+/** Oldalfejléc: csendes felső felirat, nagy, levegős címsor, opcionális bevezető. */
 export function PageHeader({
   eyebrow,
   title,
@@ -129,29 +134,29 @@ export function PageHeader({
 }) {
   return (
     <header className="max-w-2xl">
-      {eyebrow && <p className="text-xs uppercase tracking-[0.25em] text-gold">{eyebrow}</p>}
-      <h1 className="mt-4 font-serif text-4xl text-forest sm:text-5xl">{title}</h1>
-      {children && <div className="mt-6 space-y-4 text-ink-soft">{children}</div>}
+      {eyebrow && <p className="text-xs uppercase tracking-[0.18em] text-gold">{eyebrow}</p>}
+      <h1 className="mt-4 text-balance font-serif text-4xl leading-tight text-forest sm:text-5xl">{title}</h1>
+      {children && <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">{children}</div>}
     </header>
   );
 }
 
-/** Szakaszcím kisebb arany felirattal. */
+/** Szakaszcím kisebb felső felirattal. */
 export function SectionTitle({ eyebrow, title }: { eyebrow?: string; title: string }) {
   return (
-    <div>
-      {eyebrow && <p className="text-xs uppercase tracking-[0.2em] text-gold">{eyebrow}</p>}
-      <h2 className="mt-1 font-serif text-2xl text-forest">{title}</h2>
+    <div className="max-w-2xl">
+      {eyebrow && <p className="text-xs uppercase tracking-[0.18em] text-gold">{eyebrow}</p>}
+      <h2 className="mt-2 text-balance font-serif text-3xl leading-snug text-forest">{title}</h2>
     </div>
   );
 }
 
-/** Egységes gombstílusok. */
+/** Egységes gombstílusok: nyugodt, jól látható, csak színátmenettel reagál. */
 export const buttonPrimary =
-  "inline-block rounded-md border border-forest bg-forest px-5 py-2.5 text-sm text-paper transition-all duration-300 hover:border-gold hover:bg-forest/90 disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded-lg border border-forest bg-forest px-6 py-3 text-[15px] font-medium text-paper transition-colors duration-500 hover:bg-forest/85 disabled:opacity-60";
 export const buttonSecondary =
-  "inline-block rounded-md border border-forest px-5 py-2.5 text-sm text-forest transition-all duration-300 hover:border-gold hover:bg-gold-soft/40";
+  "inline-flex items-center justify-center gap-2 rounded-lg border border-forest/40 px-6 py-3 text-[15px] text-forest transition-colors duration-500 hover:border-forest hover:bg-paper-deep";
 export const inputClass =
-  "w-full rounded-md border border-line bg-paper-deep/60 px-3 py-2.5 outline-none transition-colors duration-300 focus:border-gold";
+  "w-full rounded-lg border border-line bg-paper-deep/60 px-3.5 py-3 outline-none transition-colors duration-500 focus:border-gold";
 export const linkClass =
-  "text-sm text-forest underline decoration-gold/60 underline-offset-4 transition-colors duration-300 hover:text-gold";
+  "text-forest underline decoration-gold/50 underline-offset-4 transition-colors duration-500 hover:decoration-gold";

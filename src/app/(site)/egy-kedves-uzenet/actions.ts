@@ -18,7 +18,7 @@ const DAILY_LIMIT = 5;
 /** Díjmentes Kedves Üzenet vendégként: rögzítés, majd megerősítő e-mail. */
 export async function submitGuestMessage(_prev: FormState, fd: FormData): Promise<FormState> {
   if (String(fd.get("website") ?? "") !== "") {
-    return { status: "done", message: "Köszönjük! Nézd meg a postafiókodat." }; // robot: csendben eldobjuk
+    return { status: "done", message: "Köszönöm! Nézd meg a postafiókodat." }; // robot: csendben eldobjuk
   }
   const parsed = guestSchema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return { status: "error", message: firstIssue(parsed.error) };
@@ -65,11 +65,11 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
     { href: link, label: "Megerősítem az üzenetet" },
   );
   if (!sent.ok) {
-    return { status: "error", message: "Az üzeneted megvan, de a megerősítő e-mailt most nem tudtuk elküldeni. Kérlek, próbáld újra kicsit később." };
+    return { status: "error", message: "Az üzeneted megvan, de a megerősítő e-mailt most nem tudtam elküldeni. Kérlek, próbáld újra kicsit később." };
   }
   return {
     status: "done",
-    message: `Köszönöm! Küldtem egy megerősítő e-mailt a(z) ${d.guest_email} címre. A benne lévő linkkel erősítsd meg az üzenetet — utána bekerül a sorba.`,
+    message: `Köszönöm! Küldtem egy megerősítő e-mailt erre a címre: ${d.guest_email}. A benne lévő linkkel erősítsd meg az üzenetet — utána bekerül a sorba.`,
   };
 }
 

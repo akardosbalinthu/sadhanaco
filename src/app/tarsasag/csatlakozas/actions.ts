@@ -40,11 +40,11 @@ export async function startCheckout(_prev: JoinState, formData: FormData): Promi
         ? "A csatlakozáshoz kérlek, fogadd el az ÁSZF-et és az adatkezelési tájékoztatót."
         : missing("waiver")
         ? "A csatlakozáshoz kérlek, fogadd el az azonnali teljesítésről szóló nyilatkozatot."
-        : "Kérlek, válassz csomagot, add meg a neved és egy érvényes e-mail-címet.",
+        : "Kérlek, válassz tagságot, add meg a neved és egy érvényes e-mail-címet.",
     };
   }
   if (!onlinePaymentsEnabled()) {
-    return { status: "error", message: `Az online csatlakozás hamarosan nyílik. Addig írj nekünk: ${SITE.email}` };
+    return { status: "error", message: `Az online csatlakozás hamarosan nyílik. Addig írj nekem: ${SITE.email}` };
   }
 
   const { email } = parsed.data;
@@ -63,7 +63,7 @@ export async function startCheckout(_prev: JoinState, formData: FormData): Promi
     .eq("email", email)
     .maybeSingle();
   if (profile && profile.tier !== "none" && ["active", "trialing", "past_due"].includes(profile.subscription_status)) {
-    return { status: "error", message: "Ezzel az e-mail-címmel már tag vagy. Lépj be, és a fiókodban válthatsz csomagot." };
+    return { status: "error", message: "Ezzel az e-mail-címmel már tag vagy. Lépj be, és a fiókodban válthatsz tagságot." };
   }
 
   let trialDays = 0;

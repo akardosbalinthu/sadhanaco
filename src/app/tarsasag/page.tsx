@@ -15,6 +15,7 @@ import {
   Wind,
 } from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
+import { Sprout, WindingPath } from "@/components/illustrations";
 import { formatHuf, tp } from "@/lib/site";
 import { notifyHref } from "@/lib/cta";
 import { onlinePaymentsEnabled } from "@/lib/stripe";
@@ -57,19 +58,19 @@ const BENEFITS = [
 const STEPS = [
   {
     title: "Csatlakozol",
-    text: "Kiválasztod az utad, és e-mailben megkapod a belépő linket — jelszó nincs. A havi tagságot 7 napig kipróbálhatod.",
+    text: "Kiválasztod a tagságodat, és e-mailben megkapod a belépő linket — jelszóra nincs szükség. A havi tagságot 7 napig díjmentesen kipróbálhatod.",
   },
   {
-    title: "Részt veszel a Ceremónián",
-    text: "Egy 12 kérdéses önismereti kérdőív — a Ceremónia — eldönti, melyik rendbe kerülsz: Tündék, Kertőrzők, Törpök vagy Vándorok.",
+    title: "Kitöltöd a Ceremóniát",
+    text: "Egy 12 kérdéses önismereti kérdőív — a Ceremónia — megmutatja, melyik rendbe tartozol: Tündék, Kertőrzők, Törpök vagy Vándorok.",
   },
   {
     title: "Online modul, aztán nyolc hét",
-    text: "Az első lépcső egy online modullal indul a platformon, utána nyolc hétig reggel és este gyakorolsz, hetente beszámolsz, és egy gyakorlótárs kísér az úton.",
+    text: "Az első lépcső egy rövid online modullal indul, utána nyolc hétig reggel és este gyakorolsz, hetente beszámolsz, és egy gyakorlótárs kísér.",
   },
   {
     title: "Közösen haladsz",
-    text: "Közös meditáció, pénteki kör, budapesti alkalmak, havi túra. Amikor készen állsz, egy rövid beszélgetés után továbblépsz.",
+    text: "Közös meditáció, pénteki kör, budapesti alkalmak és havi túra. Amikor készen állsz, egy rövid beszélgetés után továbblépsz.",
   },
 ];
 
@@ -85,7 +86,7 @@ const ORDERS = [
       "Megérint egy jól eltalált mondat, egy fény, egy apró részlet.",
     ],
     strength: "Finomhangolt belső érzékelés és mély empátia. Ahol mások zajt hallanak, te árnyalatokat.",
-    path: "Hogy az érzékenység ne árasszon el: határok, földelés, hosszabb kilégzés — érezni, de nem elsodródni.",
+    path: "Hogy az érzékenység ne árasszon el: határok, testtudat és hosszabb kilégzés — érezni, de nem elsodródni.",
   },
   {
     name: "Kertőrzők",
@@ -175,7 +176,7 @@ const PATH = [
         sub: "8+1 hét · heti beszámolóval",
         paras: [
           "Itt válik a modul tapasztalata mindennapi képességgé. Nyolc héten át reggel és este gyakorolsz, és hetente 3–7 alkalommal egy 15–45 perces, elmélyültebb meditációt végzel. Minden héten rövid beszámolót adsz, és váltakozó gyakorlótársakkal kísérjük egymást, hogy senki ne maradjon egyedül az úton.",
-          "A +1. alkalom a közös lezárás. Ehhez a vállalt gyakorlások legalább 80%-át kell teljesítened; a lépcsőt személyes áldással zárjuk.",
+          "A +1. alkalom a közös lezárás. Ehhez a vállalt gyakorlások legalább 80%-át kell teljesítened; a lépcsőt egy személyes beszélgetéssel zárjuk.",
         ],
       },
     ],
@@ -199,7 +200,7 @@ const PATH = [
         sub: "8+1 hét · heti beszámolóval",
         paras: [
           "Fókuszban a belső kritikus elhalkítása és az érzelmi stabilitás. Elméletben megismered az elme működését, szintjeit és állapotait, a jóga nyolc ágát — egy fa példáján —, valamint a hagyomány etikai alapelveit.",
-          "Reggel és este gyakorolsz, hetente 3–7 alkalommal egy 30–60 perces meditációval. A 4. héttől egy együttérzés-gyakorlat is csatlakozik, amelyben a jóindulatot hétről hétre szélesebb körre terjeszted ki: önmagadtól a szeretteiden és a számodra semleges embereken át a nehéz kapcsolataidig, végül minden élőlényig. A +1. alkalom a közös lezárás, személyes áldással.",
+          "Reggel és este gyakorolsz, hetente 3–7 alkalommal egy 30–60 perces meditációval. A 4. héttől egy együttérzés-gyakorlat is csatlakozik, amelyben a jóindulatot hétről hétre szélesebb körre terjeszted ki: önmagadtól a szeretteiden és a számodra semleges embereken át a nehéz kapcsolataidig, végül minden élőlényig. A +1. alkalom a közös lezárás, személyes beszélgetéssel.",
         ],
       },
     ],
@@ -214,7 +215,7 @@ const PATH = [
         sub: "8+1 hét · felkészülés az elvonulásra · heti beszámolóval",
         paras: [
           "Fókuszban az öt mentális akadály tudatos, elemző szétbontása, és az út a kikezdhetetlen, tiszta jelenlétig — ahhoz a minőséghez, amikor másoknak is biztonságos teret tudsz tartani. Elméletben az elme „mérgeivel”, a háromtest-elmélettel és a filozófia hat nagy kérdésével foglalkozunk.",
-          "Reggel és este gyakorolsz, hetente 3–7 alkalommal egy 45–90 perces meditációval, mellette rövid, elemző és kérdező elmélyülésekkel. A feltétel a II. lépcső elvégzése, a +1. alkalom a közös lezárás, személyes áldással. Az IP 3 a Szabadság Elvonulás előfeltétele.",
+          "Reggel és este gyakorolsz, hetente 3–7 alkalommal egy 45–90 perces meditációval, mellette rövid, elemző és kérdező elmélyülésekkel. A feltétel a II. lépcső elvégzése, a +1. alkalom a közös lezárás, személyes beszélgetéssel. Az IP 3 a Szabadság Elvonulás előfeltétele.",
         ],
       },
     ],
@@ -237,7 +238,7 @@ const PATH = [
 ];
 
 
-const RANKS = ["Kereső", "Figyelő", "Horgonyzó", "Csendőrző", "Egyensúlyozó", "Útitárs", "Őrző"];
+const RANKS = ["Tanonc", "Inas", "Legény", "Vándorlegény", "Mester", "Nagymester", "Bölcs"];
 
 const COMMUNITY = [
   { Icon: Users, title: "Heti online közös meditáció", text: "Élőben, együtt — bárhonnan bekapcsolódhatsz." },
@@ -260,7 +261,7 @@ const TIERS = [
       "I. Modul (Jelenlét) + I. Integrációs Program — 8+1 hét, azonnal",
       "Napi Küldetések, gyakorlónapló és saját Karakterkártya",
       "Közösségi tér, pénteki kör, heti online közös meditáció",
-      "Havi Q&A felvételek",
+      "Havi kérdezz-felelek: élőben nézheted, és felvételről is visszanézheted",
       "Havi ingyenes közös túra — vendéget is hozhatsz",
       "Havi élő szerepjáték- (D&D) és társasjáték-est",
       "Heti, havi és negyedéves ranglista a tagoknak — elrejtheted magad",
@@ -268,8 +269,8 @@ const TIERS = [
       "Havi 1 díjmentes Elsőbbségi Kedves Üzenet",
       "Napi Közlöny díjmentesen — várhatóan karácsonytól",
       "Nyílt Est 3 200 Ft-ért (4 940 Ft helyett), Élő Gyakorlónap 6 460 Ft",
-      "1-on-1 konzultáció tagi áron: 15 000 Ft",
-      "A II. és III. lépcső díjmentesen nyílik a rangoddal (Horgonyzó, illetve Csendőrző) — fizetni csak akkor kell, ha gyorsítanál",
+      "Egyéni konzultáció Bálinttal, tagi áron: 15 000 Ft",
+      "A II. és III. lépcső díjmentesen nyílik a rangoddal (Legény, illetve Vándorlegény) — fizetni csak akkor kell, ha gyorsítanál",
     ],
   },
   {
@@ -281,12 +282,12 @@ const TIERS = [
     note: "Minden, ami A Társaság Tagjának jár, és még:",
     features: [
       "A teljes tananyag-ív külön díj nélkül — II. Modul, IP 2 és IP 3 is",
-      "Havi élő Q&A, ahol te is kérdezhetsz",
+      "Havi élő kérdezz-felelek, ahol te is kérdezhetsz",
       "Havi 3 díjmentes Elsőbbségi Kedves Üzenet",
       "Díjmentes Nyílt Estek, 48 órás elsőbbségi foglalással",
       "Díjmentes Élő Gyakorlónapok",
       "Díjmentes Szabadság Elvonulás, szállással és vegán ellátással",
-      "Éves tagságnál évi 4 díjmentes 1-on-1 konzultáció, egyébként 13 000 Ft",
+      "Éves tagságnál évi 4 díjmentes egyéni konzultáció, azon felül 13 000 Ft",
     ],
   },
 ];
@@ -299,8 +300,8 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
     rows: [
       ["A Ceremónia és a rended", "—", "✓", "✓"],
       ["I. Modul (Jelenlét) + IP 1 · 8+1 hét", "—", "✓ azonnal", "✓ azonnal"],
-      ["II. Modul (Tudatosság) + IP 2 · 8+1 hét", "—", "díjmentesen nyílik, amikor elvégezted az I. lépcsőt és eléred a Horgonyzó rangot (500 XP). Ha nem várnád meg a rangot: 54 940 Ft. Mindkét esetben egy rövid beszélgetés után.", "✓ díjmentes, az I. lépcső után, beszélgetés után"],
-      ["III. Integrációs Program (IP 3) · 8+1 hét", "—", "díjmentesen nyílik, amikor elvégezted a II. lépcsőt és eléred a Csendőrző rangot (1 200 XP). Ha nem várnád meg a rangot: 44 940 Ft (a II. és III. lépcső együtt 89 940 Ft). Mindkét esetben egy rövid beszélgetés után.", "✓ díjmentes, a II. lépcső után, beszélgetés után"],
+      ["II. Modul (Tudatosság) + IP 2 · 8+1 hét", "—", "díjmentesen nyílik, amikor elvégezted az I. lépcsőt és eléred a Legény rangot (500 XP). Ha nem várnád meg a rangot: 54 940 Ft. Mindkét esetben egy rövid beszélgetés után.", "✓ díjmentes, az I. lépcső után, beszélgetés után"],
+      ["III. Integrációs Program (IP 3) · 8+1 hét", "—", "díjmentesen nyílik, amikor elvégezted a II. lépcsőt és eléred a Vándorlegény rangot (1 200 XP). Ha nem várnád meg a rangot: 44 940 Ft (a II. és III. lépcső együtt 89 940 Ft). Mindkét esetben egy rövid beszélgetés után.", "✓ díjmentes, a II. lépcső után, beszélgetés után"],
       ["Napi Küldetések és vezetett gyakorlások", "—", "✓", "✓"],
       ["Belső Tükör — privát gyakorlónapló", "—", "✓", "✓"],
       ["Karakterkártya, XP és rang", "—", "✓", "✓"],
@@ -313,7 +314,7 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
       ["Közösségi tér", "—", "✓", "✓"],
       ["Pénteki kör", "—", "✓", "✓"],
       ["Heti online közös meditáció", "—", "✓ élőben", "✓ élőben"],
-      ["Havi élő kérdezz-felelek (Q&A)", "—", "a felvétel visszanézhető; élőben nem vehetsz részt, nem kérdezhetsz", "✓ élő részvétel és kérdezési jog"],
+      ["Havi élő kérdezz-felelek", "—", "✓ élőben nézheted, és visszanézheted; kérdezni a Belső Kör tud", "✓ élő részvétel és kérdezési jog"],
       ["Havi élő szerepjáték- (D&D) és társasjáték-est", "—", "✓", "✓"],
       ["Ranglista a tagoknak — heti, havi, negyedéves", "—", "✓ az első 10 és a saját helyed; elrejtheted magad", "✓ az első 10 és a saját helyed; elrejtheted magad"],
       ["Negyedéves vacsorameghívás Bálinttól", "—", "✓ a negyedéves ranglista első tíz helyezettjének", "✓ a negyedéves ranglista első tíz helyezettjének"],
@@ -326,7 +327,7 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
       ["Élő Gyakorlónap (évente 4)", "—", "6 460 Ft", "✓ díjmentes, elsőbbségi foglalással"],
       ["III. Modul — Szabadság Elvonulás (évente 3, az IP 3 után)", "—", "önköltség (kb. 65–85 ezer Ft)", "✓ díjmentes, szállással és vegán ellátással, elsőbbségi foglalással"],
       ["Havi közös túra", "csak meghívóval, díjmentesen", "✓ díjmentes, túránként 2 vendéget hívhatsz", "✓ díjmentes, túránként 2 vendéget hívhatsz"],
-      ["1-on-1 konzultáció", "—", "15 000 Ft", "13 000 Ft; éves tagságnál évi 4 díjmentes"],
+      ["Egyéni konzultáció Bálinttal", "—", "15 000 Ft", "13 000 Ft; éves tagságnál évi 4 díjmentes"],
     ],
   },
   {
@@ -384,7 +385,7 @@ const FAQ = [
     a: "Nem. A Társaság gyakorlóközösség, nem terápia. Ha kezelés alatt állsz, vagy egészségi okból bizonytalan vagy, beszéld meg az orvosoddal, mielőtt elkezded.",
   },
   {
-    q: "Mi a különbség a két út között?",
+    q: "Mi a különbség a két tagság között?",
     a: "A Társaság Tagjaként az első lépcső azonnal nyitva van, a továbbiak pedig díjmentesen nyílnak, amikor gyakorlással eléred a hozzájuk tartozó rangot — ha gyorsítanál, külön díjért hamarabb is megnyithatod őket. A Belső Körben a teljes tananyag-ív benne van az árban, élőben kérdezhetsz, és minden élő alkalom — a Szabadság Elvonulás is — díjmentes.",
   },
   {
@@ -408,8 +409,8 @@ const FAQ = [
 function SectionHeading({ eyebrow, title, children }: { eyebrow: string; title: string; children?: React.ReactNode }) {
   return (
     <div className="max-w-2xl">
-      <p className="text-xs uppercase tracking-[0.2em] text-gold">{eyebrow}</p>
-      <h2 className="mt-2 font-serif text-2xl text-forest sm:text-3xl">{title}</h2>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">{eyebrow}</p>
+      <h2 className="mt-2 text-balance font-serif text-3xl leading-snug text-forest">{title}</h2>
       {children && <div className="mt-4 space-y-3 text-ink-soft">{children}</div>}
     </div>
   );
@@ -425,38 +426,41 @@ export default async function TarsasagHome() {
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
       {/* Nyitány */}
-      <section className="max-w-3xl">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Jelenlét – Tudatosság – Szabadság</p>
+      <section className="grid items-center gap-12 lg:grid-cols-[1.5fr_1fr]">
+        <div>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Jelenlét, tudatosság, szabadság</p>
         <h1 className="mt-5 font-serif text-4xl leading-tight text-forest sm:text-5xl">
           Nyugodtabb idegrendszer.
           <br />
           Kedvesebb hétköznapok.
         </h1>
         <p className="mt-8 font-serif text-xl leading-relaxed text-ink">
-          A Társaság online gyakorlóközösség, ahol online modulokban és nyolchetes integrációs programokban, tudományos alapokon tanítod
-          meg az idegrendszeredet megnyugodni — és ahol nem egyedül haladsz.
+          Napi 10–15 perc vezetett gyakorlással, tudományos alapokon tanítod meg az idegrendszeredet megnyugodni —
+          egy közösségben, ahol nem egyedül haladsz.
         </p>
         <p className="mt-5 max-w-2xl text-ink-soft">
-          Nyolchetes programokban, lépésről lépésre. Élő közös meditációkkal, budapesti alkalmakkal, havonta egy
-          közös túrával — és egy közösséggel, amelynek a célja egyszerű: jobb hellyé tenni a világot, először
+          A Társaság online gyakorlóközösség: rövid videós modulok és nyolchetes programok, élő közös meditációk,
+          budapesti alkalmak és havonta egy közös túra. A célunk egyszerű: jobb hellyé tenni a világot — először
           magunkkal kezdve.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <a href="#csatlakozas" className={buttonPrimary}>
-            Megnézem, hogyan csatlakozhatok
+            Megnézem a tagságokat
           </a>
           <a href="#hogyan-mukodik" className={buttonSecondary}>
             Hogyan működik?
           </a>
         </div>
         <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
-          {["7 napos próbaidő", "Bármikor lemondható", "Nem kell előzetes tapasztalat"].map((t) => (
+          {["7 napos díjmentes próbaidő", "Bármikor lemondható", "Nem kell előzetes tapasztalat"].map((t) => (
             <li key={t} className="flex items-center gap-2">
               <Check className="h-4 w-4 text-gold" strokeWidth={1.5} aria-hidden />
               {t}
             </li>
           ))}
         </ul>
+        </div>
+        <WindingPath className="mx-auto hidden h-64 w-64 lg:block" />
       </section>
 
       <CompassDivider className="my-20" />
@@ -474,12 +478,12 @@ export default async function TarsasagHome() {
             mint nap tanítja: készenlétben tart. Csak éppen elfelejtett visszaváltani.
           </p>
         </SectionHeading>
-        <GildedCard className="p-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">A jó hír</p>
+        <GildedCard ornate className="border-gold/40 p-8">
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">A jó hír</p>
           <p className="mt-3 font-serif text-xl text-forest">A visszaváltás tanulható.</p>
           <p className="mt-3 text-sm text-ink-soft">
             A légzés lassításával és a figyelem irányításával közvetlenül hatsz arra a rendszerre, amely a
-            megnyugvásért felel: a vagus idegre és a szívritmus változékonyságára. Nem varázslat, hanem
+            megnyugvásért felel: a vagusideg működésére és a szívritmus-változékonyságra. Nem varázslat, hanem
             gyakorlás — és a gyakorlás itt könnyebb, mert nem egyedül csinálod.
           </p>
         </GildedCard>
@@ -490,13 +494,13 @@ export default async function TarsasagHome() {
       {/* Amit megtanulsz */}
       <section>
         <SectionHeading eyebrow="Amit az úton megtanulsz" title="Nem egy újabb feladat. Egy képesség, ami veled marad." />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
           {BENEFITS.map(({ Icon, title, text }) => (
-            <GildedCard key={title}>
-              <Icon className="h-5 w-5 text-forest" strokeWidth={1.25} aria-hidden />
-              <h3 className="mt-4 font-serif text-xl text-forest">{title}</h3>
-              <p className="mt-2 text-sm text-ink-soft">{text}</p>
-            </GildedCard>
+            <div key={title} className="border-t border-gold/30 pt-5">
+              <Icon className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
+              <h3 className="mt-3 font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -506,14 +510,12 @@ export default async function TarsasagHome() {
       {/* Hogyan működik */}
       <section id="hogyan-mukodik" className="scroll-mt-24">
         <SectionHeading eyebrow="Hogyan működik" title="Négy lépés, és már úton is vagy." />
-        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
-            <li key={s.title}>
-              <GildedCard className="h-full">
-                <span className="font-serif text-3xl text-gold">{i + 1}</span>
-                <h3 className="mt-3 font-serif text-lg text-forest">{s.title}</h3>
-                <p className="mt-2 text-sm text-ink-soft">{s.text}</p>
-              </GildedCard>
+            <li key={s.title} className="border-t border-gold/30 pt-5">
+              <span className="font-serif text-2xl text-gold">{i + 1}.</span>
+              <h3 className="mt-2 font-serif text-xl text-forest">{s.title}</h3>
+              <p className="mt-2 text-[15px] text-ink-soft">{s.text}</p>
             </li>
           ))}
         </ol>
@@ -578,7 +580,7 @@ export default async function TarsasagHome() {
 
       {/* Egy nap */}
       <section>
-        <SectionHeading eyebrow="Küldetések & Napi Hangolások" title="Így néz ki egy nap a Társaságban.">
+        <SectionHeading eyebrow="Küldetések és napi hangolások" title="Így néz ki egy nap a Társaságban.">
           <p>
             A gyakorlás itt nem kötelező házi feladat, hanem rövid küldetések sora, amelyek beleférnek a napodba.
           </p>
@@ -609,8 +611,8 @@ export default async function TarsasagHome() {
         <SectionHeading eyebrow="Az út" title="Négy lépcső, a saját tempódban.">
           <p>
             Belépéskor az első lépcső nyílik meg. A következőre akkor léphetsz, ha az előzőt elvégezted, és
-            gyakorlással eléred a hozzá tartozó rangot: a II. lépcsőhöz a Horgonyzót (500 XP), a III.-hoz a
-            Csendőrzőt (1 200 XP). Ez díjmentes — fizetni csak akkor kell, ha nem várnád meg a rangot (54 940 Ft,
+            gyakorlással eléred a hozzá tartozó rangot: a II. lépcsőhöz a Legény (500 XP), a III.-hoz a
+            Vándorlegény rangot (1 200 XP). Ez díjmentes — fizetni csak akkor kell, ha nem várnád meg a rangot (54 940 Ft,
             illetve 44 940 Ft). A Belső Körben a rang sem feltétel. A következő lépcsőt minden esetben egy rövid,
             díjmentes beszélgetés után Bálint nyitja meg, hogy az út biztonságos és folyamatos maradjon.
           </p>
@@ -661,12 +663,12 @@ export default async function TarsasagHome() {
           </p>
         </SectionHeading>
         <GildedCard className="p-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">Karakterkártya · minta</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Karakterkártya · minta</p>
           <div className="mt-4 flex items-center gap-4">
             <CrestVandorok className="h-14 w-12" />
             <div>
               <p className="font-serif text-xl text-forest">Vándor</p>
-              <p className="text-sm text-ink-soft">I. Modul · 4. hét · Figyelő</p>
+              <p className="text-sm text-ink-soft">I. Modul · 4. hét · Inas</p>
             </div>
           </div>
           <div className="mt-6 h-px bg-gold/30" />
@@ -700,19 +702,19 @@ export default async function TarsasagHome() {
         <SectionHeading eyebrow="Nem egyedül" title="Tapasztalat, nem tanácsadás.">
           <p>
             A Társaság nem egyszemélyes színpad. A tagok nem okítják és nem diagnosztizálják egymást, hanem
-            megosztják, mi segített nekik — egy nehéz estén, egy feszült héten. A posztok alatt nincs lájk, csak
+            megosztják, mi segített nekik — egy nehéz estén, egy feszült héten. A bejegyzések alatt nincs lájk, csak
             két csendes visszajelzés: „Köszönöm, hasznos volt” és „Hasonlót tapasztaltam”.
           </p>
         </SectionHeading>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
           {COMMUNITY.map(({ Icon, title, text }) => (
-            <GildedCard key={title} className="flex gap-4">
-              <Icon className="mt-1 h-5 w-5 shrink-0 text-forest" strokeWidth={1.25} aria-hidden />
+            <div key={title} className="flex gap-4">
+              <Icon className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.25} aria-hidden />
               <div>
-                <h3 className="font-serif text-lg text-forest">{title}</h3>
-                <p className="mt-1 text-sm text-ink-soft">{text}</p>
+                <h3 className="font-serif text-xl text-forest">{title}</h3>
+                <p className="mt-1 text-[15px] text-ink-soft">{text}</p>
               </div>
-            </GildedCard>
+            </div>
           ))}
         </div>
         <p className="mt-6 text-sm text-ink-soft">
@@ -726,16 +728,19 @@ export default async function TarsasagHome() {
 
       {/* Bálint */}
       <section className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-        <SectionHeading eyebrow="Aki az utat vezeti" title="Kardos Bálint" />
+        <div>
+          <SectionHeading eyebrow="Aki az utat vezeti" title="Kardos Bálint" />
+          <Sprout className="mt-8 hidden h-28 w-28 lg:block" />
+        </div>
         <GildedCard className="p-8">
           <p className="font-serif text-lg text-ink">
-            „Kedves üzeneteket kézbesítek, segítek a telefonmentes napindításban, A Társaság tagjaival pedig azon
+            „Kedves üzeneteket kézbesítek, segítek telefon nélkül kezdeni a napot, A Társaság tagjaival pedig azon
             dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.”
           </p>
           <p className="mt-4 text-sm text-ink-soft">
-            A klasszikus légzés- és figyelemgyakorlatokat a modern idegtudomány és az életmód-orvostan felől
-            közelítem meg: mit csinál a légzés a vagus-tónussal, a szívritmus-változékonysággal, és hogyan
-            csendesedik a figyelem. Dogmák és misztifikálás nélkül.
+            A légzés, a figyelem és a testérzékelés ősi meditációs gyakorlatait tanítom, a modern idegtudomány és az
+            életmód-orvostan felől megközelítve: hogyan hat a légzés a vagusideg működésére és a
+            szívritmus-változékonyságra, és hogyan csendesedik el a figyelem. Dogmák és misztifikálás nélkül.
           </p>
           <ul className="mt-5 space-y-1.5 text-sm text-ink-soft">
             <li>Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy)</li>
@@ -748,16 +753,16 @@ export default async function TarsasagHome() {
 
       {/* Csatlakozás */}
       <section id="csatlakozas" className="scroll-mt-24">
-        <SectionHeading eyebrow="Csatlakozás" title="Válaszd ki az utad.">
-          <p>Mindkét út havi vagy éves díjjal választható; az éves tagság két hónapnyi díjat megspórol neked.</p>
+        <SectionHeading eyebrow="Csatlakozás" title="Válaszd ki, melyik tagság illik hozzád.">
+          <p>Mindkét tagság havi vagy éves díjjal választható; az éves díjjal két hónapnyi díjat megspórolsz.</p>
         </SectionHeading>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {TIERS.map((t) => {
             const m = price(t.monthly);
             const y = price(t.yearly);
             return (
-              <GildedCard key={t.name} className="flex flex-col p-8">
-                <p className="text-xs uppercase tracking-[0.2em] text-gold">{t.subtitle}</p>
+              <GildedCard key={t.name} ornate={t.monthly === "belso_kor_havi"} className={`flex flex-col p-8 ${t.monthly === "belso_kor_havi" ? "border-gold/40" : ""}`}>
+                <p className="text-xs uppercase tracking-[0.18em] text-gold">{t.subtitle}</p>
                 <h3 className="mt-1 font-serif text-2xl text-forest">{t.name}</h3>
                 {m !== undefined && (
                   <p className="mt-4 font-serif text-3xl text-ink">
@@ -781,7 +786,7 @@ export default async function TarsasagHome() {
                   {open ? (
                     <div className="grid gap-2 sm:grid-cols-2">
                       <Link href={`${tp("/csatlakozas")}?csomag=${t.monthly}`} className={`${buttonPrimary} text-center`}>
-                        Csatlakozom — havi
+                        Havi díjjal
                       </Link>
                       <Link href={`${tp("/csatlakozas")}?csomag=${t.yearly}`} className={`${buttonSecondary} text-center`}>
                         Éves díjjal
@@ -802,12 +807,12 @@ export default async function TarsasagHome() {
         </div>
 
         <GildedCard className="mt-8 overflow-x-auto">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">Minden, ami benne van — egy pillantásra</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Minden, ami benne van — egy pillantásra</p>
           <table className="mt-4 w-full min-w-[44rem] text-left text-sm">
             <thead className="text-ink">
               <tr className="border-b border-line">
                 <th className="w-[34%] py-2 pr-4 font-normal">Szolgáltatás</th>
-                <th className="w-[18%] py-2 pr-4 font-normal">Külsősöknek</th>
+                <th className="w-[18%] py-2 pr-4 font-normal">Nem tagoknak</th>
                 <th className="w-[24%] py-2 pr-4 font-normal">A Társaság Tagja</th>
                 <th className="w-[24%] py-2 font-normal">A Belső Kör Tagja</th>
               </tr>
@@ -867,19 +872,20 @@ export default async function TarsasagHome() {
 
       {/* Zárás */}
       <section className="text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">Az első lépés mindig a legkisebb</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Az első lépés mindig a legkisebb</p>
         <h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl text-forest sm:text-4xl">
           Egy kilégzés. Egy kérdőív. Egy társaság.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Ha szeretnéd, hogy szóljunk, amikor megnyílik a csatlakozás, írj egy sort — vagy gyere el addig egy
-          budapesti Nyílt Estre, és tapasztald meg személyesen.
+          {open
+            ? "A havi tagság első hete díjmentes, és bármikor lemondható. Ha előbb személyesen ismerkednél, gyere el egy budapesti Nyílt Estre."
+            : "Ha szeretnéd, hogy szóljak, amikor megnyílik a csatlakozás, írj egy sort — vagy gyere el addig egy budapesti Nyílt Estre."}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {open ? (
-            <Link href={tp("/csatlakozas")} className={buttonPrimary}>
+            <a href="#csatlakozas" className={buttonPrimary}>
               Csatlakozom
-            </Link>
+            </a>
           ) : (
             <a href={notify} className={buttonPrimary}>
               Értesítést kérek a nyitásról

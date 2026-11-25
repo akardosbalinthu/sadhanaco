@@ -65,7 +65,7 @@ export async function payConsultation(fd: FormData) {
     admin.from("app_settings").select("terms_version").single(),
   ]);
   const base = resolvedTarsasagUrl().replace(/\/$/, "");
-  const productData = product?.stripe_product_id ? { product: product.stripe_product_id } : { product_data: { name: product?.label ?? "1-on-1 konzultáció" } };
+  const productData = product?.stripe_product_id ? { product: product.stripe_product_id } : { product_data: { name: product?.label ?? "Egyéni konzultáció" } };
   let url: string | null = null;
   try {
     const session = await getStripe().checkout.sessions.create({

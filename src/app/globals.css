@@ -55,7 +55,19 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 1.0625rem;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hosszabb szövegekben ne maradjon egy szó egyedül a sor végén. */
+p, li {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-gold-soft);
 }
 
 @media (prefers-reduced-motion: reduce) {

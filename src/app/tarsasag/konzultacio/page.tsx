@@ -36,7 +36,7 @@ export default async function ConsultationPage({ searchParams }: { searchParams:
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <MemberNav active="/konzultacio" />
-      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · 1-on-1 konzultáció</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Egyéni konzultáció</p>
       <h1 className="mt-3 font-serif text-4xl text-forest">Egy óra, csak rád figyelve.</h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         Személyes beszélgetés a gyakorlásodról: mi működik, hol akadsz el, mi a következő jó lépés. Online vagy

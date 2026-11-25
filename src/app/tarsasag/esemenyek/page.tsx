@@ -82,7 +82,7 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <MemberNav active="/esemenyek" />
-      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Események</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Események</p>
       <h1 className="mt-3 font-serif text-4xl text-forest">Együtt, élőben.</h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         Nyílt Estek, Gyakorlónapok, közös meditációk és a havi túra. {tier === "belso_kor"
@@ -101,7 +101,7 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
       {poll && (options ?? []).length > 0 && (
         <section id="szavazas" className="mt-10 scroll-mt-24">
           <GildedCard className="border-gold/50 p-7">
-            <p className="text-xs uppercase tracking-[0.2em] text-gold">A havi túra · szavazás</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-gold">A havi túra · szavazás</p>
             <h2 className="mt-2 font-serif text-2xl text-forest">{poll.title}</h2>
             {poll.description && <p className="mt-2 text-sm text-ink-soft">{poll.description}</p>}
             {pollOpen ? (

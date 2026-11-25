@@ -58,7 +58,7 @@ export default async function LeaderboardPage({ searchParams }: { searchParams: 
       </div>
 
       <GildedCard className="mt-6 p-6">
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">
           {b ? `${fmt(b.starts_on)} – ${fmt(b.ends_on)}` : ""}
         </p>
         {!b || b.top.length === 0 ? (
@@ -90,7 +90,7 @@ export default async function LeaderboardPage({ searchParams }: { searchParams: 
           <form action={setHidden} className="mt-4">
             <input type="hidden" name="hidden" value={b.me.hidden ? "false" : "true"} />
             <button className={linkClass}>
-              {b.me.hidden ? "Mutass újra a ranglistán" : "Elrejtem magam a ranglistáról"}
+              {b.me.hidden ? "Jelenjek meg újra a ranglistán" : "Elrejtem magam a ranglistáról"}
             </button>
           </form>
           {b.me.hidden && <p className="mt-2 text-xs">Most rejtve vagy: mások nem látnak a listán, a vacsorameghívásból viszont nem esel ki.</p>}

@@ -73,7 +73,7 @@ export function KindMessageForm({
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1.5 block text-sm text-ink-soft">Kinek szól?</span>
-          <input name="recipient_name" required maxLength={120} placeholder="pl. Nagymamám, Erzsi" className={inputClass} />
+          <input name="recipient_name" required maxLength={120} placeholder="pl. Erzsi nagymamám" className={inputClass} />
         </label>
         <label className="block">
           <span className="mb-1.5 block text-sm text-ink-soft">A telefonszáma</span>
@@ -100,7 +100,7 @@ export function KindMessageForm({
             <input name="guest_name" required maxLength={120} autoComplete="name" className={inputClass} />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-sm text-ink-soft">E-mail-címed — ide küldjük a megerősítést</span>
+            <span className="mb-1.5 block text-sm text-ink-soft">Az e-mail-címed — ide küldöm a megerősítést</span>
             <input name="guest_email" required type="email" autoComplete="email" className={inputClass} />
           </label>
           {/* Csapda a robotoknak: ember nem látja, nem tölti ki. */}

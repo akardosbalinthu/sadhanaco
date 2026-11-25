@@ -2,10 +2,10 @@ import { z } from "zod";
 
 /** A jelentkezéskor kért biztonsági kérdés (a régi jelentkezési űrlap szövegével egyezik). */
 export const SAFETY_QUESTION =
-  "A fizikai, mentális és érzelmi biztonságod a legfontosabb számunkra. Van-e bármi, amiről tudnunk kell (egészségi állapot, sérülés, várandósság, érzékenység)? Ha nincs, írd be: Nincs.";
+  "A testi és lelki biztonságod a legfontosabb. Van bármi, amiről tudnom kell (egészségi állapot, sérülés, várandósság, érzékenység)? Ha nincs, írd be: Nincs.";
 
 export const HEALTH_CONSENT =
-  "Hozzájárulok, hogy a megadott egészségi információt az esemény biztonságos megtartásához kezeljétek. Csak a szervező látja, és az esemény után 30 nappal törlődik.";
+  "Hozzájárulok, hogy a szervező a megadott egészségi információt az esemény biztonságos megtartása érdekében kezelje. Csak ő látja, és az esemény után 30 nappal automatikusan törlődik.";
 
 export const detailsSchema = z.object({
   phone: z

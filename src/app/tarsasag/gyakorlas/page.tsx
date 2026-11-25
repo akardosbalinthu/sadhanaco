@@ -92,9 +92,9 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
     <main className="mx-auto max-w-5xl px-6 py-12">
       <MemberNav active="/gyakorlas" />
 
-      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Gyakorlótér</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Gyakorlótér</p>
       <h1 className="mt-3 font-serif text-4xl text-forest">
-        Üdv újra itt{profile.display_name ? `, ${profile.display_name}` : ""}.
+        Üdv újra itt{(profile.nickname || profile.first_name) ? `, ${profile.nickname || profile.first_name}!` : "!"}
       </h1>
       {profile.subscription_status === "trialing" && profile.trial_ends_at && (
         <p className="mt-3 text-sm text-ink-soft">
@@ -117,17 +117,17 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
           <Sparkles className="h-5 w-5 text-gold" strokeWidth={1.25} aria-hidden />
           <h2 className="mt-3 font-serif text-2xl text-forest">Az első lépés: a Ceremónia</h2>
           <p className="mt-2 text-sm text-ink-soft">
-            Tizenkét kérdés, nagyjából öt perc. A végén kiderül, melyik rendbe kerülsz — ez lesz a kiindulópontod.
+            Tizenkét kérdés, nagyjából öt perc. A végén kiderül, melyik rendbe tartozol — ez lesz a kiindulópontod.
           </p>
           <Link href={tp("/ceremonia")} className={`${buttonPrimary} mt-6`}>
-            Részt veszek a Ceremónián
+            Kitöltöm a Ceremóniát
           </Link>
         </GildedCard>
       )}
 
       <section className="mt-10 grid gap-5 lg:grid-cols-[1fr_1.3fr]">
         <GildedCard className="p-7">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">Karakterkártya</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Karakterkártya</p>
           <div className="mt-4 flex items-center gap-4">
             <OrderCrest order={card?.order} className="h-16 w-14" />
             <div>
@@ -137,7 +137,7 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
                   A rendem részletesen
                 </Link>
               )}
-              <p className="text-sm text-ink-soft">{card?.rank?.label ?? "Kereső"} · {card?.xp_total ?? 0} XP</p>
+              <p className="text-sm text-ink-soft">{card?.rank?.label ?? "Tanonc"} · {card?.xp_total ?? 0} XP</p>
             </div>
           </div>
           <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-line" aria-hidden>
@@ -160,7 +160,7 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
         </GildedCard>
 
         <GildedCard className="p-7">
-          <p className="text-xs uppercase tracking-[0.2em] text-gold">Az utad</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Az utad</p>
           <ol className="mt-4 space-y-3">
             {stages.map((s) => (
               <li key={s.stage} className="flex items-start gap-3">
@@ -185,7 +185,7 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
       <CompassDivider className="my-14" />
 
       <section>
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">Küldetések & Napi Hangolások</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Küldetések és napi hangolások</p>
         <h2 className="mt-2 font-serif text-3xl text-forest">{current?.week ? `${current.week}. hét` : "Ezen a héten"}</h2>
         {thisWeek.length === 0 ? (
           <GildedCard className="mt-6 text-sm text-ink-soft">
@@ -233,7 +233,7 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
         <>
           <CompassDivider className="my-14" />
           <section id="tovabblepes" className="scroll-mt-24">
-            <p className="text-xs uppercase tracking-[0.2em] text-gold">Továbblépés</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-gold">Továbblépés</p>
             {typeof sp.ok === "string" && <p role="status" className="mt-4 rounded-md border border-gold/50 px-4 py-3 text-sm text-forest">{sp.ok}</p>}
             {typeof sp.hiba === "string" && <p role="status" className="mt-4 rounded-md border border-alert/40 px-4 py-3 text-sm text-alert">{sp.hiba}</p>}
             <h2 className="mt-2 font-serif text-2xl text-forest">A következő lépcső</h2>

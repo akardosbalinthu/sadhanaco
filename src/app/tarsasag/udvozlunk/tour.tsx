@@ -21,7 +21,7 @@ const STEPS = [
     title: "A Ceremónia és a rended",
     text: [
       "Tizenkét kérdés arról, hogyan működik az idegrendszered a hétköznapokban: mi történik benned feszült helyzetben, mi tölt vissza, merre jár a figyelmed.",
-      "A válaszaid alapján a négy rend egyikébe kerülsz — Tündék, Kertőrzők, Törpök vagy Vándorok —, és részletes, személyre szóló kiértékelést kapsz. A rend a kiindulópontod: minden rend egyenrangú, és mindenki mindent gyakorol.",
+      "A válaszaid megmutatják, a négy rend közül melyikbe tartozol — Tündék, Kertőrzők, Törpök vagy Vándorok —, és részletes, személyre szóló kiértékelést kapsz. A rend a kiindulópontod: minden rend egyenrangú, és mindenki mindent gyakorol.",
     ],
   },
   {
@@ -30,7 +30,7 @@ const STEPS = [
     title: "Heti küldetések, napi hangolások",
     text: [
       "A tananyag a belépésed napjától hetente nyílik: rövid elméleti videók, vezetett hanganyagok és napi 10–15 perces gyakorlások. Ami aznap megvolt, azt egy kattintással kipipálod.",
-      "A haladásodat a karakterkártyád mutatja: XP és rang (Kereső, Figyelő, Horgonyzó…). A ranglistán heti, havi és negyedéves bontásban látszik, kik gyakoroltak a legtöbbet — ha nem szeretnél szerepelni, elrejtheted magad. A Belső Tükör a saját, csak általad látható naplód.",
+      "A haladásodat a karakterkártyád mutatja: XP és rang (Tanonc, Inas, Legény…). A ranglistán heti, havi és negyedéves bontásban látszik, kik gyakoroltak a legtöbbet — ha nem szeretnél szerepelni, elrejtheted magad. A Belső Tükör a saját, csak általad látható naplód.",
     ],
   },
   {
@@ -61,7 +61,7 @@ export function Tour({ hasOrder }: { hasOrder: boolean }) {
   return (
     <GildedCard className="p-8 sm:p-10">
       <div className="flex items-center justify-between text-xs text-ink-soft">
-        <span className="uppercase tracking-[0.2em] text-gold">{step.eyebrow}</span>
+        <span className="uppercase tracking-[0.18em] text-gold">{step.eyebrow}</span>
         <span>
           {i + 1} / {STEPS.length}
         </span>

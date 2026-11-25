@@ -44,7 +44,7 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         <ArrowLeft className="h-4 w-4" strokeWidth={1.5} aria-hidden /> Vissza a gyakorlótérbe
       </Link>
 
-      <p className="mt-8 text-xs uppercase tracking-[0.2em] text-gold">
+      <p className="mt-8 text-xs uppercase tracking-[0.18em] text-gold">
         {TRACK_LABEL[lesson.track] ?? "Küldetés"} · {moduleTitle} · {lesson.week_number === 9 ? "+1. hét" : `${lesson.week_number}. hét`}
         {lesson.duration_seconds ? ` · ${Math.round(lesson.duration_seconds / 60)} perc` : ""}
       </p>

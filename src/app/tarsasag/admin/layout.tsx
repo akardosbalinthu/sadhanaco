@@ -22,7 +22,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   };
   return (
     <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
-      <p className="text-xs uppercase tracking-[0.25em] text-gold">Admin</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">Admin</p>
       <AdminNav counts={counts} />
       {children}
     </main>

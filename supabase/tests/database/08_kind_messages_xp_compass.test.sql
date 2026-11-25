@@ -258,8 +258,8 @@ select is((select count(*)::int from public.xp_events where user_id = :'x'), 0, 
 -- Karakterkártya, mérföldkövek; visszatérő tag nulláról indul.
 set local role authenticated;
 select pg_temp.act_as(:'c');
-select is((public.my_character_card() -> 'rank' ->> 'label'), 'Figyelő', 'rang: 160 XP = Figyelő');
-select is((public.my_character_card() ->> 'xp_to_next')::int, 340, 'a következő rangig (Horgonyzó, 500) hátralévő XP');
+select is((public.my_character_card() -> 'rank' ->> 'label'), 'Inas', 'rang: 160 XP = Inas');
+select is((public.my_character_card() ->> 'xp_to_next')::int, 340, 'a következő rangig (Legény, 500) hátralévő XP');
 select pg_temp.act_as(:'b');
 select ok((public.my_character_card() -> 'milestones')::text like '%elso_valasz%', 'mérföldkő: első válasz egy társnak');
 reset role;

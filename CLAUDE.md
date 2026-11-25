@@ -199,7 +199,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 ### 7.12 A Társaság arculata (2026. november 24.)
 - **A 4 Rend** (egyenrangú kiindulópontok, belépéskor a Ceremónia kérdőíve dönti el): **Tündék** (finom érzékelés és tudatosság), **Kertőrzők** (jelenlét és belső béke), **Törpök** (állhatatosság és belső rend), **Vándorok** (bátorság és fókusz). A „Hobbit” elnevezés nem használható.
-- Gyakorlás = **Küldetések & Napi Hangolások**; haladás = **privát Karakterkártya, XP és rang** (Kereső → Figyelő → Horgonyzó → Csendőrző → Egyensúlyozó…) — csak a tag látja, nincs ranglista.
+- Gyakorlás = **Küldetések & Napi Hangolások**; haladás = **privát Karakterkártya, XP és rang** (Tanonc → Inas → Legény → Vándorlegény → Mester…, lásd 7.20) — csak a tag látja, nincs ranglista.
 - Csomagnevek: lásd 7.16 (**A Társaság Tagja**, **A Belső Kör Tagja**).
 - Vizuális nyelv: meleg törtfehér alap, erdőzöld (`#1C2520`), hajszálvékony antik arany (`#C5A059`) díszítés (`src/components/ornaments.tsx`).
 
@@ -210,7 +210,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
   - Sorrend: elsőbbségi kereten belüli (beérkezés szerint) → elsőbbségi fizetős (összeg szerint csökkenő) → díjmentes (beérkezés szerint). Implementáció: 005-ös migráció (`submit_kind_message`, `confirm_kind_message`, `admin_record_kind_message_attempt`, `admin_kind_message_queue`).
 - **Túravendég:** tagonként túránként 2 vendég — jóváhagyva; **próbaidős tag is meghívhat**.
 - **A 4 Rend:** a rendet a belépéskori kérdőív (**Ceremónia**, `docs/ceremonia.md`) eredménye adja; **a tag nem válthat rendet**, hibát csak a **superadmin** javíthat (`superadmin_set_order`).
-- **Pontrendszer (jóváhagyva):** privát XP és rang (`xp_events`, `my_character_card`), napi felső határ 60 XP (a lépcső-bónusz kivétel), rangok: Kereső 0 · Figyelő 150 · Horgonyzó 500 · Csendőrző 1200 · Egyensúlyozó 2500 · Útitárs 4500 · Őrző 7000. Csendes mérföldkövek, nincs ranglista, nincs sorozat, nincs levonás. A továbblépési küszöb XP-ben: II. lépcső 500, III. lépcső 1200. Súlyok: `app_settings.xp_rules`. Visszatérő tagnál új ciklus, nulláról.
+- **Pontrendszer (jóváhagyva):** privát XP és rang (`xp_events`, `my_character_card`), napi felső határ 60 XP (a lépcső-bónusz kivétel), rangok: lásd 7.20 (céhes út). Csendes mérföldkövek, nincs ranglista, nincs sorozat, nincs levonás. A továbblépési küszöb XP-ben: II. lépcső 500, III. lépcső 1200. Súlyok: `app_settings.xp_rules`. Visszatérő tagnál új ciklus, nulláról.
 
 ### 7.14 Döntések (2026. november 24., ötödik kör)
 - **Ceremónia:** a rend-beosztó kérdőív neve az „Idegrendszeri Iránytű” helyett **Ceremónia** (a technikai nevek maradnak).
@@ -242,6 +242,12 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Élő alkalmak Google Meettel** (a LiveKit Cloud költsége miatt): az admin eseményenként megadja a Meet-linket (`event_live_links`, csak admin olvassa). A tag a kezdés előtt 15 perccel az Események oldalon kapja meg a belépést (`join_live_event` → átirányítás a Meetre); előre jelentkezni nem kell, próbaidőben nem érhető el. Ingyenes Gmail-lel a 3+ fős hívás 60 perces. Tartalékként a natív LiveKit-szoba megmaradt (csak ha nincs Meet-link és be vannak állítva a LiveKit-kulcsok).
 - **A részvétel XP-t ad:** a belépés jelenlétnek számít (`attended_at` → online alkalom 10 XP, személyes 20 XP; `app_settings.xp_rules`).
 - **Felvétel:** az admin utólag rendeli hozzá a Bunny-videót (`events.recording_bunny_id`); a tagok az Események oldal „Felvételek” részén érik el.
+
+### 7.20 Rangnevek, arculat, hangnem (2026. november 25.)
+- **Rangnevek — céhes út:** Tanonc (0) → Inas (150) → Legény (500) → Vándorlegény (1 200) → Mester (2 500) → Nagymester (4 500) → Bölcs (7 000 XP). A II. lépcső küszöbe a Legény, a III.-é a Vándorlegény rang. (A 7.13 korábbi rangnevei helyett; `app_settings.xp_ranks`, 017-es migráció.)
+- **Megszólítás:** a felületen és a levelekben Bálint egyes szám első személyben beszél („küldöm”, „várlak”); a jogi szövegek maradnak többes számban. Megszólítás a levelekben: „Kedves Tagtárs!”. Kerülendő: tükörfordítás („földelés”, „1-on-1”, „&”), „csomag” helyett „tagság”, „Q&A” helyett „kérdezz-felelek”, „egyéni konzultáció”.
+- **Arculat:** a meleg törtfehér–erdőzöld–arany paletta marad, de kevesebb keret és díszítés (a sarokdísz csak kiemelt elemen: `GildedCard ornate`), lassú, csak színátmenetes mozgás, nagyobb levegő; saját vonalas illusztrációk: `src/components/illustrations.tsx`.
+- **Valós vélemények nélkül** — kitalált ajánlást nem használunk; a bizalmat a végzettségek, a módszer és a feltételek (próbaidő, bármikor lemondható) adják.
 
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).

@@ -73,7 +73,7 @@ select is((select array_agg((e ->> 'position')::int order by (e ->> 'position'):
           array[1, 2, 3], 'a helyezések az elrejtett tag nélkül számolódnak');
 select ok(not (public.leaderboard('quarter')::text like '%@%'), 'e-mail-cím nem kerül a listára');
 select ok((public.leaderboard('week') -> 'top' -> 0 ->> 'is_me')::boolean, 'a saját sor jelölve');
-select is(public.leaderboard('month') -> 'top' -> 0 ->> 'rank', 'Kereső', 'a rang is megjelenik');
+select is(public.leaderboard('month') -> 'top' -> 0 ->> 'rank', 'Tanonc', 'a rang is megjelenik');
 select ok(not (public.leaderboard('quarter')::text like '%csilla%'), 'régebbi időszak XP-je nem számít');
 
 select pg_temp.act_as(:'h');

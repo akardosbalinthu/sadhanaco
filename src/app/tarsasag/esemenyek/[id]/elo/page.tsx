@@ -33,7 +33,7 @@ export default async function LivePage({ params }: { params: Promise<{ id: strin
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Élőben</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Élőben</p>
           <h1 className="mt-1 font-serif text-3xl text-forest">{data?.title ?? "Élő alkalom"}</h1>
         </div>
         <Link href={back} className="text-sm text-ink-soft underline decoration-gold/50 underline-offset-4 hover:text-gold">

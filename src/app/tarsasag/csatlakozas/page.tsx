@@ -9,7 +9,7 @@ import { JoinForm, type PlanOption } from "./join-form";
 export const metadata = { title: "Csatlakozás · A Társaság" };
 
 const NOTES: Record<PlanCode, string> = {
-  tarsasagi_havi: "7 napig ingyen kipróbálható",
+  tarsasagi_havi: "7 napig díjmentesen kipróbálható",
   tarsasagi_eves: "2 hónap ajándék",
   belso_kor_havi: "a teljes út, minden élő alkalom díjmentesen",
   belso_kor_eves: "2 hónap ajándék + évi 4 díjmentes konzultáció",
@@ -28,9 +28,9 @@ export default async function JoinPage({ searchParams }: { searchParams: Promise
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
-      <PageHeader eyebrow="Csatlakozás" title="Válaszd ki az utad">
+      <PageHeader eyebrow="Csatlakozás" title="Válaszd ki a tagságodat">
         <p>
-          Néhány lépés, és indulhatsz: kiválasztod a csomagot, megadod a neved és az e-mail-címed, a fizetés után pedig
+          Néhány lépés, és indulhatsz: kiválasztod a tagságot, megadod a neved és az e-mail-címed, a fizetés után pedig
           e-mailben megkapod a belépő linket. Az első lépés a Ceremónia lesz.
         </p>
       </PageHeader>

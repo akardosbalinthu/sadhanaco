@@ -17,7 +17,7 @@ export default async function MyDetailsPage({ searchParams }: { searchParams: SP
   return (
     <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <MemberNav active="/adataim" />
-      <p className="text-xs uppercase tracking-[0.25em] text-gold">A Társaság · Adataim</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-gold">A Társaság · Adataim</p>
       <h1 className="mt-3 font-serif text-4xl text-forest">Hogyan szólíthatunk?</h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         A Társaságban a teljes neveddel jelensz meg. Ha van beceneved, amit szívesen hallasz, add meg — a neved után,
@@ -51,7 +51,7 @@ export default async function MyDetailsPage({ searchParams }: { searchParams: SP
       <section className="mt-12 border-t border-gold/25 pt-8">
         <h2 className="font-serif text-2xl text-forest">Tagság és belépés</h2>
         <p className="mt-3 text-sm text-ink-soft">
-          Belépési e-mail-címed: <span className="text-forest">{profile.email}</span>. Ennek módosításához írj nekünk.
+          Belépési e-mail-címed: <span className="text-forest">{profile.email}</span>. Ha módosítanád, írj nekem.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={tp("/udvozlunk")} className={buttonSecondary}>

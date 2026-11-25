@@ -30,7 +30,7 @@ export default async function RecordingPage({ params }: { params: Promise<{ id: 
       <Link href={tp("/esemenyek#felvetelek")} className="text-sm text-ink-soft underline decoration-gold/50 underline-offset-4 hover:text-gold">
         Vissza a felvételekhez
       </Link>
-      <p className="mt-6 text-xs uppercase tracking-[0.25em] text-gold">
+      <p className="mt-6 text-xs uppercase tracking-[0.18em] text-gold">
         {EVENT_KIND_LABEL[e.kind]} · felvétel · {dayFmt.format(new Date(e.starts_at))}
       </p>
       <h1 className="mt-3 font-serif text-3xl text-forest sm:text-4xl">{e.title}</h1>

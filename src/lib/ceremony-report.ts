@@ -36,7 +36,7 @@ export const PORTRAITS: Record<MemberOrder, Portrait> = {
     strength:
       "Belső érzékelésed és empátiád ritka erőforrás. Te veszed észre elsőként, ha valami megváltozik — benned vagy körülötted —, és ez egy közösségben felbecsülhetetlen.",
     learn:
-      "Az úton a határaidat tanulod: hogyan maradj nyitott úgy, hogy közben nem áraszt el a világ. A földelés — a talaj, a súly, a test alsó részének érzése — és a hosszabb kilégzés lesznek a legjobb szövetségeseid.",
+      "Az úton a határaidat tanulod: hogyan maradj nyitott úgy, hogy közben nem áraszt el a világ. A talaj érzése — a súlyod, a talpad, a test alsó részének érzékelése — és a hosszabb kilégzés lesznek a legjobb szövetségeseid.",
     practice:
       "Neked a testen lassan végighaladó figyelem és a kilégzés finom meghosszabbítása hozza a legtöbbet. Rövidebb, csendes alkalmakkal kezdj, kevés ingerrel; inkább naponta tíz perc, mint hetente egy hosszú ülés.",
     asSecond: "a finom érzékelés: gyakran előbb érzed meg, mi történik, mint ahogy szavakba tudnád önteni",

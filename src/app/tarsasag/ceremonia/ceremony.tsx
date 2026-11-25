@@ -38,7 +38,7 @@ export function Ceremony({ questions, info, practiceHref, reportHref }: { questi
     const o = info[result];
     return (
       <GildedCard className="p-8 text-center">
-        <p className="text-xs uppercase tracking-[0.25em] text-gold">A Ceremónia döntött</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">A Ceremónia döntött</p>
         <OrderCrest order={result} className="mx-auto mt-6 h-28 w-24" />
         <h2 className="mt-4 font-serif text-4xl text-forest">{o?.name}</h2>
         <p className="mt-2 text-gold">{o?.gift}</p>
@@ -62,7 +62,7 @@ export function Ceremony({ questions, info, practiceHref, reportHref }: { questi
   if (tied) {
     return (
       <GildedCard className="p-8">
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">Még egy kérdés</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Még egy kérdés</p>
         <h2 className="mt-3 font-serif text-2xl text-forest">Ha egyetlen dolgot vihetnél magaddal az útra, mi lenne az?</h2>
         <div className="mt-6 grid gap-3">
           {tied.map((t) => (
@@ -82,7 +82,7 @@ export function Ceremony({ questions, info, practiceHref, reportHref }: { questi
   return (
     <GildedCard className="p-8">
       <div className="flex items-center justify-between text-xs text-ink-soft">
-        <span className="uppercase tracking-[0.2em] text-gold">{step + 1}. kérdés / {questions.length}</span>
+        <span className="uppercase tracking-[0.18em] text-gold">{step + 1}. kérdés / {questions.length}</span>
         <span>{Math.round((step / questions.length) * 100)}%</span>
       </div>
       <div className="mt-3 h-1 overflow-hidden rounded-full bg-line" aria-hidden>

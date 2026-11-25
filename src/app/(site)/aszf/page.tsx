@@ -119,7 +119,7 @@ const sections: LegalSection[] = [
         <p>
           <strong>Sikertelen terhelés esetén</strong> e-mailben értesítünk, a hozzáférésed pedig megmarad. A rendszer
           10 napon belül összesen 5 alkalommal próbálja újra a terhelést; ha egyik sem sikerül, a tagság megszűnik.
-          A kártyát a „Előfizetés” menüpontban bármikor frissítheted.
+          A kártyádat az Adataim oldalon, az „Előfizetés kezelése” gombbal bármikor frissítheted.
         </p>
       </>
     ),
@@ -138,7 +138,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Az előfizetést az „Előfizetés” menüpontban bármikor lemondhatod. A lemondás a következő számlázási
+          Az előfizetést az Adataim oldalon, az „Előfizetés kezelése” gombbal bármikor lemondhatod. A lemondás a következő számlázási
           időszaktól él: a már kifizetett időszak végéig minden hozzáférésed megmarad, utána a tagság — és vele a teljes
           rendszerhez való hozzáférés — megszűnik. A már kifizetett díjat nem térítjük vissza, és ügyfél által kért
           számlasztornóra nincs lehetőség.
@@ -177,8 +177,7 @@ const sections: LegalSection[] = [
     body: (
       <ul>
         <li>
-          <strong>Nyílt Meditációs Est:</strong> bárki jelentkezhet; a külsős részvételi díj 4 940 Ft. A személyes
-          helyek legfeljebb 50%-a foglalható a Társaság tagjainak, hogy mindig maradjon hely külsősöknek. A Belső Kör
+          <strong>Nyílt Meditációs Est:</strong> bárki jelentkezhet; a részvételi díj nem tagoknak 4 940 Ft. Az eseménynél jelölt alkalmak adomány alapúak: ezeken a részvétel díjmentes, a helyszínen belátás szerint támogathatók. A személyes helyek legfeljebb 50%-a foglalható a Társaság tagjainak, hogy mindig maradjon hely a nem tagoknak. A Belső Kör
           tagjai 48 órás elsőbbséggel és díjmentesen, A Társaság Tagjai a fennmaradó tagi helyekre 3 200 Ft-os díjjal
           foglalhatnak.
         </li>
@@ -187,6 +186,8 @@ const sections: LegalSection[] = [
           <strong>Szabadság Elvonulás:</strong> kizárólag a III. lépcsőt elvégzett, megnyitott hozzáféréssel rendelkező
           tagoknak; A Társaság Tagjainak eseményenként megadott önköltséges áron, A Belső Kör Tagjainak díjmentesen.
         </li>
+        <li>
+          <strong>Online közös alkalmak</strong> (heti közös meditáció, havi kérdezz-felelek, játékest): a tagság részei, előzetes jelentkezés nélkül, a próbaidő után érhetők el. A belépő linket a szolgáltató a kezdés előtt 15 perccel teszi elérhetővé; a hívás a Google Meetben zajlik. A kérdezz-feleleken kérdezni A Belső Kör Tagjai tudnak.</li>
         <li>
           <strong>Közös túra:</strong> tagoknak és az általuk meghívott vendégeknek díjmentes; tagonként túránként
           legfeljebb 2 vendég hívható meg. Az úti célt a tagok szavazzák meg.

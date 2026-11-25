@@ -60,8 +60,8 @@ export function BookingForm({ eventId, priceLabel, free = false }: { eventId: st
         <label className="flex items-start gap-3 text-sm text-ink-soft">
           <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
           <span>
-            Kérem a szolgáltatás teljesítését a megrendeléssel, és tudomásul veszem, hogy ezzel elveszítem
-            a 14 napos elállási jogomat.
+            Kérem a szolgáltatás azonnali teljesítését, és tudomásul veszem, hogy ezzel elveszítem a 14 napos
+            elállási jogomat.
           </span>
         </label>
       )}
@@ -71,12 +71,12 @@ export function BookingForm({ eventId, priceLabel, free = false }: { eventId: st
         disabled={pending}
         className={`${buttonPrimary} w-full`}
       >
-        {pending ? "Egy pillanat…" : free ? `Jelentkezem (${priceLabel})` : `Jelentkezés és fizetés (${priceLabel})`}
+        {pending ? "Egy pillanat…" : free ? `Lefoglalom a helyem (${priceLabel})` : `Tovább a fizetéshez (${priceLabel})`}
       </button>
       {!free && (
         <p className="text-xs text-ink-soft">
           A fizetés a Stripe biztonságos oldalán történik. A részvételi díjról alanyi adómentes számlát
-          állítunk ki.
+          kapsz.
         </p>
       )}
     </form>
