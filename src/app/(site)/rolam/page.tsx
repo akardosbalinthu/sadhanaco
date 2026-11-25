@@ -92,7 +92,7 @@ const STATIONS: Station[] = [
     when: "2020-tól",
     title: "Vacsoraestek egy tetőteraszon, aztán a nagykonyha",
     paras: [
-      "Egy barátommal kibéreltünk egy elképesztően szép belvárosi tetőlakást, harminc négyzetméteres terasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek: összesen több mint 11,5 millió forint gyűlt össze kórházban fekvő gyerekek foglalkozásaira. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
+      "Egy barátommal kibéreltünk egy elképesztően szép, háromszintes belvárosi penthouse-t, harminc négyzetméteres saját tetőterasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek: összesen több mint 11,5 millió forint gyűlt össze kórházban fekvő gyerekek foglalkozásaira. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
       "Otthagytam a jól fizető marketingprojekteket, és elmentem szakácsnak. Kevesebb pénz, több és keményebb munka, alig szabadidő — mégis boldogabb voltam, mint addig bármikor. Végigjártam a konyhai ranglétrát a mosogatótól a konyhafőnökig. Néhány év után viszont azt éreztem: többre vagyok képes.",
     ],
     photos: [
