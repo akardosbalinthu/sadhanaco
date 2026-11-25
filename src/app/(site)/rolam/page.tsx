@@ -375,12 +375,12 @@ export default function AboutPage() {
           Kezdjük el együtt.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Ha valamelyik állomásban magadra ismertél, és most kezdenél, töltsd ki a felmérést. Ha előbb személyesen
-          ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
+          Ha valamelyik állomásban magadra ismertél, és most kezdenél, töltsd ki a kérdőívet: két perc alatt megnézheted,
+          hol tartasz most. Ha előbb személyesen ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/jelentkezes" className={buttonPrimary}>
-            Jelentkezem konzultációra
+            Kérem az Életmód-térképem
           </Link>
           <Link href="/nyilt-estek" className={buttonSecondary}>
             Közelgő Nyílt Estek

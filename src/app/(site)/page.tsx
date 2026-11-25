@@ -7,20 +7,39 @@ import { DawnLandscape, EveningLamp, KindCall, Sprout, WindingPath } from "@/com
 export const metadata = {
   title: "Kardos Bálint · Találd meg a nyugalmad – és tartsd is meg a hétköznapokban",
   description:
-    "Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva. Nyolc hónapos egyéni, online program meditációval, légzéssel, mozgással, alvással, étkezéssel és kapcsolatokkal.",
+    "Nyolchónapos egyéni idegrendszer-fejlesztő program tradicionális jógikus gyakorlatokkal, modern életmód-orvostani keretrendszerben. Hosszú távú út, de az első lépést már ma megteheted.",
 };
 
+// A felsorolások sorrendje a jóga nyolc ágát követi: önfegyelem és mértékletesség → test → légzés →
+// az érzékek befelé fordítása → figyelem → meditáció. A kapcsolatok nem eszköz, hanem eredmény.
 const BENEFITS = [
-  "Saját, személyre szabott gyakorlási terv, nem általános recept",
-  "Személyes kísérés: az első négy hónapban hetente, utána havonta találkozunk",
-  "Az egész életed számít: a meditáción túl az alvásod, a mozgásod, az étkezésed és a kapcsolataid is",
+  "Saját gyakorlási terv, amely illeszkedik a napjaidhoz",
+  "Személyes kísérés: négy hónapig hetente, utána havonta beszélünk",
+  "Az étkezésedtől a mozgáson, a légzésen és az alváson át a figyelmedig és a meditációig: minden számít",
 ];
 
-const FOR_WHOM = [
-  "sokáig bírod a terhelést, de a nyugalom egyre ritkábban jön magától,",
-  "próbáltál már meditálni vagy életmódot váltani, de nem maradt meg,",
-  "nem egy újabb alkalmazásra vágysz, hanem személyes kísérésre,",
-  "készen állsz arra, hogy időt és figyelmet szánj magadra – most.",
+// P – a probléma, a látogató saját helyzeteiből
+const PROBLEM = [
+  "Egész nap pörögsz, és este sem tudsz igazán kikapcsolni.",
+  "A fejed akkor is jár, amikor már pihenned kellene.",
+  "Egy feszült helyzet után órákig benned marad a feszültség.",
+  "A nyugalom egyre ritkábban jön magától – leginkább csak szabadság alatt.",
+];
+
+// S – az idegrendszer-fejlesztés, egyszerűen
+const NERVOUS_SYSTEM = [
+  {
+    title: "Megérted, mi történik benned",
+    text: "Az idegrendszered egész nap a készenlét és a nyugalom között vált. Megmutatom, hogyan ismerheted fel, melyik állapotban vagy éppen, és mi billent át egyikből a másikba.",
+  },
+  {
+    title: "Megtanulod segíteni a visszaváltást",
+    text: "A légzéssel, a figyelemmel és a testérzékeléssel tudatosan segítheted, hogy egy nehéz helyzet után hamarabb visszatalálj a nyugalomhoz. Ez tanulható, mint bármely más készség.",
+  },
+  {
+    title: "Megteremted hozzá az alapokat",
+    text: "Az étkezés, a mozgás és az alvás adja azt a hátteret, amelyre a gyakorlás épülhet. Ezért nem csak a meditációval foglalkozunk, hanem az egész napoddal.",
+  },
 ];
 
 const PAIRS = [
@@ -32,11 +51,11 @@ const PAIRS = [
   { limb: "Összpontosítás, meditáció, elmélyült jelenlét", skt: "dháraná, dhjána, szamádhi", pillar: "Stresszkezelés, figyelem" },
 ];
 
-const LAYERS = [
-  { title: "Meditáció", text: "Megtanulod szándékosan irányítani a figyelmedet, és olyan rendszeres gyakorlást építesz, amely belefér a napodba." },
-  { title: "Idegrendszer-szabályozás", text: "Megérted, mi zajlik a testedben terhelés alatt, és eszközöket kapsz ahhoz, hogy vissza tudj találni a nyugalomba." },
-  { title: "Életmódváltás", text: "Az alvás, a mozgás, az étkezés és a szerekhez fűződő viszonyod – lépésről lépésre, a saját tempódban." },
-  { title: "Értékek és kapcsolatok", text: "Ahogyan magaddal és másokkal bánsz. A nyugalom a kapcsolatainkban mutatkozik meg igazán." },
+// O – mi változik (cél, nem garancia)
+const OUTCOMES = [
+  { title: "Hamarabb visszatalálsz a nyugalomhoz", text: "Egy nehéz nap vagy egy feszült beszélgetés után tudod, mit tehetsz, hogy ne vigyed magaddal estig." },
+  { title: "Olyan szokásaid lesznek, amelyek megmaradnak", text: "Nyolc hónap alatt a gyakorlás a napjaid természetes része lesz, nem egy újabb feladat a listán." },
+  { title: "Javul a kapcsolatod önmagaddal és a világgal", text: "Ha jobban figyelsz magadra, a körülötted élőkre is több figyelmed marad. Ez a munka valódi eredménye." },
 ];
 
 const INCLUDED = [
@@ -48,25 +67,30 @@ const INCLUDED = [
 ];
 
 const STEPS = [
-  { title: "Felmérés", text: "Két-három perc, 15 kérdés. A végén megkapod az Életmód-térképedet és egy tanácsot, amit még ma kipróbálhatsz." },
+  { title: "Kérdőív és Életmód-térkép", text: "Két-három perc, 15 kérdés. A végén látod, hol tartasz most, és kapsz egy első tanácsot." },
   { title: "Ismerkedő konzultáció", text: "Online beszélgetünk arról, mit szeretnél, és hogy a program jó választás-e neked. Itt beszéljük meg a részleteket és a díjat is." },
   { title: "Indulás", text: "Ha mindketten igent mondunk, elkészítem a személyre szabott tervedet, és elindulunk." },
 ];
 
 const FAQ = [
   { q: "Mennyibe kerül a program?", a: "A díjat az ismerkedő konzultáción beszéljük meg, személyesen, mert a program a te helyzetedre épül." },
-  { q: "Mennyi időt kér naponta?", a: "Reggel és este rövid gyakorlást, emellett hetente néhány hosszabb, elmélyültebb ülést. A pontos ütemet a te napjaidhoz igazítjuk." },
+  { q: "Mikor kezdhetem el a gyakorlást?", a: "Már az első közös alkalmunk után, a saját tervedet követve. Az első lépéshez nem kell hónapokig várnod." },
+  { q: "Mennyi időt kér naponta?", a: "Reggel és este egy rövid gyakorlást, emellett hetente néhány hosszabb, elmélyültebb ülést. A pontos ütemet a napjaidhoz igazítjuk." },
   { q: "Kell hozzá előzetes tapasztalat?", a: "Nem. Ha még sosem meditáltál, az elejéről indulunk; ha már gyakorolsz, onnan folytatjuk, ahol tartasz." },
+  { q: "Mi van, ha közben elakadok?", a: "Erre való a heti beszámoló és a heti alkalom: ha elakadsz, együtt nézzük meg, hogyan lépj tovább." },
   { q: "Online vagy személyesen zajlik?", a: "Az egyéni alkalmak online, Google Meeten zajlanak, így bárhonnan részt vehetsz. Budapesten a Nyílt Meditációs Esteken személyesen is találkozhatunk." },
   { q: "Terápia ez?", a: "Nem. A program nem helyettesíti az orvosi vagy pszichológiai kezelést. Ha ilyen kezelés alatt állsz, a konzultáción erről is beszéljünk." },
 ];
 
+const CTA = "Kérem az Életmód-térképem";
+
 export default function HomePage() {
   return (
     <main>
+      {/* Nyitókép: a haszon egy mondatban, kinek szól, egy gomb */}
       <section className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.15fr_1fr]">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-gold">Egyéni program · 8 hónap · online</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Idegrendszer-fejlesztés · egyénileg · 8 hónap</p>
           <h1 className="mt-5 text-balance font-serif text-4xl leading-tight text-forest sm:text-5xl">
             Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.
           </h1>
@@ -74,9 +98,7 @@ export default function HomePage() {
             Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.
           </p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-            Nyolc hónapos egyéni programomban a meditációt, a légzést, a mozgást, az alvást, az étkezést és a
-            kapcsolataidat egy egészként nézzük. Így nem egy újabb jó szándék lesz belőle, hanem olyan gyakorlás, amely a
-            te napjaidba illeszkedik, és meg is marad.
+            Hosszú távú út ez, nem gyorstalpaló – az első lépést mégis már ma megteheted.
           </p>
           <ul className="mt-6 space-y-2">
             {BENEFITS.map((b) => (
@@ -88,31 +110,65 @@ export default function HomePage() {
           </ul>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link href="/jelentkezes" className={buttonPrimary}>
-              Jelentkezem konzultációra
+              {CTA}
             </Link>
             <a href="#menete" className={buttonSecondary}>
               Hogyan működik?
             </a>
           </div>
-          <p className="mt-4 text-sm text-ink-soft">A jelentkezés egy két-három perces kérdőívvel indul, a végén megkapod az Életmód-térképedet.</p>
+          <p className="mt-4 text-sm text-ink-soft">15 kérdés, két-három perc. A végén kapsz egy tanácsot is, amelyet még aznap kipróbálhatsz.</p>
         </div>
         <DawnLandscape className="mx-auto w-full max-w-md opacity-90 lg:max-w-none" />
       </section>
 
-      <section className="max-w-3xl">
-        <SectionTitle eyebrow="Kinek szól?" title="Neked szól, ha…" />
-        <ul className="mt-8 space-y-3">
-          {FOR_WHOM.map((t) => (
-            <li key={t} className="flex items-start gap-3 text-lg text-ink">
-              <span className="mt-3 h-px w-5 shrink-0 bg-gold" aria-hidden />
-              {t}
-            </li>
-          ))}
-        </ul>
+      {/* P + A: a helyzet, és miért nem múlik el magától */}
+      <section className="grid gap-12 lg:grid-cols-2">
+        <div>
+          <SectionTitle eyebrow="Ismerős?" title="Amikor a nyugalom már nem jön magától" />
+          <ul className="mt-8 space-y-3">
+            {PROBLEM.map((t) => (
+              <li key={t} className="flex items-start gap-3 text-lg text-ink">
+                <span className="mt-3 h-px w-5 shrink-0 bg-gold" aria-hidden />
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="space-y-4 self-end text-lg leading-relaxed text-ink-soft">
+          <p>
+            Ilyenkor a tested hosszú ideig készenlétben marad, és minél tovább tart ez az állapot, annál nehezebb magadtól
+            visszatalálni a nyugalomhoz.
+          </p>
+          <p>
+            A gyors megoldások – egy szabad hétvége, egy új alkalmazás, egy jó könyv – néhány napig segítenek. Aztán jön
+            egy nehezebb hét, és minden visszaáll a régi kerékvágásba.
+          </p>
+          <p className="text-ink">Nem veled van a baj. Erre ritkán tanít meg bárki: hogyan működik ez belül, és mit tehetsz érte.</p>
+        </div>
       </section>
 
       <CompassDivider className="my-20" />
 
+      {/* S: idegrendszer-fejlesztés */}
+      <section id="idegrendszer" className="scroll-mt-24">
+        <SectionTitle eyebrow="Az idegrendszer-fejlesztés" title="A nyugalom tanulható." />
+        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft">
+          Az idegrendszer-fejlesztés azt jelenti, hogy megtanulod érteni és tudatosan segíteni a saját idegrendszeredet:
+          mikor kapcsol készenlétbe, és hogyan vezetheted vissza a nyugalomba.
+        </p>
+        <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
+          {NERVOUS_SYSTEM.map(({ title, text }) => (
+            <div key={title} className="border-t border-gold/30 pt-5">
+              <h3 className="font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* S: a módszer */}
       <section id="modszer" className="scroll-mt-24">
         <SectionTitle eyebrow="A módszerem" title="Két rendszer, egy út: a jóga nyolc ága és az életmód-orvostan hat pillére." />
         <div className="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed text-ink-soft">
@@ -146,19 +202,11 @@ export default function HomePage() {
             ))}
           </ul>
         </div>
-
-        <div className="mt-14 grid gap-x-10 gap-y-8 md:grid-cols-2">
-          {LAYERS.map(({ title, text }) => (
-            <div key={title} className="border-t border-gold/30 pt-5">
-              <h3 className="font-serif text-xl text-forest">{title}</h3>
-              <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       <CompassDivider className="my-20" />
 
+      {/* S: a program menete */}
       <section id="menete" className="scroll-mt-24">
         <SectionTitle eyebrow="A program menete" title="Négy hónap tanulás, négy hónap önálló beépítés." />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -198,6 +246,32 @@ export default function HomePage() {
 
       <CompassDivider className="my-20" />
 
+      {/* O: mi változik */}
+      <section>
+        <SectionTitle eyebrow="Amiért dolgozunk" title="Mi változik nyolc hónap alatt?" />
+        <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
+          {OUTCOMES.map(({ title, text }) => (
+            <div key={title} className="border-t border-gold/30 pt-5">
+              <h3 className="font-serif text-xl text-forest">{title}</h3>
+              <p className="mt-2 text-[15px] text-ink-soft">{text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 grid max-w-3xl gap-5 sm:grid-cols-2">
+          <div className="rounded-lg bg-paper-deep/70 px-5 py-4">
+            <p className="font-serif text-lg text-forest">Hosszú távú út</p>
+            <p className="mt-1 text-[15px] text-ink-soft">A változás nem harminc nap alatt történik. Nyolc hónapon át, lépésről lépésre építjük fel, hogy utána is veled maradjon.</p>
+          </div>
+          <div className="rounded-lg bg-paper-deep/70 px-5 py-4">
+            <p className="font-serif text-lg text-forest">Már ma elkezdheted</p>
+            <p className="mt-1 text-[15px] text-ink-soft">A kérdőív végén kapsz egy egyszerű tanácsot, amelyet még aznap kipróbálhatsz. Nem kell hónapokig várnod arra, hogy elinduljon valami.</p>
+          </div>
+        </div>
+      </section>
+
+      <CompassDivider className="my-20" />
+
+      {/* Hogyan kerülhetsz be */}
       <section id="jelentkezes" className="scroll-mt-24">
         <SectionTitle eyebrow="Hogyan kerülhetsz be?" title="Három lépés, sietség nélkül." />
         <ol className="mt-10 grid gap-x-8 gap-y-10 md:grid-cols-3">
@@ -215,13 +289,14 @@ export default function HomePage() {
         </p>
         <div className="mt-8">
           <Link href="/jelentkezes" className={buttonPrimary}>
-            Kitöltöm a felmérést
+            {CTA}
           </Link>
         </div>
       </section>
 
       <CompassDivider className="my-20" />
 
+      {/* Ki áll mögötte */}
       <section className="grid max-w-3xl items-start gap-8 sm:grid-cols-[auto_1fr]">
         <Image
           src="/images/rolam/portre.webp"
@@ -307,14 +382,15 @@ export default function HomePage() {
       <section className="pb-8 text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha most kezdenéd</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest sm:text-4xl">
-          Az első lépés egy rövid felmérés.
+          Az első lépés mindössze két perc.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Utána egy ismerkedő beszélgetésen eldöntjük, hogy a program jó választás-e neked.
+          Töltsd ki a kérdőívet, és nézd meg, hol tartasz most. Utána egy ismerkedő beszélgetésen eldönthetjük, hogy a
+          program jó választás-e neked.
         </p>
         <div className="mt-8">
           <Link href="/jelentkezes" className={buttonPrimary}>
-            Jelentkezem konzultációra
+            {CTA}
           </Link>
         </div>
       </section>

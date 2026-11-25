@@ -40,10 +40,11 @@ export default async function OpenEveningsPage() {
         <PageHeader eyebrow="Havonta egyszer, Budapesten" title="Nyílt Meditációs Estek">
           <p className="font-serif text-xl text-ink">Egy este, amikor nem kell megfelelned semminek – csak megérkezned és lélegezned.</p>
           <p>
-            Ha még sosem meditáltál, vagy egyszerűen kíváncsi vagy, hogyan dolgozunk, ez a legjobb kezdőpont. Kis
-            csoportban, vezetett légzés- és figyelemgyakorlással tapasztalod meg, milyen, amikor a tested a készenlétből
-            visszavált nyugalomba. Hazafelé figyeld meg, mi változott.
+            Egy hét rohanás után nehéz egyedül megállni: otthon mindig akad még egy üzenet, egy feladat, egy képernyő. Itt
+            kis csoportban, telefon nélkül, vezetett légzés- és figyelemgyakorlással tapasztalod meg, milyen, amikor a
+            tested a készenlétből visszavált nyugalomba.
           </p>
+          <p>Ha még sosem meditáltál, ez a legjobb kezdőpont. Hazafelé figyeld meg, mi változott.</p>
         </PageHeader>
         <EveningLamp className="mx-auto hidden h-44 w-44 lg:block" />
       </div>
