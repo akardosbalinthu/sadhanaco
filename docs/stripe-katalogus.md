@@ -43,7 +43,8 @@ Döntés: sikertelen megújításkor azonnali e-mail a tagnak, a hozzáférés *
 legfeljebb 3 újrapróbálkozást enged, a Smart Retries pedig 1 / 2 / 3 hetes vagy 1 / 2 hónapos ablakot.
 Javasolt beállítás:
 
-- **Smart Retries: 5 újrapróbálkozás, 2 hetes ablak**
+- **Smart Retries: 8 újrapróbálkozás, 2 hetes ablak** (beállítva 2026-11-25; a tag csak az első sikertelen terhelésről kap levelet)
+- **Fizetés megerősítése (3D Secure):** a Stripe-hosted megerősítő link e-mailje bekapcsolva
 - **Ha minden újrapróbálkozás sikertelen: Cancel the subscription**
 
 A 10 napos határt az adatbázis tartja be (`app_settings.past_due_grace_days = 10`): a 10. nap után a
