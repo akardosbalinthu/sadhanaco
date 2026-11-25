@@ -7,7 +7,7 @@ import { z } from "zod";
 import { getStripe, onlinePaymentsEnabled } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { firstIssue, kindMessageError, messageFields, type FormState } from "@/lib/kind-message";
+import { firstIssue, kindMessageError, messageFields, wantsAnonymity, type FormState } from "@/lib/kind-message";
 import { resolvedTarsasagUrl, tp } from "@/lib/site";
 
 const schema = z.object({ ...messageFields, kind: z.enum(["priority", "standard", "paid"], { message: "Válaszd ki az üzenet fajtáját." }) });
@@ -27,22 +27,39 @@ export async function sendMemberMessage(_prev: FormState, fd: FormData): Promise
 
   if (d.kind === "paid") return startPaidMessage(user.id, user.email ?? "", d, fd);
 
+  let messageId: string | undefined;
   if (d.kind === "priority") {
     // A keret, a próbaidő és a tagság ellenőrzése az adatbázisban, atomi zárolással.
-    const { error } = await supabase.rpc("send_free_kind_message", {
+    const { data, error } = await supabase.rpc("send_free_kind_message", {
       p_recipient_name: d.recipient_name,
       p_recipient_phone: d.recipient_phone,
       p_message: d.message,
     });
     if (error) return { status: "error", message: kindMessageError(error.hint) };
+    messageId = data?.id;
   } else {
-    const { error } = await createAdminClient().rpc("submit_kind_message", {
-      p_recipient_name: d.recipient_name,
-      p_recipient_phone: d.recipient_phone,
-      p_message: d.message,
-      p_sender: user.id,
-    });
+    const { data, error } = await createAdminClient()
+      .rpc("submit_kind_message", {
+        p_recipient_name: d.recipient_name,
+        p_recipient_phone: d.recipient_phone,
+        p_message: d.message,
+        p_sender: user.id,
+      })
+      .single();
     if (error) return { status: "error", message: kindMessageError(error.hint) };
+    messageId = data?.message_id;
+  }
+  // A névtelenség jelölése nem állíthatja meg a már rögzített üzenetet; hiba esetén szólunk.
+  const anonFailed =
+    wantsAnonymity(fd) && messageId
+      ? !!(await createAdminClient().rpc("set_kind_message_anonymous", { p_message_id: messageId, p_anonymous: true })).error
+      : false;
+  if (anonFailed) {
+    revalidatePath(tp("/kedves-uzenet"));
+    return {
+      status: "done",
+      message: `Az üzeneted ${d.recipient_name} részére bekerült a sorba, de a névtelenséget most nem sikerült rögzíteni. Kérlek, írj az info@akardosbalint.hu címre, és kézzel beállítom.`,
+    };
   }
   revalidatePath(tp("/kedves-uzenet"));
   return {
@@ -80,6 +97,13 @@ async function startPaidMessage(userId: string, email: string, d: z.infer<typeof
     p_message: d.message,
     p_amount_huf: amount,
   });
+  if (!error && messageId && wantsAnonymity(fd)) {
+    const { error: anonErr } = await admin.rpc("set_kind_message_anonymous", { p_message_id: messageId, p_anonymous: true });
+    if (anonErr) {
+      await admin.from("kind_messages").delete().eq("id", messageId).eq("status", "pending_payment");
+      return { status: "error", message: kindMessageError(null) };
+    }
+  }
   if (error || !messageId) {
     return { status: "error", message: error?.hint === "AMOUNT_TOO_LOW" ? `Az összeg legalább ${min.toLocaleString("hu-HU", { useGrouping: "always" } as Intl.NumberFormatOptions)} Ft.` : kindMessageError(error?.hint) };
   }

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail } from "@/lib/email";
-import { firstIssue, kindMessageError, messageFields, type FormState } from "@/lib/kind-message";
+import { firstIssue, kindMessageError, messageFields, wantsAnonymity, type FormState } from "@/lib/kind-message";
 import { resolvedSiteUrl } from "@/lib/site";
 
 const guestSchema = z.object({
@@ -45,6 +45,13 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
     })
     .single();
   if (error || !data?.confirm_token) return { status: "error", message: kindMessageError(error?.hint) };
+  if (wantsAnonymity(fd)) {
+    const { error: anonErr } = await admin.rpc("set_kind_message_anonymous", { p_message_id: data.message_id, p_anonymous: true });
+    if (anonErr) {
+      await admin.from("kind_messages").delete().eq("id", data.message_id).eq("status", "pending_confirmation");
+      return { status: "error", message: kindMessageError(null) };
+    }
+  }
 
   const link = `${resolvedSiteUrl().replace(/\/$/, "")}/egy-kedves-uzenet/megerosites?t=${data.confirm_token}`;
   const sent = await sendEmail(
@@ -52,7 +59,7 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
     "Erősítsd meg a Kedves Üzenetedet",
     [
       `Kedves ${d.guest_name}!`,
-      `Köszönöm, hogy üzenetet küldenél ${d.recipient_name} részére. Egy kattintással erősítsd meg, hogy tényleg te küldted — utána bekerül a kézbesítési sorba.`,
+      `Köszönöm, hogy üzenetet küldenél ${d.recipient_name} részére${wantsAnonymity(fd) ? " — névtelenül, a neved a hívásban nem hangzik el" : ""}. Egy kattintással erősítsd meg, hogy tényleg te küldted — utána bekerül a kézbesítési sorba.`,
       "A link 48 óráig érvényes. Ha nem te küldted, egyszerűen hagyd figyelmen kívül ezt a levelet.",
     ],
     { href: link, label: "Megerősítem az üzenetet" },

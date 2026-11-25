@@ -12,6 +12,9 @@ export const messageFields = {
   consent: z.literal("on", { message: "Kérlek, erősítsd meg a nyilatkozatot." }),
 };
 
+/** A „Névtelen maradnék” jelölőnégyzet értéke. */
+export const wantsAnonymity = (fd: FormData) => fd.get("anonymous") === "on";
+
 export type FormState = { status: "idle" } | { status: "error"; message: string } | { status: "done"; message: string };
 
 /** Az adatbázis HINT-kódjai emberi nyelven. */

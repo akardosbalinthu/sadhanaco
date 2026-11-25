@@ -135,6 +135,14 @@ export function KindMessageForm({
       )}
 
       <label className="flex items-start gap-3 text-sm text-ink-soft">
+        <input type="checkbox" name="anonymous" className="mt-1 accent-forest" />
+        <span>
+          <span className="text-forest">Névtelen maradnék.</span> A hívásban nem mondom ki a neved — a címzett csak az
+          üzenetet hallja, azt nem, hogy ki küldte.
+        </span>
+      </label>
+
+      <label className="flex items-start gap-3 text-sm text-ink-soft">
         <input type="checkbox" name="consent" required className="mt-1 accent-forest" />
         <span>
           A címzett nevét és telefonszámát jogszerűen adom meg, és elfogadom az{" "}

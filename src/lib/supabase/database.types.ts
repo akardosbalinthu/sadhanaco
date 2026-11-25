@@ -347,14 +347,14 @@ isOneToOne: false
                   ]
                 },"kind_messages": {
                   Row: {
-                    "amount_huf": number,"attempts": number,"closed_at": string | null,"confirm_expires_at": string | null,"confirm_token_hash": string | null,"confirmed_at": string | null,"created_at": string,"delivered_at": string | null,"guest_email": string | null,"guest_name": string | null,"id": string,"invoice_id": string | null,"is_free": boolean,"kind": Database["public"]['Enums']["kind_message_kind"],"last_attempt_at": string | null,"message": string,"phone_purged_at": string | null,"recipient_name": string,"recipient_phone": string | null,"sender_id": string | null,"status": Database["public"]['Enums']["kind_message_status"]
+                    "amount_huf": number,"anonymous": boolean,"attempts": number,"closed_at": string | null,"confirm_expires_at": string | null,"confirm_token_hash": string | null,"confirmed_at": string | null,"created_at": string,"delivered_at": string | null,"guest_email": string | null,"guest_name": string | null,"id": string,"invoice_id": string | null,"is_free": boolean,"kind": Database["public"]['Enums']["kind_message_kind"],"last_attempt_at": string | null,"message": string,"phone_purged_at": string | null,"recipient_name": string,"recipient_phone": string | null,"sender_id": string | null,"status": Database["public"]['Enums']["kind_message_status"]
                   }
                   ComputedFields: never
                   Insert: {
-                    "amount_huf"?: number,"attempts"?: number,"closed_at"?: string | null,"confirm_expires_at"?: string | null,"confirm_token_hash"?: string | null,"confirmed_at"?: string | null,"created_at"?: string,"delivered_at"?: string | null,"guest_email"?: string | null,"guest_name"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free": boolean,"kind"?: Database["public"]['Enums']["kind_message_kind"],"last_attempt_at"?: string | null,"message": string,"phone_purged_at"?: string | null,"recipient_name": string,"recipient_phone"?: string | null,"sender_id"?: string | null,"status"?: Database["public"]['Enums']["kind_message_status"]
+                    "amount_huf"?: number,"anonymous"?: boolean,"attempts"?: number,"closed_at"?: string | null,"confirm_expires_at"?: string | null,"confirm_token_hash"?: string | null,"confirmed_at"?: string | null,"created_at"?: string,"delivered_at"?: string | null,"guest_email"?: string | null,"guest_name"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free": boolean,"kind"?: Database["public"]['Enums']["kind_message_kind"],"last_attempt_at"?: string | null,"message": string,"phone_purged_at"?: string | null,"recipient_name": string,"recipient_phone"?: string | null,"sender_id"?: string | null,"status"?: Database["public"]['Enums']["kind_message_status"]
                   }
                   Update: {
-                    "amount_huf"?: number,"attempts"?: number,"closed_at"?: string | null,"confirm_expires_at"?: string | null,"confirm_token_hash"?: string | null,"confirmed_at"?: string | null,"created_at"?: string,"delivered_at"?: string | null,"guest_email"?: string | null,"guest_name"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free"?: boolean,"kind"?: Database["public"]['Enums']["kind_message_kind"],"last_attempt_at"?: string | null,"message"?: string,"phone_purged_at"?: string | null,"recipient_name"?: string,"recipient_phone"?: string | null,"sender_id"?: string | null,"status"?: Database["public"]['Enums']["kind_message_status"]
+                    "amount_huf"?: number,"anonymous"?: boolean,"attempts"?: number,"closed_at"?: string | null,"confirm_expires_at"?: string | null,"confirm_token_hash"?: string | null,"confirmed_at"?: string | null,"created_at"?: string,"delivered_at"?: string | null,"guest_email"?: string | null,"guest_name"?: string | null,"id"?: string,"invoice_id"?: string | null,"is_free"?: boolean,"kind"?: Database["public"]['Enums']["kind_message_kind"],"last_attempt_at"?: string | null,"message"?: string,"phone_purged_at"?: string | null,"recipient_name"?: string,"recipient_phone"?: string | null,"sender_id"?: string | null,"status"?: Database["public"]['Enums']["kind_message_status"]
                   }
                   Relationships: [
                     {
@@ -727,6 +727,7 @@ isOneToOne: false
 "admin_close_kind_message":
 { Args: { "p_failed": boolean,"p_message": string,"p_note"?: string }; Returns: {
               "amount_huf": number,
+"anonymous": boolean,
 "attempts": number,
 "closed_at": string | null,
 "confirm_expires_at": string | null,
@@ -776,6 +777,7 @@ isOneToOne: false
 "admin_kind_message_queue":
 { Args: Record<PropertyKey, never>; Returns: {
               "amount_huf": number,
+"anonymous": boolean,
 "attempts": number,
 "closed_at": string | null,
 "confirm_expires_at": string | null,
@@ -811,6 +813,7 @@ isOneToOne: false
 "admin_record_kind_message_attempt":
 { Args: { "p_message": string,"p_note"?: string,"p_success": boolean }; Returns: {
               "amount_huf": number,
+"anonymous": boolean,
 "attempts": number,
 "closed_at": string | null,
 "confirm_expires_at": string | null,
@@ -948,6 +951,7 @@ isOneToOne: false
 "confirm_kind_message":
 { Args: { "p_token": string }; Returns: {
               "amount_huf": number,
+"anonymous": boolean,
 "attempts": number,
 "closed_at": string | null,
 "confirm_expires_at": string | null,
@@ -996,6 +1000,7 @@ isOneToOne: false
 "confirm_paid_kind_message":
 { Args: { "p_invoice"?: string,"p_message": string }; Returns: {
               "amount_huf": number,
+"anonymous": boolean,
 "attempts": number,
 "closed_at": string | null,
 "confirm_expires_at": string | null,
@@ -1382,6 +1387,7 @@ isOneToOne: false
 "send_free_kind_message":
 { Args: { "p_message": string,"p_recipient_name": string,"p_recipient_phone": string }; Returns: {
               "amount_huf": number,
+"anonymous": boolean,
 "attempts": number,
 "closed_at": string | null,
 "confirm_expires_at": string | null,
@@ -1409,6 +1415,9 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"set_kind_message_anonymous":
+{ Args: { "p_anonymous": boolean,"p_message_id": string }; Returns: undefined
+                           },
 "set_registration_details":
 { Args: { "p_consent": boolean,"p_phone": string,"p_registration_id": string,"p_safety_note": string }; Returns: undefined
                            },

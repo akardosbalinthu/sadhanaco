@@ -49,6 +49,11 @@ export default async function AdminKindMessages({ searchParams }: { searchParams
                         {priority ? (m.is_free ? "Elsőbbségi · keretből" : `Elsőbbségi · ${huf(m.amount_huf)}`) : "Díjmentes"}
                         {m.status === "followup" && " · utánkövetés"}
                       </p>
+                      {m.anonymous && (
+                        <p className="w-full rounded-md border border-alert/50 px-3 py-1.5 text-sm text-alert">
+                          Névtelen — a hívásban ne mondd ki a küldő nevét.
+                        </p>
+                      )}
                     </div>
                     <p className="mt-1 text-xs text-ink-soft">
                       Küldő: {s ? `${s.display_name || s.email} (${s.email})` : `${m.guest_name ?? "—"} (${m.guest_email ?? "—"})`} ·{" "}

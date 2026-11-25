@@ -82,7 +82,7 @@ const sections: LegalSection[] = [
 
         <p className="pt-3 font-serif text-lg text-forest">Egy Kedves Üzenet</p>
         <ul>
-          <Row what="A küldő neve és e-mail-címe" why="az üzenet megerősítése és a kapcsolattartás" basis="szerződés teljesítése" until="a kézbesítés után 1 év" />
+          <Row what="A küldő neve és e-mail-címe, valamint az, hogy névtelenséget kért-e" why="az üzenet megerősítése és a kapcsolattartás; névtelenségnél a nevet a hívásban nem mondjuk ki" basis="szerződés teljesítése" until="a kézbesítés után 1 év" />
           <Row what="A címzett neve, telefonszáma és az üzenet szövege" why="a meglepetés-hívás lebonyolítása" basis="jogos érdek (a küldő és a címzett érdeke az üzenet átadásában)" until="a telefonszámot legfeljebb 180 napig, utána automatikusan töröljük" />
         </ul>
         <p className="text-sm text-ink-soft">
