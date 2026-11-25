@@ -139,7 +139,7 @@ const STATIONS: Station[] = [
     title: "Visszavenni a figyelmünket",
     Art: MorningPaper,
     paras: [
-      "Az idegrendszerünk így is túlterhelt, és szinte minden körülöttünk azon dolgozik, hogy elrabolja a figyelmünket — vele pedig az erőnket. Amire figyelünk, abba tesszük az energiánkat. A telefon csak eszköz, mégis sokszor ő irányít minket, nem fordítva.",
+      "Az idegrendszerünk így is túlterhelt, és szinte minden körülöttünk azon dolgozik, hogy elrabolja a figyelmünket — vele pedig az erőnket. A telefon csak eszköz, mégis sokszor ő irányít minket, nem fordítva.",
       "Szeretném visszavenni a figyelmemet, és segíteni másoknak is, hogy a nap legérzékenyebb perceit, az ébredés utániakat, a lehető legkevesebb ingerrel kezdjék. Ebből lett a Napi Közlöny.",
     ],
   },
