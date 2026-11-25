@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { LEGAL, SITE } from "@/lib/site";
 import { LegalDoc, type LegalSection } from "@/components/legal-doc";
 
 export const metadata = {
@@ -7,7 +7,7 @@ export const metadata = {
   description: "Milyen személyes adatokat kezelünk, miért, mennyi ideig, és milyen jogaid vannak.",
 };
 
-/** TERVEZET — élesítés előtt jogásszal átnézendő; a [kitöltendő] mezőket Bálint adja meg. */
+/** Jogásszal átnézendő. Az adatkezelő adatai: LEGAL (src/lib/site.ts). */
 
 function Row({ what, why, basis, until }: { what: string; why: string; basis: string; until: string }) {
   return (
@@ -22,7 +22,8 @@ const sections: LegalSection[] = [
     title: "Az adatkezelő",
     body: (
       <p>
-        <strong>Kardos Bálint egyéni vállalkozó</strong> · székhely: [kitöltendő] · e-mail: {SITE.email}. Adatvédelmi
+        <strong>{LEGAL.fullName}</strong> · székhely: {LEGAL.address} · nyilvántartási szám: {LEGAL.registrationNumber} ·
+        adószám: {LEGAL.taxNumber} · e-mail: {SITE.email}. Adatvédelmi
         tisztviselő kinevezésére nem vagyunk kötelesek; minden adatvédelmi kérdésben a fenti e-mail-címen érsz el.
       </p>
     ),
@@ -173,7 +174,7 @@ export default function PrivacyPage() {
       eyebrow="Jogi tudnivalók"
       title="Adatkezelési tájékoztató"
       intro={<p>Röviden: csak a szolgáltatáshoz szükséges adatokat kezeljük, nem adjuk el őket, és nincs követő süti.</p>}
-      meta="Verzió: 2026-11 · Hatályos: [kitöltendő]"
+      meta={`Verzió: 2026-11 · Hatályos: ${LEGAL.effectiveFrom}`}
       sections={sections}
     />
   );

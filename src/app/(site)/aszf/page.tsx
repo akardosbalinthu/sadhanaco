@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { LEGAL, SITE } from "@/lib/site";
 import { LegalDoc, type LegalSection } from "@/components/legal-doc";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 /**
- * TERVEZET — élesítés előtt jogásszal átnézendő; a [kitöltendő] mezőket Bálint adja meg.
+ * Jogásszal átnézendő. A szolgáltató adatai: LEGAL (src/lib/site.ts).
  * A szöveg verziója: app_settings.terms_version (a vásárláskor ezt rögzítjük a hozzájárulással).
  */
 const sections: LegalSection[] = [
@@ -17,8 +17,8 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          <strong>Kardos Bálint egyéni vállalkozó</strong> (KATA, alanyi adómentes) · székhely: [kitöltendő] ·
-          nyilvántartási szám: [kitöltendő] · adószám: [kitöltendő] · e-mail: {SITE.email}. A további adatok az{" "}
+          <strong>{LEGAL.fullName}</strong> (KATA, alanyi adómentes) · székhely: {LEGAL.address} ·
+          nyilvántartási szám: {LEGAL.registrationNumber} · adószám: {LEGAL.taxNumber} · e-mail: {SITE.email}. A további adatok az{" "}
           <Link href="/impresszum">impresszumban</Link> találhatók.
         </p>
         <p>
@@ -307,7 +307,7 @@ export default function TermsPage() {
           helyettesíti az orvosi kezelést.
         </p>
       }
-      meta="Verzió: 2026-11 · Hatályos: [kitöltendő]"
+      meta={`Verzió: 2026-11 · Hatályos: ${LEGAL.effectiveFrom}`}
       sections={sections}
     />
   );

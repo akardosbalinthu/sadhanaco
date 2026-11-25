@@ -42,6 +42,17 @@ export const SITE = {
   egyKedvesUzenetUrl: "https://egykedvesuzenet.hu",
 } as const;
 
+/** A szolgáltató (számlázási entitás) jogi adatai — ÁSZF, Adatkezelés, Impresszum. Kft.-váltáskor itt kell módosítani. */
+export const LEGAL = {
+  name: "Kardos Bálint e. v.",
+  fullName: "Kardos Bálint egyéni vállalkozó",
+  address: "1027 Budapest, Bem József utca 6. fsz. 3., Magyarország",
+  registrationNumber: "61623820",
+  taxNumber: "91637778-1-41",
+  effectiveFrom: "2026. november 25.",
+  host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA",
+} as const;
+
 // useGrouping "always": a négyjegyű összegek is tagolva (9 940 Ft), ahogy a nyomtatott árakban.
 const hufFormatter = new Intl.NumberFormat("hu-HU", { maximumFractionDigits: 0, useGrouping: "always" });
 export function formatHuf(amount: number): string {

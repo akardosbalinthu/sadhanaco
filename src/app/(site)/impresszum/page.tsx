@@ -1,21 +1,18 @@
-import { SITE } from "@/lib/site";
+import { LEGAL, SITE } from "@/lib/site";
 import { CompassDivider, GildedCard, PageHeader } from "@/components/ornaments";
 
 export const metadata = { title: "Impresszum · Kardos Bálint" };
 
-/**
- * FIGYELEM: a [kitöltendő] mezőket élesítés előtt Bálintnak kell megadnia
- * (székhely, nyilvántartási szám, adószám, tárhelyszolgáltató adatai).
- */
+/** A jogi adatok forrása: LEGAL (src/lib/site.ts). */
 export default function ImprintPage() {
   const rows: [string, string][] = [
-    ["Szolgáltató", "Kardos Bálint egyéni vállalkozó"],
+    ["Szolgáltató", `${LEGAL.fullName} (${LEGAL.name})`],
     ["Adózás", "KATA, alanyi adómentes (AAM)"],
-    ["Székhely", "[kitöltendő]"],
-    ["Nyilvántartási szám", "[kitöltendő]"],
-    ["Adószám", "[kitöltendő]"],
+    ["Székhely", LEGAL.address],
+    ["Nyilvántartási szám", LEGAL.registrationNumber],
+    ["Adószám", LEGAL.taxNumber],
     ["E-mail", SITE.email],
-    ["Tárhelyszolgáltató", "Vercel Inc. [cím kitöltendő]"],
+    ["Tárhelyszolgáltató", LEGAL.host],
   ];
   return (
     <main className="py-16">
