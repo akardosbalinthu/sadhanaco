@@ -16,10 +16,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.redirect(new URL(`${tp("/csatlakozas")}`, request.nextUrl.origin), 303);
   }
 
+  // A Társaság saját portál-beállítása (kártyacsere, lemondás az időszak végén, szintváltás a négy tagsági ár
+  // között); ugyanebben a Stripe-fiókban más előfizetések is futnak, ezért nem a fiók alapértelmezésére hagyatkozunk.
+  const configuration = process.env.STRIPE_PORTAL_CONFIGURATION_ID || undefined;
   const session = await getStripe().billingPortal.sessions.create({
     customer: profile.stripe_customer_id,
     locale: "hu",
-    return_url: `${resolvedTarsasagUrl().replace(/\/$/, "")}/gyakorlas`,
+    ...(configuration ? { configuration } : {}),
+    return_url: `${resolvedTarsasagUrl().replace(/\/$/, "")}/adataim`,
   });
   return NextResponse.redirect(session.url, 303);
 }

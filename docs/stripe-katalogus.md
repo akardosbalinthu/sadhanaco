@@ -7,9 +7,9 @@ A Stripe-ban a HUF kéttizedes: `unit_amount 994000` = 9 940 Ft.
 
 | Termék | Product ID | lookup_key | Ár |
 | --- | --- | --- | --- |
-| Társasági Tagság | `prod_VgbrLOKdZgQqyM` | `tarsasagi_havi` | 9 940 Ft / hó (7 napos próba a checkoutnál) |
+| A Társaság Tagja | `prod_VgbrLOKdZgQqyM` | `tarsasagi_havi` | 9 940 Ft / hó (7 napos próba a checkoutnál) |
 | | | `tarsasagi_eves` | 99 400 Ft / év |
-| Belső Kör | `prod_VgbtwmiPVKTIme` | `belso_kor_havi` | 27 940 Ft / hó |
+| A Belső Kör Tagja | `prod_VgbtwmiPVKTIme` | `belso_kor_havi` | 27 940 Ft / hó |
 | | | `belso_kor_eves` | 279 400 Ft / év |
 | II. Modul + IP 2 (gyorsított) | `prod_VgbwbICFQliZfC` | `gyorsitott_m2_ip2` | 54 940 Ft |
 | IP 3 (gyorsított) | `prod_VgbwI6pIJhOfRS` | `gyorsitott_ip3` | 44 940 Ft |
@@ -50,3 +50,15 @@ A 10 napos határt az adatbázis tartja be (`app_settings.past_due_grace_days = 
 hozzáférés szünetel. Ha egy későbbi újrapróbálkozás (10–14. nap) mégis sikerül, a hozzáférés automatikusan
 visszaáll, a haladás megmarad. A tagság (és vele a 7.4 szerinti „elölről kezdés”) csak akkor szűnik meg,
 amikor a Stripe lezárja az előfizetést.
+
+## Webhook és ügyfélportál (2026-11-25)
+
+- **Webhook-végpont:** `we_1UfUsSKKK49wrBvLak7FSM3z` → `https://tarsasag.akardosbalint.hu/api/webhooks/stripe`,
+  API-verzió `2026-11-18.endive`, 7 esemény (lásd `docs/telepites.md` 5. pont). Aláíró kulcs: Vercel `STRIPE_WEBHOOK_SECRET`.
+- **Ügyfélportál:** `bpc_1UfUzUKKK49wrBvLHCRNpz8n` („A Társaság — tagság”), Vercel `STRIPE_PORTAL_CONFIGURATION_ID`.
+  Kártyacsere; lemondás a számlázási időszak végén, visszatérítés nélkül, okkal; váltás a négy tagsági ár között —
+  felfelé azonnal, időarányos számlával (`always_invoice`), lefelé és rövidebb időszakra a következő időszaktól;
+  próbaidő alatti váltásnál a próba véget ér; mennyiség nem módosítható; számlatörténet és ügyféladat-módosítás
+  kikapcsolva (a hivatalos számla a kézi AAM-számla, a belépési azonosító az e-mail-cím).
+  A fiók első portál-beállításaként a Stripe alapértelmezettnek jelölte; más előfizetésnél csak kártyacsere és lemondás érhető el.
+- A két tagsági termék neve 2026-11-25-én a 7.16 szerinti csomagnevekre változott (a Checkout és a portál ezt mutatja).
