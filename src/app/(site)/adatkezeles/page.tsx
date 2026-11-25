@@ -64,6 +64,8 @@ const sections: LegalSection[] = [
 
         <p className="pt-3 font-serif text-lg text-forest">Közösség</p>
         <ul>
+          <Row what="Értesítési beállítás (kérsz-e levelet az újdonságokról)" why="értesítő levél az új eseményekről, bejegyzésekről és szavazásokról" basis="jogos érdek — bármikor leiratkozhatsz az Adataim oldalon vagy a levél alján" until="a tagság megszűnéséig" />
+          <Row what="Élő alkalmon: a neved, a jelenléted, és ha bekapcsolod, a kamerád és a mikrofonod képe-hangja" why="az élő közös meditáció és a Q&A lebonyolítása, a részvétel rögzítése (XP)" basis="szerződés teljesítése" until="a kép és a hang csak élőben jut el a résztvevőkhöz; felvétel csak az előre jelzett alkalmakról (pl. Q&A) készül" />
           <Row what="Bejegyzések, hozzászólások, reakciók" why="a közösségi tér működése" basis="szerződés teljesítése; a tagság megszűnése után jogos érdek (a beszélgetések érthetősége)" until="a tagság után is a neveddel megmaradnak; kérésre töröljük" />
         </ul>
 
@@ -103,6 +105,7 @@ const sections: LegalSection[] = [
           <li><strong>Stripe Payments Europe Ltd.</strong> (bankkártyás fizetés, Írország)</li>
           <li><strong>Resend</strong> (tranzakciós e-mailek, USA — EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>BunnyWay d.o.o. (bunny.net)</strong> (hang- és videóanyagok, Szlovénia)</li>
+          <li><strong>LiveKit Inc.</strong> (élő közvetítés, EU-s szerveren; USA — EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>Zoho</strong> (levelezés)</li>
           <li><strong>Billingo</strong> (számlázás, amint bekapcsoljuk)</li>
         </ul>

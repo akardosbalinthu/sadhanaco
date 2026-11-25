@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { tp } from "@/lib/site";
+import { announceToMembers } from "@/lib/announce";
 
 const uuid = z.string().uuid();
 const refresh = () => revalidatePath(tp("/kozosseg"), "layout");
@@ -26,6 +27,17 @@ export async function createPost(formData: FormData) {
     .select("id")
     .single();
   if (error) fail("/kozosseg", "A bejegyzés most nem ment el. Próbáld újra kicsit később.");
+  // Admin bejegyzéséről minden tag értesítést kap (CLAUDE.md 7.19).
+  const { data: isAdmin } = await supabase.rpc("is_admin");
+  if (isAdmin) {
+    const excerpt = parsed.data.body.length > 500 ? `${parsed.data.body.slice(0, 500)}…` : parsed.data.body;
+    announceToMembers("post", data.id, {
+      subject: parsed.data.title ? `Új bejegyzés: ${parsed.data.title}` : "Új bejegyzés A Társaságban",
+      paragraphs: ["Új bejegyzést írtam A Társaság közösségi terébe.", ...(parsed.data.title ? [parsed.data.title] : []), excerpt],
+      linkPath: `/kozosseg/${data.id}`,
+      linkLabel: "Elolvasom",
+    });
+  }
   refresh();
   redirect(tp(`/kozosseg/${data.id}`));
 }

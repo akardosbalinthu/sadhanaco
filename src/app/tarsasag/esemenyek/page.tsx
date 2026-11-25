@@ -1,4 +1,6 @@
-import { CalendarDays, Check, MapPin, Monitor } from "lucide-react";
+import Link from "next/link";
+import { CalendarDays, CalendarPlus, Check, MapPin, Monitor, PlayCircle, Radio } from "lucide-react";
+import { tp } from "@/lib/site";
 import { requireMember } from "@/lib/member";
 import { EVENT_KIND_LABEL } from "@/lib/admin";
 import { MemberNav } from "@/components/member-nav";
@@ -17,8 +19,8 @@ const huf = (n: number) => (n === 0 ? "díjmentes" : `${new Intl.NumberFormat("h
 
 export default async function EventsPage({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
-  const { supabase, profile, hasAccess } = await requireMember();
-  if (!hasAccess) {
+  const { supabase, profile, hasAccess, isAdmin } = await requireMember();
+  if (!hasAccess && !isAdmin) {
     return (
       <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <MemberNav active="/esemenyek" />
@@ -30,13 +32,26 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
   const trial = profile.subscription_status === "trialing";
   const tier = profile.tier === "belso_kor" ? "belso_kor" : "tarsasagi";
 
-  const [{ data: events }, { data: regs }, { data: invites }, { data: settings }, { data: polls }] = await Promise.all([
-    supabase.from("events").select("*").gte("starts_at", now.toISOString()).is("cancelled_at", null).eq("is_published", true).order("starts_at").limit(30),
+  const LIVE_LEAD_MS = 15 * 60_000;
+  const endOf = (e: { starts_at: string; ends_at: string | null }) =>
+    e.ends_at ? new Date(e.ends_at) : new Date(new Date(e.starts_at).getTime() + 3 * 3600_000);
+  const [{ data: upcoming }, { data: regs }, { data: invites }, { data: settings }, { data: polls }, { data: recordings }] = await Promise.all([
+    // A már elkezdődött (élő) alkalmak is látszanak, amíg véget nem érnek.
+    supabase.from("events").select("*").gte("starts_at", new Date(now.getTime() - 6 * 3600_000).toISOString()).is("cancelled_at", null).eq("is_published", true).order("starts_at").limit(40),
     supabase.from("event_registrations").select("id, event_id, status, hold_expires_at, price_huf").eq("user_id", profile.id).neq("status", "cancelled"),
     supabase.from("event_invitations").select("id, event_id, guest_name, status").eq("invited_by", profile.id).neq("status", "cancelled"),
     supabase.from("app_settings").select("belso_kor_priority_hours, hike_guest_invites_per_member").single(),
     supabase.from("destination_polls").select("*").order("month", { ascending: false }).limit(1),
+    supabase
+      .from("events")
+      .select("id, title, kind, starts_at")
+      .eq("is_published", true)
+      .not("recording_bunny_id", "is", null)
+      .lt("starts_at", now.toISOString())
+      .order("starts_at", { ascending: false })
+      .limit(12),
   ]);
+  const events = (upcoming ?? []).filter((e) => endOf(e) > now);
   const regBy = new Map((regs ?? []).map((r) => [r.event_id, r]));
   // A telefonszámot az előző jelentkezésből előre kitöltjük (ha még nem törlődött).
   const { data: lastWithPhone } = await supabase
@@ -127,8 +142,8 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
       )}
 
       <section className="mt-10 space-y-5">
-        {(events ?? []).length === 0 && <GildedCard className="text-sm text-ink-soft">Most nincs kiírt alkalom. Hamarosan jönnek az újak.</GildedCard>}
-        {(events ?? []).map((e) => {
+        {events.length === 0 && <GildedCard className="text-sm text-ink-soft">Most nincs kiírt alkalom. Hamarosan jönnek az újak.</GildedCard>}
+        {events.map((e) => {
           const reg = regBy.get(e.id);
           const price = tier === "belso_kor" ? e.price_belso_kor_huf : e.price_tarsasagi_huf;
           const opens = new Date(e.registration_opens_at);
@@ -160,7 +175,16 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
                 {e.description && <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-ink">{e.description}</p>}
 
                 <div className="mt-6 border-t border-line pt-5">
-                  {reg?.status === "confirmed" ? (
+                  {e.is_online ? (
+                    <LiveBlock
+                      eventId={e.id}
+                      open={now.getTime() >= new Date(e.starts_at).getTime() - LIVE_LEAD_MS}
+                      live={now >= new Date(e.starts_at)}
+                      trial={trial}
+                      viewerOnly={e.kind === "qa_elo" && tier !== "belso_kor"}
+                      attended={!!reg && reg.status === "confirmed"}
+                    />
+                  ) : reg?.status === "confirmed" ? (
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <p className="flex items-center gap-2 text-sm text-forest">
                         <Check className="h-4 w-4 text-gold" strokeWidth={2} aria-hidden /> Ott leszel — a helyed le van foglalva.
@@ -207,6 +231,12 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
                       </form>
                     </details>
                   )}
+                  <a
+                    href={tp(`/esemenyek/${e.id}/naptar.ics`)}
+                    className="mt-4 inline-flex items-center gap-1.5 text-xs text-ink-soft underline decoration-gold/50 underline-offset-4 hover:text-gold"
+                  >
+                    <CalendarPlus className="h-3.5 w-3.5" strokeWidth={1.25} aria-hidden /> Naptárba teszem
+                  </a>
 
                   {isHike && (
                     <div className="mt-6">
@@ -246,7 +276,71 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
           );
         })}
       </section>
+
+      {(recordings ?? []).length > 0 && (
+        <section id="felvetelek" className="mt-16 scroll-mt-24">
+          <h2 className="font-serif text-2xl text-forest">Felvételek</h2>
+          <p className="mt-2 text-sm text-ink-soft">A korábbi élő alkalmak — ha valamelyikről lemaradtál, itt visszanézheted.</p>
+          <ul className="mt-5 space-y-2">
+            {recordings!.map((r) => (
+              <li key={r.id}>
+                <Link
+                  href={tp(`/esemenyek/${r.id}/felvetel`)}
+                  className="flex items-center gap-3 rounded-md border border-line px-4 py-3 text-sm transition-colors duration-300 hover:border-gold/60"
+                >
+                  <PlayCircle className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} aria-hidden />
+                  <span className="text-forest">{r.title}</span>
+                  <span className="ml-auto text-xs text-ink-soft">
+                    {EVENT_KIND_LABEL[r.kind]} · {shortFmt.format(new Date(r.starts_at))}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
+  );
+}
+
+/** Online alkalom: előre jelentkezni nem kell; a kezdés előtt 15 perccel nyílik a belépés. */
+function LiveBlock({
+  eventId,
+  open,
+  live,
+  trial,
+  viewerOnly,
+  attended,
+}: {
+  eventId: string;
+  open: boolean;
+  live: boolean;
+  trial: boolean;
+  viewerOnly: boolean;
+  attended: boolean;
+}) {
+  if (trial) return <p className="text-sm text-ink-soft">Az élő alkalmak a próbaidő után nyílnak meg.</p>;
+  const note = viewerOnly ? " Élőben nézheted és hallgathatod; kérdezni a Belső Kör tagjai tudnak." : "";
+  if (!open) {
+    return (
+      <p className="flex items-start gap-2 text-sm text-ink-soft">
+        <Radio className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} aria-hidden />
+        <span>
+          Élőben, itt A Társaság felületén. Előre jelentkezni nem kell — a belépés a kezdés előtt 15 perccel nyílik.{note}
+        </span>
+      </p>
+    );
+  }
+  return (
+    <div className="flex flex-wrap items-center gap-4">
+      <Link href={tp(`/esemenyek/${eventId}/elo`)} className={buttonPrimary}>
+        {live ? "Belépés — most zajlik" : "Belépés az élő alkalomra"}
+      </Link>
+      <span className="text-xs text-ink-soft">
+        {attended ? "Már bent voltál — bármikor visszaléphetsz." : "Némítva érkezel; a kamera választható."}
+        {note}
+      </span>
+    </div>
   );
 }
 

@@ -36,3 +36,17 @@ export async function saveNames(formData: FormData) {
   revalidatePath(tp("/"), "layout");
   redirect(`${tp("/adataim")}?ok=1`);
 }
+
+/** Értesítő levelek az újdonságokról (új esemény, bejegyzés, szavazás) — be- és kikapcsolás. */
+export async function setNotifications(formData: FormData) {
+  const on = formData.get("on") === "true";
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect(tp("/belepes"));
+  const { error } = await supabase.from("profiles").update({ notify_admin_updates: on }).eq("id", user.id);
+  if (error) redirect(`${tp("/adataim")}?hiba=${encodeURIComponent("A mentés most nem sikerült.")}#ertesitesek`);
+  revalidatePath(tp("/adataim"));
+  redirect(`${tp("/adataim")}?ok=1#ertesitesek`);
+}

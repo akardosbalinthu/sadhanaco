@@ -237,6 +237,12 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Nyílt Estek:** a részvétel fizetős (külsős 4 940 Ft, tag 3 200 Ft, Belső Kör díjmentes); **kivétel a 2026. decemberi est, amely adomány alapú**.
 - **Napi Közlöny:** nincs PRO változat — egyetlen változat, A Társaságban érhető el, a tagoknak díjmentes, várhatóan karácsonytól. A CTA: „Benézek a Társaságba”.
 
+### 7.19 Értesítések és élő alkalmak (2026. november 25.)
+- **Értesítő levél minden új admin-tevékenységről** (közzétett esemény, admin-bejegyzés, túra-szavazás) minden aktív tagnak — a 3. pont e-mail-tilalmát ez felülírja. Tételenként egyszer (`announced_at`, `claim_announcement`), a háttérben (`src/lib/announce.ts`). A tag **leiratkozhat** (`profiles.notify_admin_updates`; Adataim oldal + egykattintásos link: `profiles.email_token`, `/leiratkozas`, `/api/leiratkozas`).
+- **Élő alkalmak natívan, A Társaság felületén** (LiveKit Cloud, EU): online eseménynél a kezdés előtt 15 perccel nyílik a belépés (`join_live_event`), előre jelentkezni nem kell. Szerepek: admin = házigazda (bármikor), online meditáción a jogosult tag beszélhet, Q&A-n a Belső Kör kérdezhet, A Társaság Tagja néz. Próbaidőben nem érhető el.
+- **A részvétel XP-t ad:** a belépés jelenlétnek számít (`attended_at` → online alkalom 10 XP, személyes 20 XP; `app_settings.xp_rules`).
+- **Felvétel:** az admin utólag rendeli hozzá a Bunny-videót (`events.recording_bunny_id`); a tagok az Események oldal „Felvételek” részén érik el.
+
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)
 - A kereten felüli Kedves Üzenetek és a Nyílt Estek „hozzájárulása” is szabadon választott összegű szolgáltatási díjként, AAM számlával megy-e (feltételezés: igen).
 - Mi számít „közösségi aktivitásnak” a II. és III. lépcső megnyitásánál (ne csússzon pontrendszer felé — lehet tisztán admin döntés).

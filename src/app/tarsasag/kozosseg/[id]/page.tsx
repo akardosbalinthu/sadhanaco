@@ -149,7 +149,7 @@ export default async function PostPage({ params, searchParams }: { params: Promi
           ))}
         </ul>
 
-        {hasAccess && (
+        {(hasAccess || isAdmin) && (
           <form action={addComment} className="mt-8 space-y-3">
             <input type="hidden" name="postId" value={post.id} />
             <label className="block">

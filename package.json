@@ -16,8 +16,12 @@
     "test:webhook": "node --conditions=react-server --import tsx --test tests/webhook.test.ts"
   },
   "dependencies": {
+    "@livekit/components-react": "^2.9.26",
+    "@livekit/components-styles": "^1.2.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.2",
+    "livekit-client": "^2.25.0",
+    "livekit-server-sdk": "^2.20.1",
     "lucide-react": "^1.79.0",
     "next": "15.5.29",
     "react": "19.1.0",

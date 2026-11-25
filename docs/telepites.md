@@ -105,3 +105,25 @@ Sikertelen terhelés: lásd `docs/stripe-katalogus.md`. Webhook-végpont: 2. fá
 4. A hanganyagokat is ide töltsd fel videóként (MP4, egy nyugodt állóképpel) — egy lejátszó kezel mindent.
 5. A feltöltött videó azonosítóját (Video GUID) az admin **Tananyag** oldalán, a leckénél a
    „Bunny videó-azonosító” mezőbe írd. A tagok 3 óráig érvényes, aláírt linket kapnak.
+
+## 7. LiveKit — élő alkalmak (közös meditáció, Q&A) a Társaság felületén
+
+1. Regisztrálj a **LiveKit Cloud**-on (cloud.livekit.io), és hozz létre egy projektet (régió: **EU**).
+2. A projekt *Settings → Keys* oldalán hozz létre egy API-kulcsot.
+3. A Vercel környezeti változói közé (Production; a kulcsot és a titkot **Sensitive**-ként):
+   - `LIVEKIT_URL` — a projekt WebSocket-címe (`wss://<projekt>.livekit.cloud`),
+   - `LIVEKIT_API_KEY` — az API key,
+   - `LIVEKIT_API_SECRET` — az API secret.
+4. Mentés után indíts új élesítést (Redeploy), hogy a változók életbe lépjenek.
+5. Az adminban hozz létre egy eseményt „Online” jelöléssel (pl. heti közös meditáció). Az esemény
+   részleteinél a **Belépés házigazdaként** gombbal bármikor beléphetsz hangpróbára; a tagoknak a
+   kezdés előtt 15 perccel nyílik. A belépés jelenlétnek számít (XP).
+6. Felvétel: az alkalom után töltsd fel a felvételt a Bunny Streamre, és az esemény részleteinél
+   írd be a videó-azonosítót — a tagok az Események oldal „Felvételek” részén érik el.
+
+## 8. Értesítő levelek
+
+Minden új közzétett eseményről, admin-bejegyzésről és túra-szavazásról levél megy a tagoknak
+(tételenként egyszer). A tag az Adataim oldalon vagy a levél alján lévő linkkel leiratkozhat.
+A Resend ingyenes csomagja napi 100 levelet enged — ha a taglétszám ennél nagyobb, válts fizetős csomagra.
+

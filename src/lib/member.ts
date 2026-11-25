@@ -14,7 +14,9 @@ export async function requireMember() {
   if (!profile) redirect(tp("/belepes"));
   const hasAccess =
     profile.tier !== "none" && ["active", "trialing", "past_due"].includes(profile.subscription_status);
-  return { supabase, user, profile, hasAccess };
+  // Az admin (tagság nélkül is) a közösségben és az eseményeknél ott lehet: ír, hozzászól, élő alkalmat vezet.
+  const isAdmin = profile.role === "admin" || profile.role === "superadmin";
+  return { supabase, user, profile, hasAccess, isAdmin };
 }
 
 export const ORDER_INFO = {

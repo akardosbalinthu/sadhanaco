@@ -21,12 +21,12 @@ const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) 
 
 export default async function CommunityPage({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
-  const { supabase, hasAccess } = await requireMember();
+  const { supabase, hasAccess, isAdmin } = await requireMember();
   const filter = one(sp.szuro);
   const before = one(sp.elott);
   const hiba = one(sp.hiba);
 
-  if (!hasAccess) {
+  if (!hasAccess && !isAdmin) {
     return (
       <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <MemberNav active="/kozosseg" />

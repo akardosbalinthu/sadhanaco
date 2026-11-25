@@ -2,7 +2,7 @@ import Link from "next/link";
 import { EVENT_KIND_LABEL, fmtDateTime, huf, profilesById, requireAdmin } from "@/lib/admin";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
-import { cancelEvent, createEvent, markAttended, publishEvent, setDonationBased, unpublishEvent } from "../actions";
+import { cancelEvent, createEvent, markAttended, publishEvent, setDonationBased, setRecording, unpublishEvent } from "../actions";
 import { Empty, Flash, H2, label, one, smallButton, smallInput, smallPrimary, type SP } from "../ui";
 import { SubmitButton } from "../submit-button";
 
@@ -81,6 +81,27 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
                   Esemény lemondása
                 </button>
               </form>
+            )}
+
+            {e.is_online && !e.cancelled_at && (
+              <div className="mt-8 space-y-4 border-t border-line pt-6">
+                <h3 className="font-serif text-lg text-forest">Élő közvetítés</h3>
+                <p className="text-sm text-ink-soft">
+                  Az élő szoba A Társaság felületén fut. Házigazdaként bármikor beléphetsz (pl. hangpróbára); a tagoknak a
+                  kezdés előtt 15 perccel nyílik. A belépés jelenlétnek számít, és XP-t ad.
+                </p>
+                <a href={tp(`/esemenyek/${e.id}/elo`)} className={smallPrimary}>
+                  Belépés házigazdaként
+                </a>
+                <form action={setRecording} className="flex flex-wrap items-end gap-2">
+                  <input type="hidden" name="id" value={e.id} />
+                  <label className="text-sm">
+                    <span className="block text-xs text-ink-soft">Felvétel — Bunny Stream videó-azonosító (utólag)</span>
+                    <input name="recording_bunny_id" defaultValue={e.recording_bunny_id ?? ""} className={`${smallInput} mt-1 w-72`} />
+                  </label>
+                  <SubmitButton className={smallButton}>Mentés</SubmitButton>
+                </form>
+              </div>
             )}
 
             <div className="mt-8 flex flex-wrap items-baseline justify-between gap-3 border-t border-line pt-6">
@@ -197,7 +218,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               <input name="location" placeholder="pl. Udgama ECO Központ" className={`${smallInput} mt-1 w-full`} />
             </label>
             <label className="flex items-end gap-2 pb-2 text-sm sm:col-span-2">
-              <input type="checkbox" name="is_online" className="accent-[var(--color-gold)]" /> Online
+              <input type="checkbox" name="is_online" className="accent-[var(--color-gold)]" /> Online — élő szoba A Társaság felületén (közös meditáció, Q&amp;A)
             </label>
             <label className="sm:col-span-2">
               <span className={label}>A Társaság Tagja (Ft)</span>

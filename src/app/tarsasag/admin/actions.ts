@@ -2,8 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { back, budapestLocalToIso, requireAdmin } from "@/lib/admin";
+import { back, budapestLocalToIso, EVENT_KIND_LABEL, requireAdmin } from "@/lib/admin";
 import { sendEmail } from "@/lib/email";
+import { announceToMembers } from "@/lib/announce";
 import { resolvedTarsasagUrl, tp } from "@/lib/site";
 
 const uuid = z.string().uuid();
@@ -262,7 +263,8 @@ const EVENT_DEFAULTS: Record<
   gyakorlonap: { tarsasagi: 6460, belso: 0, external: null, membersOnly: true, retreat: false, allowed: ["tarsasagi", "belso_kor"] },
   elvonulas: { tarsasagi: 0, belso: 0, external: null, membersOnly: true, retreat: true, allowed: ["tarsasagi", "belso_kor"] },
   online_meditacio: { tarsasagi: 0, belso: 0, external: null, membersOnly: true, retreat: false, allowed: ["tarsasagi", "belso_kor"] },
-  qa_elo: { tarsasagi: 0, belso: 0, external: null, membersOnly: true, retreat: false, allowed: ["belso_kor"] },
+  // Élő Q&A: mindkét szint beléphet; kérdezni (beszélni) csak a Belső Kör tud (join_live_event).
+  qa_elo: { tarsasagi: 0, belso: 0, external: null, membersOnly: true, retreat: false, allowed: ["tarsasagi", "belso_kor"] },
   tura: { tarsasagi: 0, belso: 0, external: null, membersOnly: true, retreat: false, allowed: ["tarsasagi", "belso_kor"] },
 };
 
@@ -307,8 +309,9 @@ export async function createEvent(formData: FormData) {
   }
   const { data, error } = await supabase.from("events").insert(row).select("id").single();
   if (error) back("/esemenyek", { hiba: error.message });
+  if (row.is_published) await announceEvent(supabase, data.id);
   revalidatePath(tp("/admin"), "layout");
-  back(`/esemenyek?esemeny=${data.id}`, { ok: "Az esemény létrejött." });
+  back(`/esemenyek?esemeny=${data.id}`, { ok: row.is_published ? "Az esemény létrejött; a tagok e-mailben értesítést kapnak." : "Az esemény létrejött." });
 }
 
 export async function publishEvent(formData: FormData) {
@@ -327,7 +330,27 @@ async function setEventState(formData: FormData, op: "publish" | "unpublish" | "
   const patch =
     op === "publish" ? { is_published: true } : op === "unpublish" ? { is_published: false } : { cancelled_at: new Date().toISOString() };
   const { error } = await supabase.from("events").update(patch).eq("id", id);
-  done(`/esemenyek?esemeny=${id}`, error, op === "cancel" ? "Az esemény lemondva." : "Mentve.");
+  if (!error && op === "publish") await announceEvent(supabase, id);
+  done(`/esemenyek?esemeny=${id}`, error, op === "cancel" ? "Az esemény lemondva." : op === "publish" ? "Közzétéve — a tagok e-mailben értesítést kapnak (ha még nem kaptak róla)." : "Mentve.");
+}
+
+/** Új esemény → értesítő levél a tagoknak (eseményenként egyszer). */
+async function announceEvent(supabase: Admin, id: string) {
+  const { data: e } = await supabase.from("events").select("title, kind, starts_at, is_online, location, description").eq("id", id).single();
+  if (!e) return;
+  const label = EVENT_KIND_LABEL[e.kind];
+  const where = e.is_online ? "online, A Társaság felületén élőben" : e.location ?? "a helyszínt hamarosan megírom";
+  announceToMembers("event", id, {
+    subject: `Új alkalom: ${e.title}`,
+    paragraphs: [
+      `Új alkalmat írtam ki A Társaságban: ${label} — ${e.title}.`,
+      `Időpont: ${whenFmt.format(new Date(e.starts_at))}. Helyszín: ${where}.`,
+      ...(e.description ? [e.description.length > 400 ? `${e.description.slice(0, 400)}…` : e.description] : []),
+      e.is_online ? "Előre jelentkezni nem kell: a kezdés előtt 15 perccel az Események oldalon nyílik a belépés." : "A részleteket és a jelentkezést az Események oldalon találod.",
+    ],
+    linkPath: `/esemenyek#e-${id}`,
+    linkLabel: "Megnézem",
+  });
 }
 
 export async function markAttended(formData: FormData) {
@@ -377,7 +400,17 @@ export async function createPoll(formData: FormData) {
     }),
   );
   if (optError) await supabase.from("destination_polls").delete().eq("id", poll.id);
-  done("/turak", optError, "A szavazás kiírva.");
+  else
+    announceToMembers("poll", poll.id, {
+      subject: "Hová menjünk túrázni? Szavazz!",
+      paragraphs: [
+        "Kiírtam a következő közös túra úti céljait — a Társaság szavaz, hová menjünk.",
+        `${options.length} úti cél közül választhatsz; a szavazás ${whenFmt.format(new Date(closesAt))}-kor zárul. Az állás a lezárásig rejtett.`,
+      ],
+      linkPath: "/esemenyek#szavazas",
+      linkLabel: "Szavazok",
+    });
+  done("/turak", optError, optError ? "" : "A szavazás kiírva; a tagok e-mailben értesítést kapnak.");
 }
 
 export async function closePoll(formData: FormData) {
@@ -478,4 +511,14 @@ export async function setDonationBased(formData: FormData) {
     error,
     on ? "Az esemény adomány alapú lett; a részvétel díjmentes." : "Az esemény már nem adomány alapú. Ha díjat kérnél, hozz létre új eseményt a díjjal.",
   );
+}
+
+/** Élő alkalom felvétele: a Bunny Stream videó-azonosítója (üresen hagyva törlődik). */
+export async function setRecording(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(formData.get("id"));
+  const videoId = str(formData, "recording_bunny_id");
+  if (videoId && !/^[A-Za-z0-9-]{1,64}$/.test(videoId)) back(`/esemenyek?esemeny=${id}`, { hiba: "A videó-azonosító csak betűt, számot és kötőjelet tartalmazhat." });
+  const { error } = await supabase.from("events").update({ recording_bunny_id: videoId || null }).eq("id", id);
+  done(`/esemenyek?esemeny=${id}`, error, videoId ? "A felvétel hozzárendelve — a tagok az Események oldalon érik el." : "A felvétel eltávolítva.");
 }
