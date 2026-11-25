@@ -6,6 +6,7 @@ import { publicEnv } from "@/lib/env";
 
 const SITE_URL = publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
 import { useActionState } from "react";
+import { RegistrationDetailsFields } from "@/components/registration-details-fields";
 import { bookOpenEvening, type GuestBookingState } from "./actions";
 
 const initial: GuestBookingState = { status: "idle" };
@@ -39,6 +40,7 @@ export function BookingForm({ eventId, priceLabel, free = false }: { eventId: st
           className={inputClass}
         />
       </label>
+      <RegistrationDetailsFields />
       <label className="flex items-start gap-3 text-sm text-ink-soft">
         <input type="checkbox" name="terms" required className="mt-1 accent-forest" />
         <span>

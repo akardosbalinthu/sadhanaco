@@ -3,6 +3,7 @@ import { requireMember } from "@/lib/member";
 import { EVENT_KIND_LABEL } from "@/lib/admin";
 import { MemberNav } from "@/components/member-nav";
 import { buttonPrimary, buttonSecondary, GildedCard, inputClass } from "@/components/ornaments";
+import { RegistrationDetailsFields } from "@/components/registration-details-fields";
 import { bookEvent, cancelInvitation, cancelRegistration, castVote, inviteGuest, payRegistration } from "./actions";
 
 export const metadata = { title: "Események · A Társaság", robots: { index: false, follow: false } };
@@ -37,6 +38,16 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
     supabase.from("destination_polls").select("*").order("month", { ascending: false }).limit(1),
   ]);
   const regBy = new Map((regs ?? []).map((r) => [r.event_id, r]));
+  // A telefonszámot az előző jelentkezésből előre kitöltjük (ha még nem törlődött).
+  const { data: lastWithPhone } = await supabase
+    .from("event_registrations")
+    .select("phone")
+    .eq("user_id", profile.id)
+    .not("phone", "is", null)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  const lastPhone = lastWithPhone?.phone ?? "";
   const priorityHours = settings?.belso_kor_priority_hours ?? 48;
   const guestLimit = settings?.hike_guest_invites_per_member ?? 2;
 
@@ -180,13 +191,21 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
                       A Belső Kör elsőbbségi foglalása {shortFmt.format(priorityEnds)}-ig tart; utána a fennmaradó helyekre te is jelentkezhetsz.
                     </p>
                   ) : (
-                    <form action={bookEvent} className="flex flex-wrap items-center gap-4">
-                      <input type="hidden" name="eventId" value={e.id} />
-                      <button disabled={trial} className={buttonPrimary}>
-                        {isHike ? "Jövök" : price > 0 ? `Jelentkezem és fizetek (${huf(price)})` : "Jelentkezem"}
-                      </button>
-                      {e.capacity && <span className="text-xs text-ink-soft">Korlátozott létszám.</span>}
-                    </form>
+                    <details className="group">
+                      <summary className={`${buttonPrimary} cursor-pointer list-none ${trial ? "pointer-events-none opacity-60" : ""}`}>
+                        {isHike ? "Jövök" : "Jelentkezem"}
+                      </summary>
+                      <form action={bookEvent} className="mt-5 space-y-4">
+                        <input type="hidden" name="eventId" value={e.id} />
+                        <RegistrationDetailsFields phone={lastPhone} />
+                        <div className="flex flex-wrap items-center gap-4">
+                          <button disabled={trial} className={buttonPrimary}>
+                            {price > 0 && !isHike ? `Jelentkezem és fizetek (${huf(price)})` : "Jelentkezés elküldése"}
+                          </button>
+                          {e.capacity && <span className="text-xs text-ink-soft">Korlátozott létszám.</span>}
+                        </div>
+                      </form>
+                    </details>
                   )}
 
                   {isHike && (

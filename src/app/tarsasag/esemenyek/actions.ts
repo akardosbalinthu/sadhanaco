@@ -8,6 +8,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe, onlinePaymentsEnabled } from "@/lib/stripe";
 import { sendEmail } from "@/lib/email";
 import { bookingError, eventPriceCode, inviteError } from "@/lib/events";
+import { detailsError, parseDetails } from "@/lib/registration-details";
 import { resolvedSiteUrl, resolvedTarsasagUrl, tp } from "@/lib/site";
 
 const uuid = z.string().uuid();
@@ -64,8 +65,21 @@ export async function bookEvent(fd: FormData) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect(tp("/belepes"));
+  // A telefonszám és a biztonsági megjegyzés minden jelentkezéshez kell — előbb ellenőrizzük.
+  const details = parseDetails(fd);
+  if (!details.success) back({ hiba: details.error.issues[0]?.message ?? "Kérlek, ellenőrizd a mezőket." }, `#e-${eventId}`);
   const { data: reg, error } = await supabase.rpc("book_event", { p_event_id: eventId });
   if (error) back({ hiba: bookingError(error.hint) }, `#e-${eventId}`);
+  const { error: detErr } = await supabase.rpc("set_registration_details", {
+    p_registration_id: reg.id,
+    p_phone: details.data.phone,
+    p_safety_note: details.data.safety_note,
+    p_consent: true,
+  });
+  if (detErr) {
+    await supabase.rpc("cancel_my_registration", { p_registration_id: reg.id });
+    back({ hiba: detailsError(detErr.hint) }, `#e-${eventId}`);
+  }
   revalidatePath(tp("/esemenyek"));
   if (reg.status === "confirmed") back({ ok: "Ott leszel — a helyed le van foglalva." }, `#e-${eventId}`);
   if (!onlinePaymentsEnabled()) back({ hiba: "Az online fizetés hamarosan nyílik. A helyed rövid ideig fenntartva marad." });

@@ -35,7 +35,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     : { data: [] };
   const who = new Map((people ?? []).map((p) => [p.id, p]));
 
-  const header = ["Név", "E-mail", "Résztvevő", "Állapot", "Díj (Ft)", "Jelentkezett", "Jelen volt", "Meghívta"];
+  const header = ["Név", "E-mail", "Telefonszám", "Biztonsági megjegyzés", "Résztvevő", "Állapot", "Díj (Ft)", "Jelentkezett", "Jelen volt", "Meghívta"];
   const rows = (regs ?? []).map((r) => {
     const p = r.user_id ? who.get(r.user_id) : null;
     const inviter = inviterOf.get(r.id);
@@ -45,6 +45,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     return [
       p?.display_name ?? r.guest_name,
       p?.email ?? r.guest_email,
+      r.phone,
+      r.safety_note,
       kind,
       STATUS[r.status] ?? r.status,
       r.price_huf,

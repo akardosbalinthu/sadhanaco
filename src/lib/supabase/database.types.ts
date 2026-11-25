@@ -235,14 +235,14 @@ isOneToOne: false
                   ]
                 },"event_registrations": {
                   Row: {
-                    "attended_at": string | null,"cancelled_at": string | null,"created_at": string,"event_id": string,"guest_email": string | null,"guest_name": string | null,"hold_expires_at": string | null,"id": string,"is_member_seat": boolean,"price_huf": number,"status": Database["public"]['Enums']["registration_status"],"tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,"user_id": string | null
+                    "attended_at": string | null,"cancelled_at": string | null,"created_at": string,"details_purged_at": string | null,"event_id": string,"guest_email": string | null,"guest_name": string | null,"health_consent_at": string | null,"hold_expires_at": string | null,"id": string,"is_member_seat": boolean,"phone": string | null,"price_huf": number,"safety_note": string | null,"status": Database["public"]['Enums']["registration_status"],"tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,"user_id": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "attended_at"?: string | null,"cancelled_at"?: string | null,"created_at"?: string,"event_id": string,"guest_email"?: string | null,"guest_name"?: string | null,"hold_expires_at"?: string | null,"id"?: string,"is_member_seat": boolean,"price_huf"?: number,"status": Database["public"]['Enums']["registration_status"],"tier_at_booking"?: Database["public"]['Enums']["membership_tier"] | null,"user_id"?: string | null
+                    "attended_at"?: string | null,"cancelled_at"?: string | null,"created_at"?: string,"details_purged_at"?: string | null,"event_id": string,"guest_email"?: string | null,"guest_name"?: string | null,"health_consent_at"?: string | null,"hold_expires_at"?: string | null,"id"?: string,"is_member_seat": boolean,"phone"?: string | null,"price_huf"?: number,"safety_note"?: string | null,"status": Database["public"]['Enums']["registration_status"],"tier_at_booking"?: Database["public"]['Enums']["membership_tier"] | null,"user_id"?: string | null
                   }
                   Update: {
-                    "attended_at"?: string | null,"cancelled_at"?: string | null,"created_at"?: string,"event_id"?: string,"guest_email"?: string | null,"guest_name"?: string | null,"hold_expires_at"?: string | null,"id"?: string,"is_member_seat"?: boolean,"price_huf"?: number,"status"?: Database["public"]['Enums']["registration_status"],"tier_at_booking"?: Database["public"]['Enums']["membership_tier"] | null,"user_id"?: string | null
+                    "attended_at"?: string | null,"cancelled_at"?: string | null,"created_at"?: string,"details_purged_at"?: string | null,"event_id"?: string,"guest_email"?: string | null,"guest_name"?: string | null,"health_consent_at"?: string | null,"hold_expires_at"?: string | null,"id"?: string,"is_member_seat"?: boolean,"phone"?: string | null,"price_huf"?: number,"safety_note"?: string | null,"status"?: Database["public"]['Enums']["registration_status"],"tier_at_booking"?: Database["public"]['Enums']["membership_tier"] | null,"user_id"?: string | null
                   }
                   Relationships: [
                     {
@@ -685,13 +685,17 @@ isOneToOne: false
               "attended_at": string | null,
 "cancelled_at": string | null,
 "created_at": string,
+"details_purged_at": string | null,
 "event_id": string,
 "guest_email": string | null,
 "guest_name": string | null,
+"health_consent_at": string | null,
 "hold_expires_at": string | null,
 "id": string,
 "is_member_seat": boolean,
+"phone": string | null,
 "price_huf": number,
+"safety_note": string | null,
 "status": Database["public"]['Enums']["registration_status"],
 "tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
 "user_id": string | null
@@ -842,13 +846,17 @@ isOneToOne: false
               "attended_at": string | null,
 "cancelled_at": string | null,
 "created_at": string,
+"details_purged_at": string | null,
 "event_id": string,
 "guest_email": string | null,
 "guest_name": string | null,
+"health_consent_at": string | null,
 "hold_expires_at": string | null,
 "id": string,
 "is_member_seat": boolean,
+"phone": string | null,
 "price_huf": number,
+"safety_note": string | null,
 "status": Database["public"]['Enums']["registration_status"],
 "tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
 "user_id": string | null
@@ -894,13 +902,17 @@ isOneToOne: false
               "attended_at": string | null,
 "cancelled_at": string | null,
 "created_at": string,
+"details_purged_at": string | null,
 "event_id": string,
 "guest_email": string | null,
 "guest_name": string | null,
+"health_consent_at": string | null,
 "hold_expires_at": string | null,
 "id": string,
 "is_member_seat": boolean,
+"phone": string | null,
 "price_huf": number,
+"safety_note": string | null,
 "status": Database["public"]['Enums']["registration_status"],
 "tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
 "user_id": string | null
@@ -1016,13 +1028,17 @@ isOneToOne: false
               "attended_at": string | null,
 "cancelled_at": string | null,
 "created_at": string,
+"details_purged_at": string | null,
 "event_id": string,
 "guest_email": string | null,
 "guest_name": string | null,
+"health_consent_at": string | null,
 "hold_expires_at": string | null,
 "id": string,
 "is_member_seat": boolean,
+"phone": string | null,
 "price_huf": number,
+"safety_note": string | null,
 "status": Database["public"]['Enums']["registration_status"],
 "tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
 "user_id": string | null
@@ -1303,6 +1319,9 @@ isOneToOne: false
 "purge_kind_message_phones":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
+"purge_registration_details":
+{ Args: Record<PropertyKey, never>; Returns: number
+                           },
 "purge_unpaid_consultations":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
@@ -1333,13 +1352,17 @@ isOneToOne: false
               "attended_at": string | null,
 "cancelled_at": string | null,
 "created_at": string,
+"details_purged_at": string | null,
 "event_id": string,
 "guest_email": string | null,
 "guest_name": string | null,
+"health_consent_at": string | null,
 "hold_expires_at": string | null,
 "id": string,
 "is_member_seat": boolean,
+"phone": string | null,
 "price_huf": number,
+"safety_note": string | null,
 "status": Database["public"]['Enums']["registration_status"],
 "tier_at_booking": Database["public"]['Enums']["membership_tier"] | null,
 "user_id": string | null
@@ -1386,6 +1409,9 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"set_registration_details":
+{ Args: { "p_consent": boolean,"p_phone": string,"p_registration_id": string,"p_safety_note": string }; Returns: undefined
+                           },
 "stage_progress":
 { Args: { "p_stage": number }; Returns: Json
                            },

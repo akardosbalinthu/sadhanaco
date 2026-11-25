@@ -104,6 +104,15 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
                         {p ? (r.is_member_seat ? "tag" : "tag (külsős helyen)") : "külsős"} · {REG_STATUS[r.status]}
                         {r.price_huf > 0 && ` · ${huf(r.price_huf)}`}
                       </span>
+                      {(r.phone || r.safety_note) && (
+                        <span className="basis-full text-xs text-ink-soft">
+                          {r.phone && <a href={`tel:${r.phone.replace(/[^+0-9]/g, "")}`} className="text-forest hover:text-gold">{r.phone}</a>}
+                          {r.safety_note && (
+                            <span className={/^nincs\.?$/i.test(r.safety_note.trim()) ? "" : "text-alert"}> · Biztonság: {r.safety_note}</span>
+                          )}
+                        </span>
+                      )}
+                      {r.details_purged_at && <span className="basis-full text-xs text-ink-soft">A telefonszám és a megjegyzés az esemény után törlődött.</span>}
                       {r.status === "confirmed" && (
                         <form action={markAttended} className="ml-auto">
                           <input type="hidden" name="id" value={r.id} />

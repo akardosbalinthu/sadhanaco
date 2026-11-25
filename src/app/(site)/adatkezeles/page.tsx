@@ -75,6 +75,8 @@ const sections: LegalSection[] = [
         <p className="pt-3 font-serif text-lg text-forest">Események</p>
         <ul>
           <Row what="Név, e-mail-cím, foglalás, jelenlét" why="a helyfoglalás és a részvétel szervezése" basis="szerződés teljesítése" until="az esemény után 1 év (a számlaadatok 8 év)" />
+          <Row what="Telefonszám" why="kapcsolattartás az eseménnyel kapcsolatban (pl. változás, elérhetőség a helyszínen)" basis="szerződés teljesítése" until="az esemény után 30 nap, utána automatikusan töröljük" />
+          <Row what="Biztonsági (egészségi) megjegyzés — amit a jelentkezéskor megadsz egészségi állapotról, sérülésről, várandósságról vagy érzékenységről" why="hogy a gyakorlást biztonságosan, rád figyelve vezethessük" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a)); a hozzájárulás a jelentkezéskor, időbélyeggel rögzül, és bármikor visszavonható" until="az esemény után 30 nap, utána automatikusan töröljük; csak a szervező látja" />
           <Row what="Túravendég neve és e-mail-címe (a meghívó tag adja meg)" why="a meghívó elküldése és a részvétel szervezése" basis="jogos érdek" until="a túra után 30 nap" />
         </ul>
 

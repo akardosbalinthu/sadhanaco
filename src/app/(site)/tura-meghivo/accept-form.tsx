@@ -3,6 +3,8 @@
 import { useActionState } from "react";
 import { Check } from "lucide-react";
 import { buttonPrimary } from "@/components/ornaments";
+import { RegistrationDetailsFields } from "@/components/registration-details-fields";
+import { keepFields } from "@/lib/keep-fields";
 import { acceptInvitation, type AcceptState } from "./actions";
 
 export function AcceptForm({ token }: { token: string }) {
@@ -16,8 +18,9 @@ export function AcceptForm({ token }: { token: string }) {
     );
   }
   return (
-    <form action={action} className="space-y-4">
+    <form onSubmit={keepFields(action)} className="space-y-4">
       <input type="hidden" name="t" value={token} />
+      <RegistrationDetailsFields />
       {state.status === "error" && <p role="alert" className="text-sm text-alert">{state.message}</p>}
       <button disabled={pending} className={buttonPrimary}>
         {pending ? "Egy pillanat…" : "Elfogadom a meghívót"}

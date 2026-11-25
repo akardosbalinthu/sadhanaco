@@ -8,6 +8,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe, onlinePaymentsEnabled } from "@/lib/stripe";
 import { SITE } from "@/lib/site";
 import { sendEmail } from "@/lib/email";
+import { detailsError, parseDetails } from "@/lib/registration-details";
 
 export type GuestBookingState =
   | { status: "idle" }
@@ -62,6 +63,8 @@ export async function bookOpenEvening(
   }
 
   const { eventId, name, email } = parsed.data;
+  const details = parseDetails(formData);
+  if (!details.success) return { status: "error", message: details.error.issues[0]?.message ?? "Kérlek, ellenőrizd a mezőket." };
   const admin = createAdminClient();
 
   // Az esemény saját ára dönt: díjmentes estnél nincs fizetés, fizetősnél az esemény ára kerül terhelésre.
@@ -85,6 +88,17 @@ export async function bookOpenEvening(
   });
   if (error || !reg) {
     return { status: "error", message: MESSAGES[error?.hint ?? ""] ?? "Most nem sikerült. Kérlek, próbáld újra." };
+  }
+  // Telefonszám és biztonsági megjegyzés (kifejezett hozzájárulással); az esemény után 30 nappal törlődik.
+  const { error: detErr } = await admin.rpc("set_registration_details", {
+    p_registration_id: reg.id,
+    p_phone: details.data.phone,
+    p_safety_note: details.data.safety_note,
+    p_consent: true,
+  });
+  if (detErr) {
+    await admin.from("event_registrations").update({ status: "cancelled", cancelled_at: new Date().toISOString() }).eq("id", reg.id);
+    return { status: "error", message: detailsError(detErr.hint) };
   }
 
   if (reg.status === "confirmed") {
