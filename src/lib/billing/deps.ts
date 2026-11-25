@@ -2,21 +2,10 @@ import "server-only";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe } from "@/lib/stripe";
 import { sendEmail } from "@/lib/email";
-import { resolvedTarsasagUrl } from "@/lib/site";
+import { magicLinkFor } from "@/lib/auth-links";
 import type { WebhookDeps } from "./webhook";
 
 const priceCache = new Map<string, { code: string | null; unitAmount: number | null }>();
-
-/** Belépő link (egyszer használatos), a Supabase Auth által aláírt tokennel. */
-export async function magicLinkFor(email: string): Promise<string | null> {
-  const admin = createAdminClient();
-  const { data, error } = await admin.auth.admin.generateLink({ type: "magiclink", email });
-  if (error || !data.properties?.hashed_token) return null;
-  const url = new URL(`${resolvedTarsasagUrl().replace(/\/$/, "")}/auth/confirm`);
-  url.searchParams.set("token_hash", data.properties.hashed_token);
-  url.searchParams.set("type", "magiclink");
-  return url.toString();
-}
 
 export function liveWebhookDeps(): WebhookDeps {
   const stripe = getStripe();

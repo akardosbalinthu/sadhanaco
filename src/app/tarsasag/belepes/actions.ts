@@ -1,8 +1,9 @@
 "use server";
 
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
-import { publicEnv } from "@/lib/env";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { magicLinkFor } from "@/lib/auth-links";
+import { sendEmail } from "@/lib/email";
 import { tp } from "@/lib/site";
 
 export type LoginState =
@@ -30,21 +31,35 @@ export async function sendMagicLink(_prev: LoginState, formData: FormData): Prom
     return { status: "error", message: "Kérlek, adj meg egy érvényes e-mail-címet." };
   }
 
-  const supabase = await createClient();
-  const redirect = new URL(`${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/auth/confirm`);
-  redirect.searchParams.set("next", safeNext(parsed.data.tovabb));
+  const email = parsed.data.email;
+  const sent: LoginState = { status: "sent", email };
+  const admin = createAdminClient();
 
-  const { error } = await supabase.auth.signInWithOtp({
-    email: parsed.data.email,
-    options: {
-      emailRedirectTo: redirect.toString(),
-      // Fiókot csak sikeres fizetés hoz létre (2. fázis) — belépéssel nem regisztrálunk.
-      shouldCreateUser: false,
-    },
-  });
+  // Fiókot csak sikeres fizetés hoz létre — belépéssel nem regisztrálunk. Ismeretlen címre nem
+  // küldünk levelet, de ugyanazt válaszoljuk, hogy ne derüljön ki, kinek van fiókja.
+  const { data: profile } = await admin.from("profiles").select("id, first_name").eq("email", email).maybeSingle();
+  if (!profile) return sent;
 
-  // Szándékosan nem áruljuk el, hogy létezik-e a cím: mindig ugyanazt válaszoljuk.
-  if (error && error.status !== 422 && error.status !== 400) {
+  // Visszaélés ellen: egy címre legfeljebb percenként egy belépő levél.
+  const { data: auth } = await admin.auth.admin.getUserById(profile.id);
+  const last = auth?.user?.recovery_sent_at ? Date.parse(auth.user.recovery_sent_at) : 0;
+  if (Date.now() - last < 60_000) return sent;
+
+  const link = await magicLinkFor(email, safeNext(parsed.data.tovabb));
+  if (!link) {
+    return { status: "error", message: "Most nem sikerült elküldeni a levelet. Próbáld újra pár perc múlva." };
+  }
+  const res = await sendEmail(
+    email,
+    "Belépő link — A Társaság",
+    [
+      profile.first_name ? `Kedves ${profile.first_name}!` : "Kedves Tagtárs!",
+      "Ezzel a linkkel léphetsz be A Társaságba. A link egyszer használható, és egy órán át érvényes — bármelyik eszközön megnyithatod.",
+      "Ha nem te kérted, nyugodtan hagyd figyelmen kívül ezt a levelet.",
+    ],
+    { href: link, label: "Belépek" },
+  );
+  if (!res.ok) {
     return { status: "error", message: "Most nem sikerült elküldeni a levelet. Próbáld újra pár perc múlva." };
   }
   return { status: "sent", email: parsed.data.email };
