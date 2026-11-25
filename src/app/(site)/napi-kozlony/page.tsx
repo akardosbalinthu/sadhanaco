@@ -77,7 +77,7 @@ export default function DailyGazettePage() {
       <CompassDivider className="my-14" />
 
       <section>
-        <SectionTitle eyebrow="Hogyan működik" title="Négy lépés — ebből csak az elsőt kell neked megtenned." />
+        <SectionTitle eyebrow="Hogyan működik?" title="Négy lépés — ebből csak az elsőt kell neked megtenned." />
         <ol className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2">
           {STEPS.map(({ Icon, title, text }, i) => (
             <li key={title}>

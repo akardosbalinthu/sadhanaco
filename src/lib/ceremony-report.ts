@@ -59,7 +59,7 @@ export const PORTRAITS: Record<MemberOrder, Portrait> = {
     learn:
       "Az úton azt tanulod, hogy a saját igényeid is számítanak: nemet mondani, kilépni a megszokottból, és ugyanazt a gondoskodást magad felé is fordítani, amit olyan természetesen adsz másoknak.",
     practice:
-      "Neked az egyenletes, nyugodt ritmusú légzés és a kiszámítható, mindig azonos időben végzett gyakorlás hozza a legtöbbet — egy biztos pont a napodban, ami csak a tiéd.",
+      "Neked az egyenletes, nyugodt ritmusú légzés és a kiszámítható, mindig azonos időben végzett gyakorlás hozza a legtöbbet — egy biztos pont a napodban, amely csak a tiéd.",
     asSecond: "a gondoskodó jelenlét: természetes módon figyelsz arra, hogy körülötted mindenki jól legyen",
     asGrowth:
       "a belső béke iránya: megérkezni egy nyugodt, egyenletes ritmusba, és ott is maradni. A gyakorlásban ezt a lassú, kiegyensúlyozott légzés és a rendszeresség építi.",
@@ -74,9 +74,9 @@ export const PORTRAITS: Record<MemberOrder, Portrait> = {
     mind:
       "Az elkalandozó figyelmed teendők, tervek és hiányok körül forog: mi maradt el, mit kellene még átgondolni, mi lesz holnap.",
     recharge:
-      "Rend, lezárt ügyek és kiszámíthatóság töltenek vissza: egy kipipált lista, egy rendbe tett szoba, egy nap, ami úgy alakul, ahogy tervezted.",
+      "Rend, lezárt ügyek és kiszámíthatóság töltenek vissza: egy kipipált lista, egy rendbe tett szoba, egy nap, amely úgy alakul, ahogy tervezted.",
     strength:
-      "Kitartásod és szerkezetteremtő képességed. A rendszeresség, ami másoknak nehéz, neked természetes — és a gyakorlásban ez óriási előny.",
+      "Kitartásod és szerkezetteremtő képességed. A rendszeresség, amely másoknak nehéz, neked természetes — és a gyakorlásban ez óriási előny.",
     learn:
       "Az úton az elengedést tanulod: hogy a pihenés nem jutalom, amit ki kell érdemelni, és hogy a kontroll lazításával nem esik szét semmi. Sőt: éppen ilyenkor kapcsol át az idegrendszered regenerálódásra.",
     practice:
@@ -89,7 +89,7 @@ export const PORTRAITS: Record<MemberOrder, Portrait> = {
     intro:
       "Az idegrendszered mozgásra és irányra hangolt. Ott vagy a legjobb formádban, ahol történik valami: kezdeményezel, döntesz, és nyomás alatt is fókuszban maradsz. A nyugalom nálad nem a mozdulatlanságban, hanem az irányban rejlik.",
     stress:
-      "Feszült helyzetben felpörögsz: mozdulni, cselekedni vagy visszaszólni akarsz. Ez a klasszikus „harcolj vagy menekülj” válasz, ami nálad gyorsan beindul — és sokszor jól is szolgál, csak nehéz utána leállni.",
+      "Feszült helyzetben felpörögsz: mozdulni, cselekedni vagy visszaszólni akarsz. Ez a klasszikus „harcolj vagy menekülj” válasz, amely nálad gyorsan beindul — és sokszor jól is szolgál, csak nehéz utána leállni.",
     body:
       "Menet közben alig érzékeled a tested jelzéseit. A fáradtság, az éhség vagy a feszültség sokszor csak akkor ér utol, amikor megállsz — este, hétvégén, vagy az első szabadnapon.",
     mind:

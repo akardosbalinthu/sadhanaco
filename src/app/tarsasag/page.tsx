@@ -244,8 +244,8 @@ const RANKS = ["Tanonc", "Inas", "Legény", "Vándorlegény", "Mester", "Nagymes
 
 const COMMUNITY = [
   { Icon: Users, title: "Heti online közös meditáció", text: "Élőben, együtt — bárhonnan bekapcsolódhatsz." },
-  { Icon: Sparkles, title: "Pénteki kör", text: "Három egyszerű kérdés minden péntek reggel: mi volt nehéz, mi működött, miben segíthet a Társaság." },
-  { Icon: Mountain, title: "Havi közös túra", text: "Valahol Magyarországon; az úti célt a tagok szavazzák meg. Ingyenes, és barátot is hozhatsz." },
+  { Icon: Sparkles, title: "Pénteki kör", text: "Három egyszerű kérdés minden péntek reggel: mi volt nehéz, mi működött, miben segíthet A Társaság." },
+  { Icon: Mountain, title: "Havi közös túra", text: "Valahol Magyarországon; az úti célt a tagok szavazzák meg. Díjmentes, és barátot is hozhatsz." },
   { Icon: HeartHandshake, title: "Elsőbbségi Kedves Üzenet", text: "Havonta díjmentesen küldhetsz valakinek egy kedves üzenetet — Bálint telefonon adja át." },
   { Icon: Dices, title: "Havi élő szerepjáték- és társasjáték-est", text: "D&D-kaland vagy egy jó társasjáték: egy este, amikor együtt nevetünk, tervezünk és játszunk — mert a kapcsolódás is idegrendszer-fejlesztés." },
   { Icon: UtensilsCrossed, title: "Negyedéves vacsorameghívás", text: "Negyedévente a negyedéves ranglista első tíz helyezettje személyes vacsorameghívást kap Bálinttól — akkor is, ha elrejtette magát a listáról." },
@@ -258,13 +258,13 @@ const TIERS = [
     monthly: "tarsasagi_havi",
     yearly: "tarsasagi_eves",
     forWhom: "Neked való, ha most kezdenéd, és a saját tempódban, közösségben szeretnéd megtapasztalni, mit ad a rendszeres gyakorlás.",
-    note: "A havi tagság 7 napig ingyen kipróbálható.",
+    note: "A havi tagság 7 napig díjmentesen kipróbálható.",
     features: [
       "I. Modul (Jelenlét) + I. Integrációs Program — 8+1 hét, azonnal",
       "Napi Küldetések, gyakorlónapló és saját Karakterkártya",
       "Közösségi tér, pénteki kör, heti online közös meditáció",
       "Havi kérdezz-felelek: élőben nézheted, és felvételről is visszanézheted",
-      "Havi ingyenes közös túra — vendéget is hozhatsz",
+      "Havi díjmentes közös túra — vendéget is hozhatsz",
       "Havi élő szerepjáték- (D&D) és társasjáték-est",
       "Heti, havi és negyedéves ranglista a tagoknak — elrejtheted magad",
       "Negyedévente vacsorameghívás Bálinttól a ranglista első tíz helyezettjének",
@@ -344,7 +344,7 @@ const COMPARE: { group: string; rows: CompareRow[] }[] = [
   {
     group: "Díj és feltételek",
     rows: [
-      ["7 napos ingyenes próbaidő", "—", "✓ a havi tagságra", "—"],
+      ["7 napos díjmentes próbaidő", "—", "✓ a havi tagságra", "—"],
       ["Bármikor lemondható (a következő időszaktól)", "—", "✓", "✓"],
     ],
   },
@@ -392,7 +392,7 @@ const FAQ = [
   },
   {
     q: "Hogyan működik a próbaidő?",
-    a: "A Társaság Tagja havi tagságot 7 napig ingyen kipróbálhatod (bankkártya szükséges, és e-mail-címenként egyszer jár). A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Kedves Üzenet és a foglalások az első fizetés után nyílnak meg.",
+    a: "A Társaság Tagja havi tagságot 7 napig díjmentesen kipróbálhatod (bankkártya szükséges, és e-mail-címenként egyszer jár). A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Elsőbbségi Kedves Üzenet és a foglalások az első fizetés után nyílnak meg.",
   },
   {
     q: "Lemondhatom bármikor?",
@@ -495,7 +495,7 @@ export default async function TarsasagHome() {
 
       {/* Amit megtanulsz */}
       <section>
-        <SectionHeading eyebrow="Amit az úton megtanulsz" title="Nem egy újabb feladat. Egy képesség, ami veled marad." />
+        <SectionHeading eyebrow="Amit az úton megtanulsz" title="Nem egy újabb feladat. Egy képesség, amely veled marad." />
         <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
           {BENEFITS.map(({ Icon, title, text }) => (
             <div key={title} className="border-t border-gold/30 pt-5">
@@ -511,7 +511,7 @@ export default async function TarsasagHome() {
 
       {/* Hogyan működik */}
       <section id="hogyan-mukodik" className="scroll-mt-24">
-        <SectionHeading eyebrow="Hogyan működik" title="Négy lépés, és már úton is vagy." />
+        <SectionHeading eyebrow="Hogyan működik?" title="Négy lépés, és már úton is vagy." />
         <ol className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <li key={s.title} className="border-t border-gold/30 pt-5">
@@ -534,7 +534,7 @@ export default async function TarsasagHome() {
             a négy irányt négy rend őrzi.
           </p>
           <p>
-            Belépéskor egy rövid önismereti kérdőív, a Ceremónia dönti el, melyik rendbe kerülsz. A rended végleges: ez a
+            Belépéskor egy rövid önismereti kérdőív, a Ceremónia megmutatja, melyik rendbe tartozol. A rended végleges: ez a
             kiindulópontod, amelyhez az úton végig visszatalálsz. Nincs jó vagy rossz rend — mind egyenrangú, és
             minden rend mindent gyakorol.
           </p>
@@ -582,7 +582,7 @@ export default async function TarsasagHome() {
 
       {/* Egy nap */}
       <section>
-        <SectionHeading eyebrow="Küldetések és napi hangolások" title="Így néz ki egy nap a Társaságban.">
+        <SectionHeading eyebrow="Küldetések és napi hangolások" title="Így néz ki egy nap A Társaságban.">
           <p>
             A gyakorlás itt nem kötelező házi feladat, hanem rövid küldetések sora, amelyek beleférnek a napodba.
           </p>
@@ -613,8 +613,7 @@ export default async function TarsasagHome() {
         <SectionHeading eyebrow="Az út" title="Négy lépcső, a saját tempódban.">
           <p>
             Belépéskor az első lépcső nyílik meg. A következőre akkor léphetsz, ha az előzőt elvégezted, és
-            gyakorlással eléred a hozzá tartozó rangot: a II. lépcsőhöz a Legény (500 XP), a III.-hoz a
-            Vándorlegény rangot (1 200 XP). Ez díjmentes — fizetni csak akkor kell, ha nem várnád meg a rangot (54 940 Ft,
+            gyakorlással eléred a hozzá tartozó rangot: a II. lépcsőhöz a Legény rangot (500 XP), a III.-hoz a Vándorlegényt (1 200 XP). Ez díjmentes — fizetni csak akkor kell, ha nem várnád meg a rangot (54 940 Ft,
             illetve 44 940 Ft). A Belső Körben a rang sem feltétel. A következő lépcsőt minden esetben egy rövid,
             díjmentes beszélgetés után Bálint nyitja meg, hogy az út biztonságos és folyamatos maradjon.
           </p>
@@ -796,12 +795,12 @@ export default async function TarsasagHome() {
                 </ul>
                 <div className="mt-8">
                   {open ? (
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      <Link href={`${tp("/csatlakozas")}?csomag=${t.monthly}`} className={`${buttonPrimary} text-center`}>
-                        Havi díjjal
+                    <div className="grid gap-2">
+                      <Link href={`${tp("/csatlakozas")}?csomag=${t.monthly}`} className={`${buttonPrimary} w-full text-center`}>
+                        {t.monthly === "tarsasagi_havi" ? "Kipróbálom 7 napig díjmentesen" : "Csatlakozom havi díjjal"}
                       </Link>
-                      <Link href={`${tp("/csatlakozas")}?csomag=${t.yearly}`} className={`${buttonSecondary} text-center`}>
-                        Éves díjjal
+                      <Link href={`${tp("/csatlakozas")}?csomag=${t.yearly}`} className={`${buttonSecondary} w-full text-center`}>
+                        Éves díjjal — 2 hónap ajándék
                       </Link>
                     </div>
                   ) : (

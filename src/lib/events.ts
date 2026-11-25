@@ -44,7 +44,7 @@ export function inviteError(hint: string | null | undefined): string {
     case "INVITE_LIMIT":
       return "Erre a túrára már meghívtad a megengedett számú vendéget.";
     case "ALREADY_MEMBER":
-      return "Ő már a Társaság tagja — külön meghívó nélkül is jöhet.";
+      return "Ő már A Társaság tagja — külön meghívó nélkül is jöhet.";
     case "ALREADY_INVITED":
       return "Őt már meghívták erre a túrára.";
     case "INVALID_GUEST":

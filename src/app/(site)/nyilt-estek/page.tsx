@@ -14,9 +14,9 @@ const FLOW = [
 ];
 
 const GOOD_TO_KNOW = [
-  { Icon: Users, title: "Kis csoport", text: "Legfeljebb 15 fő, hogy mindenkire jusson figyelem. A helyek fele mindig a Társaságon kívülieknek marad." },
+  { Icon: Users, title: "Kis csoport", text: "Legfeljebb 15 fő, hogy mindenkire jusson figyelem. A helyek fele mindig a nem tagoknak marad." },
   { Icon: SproutIcon, title: "Nem kell tapasztalat", text: "Ha még sosem meditáltál, éppen jó helyen vagy. Ha már gyakorolsz, elmélyítheted." },
-  { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni. Minden mást biztosítunk." },
+  { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni." },
   {
     Icon: Ticket,
     title: "Részvételi díj: 4 940 Ft",

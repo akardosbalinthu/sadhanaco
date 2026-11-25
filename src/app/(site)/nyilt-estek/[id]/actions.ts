@@ -29,7 +29,7 @@ const MESSAGES: Record<string, string> = {
   ALREADY_REGISTERED: "Ezzel az e-mail-címmel már van jelentkezés erre az alkalomra.",
   REGISTRATION_NOT_OPEN: "A jelentkezés még nem nyílt meg.",
   REGISTRATION_CLOSED: "A jelentkezés erre az alkalomra lezárult.",
-  NOT_PUBLIC_EVENT: "Erre az alkalomra csak a Társaság tagjai jelentkezhetnek.",
+  NOT_PUBLIC_EVENT: "Erre az alkalomra csak A Társaság tagjai jelentkezhetnek.",
   EVENT_NOT_FOUND: "Ez az alkalom nem érhető el.",
   INVALID_GUEST: "Kérlek, add meg a neved és egy érvényes e-mail-címet.",
 };
