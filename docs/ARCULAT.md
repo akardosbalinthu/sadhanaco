@@ -1,80 +1,104 @@
 # Arculati alap
 
-## 1. A cél
+> 2026. november 25-től érvényes, az egyéni program koncepciójához igazítva (`docs/KONCEPCIO.md`). A korábbi, a Társaságra épülő arculati alapot felváltja.
 
-**A cél egy kapcsolódóbb világ, ahol egyre kevesebb ember marad egyedül.**
+## 1. A fő üzenet
 
-A magányjárvány korunk egyik legnagyobb, mégis láthatatlan egészségügyi veszélye. Minden, amit csinálunk, erre válaszol. Nem a magány **ellen** harcolunk, hanem a kapcsolódás**ért** dolgozunk.
+**Egy teljes, személyre szabott út:** meditáció, légzés, test, életmód és kapcsolatok egyetlen programban. Az alapja Bálint egyedi módszertana, amely a jóga nyolc ágát az életmód-orvostan hat pillérével vegyíti, személyes vezetéssel, a résztvevő saját életére szabva.
 
-## 2. A cél és az út
+**Vezérmondat:** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
 
-- **Cél:** kapcsolódás. Ez minden szolgáltatás és minden szöveg középpontja.
-- **Út befelé:** kapcsolódás önmagunkkal, a testünkkel, a légzésünkkel és a belső hangunkkal. Ennek eszköze a meditáció, a légzés és az idegrendszer szabályozása.
-- **Út kifelé:** kapcsolódás egymással, a barátainkkal, a közösségünkkel és minden élőlénnyel. Ennek eszköze a közösség, a kedvesség és a személyes találkozás.
+**Üzleti cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával (5. pont).
 
-A meditáció, a légzés és az idegrendszer-fejlesztés **eszköz és út, nem cél**. A szövegekben mindig a célhoz kell kötni őket.
+## 2. A módszertan
 
-## 3. Küldetés (szó szerint)
+A program ereje a két rendszer **vegyítésében** van. A jóga nyolc ága a belső munka teljes ívét adja: értékek, test, légzés, figyelem, meditáció. Az életmód-orvostan hat pillére a hétköznapi élet alapjait adja. Együtt az egész embert fogják át, nem egy tünetet.
 
-> A Társaság tagjaival azon dolgozunk, hogy egyre több ember kapcsolódjon önmagához és egymáshoz — először magunkkal kezdve.
+| A jóga ága | Az életmód-orvostan pillére |
+|---|---|
+| Bánásmód másokkal (jama) | Társas kapcsolódás |
+| Bánásmód önmagunkkal: önfegyelem, mértékletesség, önápolás (nijama) | Táplálkozás; kockázatos szerek kerülése |
+| Test és tartás (ászana) | Mozgás |
+| Légzés (pránájáma) | Stresszkezelés |
+| Az érzékek befelé fordítása, ingercsökkentés (pratjáhára) | Alvás |
+| Összpontosítás, meditáció, elmélyült jelenlét (dháraná, dhjána, szamádhi) | Stresszkezelés, figyelem |
 
-**Vezérmondat:** Kapcsolódj — önmagadhoz és egymáshoz.
+- Az ágak neve **magyarul és szanszkritul is** szerepel: elöl a magyar, utána zárójelben a szanszkrit.
+- **A program négy rétege egyenrangú:** meditáció, idegrendszer-szabályozás, életmódváltás, értékek és kapcsolatok. Egyiket sem emeljük a többi fölé. Ne csak „idegrendszer-szabályozásról” beszéljünk.
+- **Konkrét gyakorlatnevet** a nyilvános felületen továbbra sem említünk. Az ágak és a pillérek nevei nem gyakorlatnevek.
+
+## 3. Az ígéret
+
+Nyolc hónap alatt felépíted a saját gyakorlásodat és életmódodat, a meditációtól az alvásig, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
+
+- Az első négy hónap a tanulásé, heti egyéni alkalommal.
+- A második négy hónap az önálló integrációé, havi egyéni alkalommal.
+
+Gyógyulási vagy terápiás ígéretet nem teszünk.
 
 ## 4. Hangnem
 
-- Nyugodt, tiszta, emberi és közvetlen. Pontos, hibátlan magyar nyelv, tükörfordítások nélkül.
-- Tudományosan megalapozott (idegtudomány, életmód-orvostan), ezoterikus és spirituális szóhasználat nélkül.
-- Hívogató, nem ijesztgető. A hangsúly mindig a kapcsolódáson van, nem a magány veszélyein.
-- Hiteles, a haszonból kiinduló marketing: nincs kitalált vélemény és nincs hamis sürgetés.
+- **Nyugodt, szakszerű, személyes és egyenes.** Konkrét: kinek szól, mit kap, hogyan zajlik, mennyi időt kér. Közben átfogó, holisztikus képet fest.
+- **Nyelv:** pontos, hibátlan magyar, tükörfordítások nélkül.
+- **Tudományos keret:** életmód-orvostan és idegtudomány. A jógikus hagyományt eredeti formájában tisztelettel mutatjuk be, de ezoterikus szóhasználat nélkül.
+- **Megszólítás:** Bálint egyes szám első személyben beszél („kísérlek”, „várlak”). A jogi szövegek többes számban maradnak.
+- **Bemutatkozás:** soha nem „Kardos Bálint vagyok”, hanem „A nevem Kardos Bálint” vagy „Kardos Bálintnak hívnak”.
 
-## 5. Szóhasználati szabályok
+## 5. Erkölcsi korlátok (nem alku tárgya)
 
-**Kerülendő:**
-- harci szókincs: „harc a magány ellen”, „küzdelem”, „legyőzni a magányt”,
-- a közönség címkézése: „Magányos vagy?”, „magányos emberek”. Helyette hívogass: „Gyere, tartozz valahová.”
-- gyógyulási vagy terápiás ígéret: „meggyógyítja a magányt”, „kezeli a szorongást”. Ezek nem terápiás szolgáltatások.
-- ezoterikus szavak: „energia”, „rezgés”, „spirituális ébredés”, „transzcendens”,
-- tükörfordítások: „földelés”, „csomag” (helyette: „tagság”).
+- Nincs kitalált vélemény vagy ajánlás.
+- Nincs hamis sürgetés vagy mesterséges szűkösség.
+- Nincs gyógyulási vagy terápiás ígéret: „meggyógyítja”, „kezeli a szorongást” és hasonlók.
+- Nincs ezoterikus nyelv: „energia”, „rezgés”, „spirituális ébredés”, „transzcendens”.
+- Nincs új, nem ellenőrzött tudományos állítás, szám vagy idézet.
+- Az ár nem nyilvános, de semmit nem rejtünk el, ami a döntéshez kell (időtartam, alkalmak száma, menete).
+- **A szűrés őszinte:** aki most nem kezdene, azt nem győzködjük, hanem kedvesen a Nyílt Estre hívjuk.
+- Nem promotáljuk a kávéfogyasztást.
 
-**Előnyben részesített szavak:** kapcsolódás, jelenlét, közösség, tartozni valahová, kedvesség, találkozás, figyelem, megnyugvás.
+## 6. Szóhasználat
 
-**Számok és adatok:** a magányról szóló WHO-adat **csak egy helyen**, a bemutatkozó vagy „Miért?” oldalon szerepelhet, egyszer, a 8. pont szövegével és forrással. Máshol nem.
+- **Kerülendő:**
+  - harci szókincs („harc”, „legyőzni”);
+  - a közönség címkézése („Szorongó vagy?”);
+  - „hustle” és teljesítménykényszer;
+  - tükörfordítások: „földelés”, „1-on-1”, „&”, „Q&A”.
+- **Helyette:** „egyéni”, „személyes”, „kérdezz-felelek”.
+- **Előnyben részesített szavak:** jelenlét, figyelem, gyakorlás, életmód, egyensúly, személyre szabott, kísérés, hétköznapok, kapcsolódás.
 
-## 6. Szolgáltatások (szó szerint)
+## 7. Vizuális nyelv
 
-**A Társaság**
-Online gyakorlóközösség, ahol napi 10–15 perc vezetett légzéssel és meditációval megtanulsz kapcsolódni önmagadhoz, és olyan emberek közé tartozhatsz, akik ugyanezt az utat járják. Közös meditáció, túrák, szerepjáték-estek és budapesti találkozók: hely, ahová tartozni lehet.
+- **Paletta:** meleg törtfehér, erdőzöld (`#1C2520`), antik arany (`#C5A059`).
+- **Stílus:** letisztultabb, rendezettebb, kevesebb meseszerű díszítéssel.
+- **Mozgás:** lassú, csak színátmenetes.
+- **Illusztrációk:** a saját vonalas illusztrációk maradnak (`src/components/illustrations.tsx`).
 
-**Nyílt Meditációs Estek**
+## 8. Szolgáltatások
+
+**Az egyéni program** — JAVASLAT, jóváhagyásra vár:
+Nyolc hónapos egyéni program, amelyben a jóga nyolc ágát az életmód-orvostan hat pillérével ötvözöm, a te életedre szabva. Az első négy hónapban hetente találkozunk online, és lépésről lépésre felépítjük a gyakorlásodat: a meditációt, a légzést, a mozgást, az alvást és az étkezést. A második négy hónapban havonta egyszer beszélünk, te pedig önállóan építed be mindezt a hétköznapjaidba. A programba ismerkedő konzultáció után lehet bekerülni.
+
+**Nyílt Meditációs Estek** (szó szerint):
 Havonta egy este Budapesten, legfeljebb 15 emberrel. Közös gyakorlás és személyes jelenlét, telefon és képernyő nélkül.
+- Részvételi díj: 4 940 Ft mindenkinek.
+- A program résztvevőinek díjmentes.
+- A 2026. decemberi est adomány alapú.
 
-**Egy Kedves Üzenet**
+**Egy Kedves Üzenet** (szó szerint):
 Írj kedves üzenetet valakinek, és én meglepetés-telefonhívásban adom át. Egy hívás, amely emlékeztet: valaki gondol rád.
 
-**Napi Közlöny**
-Személyes napi újság a leveleidből és a naptáradból, hajnalban kinyomtatva, hogy a napod ne a telefonnal induljon, és több figyelmed maradjon azokra, akik körülötted vannak.
+## 9. Bemutatkozás
 
-## 7. Bemutatkozás (szó szerint)
-
+**Változatlan, szó szerint:**
 A nevem Kardos Bálint. Integratív meditációs és idegrendszer-fejlesztő tréner, életmód-tanácsadó és jógaoktató vagyok. Babócsán, egy somogyi faluban nőttem fel.
 
-Azért dolgozom, hogy egyre több ember kapcsolódjon önmagához és egymáshoz. Hiszem, hogy a magányra a kapcsolódás a válasz: befelé, a saját testünk és légzésünk felé, és kifelé, egymás felé.
+**A második bekezdésre javaslat, jóváhagyásra vár:**
+A jóga ősi gyakorlatait az életmód-orvostan keretrendszerével ötvözöm, hogy a meditáció ne csak a párnán, hanem a hétköznapokban is működjön: abban, ahogyan alszol, eszel, mozogsz, és ahogyan a többiekhez fordulsz.
 
-*(Megjegyzés: a bemutatkozás mindig így kezdődik: „A nevem Kardos Bálint”, soha nem így: „Bálint vagyok”.)*
+## 10. A kapcsolódásról (a Rólam oldalra)
 
-## 8. A kapcsolódásról (szó szerint, a bemutatkozó vagy „Miért?” oldalra)
+A WHO-adat **csak itt, egyszer** szerepel, forrással. A korábbi szöveg marad, egyetlen szükséges módosítással: „Ezt gyakoroljuk nap mint nap a Társaságban” helyett „Ezt gyakoroljuk nap mint nap a programban”. Ez a módosítás is jóváhagyásra vár.
 
-A magány korunk egyik legnagyobb, mégis láthatatlan egészségügyi veszélye. Az Egészségügyi Világszervezet (WHO) 2025-ös jelentése szerint világszerte minden hatodik ember magányos, és a magány évente több mint 871 000 halálesettel hozható összefüggésbe: óránként mintegy százzal.
-
-Az idegrendszer kapcsolatban nyugszik meg: önmagunkkal és egymással.
-
-**Befelé** ez kapcsolódás a testünkkel, a légzésünkkel és a belső hangunkkal. Ezt gyakoroljuk nap mint nap a Társaságban.
-
-**Kifelé** ez kapcsolódás a többi emberrel, a barátainkkal, a közösségünkkel és minden élőlénnyel. A társas kapcsolódás az életmód-orvostan hat alappillérének egyike.
-
-Úgy tapasztalom, hogy a kettő összetartozik: aki jobban kapcsolódik önmagához, kedvesebben fordul a másik felé is.
-
-### Források (kis betűvel, az oldal alján)
+### Források
 - WHO Commission on Social Connection (2025): From loneliness to social connection: charting a path to healthier societies
 - American College of Lifestyle Medicine – az életmód-orvostan hat pillére
 - Holt-Lunstad, J., Smith, T. B., Layton, J. B. (2010): Social Relationships and Mortality Risk: A Meta-analytic Review. PLoS Medicine

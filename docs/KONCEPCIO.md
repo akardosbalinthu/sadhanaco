@@ -53,7 +53,7 @@
   - Napi Közlöny.
 - Az adatbázisban a régi táblák maradhatnak, a felületről kikerülnek.
 
-## 5. A módszertan — Bálint egyedi módszere (JAVASLAT, jóváhagyásra vár)
+## 5. A módszertan — Bálint egyedi módszere (jóváhagyva)
 
 A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a belső munka teljes ívét adja (értékek, test, légzés, figyelem, meditáció), az életmód-orvostan hat pillére pedig a hétköznapi élet mérhető alapjait. Az egyik a belső, a másik a külső oldal — együtt az egész embert fogják át, nem egy tünetet.
 
@@ -66,11 +66,13 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 | Az érzékek befelé fordítása, ingercsökkentés (pratjáhára) | Alvás |
 | Összpontosítás, meditáció, elmélyült jelenlét (dháraná, dhjána, szamádhi) | Stresszkezelés, figyelem |
 
-- A párosítás Bálint jóváhagyására vár — ez az ő módszertana, ő véglegesíti.
-- A nyilvános felületen az ágakat **magyarul** nevezzük meg, a szanszkrit név legfeljebb kisebb betűvel, zárójelben szerepelhet. Konkrét gyakorlatnevet továbbra sem.
+- A párosítást Bálint jóváhagyta (2026. november 25.).
+- A nyilvános felületen az ágak **magyarul és szanszkritul is** szerepelnek (magyar, zárójelben szanszkrit). Konkrét gyakorlatnevet továbbra sem.
 - Négy réteg, amelyről a program beszél: **meditáció**, **idegrendszer-szabályozás**, **életmódváltás**, **értékek és kapcsolatok**. Egyik sem kerül a többi fölé.
 
-## 6. Új arculati alap — JAVASLAT, jóváhagyásra vár
+## 6. Új arculati alap — jóváhagyva, részletek: `docs/ARCULAT.md`
+
+- **Vezérmondat:** Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
 
 - **A fő üzenet:** egy teljes, holisztikus út — meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
 - **A cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával.
@@ -109,9 +111,9 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 9. **Oldalankénti szövegírás** az új arculattal (főoldal, Rólam, Nyílt Est, Egy Kedves Üzenet).
 10. **Élesítés** csak Bálint engedélyével.
 
-## 8. Nyitott kérdések
+## 8. Döntések (2026. november 25.)
 
-- Konzultációfoglalás: Google Naptár időpontfoglaló oldal vagy saját időpontrendszer?
-- Fizetés: egyedi Stripe fizetési link a konzultáció után, vagy átutalás? Egy összegben vagy részletben?
-- A Nyílt Est egységes ára (4 940 Ft?), illetve a program résztvevői díjmentesen jöhetnek-e.
-- Vezérmondat (lásd a válaszban szereplő javaslatokat).
+- **Konzultációfoglalás:** saját időpontrendszer a platformon. Bálint megadja a szabad időpontokat, a minősített érdeklődő ezek közül választ. A foglalásból Google Naptár-esemény hozható létre (egy kattintásos „Hozzáadás a Google Naptárhoz” link és .ics melléklet Bálintnak és az érdeklődőnek is), Meet-linkkel.
+- **Fizetés:** egyelőre nincs a rendszerben. Mindig egyedileg beszéljük meg; a résztvevőt az admin kézzel aktiválja.
+- **Nyílt Est:** 4 940 Ft mindenkinek; a program résztvevőinek díjmentes (a 2026. decemberi est adomány alapú).
+- **Egészségügyi adatok:** a felmérés előtt kötelező, külön, kifejezett hozzájárulás (GDPR 9. cikk), időbélyeggel tárolva; az adatkezelési tájékoztató kiegészítése Bálint jóváhagyásával, ügyvédi átnézés javasolt.
