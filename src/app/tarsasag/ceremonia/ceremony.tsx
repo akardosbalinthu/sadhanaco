@@ -16,7 +16,7 @@ const TIEBREAK: Record<string, string> = {
   vandorok: "Több bátorságot",
 };
 
-export function Ceremony({ questions, info, practiceHref }: { questions: Q[]; info: Info; practiceHref: string }) {
+export function Ceremony({ questions, info, practiceHref, reportHref }: { questions: Q[]; info: Info; practiceHref: string; reportHref: string }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [tied, setTied] = useState<string[] | null>(null);
@@ -43,9 +43,18 @@ export function Ceremony({ questions, info, practiceHref }: { questions: Q[]; in
         <h2 className="mt-4 font-serif text-4xl text-forest">{o?.name}</h2>
         <p className="mt-2 text-gold">{o?.gift}</p>
         <p className="mx-auto mt-6 max-w-md font-serif italic text-ink">{o?.motto}</p>
-        <Link href={practiceHref} className={`${buttonPrimary} mt-8`}>
-          Indulhat az első hét
-        </Link>
+        <p className="mx-auto mt-6 max-w-md text-sm text-ink-soft">
+          Elkészült a személyre szóló kiértékelésed is: mit mutattak a válaszaid a stresszválaszodról, a
+          testérzékelésedről és arról, mi tölt vissza.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link href={reportHref} className={buttonPrimary}>
+            Elolvasom a kiértékelésem
+          </Link>
+          <Link href={practiceHref} className={buttonSecondary}>
+            Indulhat az első hét
+          </Link>
+        </div>
       </GildedCard>
     );
   }

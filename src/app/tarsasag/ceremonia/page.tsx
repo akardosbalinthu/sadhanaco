@@ -34,7 +34,7 @@ export default async function CeremonyPage() {
         </p>
       </PageHeader>
       <div className="mt-10">
-        <Ceremony questions={questions} info={ORDER_INFO} practiceHref={tp("/gyakorlas")} />
+        <Ceremony questions={questions} info={ORDER_INFO} practiceHref={tp("/gyakorlas")} reportHref={tp("/rendem")} />
       </div>
     </main>
   );

@@ -129,6 +129,11 @@ export default async function PracticePage({ searchParams }: { searchParams: Pro
             <OrderCrest order={card?.order} className="h-16 w-14" />
             <div>
               <p className="font-serif text-2xl text-forest">{order ? order.single : "Rend nélkül"}</p>
+              {order && (
+                <Link href={tp("/rendem")} className="text-xs text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
+                  A rendem részletesen
+                </Link>
+              )}
               <p className="text-sm text-ink-soft">{card?.rank?.label ?? "Kereső"} · {card?.xp_total ?? 0} XP</p>
             </div>
           </div>
