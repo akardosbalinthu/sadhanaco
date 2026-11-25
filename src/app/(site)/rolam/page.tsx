@@ -77,7 +77,7 @@ const STATIONS: Station[] = [
     title: "„Szeretlek, apa”",
     paras: [
       "Édesapámat huszonegy évesen ismertem meg. Az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
-      "Aztán a kitartó felelősségvállalása, és ahogyan a tetteivel próbálta helyrehozni a hibáit, meggyőzött. Nagyon jóba lettünk. Alig másfél évvel később egyszer munkából hazafelé azzal hívtam fel: „Szeretlek, apa.” Három hónappal később már nem élt — gyomorrákban és annak szövődményeiben hunyt el.",
+      "Aztán a kitartó felelősségvállalása, és ahogyan a tetteivel próbálta helyrehozni a hibáit, meggyőzött. Jóban lettünk — igazi apa–fia kapcsolatunk lett. Alig másfél évvel később egyszer munkából hazafelé azzal hívtam fel: „Szeretlek, apa.” Három hónappal később már nem élt — gyomorrákban és annak szövődményeiben hunyt el.",
     ],
   },
   {
