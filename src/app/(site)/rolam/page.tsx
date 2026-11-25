@@ -170,7 +170,7 @@ export default function AboutPage() {
   return (
     <main className="py-16">
       <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
-        <PageHeader eyebrow="Rólam" title="Kardos Bálint vagyok.">
+        <PageHeader eyebrow="Rólam" title="Kardos Bálintnak hívnak.">
           <p className="font-serif text-xl text-ink">
             Évekig kerestem, hol a helyem. Kipróbáltam szinte mindent — a kukoricaföldtől a nemzetközi irodán át a
             nagykonyháig —, mire megértettem, hogy egyetlen dolog érdekel igazán: hogyan válhatunk tudatosabb,

@@ -247,6 +247,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 - **Rangnevek — céhes út:** Tanonc (0) → Inas (150) → Legény (500) → Vándorlegény (1 200) → Mester (2 500) → Nagymester (4 500) → Bölcs (7 000 XP). A II. lépcső küszöbe a Legény, a III.-é a Vándorlegény rang. (A 7.13 korábbi rangnevei helyett; `app_settings.xp_ranks`, 017-es migráció.)
 - **Megszólítás:** a felületen és a levelekben Bálint egyes szám első személyben beszél („küldöm”, „várlak”); a jogi szövegek maradnak többes számban. Megszólítás a levelekben: „Kedves Tagtárs!”. Kerülendő: tükörfordítás („földelés”, „1-on-1”, „&”), „csomag” helyett „tagság”, „Q&A” helyett „kérdezz-felelek”, „egyéni konzultáció”.
 - **Arculat:** a meleg törtfehér–erdőzöld–arany paletta marad, de kevesebb keret és díszítés (a sarokdísz csak kiemelt elemen: `GildedCard ornate`), lassú, csak színátmenetes mozgás, nagyobb levegő; saját vonalas illusztrációk: `src/components/illustrations.tsx`.
+- **Bemutatkozás:** soha nem „Kardos Bálint vagyok” — Bálint nem a neve. Helyette: „A nevem Kardos Bálint” vagy „Kardos Bálintnak hívnak”.
 - **Valós vélemények nélkül** — kitalált ajánlást nem használunk; a bizalmat a végzettségek, a módszer és a feltételek (próbaidő, bármikor lemondható) adják.
 
 ### 7.7 Nyitott kérdések (implementáció előtt egyeztetni)

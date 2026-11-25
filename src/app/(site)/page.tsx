@@ -124,7 +124,7 @@ export default function HomePage() {
         />
         <div>
         <p className="font-serif text-xl leading-relaxed text-ink">
-          Kardos Bálint vagyok. Kedves üzeneteket kézbesítek, segítek telefon nélkül kezdeni a napot, A Társaság
+          A nevem Kardos Bálint. Kedves üzeneteket kézbesítek, segítek telefon nélkül kezdeni a napot, A Társaság
           tagjaival pedig azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
         </p>
         <p className="mt-5 text-ink-soft">
