@@ -122,7 +122,7 @@ const STATIONS: Station[] = [
     Art: WindingPath,
     paras: [
       "Ezért döntöttem úgy — minden racionalitást félretéve, szinte teljes anyagi és lelki csődben —, hogy két hónapra Indiába utazom, egy 500 órás jógaoktatói képzésre. A jóga elvei közeli rokonai annak, amit addig is naponta gyakoroltam; korábban elvégeztem egy életmód-orvostani tanácsadói képzést, és tizenkét éves korom óta meditálok. Minden a helyére került.",
-      "Közvetlenül a forrásnál akartam tanulni, és közben megtalálni, ki is vagyok valójában. A hazafelé tartó, tizenpár órás repülőúton írtam össze, mit tanultam — néhányat lent megosztok belőle.",
+      "Közvetlenül a forrásnál akartam tanulni, és közben megtalálni, ki is vagyok valójában.",
     ],
   },
   {
