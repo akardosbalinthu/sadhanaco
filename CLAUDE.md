@@ -161,6 +161,7 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 ### 7.6 Infrastruktúra
 - Supabase projekt: `kqvxosoqmwscymaoqhyj` (eu-west-1). Fejlesztés helyben / külön branch-en, éles migráció csak Bálint jóváhagyásával.
 - Vercel csapat: `akardosbalint1`.
+- **Élesítés (deploy) csak Bálint kifejezett engedélyével.** Magától Claude nem indít élesítést (a Vercel napi keretének túllépése miatt, 2026. november 25.). A módosításokat összegyűjti, és egyben élesíti, amikor Bálint jóváhagyja.
 - Minden ütemezés **Europe/Budapest** idő szerint értendő (a Vercel Cron UTC-ben fut — a nyári/téli időszámítást kezelni kell).
 
 ### 7.8 Döntések (2026. november 24.)
