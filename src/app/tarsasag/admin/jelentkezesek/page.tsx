@@ -14,7 +14,7 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
   const filter = one(sp.szuro) || "minositett";
   let q = supabase
     .from("applications")
-    .select("id, created_at, full_name, email, start_when, qualified, status, severity, urgency")
+    .select("id, created_at, full_name, email, start_when, start_score, qualified, status, severity, urgency, questionnaire_version")
     .order("created_at", { ascending: false })
     .limit(200);
   if (filter === "minositett") q = q.eq("qualified", true).in("status", ["uj", "foglalt", "konzultalt"]);
@@ -56,7 +56,8 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
                   <div>
                     <p className="font-serif text-lg text-forest">{a.full_name}</p>
                     <p className="text-xs text-ink-soft">
-                      {a.email} · {fmtDateTime(a.created_at)} · {START_LABEL[a.start_when]} · súlyosság {a.severity}/10, sürgősség {a.urgency}/10
+                      {a.email} · {fmtDateTime(a.created_at)} ·{" "}
+                      {a.questionnaire_version === 2 ? `„most van itt az ideje?” ${a.start_score}/10` : `${START_LABEL[a.start_when ?? ""] ?? "–"} · súlyosság ${a.severity}/10`}
                     </p>
                   </div>
                   <div className="text-right text-sm">

@@ -48,7 +48,7 @@ const INCLUDED = [
 ];
 
 const STEPS = [
-  { title: "Felmérés", text: "Nagyjából tíz perc: hol tartasz most a hat életmód-pillér mentén, és mi hozott ide." },
+  { title: "Felmérés", text: "Két-három perc, 15 kérdés. A végén megkapod az Életmód-térképedet és egy tanácsot, amit még ma kipróbálhatsz." },
   { title: "Ismerkedő konzultáció", text: "Online beszélgetünk arról, mit szeretnél, és hogy a program jó választás-e neked. Itt beszéljük meg a részleteket és a díjat is." },
   { title: "Indulás", text: "Ha mindketten igent mondunk, elkészítem a személyre szabott tervedet, és elindulunk." },
 ];
@@ -94,7 +94,7 @@ export default function HomePage() {
               Hogyan működik?
             </a>
           </div>
-          <p className="mt-4 text-sm text-ink-soft">A jelentkezés egy nagyjából tízperces felméréssel indul.</p>
+          <p className="mt-4 text-sm text-ink-soft">A jelentkezés egy két-három perces kérdőívvel indul, a végén megkapod az Életmód-térképedet.</p>
         </div>
         <DawnLandscape className="mx-auto w-full max-w-md opacity-90 lg:max-w-none" />
       </section>

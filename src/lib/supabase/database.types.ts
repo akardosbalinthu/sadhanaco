@@ -53,14 +53,14 @@ export type Database = {
                   ]
                 },"applications": {
                   Row: {
-                    "admin_note": string | null,"created_at": string,"email": string,"full_name": string,"health_consent_at": string,"health_consent_version": string,"id": string,"invest_energy": string,"invest_money": string,"invest_time": string,"phone": string | null,"pillars": NonNullable<Json>,"privacy_consent_at": string,"problem": string,"qualified": boolean | null,"severity": number,"start_when": Database["public"]['Enums']["application_start"],"status": Database["public"]['Enums']["application_status"],"token": string,"urgency": number
+                    "admin_note": string | null,"answers": Json | null,"created_at": string,"email": string,"full_name": string,"health_consent_at": string,"health_consent_version": string,"id": string,"invest_energy": string | null,"invest_money": string | null,"invest_time": string | null,"phone": string | null,"pillars": Json | null,"privacy_consent_at": string,"problem": string | null,"qualified": boolean | null,"questionnaire_version": number,"severity": number | null,"start_score": number | null,"start_when": Database["public"]['Enums']["application_start"] | null,"status": Database["public"]['Enums']["application_status"],"token": string,"urgency": number | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "admin_note"?: string | null,"created_at"?: string,"email": string,"full_name": string,"health_consent_at": string,"health_consent_version": string,"id"?: string,"invest_energy": string,"invest_money": string,"invest_time": string,"phone"?: string | null,"pillars": NonNullable<Json>,"privacy_consent_at": string,"problem": string,"qualified"?: never,"severity": number,"start_when": Database["public"]['Enums']["application_start"],"status"?: Database["public"]['Enums']["application_status"],"token"?: string,"urgency": number
+                    "admin_note"?: string | null,"answers"?: Json | null,"created_at"?: string,"email": string,"full_name": string,"health_consent_at": string,"health_consent_version": string,"id"?: string,"invest_energy"?: string | null,"invest_money"?: string | null,"invest_time"?: string | null,"phone"?: string | null,"pillars"?: Json | null,"privacy_consent_at": string,"problem"?: string | null,"qualified"?: never,"questionnaire_version"?: number,"severity"?: number | null,"start_score"?: number | null,"start_when"?: Database["public"]['Enums']["application_start"] | null,"status"?: Database["public"]['Enums']["application_status"],"token"?: string,"urgency"?: number | null
                   }
                   Update: {
-                    "admin_note"?: string | null,"created_at"?: string,"email"?: string,"full_name"?: string,"health_consent_at"?: string,"health_consent_version"?: string,"id"?: string,"invest_energy"?: string,"invest_money"?: string,"invest_time"?: string,"phone"?: string | null,"pillars"?: NonNullable<Json>,"privacy_consent_at"?: string,"problem"?: string,"qualified"?: never,"severity"?: number,"start_when"?: Database["public"]['Enums']["application_start"],"status"?: Database["public"]['Enums']["application_status"],"token"?: string,"urgency"?: number
+                    "admin_note"?: string | null,"answers"?: Json | null,"created_at"?: string,"email"?: string,"full_name"?: string,"health_consent_at"?: string,"health_consent_version"?: string,"id"?: string,"invest_energy"?: string | null,"invest_money"?: string | null,"invest_time"?: string | null,"phone"?: string | null,"pillars"?: Json | null,"privacy_consent_at"?: string,"problem"?: string | null,"qualified"?: never,"questionnaire_version"?: number,"severity"?: number | null,"start_score"?: number | null,"start_when"?: Database["public"]['Enums']["application_start"] | null,"status"?: Database["public"]['Enums']["application_status"],"token"?: string,"urgency"?: number | null
                   }
                   Relationships: [
                     
@@ -1600,25 +1600,60 @@ isOneToOne: false
 "submit_application":
 { Args: { "p_email": string,"p_full_name": string,"p_health_consent": boolean,"p_invest_energy": string,"p_invest_money": string,"p_invest_time": string,"p_phone": string,"p_pillars": Json,"p_privacy_consent": boolean,"p_problem": string,"p_severity": number,"p_start_when": Database["public"]['Enums']["application_start"],"p_urgency": number }; Returns: {
               "admin_note": string | null,
+"answers": Json | null,
 "created_at": string,
 "email": string,
 "full_name": string,
 "health_consent_at": string,
 "health_consent_version": string,
 "id": string,
-"invest_energy": string,
-"invest_money": string,
-"invest_time": string,
+"invest_energy": string | null,
+"invest_money": string | null,
+"invest_time": string | null,
 "phone": string | null,
-"pillars": NonNullable<Json>,
+"pillars": Json | null,
 "privacy_consent_at": string,
-"problem": string,
+"problem": string | null,
 "qualified": boolean | null,
-"severity": number,
-"start_when": Database["public"]['Enums']["application_start"],
+"questionnaire_version": number,
+"severity": number | null,
+"start_score": number | null,
+"start_when": Database["public"]['Enums']["application_start"] | null,
 "status": Database["public"]['Enums']["application_status"],
 "token": string,
-"urgency": number
+"urgency": number | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "applications"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
+"submit_application_v2":
+{ Args: { "p_answers": Json,"p_email": string,"p_full_name": string,"p_health_consent": boolean,"p_phone": string,"p_privacy_consent": boolean,"p_problem": string }; Returns: {
+              "admin_note": string | null,
+"answers": Json | null,
+"created_at": string,
+"email": string,
+"full_name": string,
+"health_consent_at": string,
+"health_consent_version": string,
+"id": string,
+"invest_energy": string | null,
+"invest_money": string | null,
+"invest_time": string | null,
+"phone": string | null,
+"pillars": Json | null,
+"privacy_consent_at": string,
+"problem": string | null,
+"qualified": boolean | null,
+"questionnaire_version": number,
+"severity": number | null,
+"start_score": number | null,
+"start_when": Database["public"]['Enums']["application_start"] | null,
+"status": Database["public"]['Enums']["application_status"],
+"token": string,
+"urgency": number | null
             }
                           SetofOptions: {
         from: "*"

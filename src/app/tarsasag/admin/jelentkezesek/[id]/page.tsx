@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarPlus } from "lucide-react";
 import { fmtDateTime, requireAdmin } from "@/lib/admin";
-import { APP_STATUS_LABEL, INVEST_LABEL, PILLARS, RATING_LABELS, START_LABEL } from "@/lib/application";
+import { APP_STATUS_LABEL, INVEST_LABEL, lifestyleMap, PILLARS, QUESTIONS, RATING_LABELS, START_LABEL, type Answers } from "@/lib/application";
+import { LifestyleRadar } from "@/components/lifestyle-map";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
@@ -26,6 +27,8 @@ export default async function ApplicationDetail({ params, searchParams }: { para
   if (!a) notFound();
   const { data: enrollment } = await supabase.from("program_enrollments").select("id").eq("application_id", id).maybeSingle();
   const pillars = (a.pillars ?? {}) as Pillars;
+  const answers = a.answers ? (a.answers as unknown as Answers) : null;
+  const map = answers ? lifestyleMap(answers) : null;
   const meet = slot?.meet_url ?? settings?.consultation_meet_url ?? null;
   const today = new Date().toISOString().slice(0, 10);
 
@@ -40,7 +43,7 @@ export default async function ApplicationDetail({ params, searchParams }: { para
           {a.phone ? ` · ${a.phone}` : ""} · kitöltve: {fmtDateTime(a.created_at)}
         </p>
         <p className="mt-2 text-sm">
-          <span className={a.qualified ? "text-forest" : "text-ink-soft"}>{START_LABEL[a.start_when]}</span>
+          <span className={a.qualified ? "text-forest" : "text-ink-soft"}>{a.questionnaire_version === 2 ? `„Most van itt az ideje?” ${a.start_score}/10` : START_LABEL[a.start_when ?? ""]}</span>
           <span className="text-ink-soft"> · {APP_STATUS_LABEL[a.status]}</span>
         </p>
       </div>
@@ -75,6 +78,46 @@ export default async function ApplicationDetail({ params, searchParams }: { para
         )}
       </GildedCard>
 
+      {a.questionnaire_version === 2 && map && answers ? (
+        <>
+          <section>
+            <H2>Életmód-térkép</H2>
+            <div className="mt-5 grid items-center gap-8 lg:grid-cols-[1.1fr_1fr]">
+              <GildedCard className="p-4">
+                <LifestyleRadar values={map.pillars.map((p) => ({ name: p.name, value: p.value }))} className="mx-auto w-full max-w-md" />
+                <p className="mt-2 text-center text-sm text-ink-soft">
+                  Befelé {map.inward.toLocaleString("hu-HU")} · Kifelé {map.outward.toLocaleString("hu-HU")}
+                </p>
+              </GildedCard>
+              <div className="space-y-3 text-sm">
+                <p><span className="text-ink-soft">Erősség:</span> <span className="text-forest">{map.strongest.name}</span></p>
+                {map.weakest && <p><span className="text-ink-soft">Következő lépés:</span> <span className="text-forest">{map.weakest.name}</span></p>}
+                {a.problem && (
+                  <div className="rounded-lg bg-paper-deep/70 p-4">
+                    <p className="text-xs uppercase tracking-[0.16em] text-gold">Mi hozott ide?</p>
+                    <p className="mt-2 whitespace-pre-line text-ink">{a.problem}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+          <section>
+            <H2>A válaszok</H2>
+            <ul className="mt-5 divide-y divide-line border-y border-line">
+              {QUESTIONS.map((q) => (
+                <li key={q.key} className="flex items-baseline justify-between gap-4 py-2.5 text-sm">
+                  <span className="text-ink-soft"><span className="text-gold">{q.area}</span> · {q.text}</span>
+                  <span className="shrink-0 font-serif text-lg text-forest">{answers[q.key]}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs text-ink-soft">
+              Egészségügyi hozzájárulás: {fmtDateTime(a.health_consent_at)} (szövegváltozat: {a.health_consent_version})
+            </p>
+          </section>
+        </>
+      ) : (
+        <>
       <section>
         <H2>1. rész – a hat pillér</H2>
         <dl className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -101,16 +144,19 @@ export default async function ApplicationDetail({ params, searchParams }: { para
           <dl className="grid gap-3 border-t border-line pt-4 text-sm sm:grid-cols-3">
             <div><dt className="text-ink-soft">Mennyire nehezíti</dt><dd className="text-forest">{a.severity}/10</dd></div>
             <div><dt className="text-ink-soft">Mennyire égető</dt><dd className="text-forest">{a.urgency}/10</dd></div>
-            <div><dt className="text-ink-soft">Mikor kezdené</dt><dd className="text-forest">{START_LABEL[a.start_when]}</dd></div>
-            <div><dt className="text-ink-soft">Pénzt</dt><dd className="text-forest">{INVEST_LABEL[a.invest_money]}</dd></div>
-            <div><dt className="text-ink-soft">Időt</dt><dd className="text-forest">{INVEST_LABEL[a.invest_time]}</dd></div>
-            <div><dt className="text-ink-soft">Energiát</dt><dd className="text-forest">{INVEST_LABEL[a.invest_energy]}</dd></div>
+            <div><dt className="text-ink-soft">Mikor kezdené</dt><dd className="text-forest">{START_LABEL[a.start_when ?? ""]}</dd></div>
+            <div><dt className="text-ink-soft">Pénzt</dt><dd className="text-forest">{INVEST_LABEL[a.invest_money ?? ""]}</dd></div>
+            <div><dt className="text-ink-soft">Időt</dt><dd className="text-forest">{INVEST_LABEL[a.invest_time ?? ""]}</dd></div>
+            <div><dt className="text-ink-soft">Energiát</dt><dd className="text-forest">{INVEST_LABEL[a.invest_energy ?? ""]}</dd></div>
           </dl>
           <p className="border-t border-line pt-3 text-xs text-ink-soft">
             Egészségügyi hozzájárulás: {fmtDateTime(a.health_consent_at)} (szövegváltozat: {a.health_consent_version})
           </p>
         </GildedCard>
       </section>
+
+        </>
+      )}
 
       <section>
         <H2>Állapot és jegyzet</H2>

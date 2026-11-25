@@ -3,23 +3,20 @@ import { ApplicationForm } from "./application-form";
 
 export const metadata = {
   title: "Jelentkezés konzultációra · Kardos Bálint",
-  description: "Egy nagyjából tízperces felmérés az egyéni program ismerkedő konzultációja előtt.",
+  description: "15 rövid kérdés, a végén a személyes Életmód-térképed és egy tanács, amit még ma kipróbálhatsz.",
   robots: { index: false, follow: true },
 };
 
 export default function ApplyPage() {
   return (
     <main className="py-16">
-      <PageHeader eyebrow="Jelentkezés konzultációra" title="Kezdjük azzal, hol tartasz most.">
+      <PageHeader eyebrow="Jelentkezés konzultációra" title="Hol tartasz most? Nézzük meg két perc alatt.">
         <p>
-          A felmérés nagyjából tíz perc. Segít, hogy a konzultáción már a lényegről beszélhessünk, és hogy a programot a
-          te helyzetedre szabhassam.
-        </p>
-        <p>
-          Ha most szeretnél elkezdeni, a végén rögtön választhatsz időpontot az ismerkedő konzultációra.
+          15 rövid kérdés, mindegyikre egy számmal válaszolsz 1-től 10-ig. A végén megkapod az Életmód-térképedet: hol
+          vagy már erős, mi lehet a következő kis lépésed, és egy tanácsot, amit még ma kipróbálhatsz.
         </p>
       </PageHeader>
-      <div className="mt-14 max-w-3xl">
+      <div className="mt-12 max-w-2xl">
         <ApplicationForm />
       </div>
     </main>
