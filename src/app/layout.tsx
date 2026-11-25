@@ -4,7 +4,7 @@ import { themeInitScript } from "@/components/theme";
 
 export const metadata: Metadata = {
   title: "Kardos Bálint · Egyéni idegrendszer-fejlesztő és meditációs program",
-  description: "Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.",
+  description: "Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.",
 };
 
 export default function RootLayout({

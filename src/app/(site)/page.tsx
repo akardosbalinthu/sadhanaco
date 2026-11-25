@@ -7,7 +7,7 @@ import { DawnLandscape, EveningLamp, KindCall, Sprout, WindingPath } from "@/com
 export const metadata = {
   title: "Kardos Bálint · Találd meg a nyugalmad — és tartsd is meg a hétköznapokban",
   description:
-    "Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva. Nyolc hónapos egyéni, online program meditációval, légzéssel, mozgással, alvással, étkezéssel és kapcsolatokkal.",
+    "Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva. Nyolc hónapos egyéni, online program meditációval, légzéssel, mozgással, alvással, étkezéssel és kapcsolatokkal.",
 };
 
 const BENEFITS = [
@@ -71,7 +71,7 @@ export default function HomePage() {
             Találd meg a nyugalmad — és tartsd is meg a hétköznapokban.
           </h1>
           <p className="mt-5 font-serif text-xl leading-relaxed text-ink">
-            Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
+            Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.
           </p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
             Nyolc hónapos egyéni programomban a meditációt, a légzést, a mozgást, az alvást, az étkezést és a
