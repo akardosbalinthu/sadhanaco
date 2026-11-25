@@ -96,7 +96,7 @@ export default function KindMessagePage() {
           Gondold végig nyugodtan, és írd meg úgy, ahogy élőszóban mondanád.
         </p>
         <GildedCard ornate className="mt-8 max-w-3xl p-8">
-          <KindMessageForm action={submitGuestMessage} guest termsHref="/aszf#p11" />
+          <KindMessageForm action={submitGuestMessage} guest termsHref="/aszf#p8" />
         </GildedCard>
       </section>
     </main>

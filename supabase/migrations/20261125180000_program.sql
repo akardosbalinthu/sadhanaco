@@ -11,7 +11,7 @@
 -- -----------------------------------------------------------------------------
 -- 1. Beállítások
 -- -----------------------------------------------------------------------------
-update public.app_settings set registration_open = false where id;
+update public.app_settings set registration_open = false, terms_version = '2026-11-25' where id;
 
 alter table public.app_settings
   add column consultation_meet_url text check (consultation_meet_url is null or consultation_meet_url ~ '^https://'),

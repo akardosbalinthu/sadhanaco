@@ -4,7 +4,7 @@ import { LegalDoc, type LegalSection } from "@/components/legal-doc";
 
 export const metadata = {
   title: "Általános Szerződési Feltételek · Kardos Bálint",
-  description: "A Társaság tagságának, az eseményeknek és az Egy Kedves Üzenetnek a szerződési feltételei.",
+  description: "Az egyéni program, a Nyílt Meditációs Estek és az Egy Kedves Üzenet szerződési feltételei.",
 };
 
 /**
@@ -22,25 +22,23 @@ const sections: LegalSection[] = [
           <Link href="/impresszum">impresszumban</Link> találhatók.
         </p>
         <p>
-          A jelen feltételek (ÁSZF) az akardosbalint.hu és a tarsasag.akardosbalint.hu oldalon elérhető minden
-          szolgáltatásra vonatkoznak: A Társaság tagságára, az élő eseményekre és az Egy Kedves Üzenetre.
+          A jelen feltételek (ÁSZF) az akardosbalint.hu oldalon és a résztvevői felületen (tarsasag.akardosbalint.hu)
+          elérhető szolgáltatásokra vonatkoznak: az egyéni programra, a Nyílt Meditációs Estekre és az Egy Kedves
+          Üzenetre.
         </p>
       </>
     ),
   },
   {
-    title: "Ki vásárolhat",
+    title: "Ki veheti igénybe",
     body: (
       <>
         <p>
-          Szolgáltatásainkat <strong>kizárólag magánszemélyek</strong> (fogyasztók) vehetik igénybe, a saját nevükben.
-          Céges, adószámos vásárlásra és számlára nincs lehetőség. A vásárlás 18. életévüket betöltött személyeknek
-          szól.
+          Szolgáltatásaimat <strong>kizárólag magánszemélyek</strong> (fogyasztók) vehetik igénybe, a saját nevükben.
+          Céges, adószámos megrendelésre és számlára nincs lehetőség. A szolgáltatások 18. életévüket betöltött
+          személyeknek szólnak.
         </p>
-        <p>
-          Bármely országból lehet vásárolni; minden ár magyar forintban értendő. Az ország megállapítása a fizetéskor
-          megadott számlázási cím alapján történik.
-        </p>
+        <p>Bármely országból igénybe vehetők; minden ár magyar forintban értendő.</p>
       </>
     ),
   },
@@ -49,108 +47,56 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          A Társaság gyakorlatai (légzés-, figyelem- és testérzékelési gyakorlatok) az egészséges életmódot és a
-          stresszkezelést támogatják. <strong>Nem minősülnek orvosi, pszichológiai vagy pszichoterápiás kezelésnek</strong>,
-          és nem helyettesítik azt. Ha bármilyen egészségügyi vagy lelki problémád van (például szív- és érrendszeri
-          betegség, légzőszervi betegség, epilepszia, várandósság, pánikbetegség, trauma), a gyakorlás megkezdése
-          előtt egyeztess orvosoddal vagy terapeutáddal. Ha egy gyakorlat közben rosszul érzed magad, hagyd abba.
-        </p>
-        <p>
-          A közösségben a tagok saját tapasztalataikat osztják meg, nem szakmai tanácsot; ezek nem helyettesítik a
-          szakember véleményét.
+          A gyakorlatok (meditáció, légzés-, figyelem- és testérzékelési gyakorlatok) és az életmódra vonatkozó
+          kísérés az egészséges életmódot és a stresszkezelést támogatják. <strong>Nem minősülnek orvosi,
+          pszichológiai vagy pszichoterápiás kezelésnek</strong>, és nem helyettesítik azt. Ha bármilyen egészségügyi
+          vagy lelki problémád van (például szív- és érrendszeri betegség, légzőszervi betegség, epilepszia,
+          várandósság, pánikbetegség, trauma), a gyakorlás megkezdése előtt egyeztess orvosoddal vagy terapeutáddal,
+          és jelezd az ismerkedő konzultáción is. Ha egy gyakorlat közben rosszul érzed magad, hagyd abba.
         </p>
       </>
     ),
   },
   {
-    title: "A Társaság tagsága",
+    title: "Az egyéni program",
     body: (
       <>
-        <p>Két tagsági szint közül lehet választani:</p>
-        <ul>
-          <li>
-            <strong>A Társaság Tagja:</strong> 9 940 Ft / hó vagy 99 400 Ft / év.
-          </li>
-          <li>
-            <strong>A Belső Kör Tagja:</strong> 27 940 Ft / hó vagy 279 400 Ft / év.
-          </li>
-        </ul>
         <p>
-          Az egyes szintek pontos tartalmát a <a href="https://tarsasag.akardosbalint.hu">Társaság oldalán</a> lévő
-          összehasonlító táblázat írja le; ez a jelen ÁSZF része. A tananyag lépcsőzetesen, a belépés napjától
-          számított heti ütemben nyílik meg. A II., III. és IV. lépcsőt minden esetben a szolgáltató nyitja meg
-          kézzel, egy rövid, díjmentes beszélgetés után — a gyorsított hozzáférés megvásárlása vagy a Belső Kör tagság
-          sem jelent automatikus megnyitást.
+          Az egyéni program nyolc hónapos, online kísérés. Az első négy hónapban hetente egy 60 perces, a második négy
+          hónapban havonta egy 45 perces egyéni alkalom van (Google Meeten), személyre szabott gyakorlási tervvel,
+          heti írásos beszámolóval és visszajelzéssel. A program ideje alatt a résztvevő hozzáfér a résztvevői
+          felületen lévő tananyaghoz (videós és hanganyagos modulok), a gyakorlás-követéshez és a naplóhoz.
         </p>
         <p>
-          A tagság a fizetéskor megadott e-mail-címhez kötődik, személyes és nem átruházható. A tananyagok
+          <strong>A program nem vásárolható meg közvetlenül.</strong> A jelentkezés egy felméréssel indul, amelyet egy
+          ismerkedő konzultáció követ. A szerződés a konzultáción egyeztetett feltételekkel (a program díja, a
+          fizetés módja és ütemezése, a kezdés napja) jön létre, amikor ezeket a szolgáltató e-mailben írásban
+          visszaigazolja. Az ismerkedő konzultáció önmagában nem keletkeztet fizetési kötelezettséget.
+        </p>
+        <p>
+          Az alkalmak időpontját közösen egyeztetjük. Az alkalmak áthelyezésére, az elmaradt alkalmakra és a program idő
+          előtti befejezésére a visszaigazolásban rögzített feltételek az irányadók.
+        </p>
+        <p>
+          A résztvevői hozzáférés a megadott e-mail-címhez kötődik, személyes és nem átruházható. A tananyagok
           hozzáférési linkjei időkorlátosak; a belépési adatok és a tartalmak továbbadása nem megengedett.
         </p>
       </>
     ),
   },
   {
-    title: "Próbaidő",
-    body: (
-      <ul>
-        <li>7 napos próbaidő kizárólag a havi díjas „A Társaság Tagja” tagsághoz jár; az éves díjhoz és a Belső Körhöz nem.</li>
-        <li>A próbaidő indításához bankkártya szükséges. Ha a próbaidő alatt nem mondod le, a 7. nap után automatikusan elindul a havi előfizetés.</li>
-        <li>Egy e-mail-cím és egy bankkártya csak egyszer kaphat próbaidőt; ismételt próbálkozásnál a tagság azonnal fizetős időszakkal indul.</li>
-        <li>
-          A próbaidő alatt a tananyag és a közösség elérhető; a díjmentes Elsőbbségi Kedves Üzenet, az
-          eseményfoglalás, a konzultációfoglalás és a Napi Közlöny az első sikeres fizetés napjától jár.
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Fizetés, megújulás és számla",
+    title: "Díjak és számla",
     body: (
       <>
         <p>
-          A fizetés bankkártyával, a Stripe biztonságos fizetési oldalán történik; a kártyaadatokat a szolgáltató nem
-          látja és nem tárolja. Az előfizetés a választott időszak (hónap vagy év) végén automatikusan megújul, és a
-          díj ugyanarról a kártyáról terhelődik, amíg le nem mondod.
+          Az egyéni program díját a konzultáción egyeztetjük. A Nyílt Meditációs Est részvételi díja a weboldalon
+          szerepel, és bankkártyával, a Stripe biztonságos fizetési oldalán fizethető; a kártyaadatokat a szolgáltató
+          nem látja és nem tárolja.
         </p>
         <p>
-          Minden fizetésről <strong>alanyi adómentes (AAM)</strong> elektronikus számla készül, a fizetéskor megadott
-          névre és címre. A díjak egyike sem adomány: mindegyik szolgáltatási díj.
-        </p>
-        <p>
-          <strong>Sikertelen terhelés esetén</strong> e-mailben értesítünk, a hozzáférésed pedig megmarad. A rendszer
-          10 napon belül összesen 5 alkalommal próbálja újra a terhelést; ha egyik sem sikerül, a tagság megszűnik.
-          A kártyádat az Adataim oldalon, az „Előfizetés kezelése” gombbal bármikor frissítheted.
-        </p>
-      </>
-    ),
-  },
-  {
-    title: "Szintváltás",
-    body: (
-      <p>
-        „A Társaság Tagja” szintről „A Belső Kör Tagja” szintre bármikor válthatsz. A váltás azonnal érvényes; a
-        folyamatban lévő időszakra az időarányos különbözetet terheljük, amelyről külön számla készül.
-      </p>
-    ),
-  },
-  {
-    title: "Lemondás és visszatérés",
-    body: (
-      <>
-        <p>
-          Az előfizetést az Adataim oldalon, az „Előfizetés kezelése” gombbal bármikor lemondhatod. A lemondás a következő számlázási
-          időszaktól él: a már kifizetett időszak végéig minden hozzáférésed megmarad, utána a tagság — és vele a teljes
-          rendszerhez való hozzáférés — megszűnik. A már kifizetett díjat nem térítjük vissza, és ügyfél által kért
-          számlasztornóra nincs lehetőség.
-        </p>
-        <p>
-          <strong>Ha később visszatérsz, az út elölről indul:</strong> a haladásod, az XP-d, a megnyitott lépcsők és a
-          gyorsítva megvásárolt hozzáférések nem állnak vissza. Erre a vásárláskor is felhívjuk a figyelmet.
-        </p>
-        <p>
-          A tagság alatt írt közösségi bejegyzéseid és hozzászólásaid a neveddel a közösségben maradnak, de a neved nem
-          lesz kattintható, nem jelenik meg profil vagy gyakorlási fázis, és nem lehet neked üzenni. Ha a bejegyzéseid
-          törlését kéred, írj nekünk.
+          Minden fizetésről <strong>alanyi adómentes (AAM)</strong> elektronikus számla készül. A díjak egyike sem
+          adomány: mindegyik szolgáltatási díj. Az adomány alapúként jelölt alkalmak kivételt képeznek: ezeken a
+          részvétel díjmentes.
         </p>
       </>
     ),
@@ -160,38 +106,25 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          A fogyasztót főszabály szerint 14 napos elállási jog illeti meg. Mivel a tagság és a digitális tartalom a
-          fizetés után azonnal elérhető, a vásárláskor külön jelölőnégyzettel kéred a szolgáltatás azonnali
-          teljesítését, és tudomásul veszed, hogy ezzel <strong>elveszíted az elállási jogodat</strong> (45/2014.
-          (II. 26.) Korm. rendelet 29. §). A nyilatkozatot időbélyeggel rögzítjük.
+          <strong>Egyéni program:</strong> a szerződés megkötésétől számított 14 napon belül indoklás nélkül elállhatsz.
+          Ha kifejezetten kéred, hogy a program már az elállási határidő alatt induljon, elálláskor az addig teljesített
+          szolgáltatás arányos díját kell megfizetned (45/2014. (II. 26.) Korm. rendelet 22. §). Az elállási szándékot
+          e-mailben jelezheted a {SITE.email} címen.
         </p>
         <p>
-          A meghatározott időpontra szóló élő események (Nyílt Est, Gyakorlónap, Szabadság Elvonulás) részvételi díja
-          szintén a fenti rendelet szerinti kivétel alá esik, így ezeknél sincs elállási jog.
+          <strong>Nyílt Meditációs Est:</strong> a meghatározott időpontra szóló szabadidős szolgáltatás a fenti rendelet
+          29. § (1) l) pontja szerinti kivétel, ezért ennél nincs elállási jog. A foglaláskor erről külön nyilatkozol;
+          a nyilatkozatot időbélyeggel rögzítjük.
         </p>
       </>
     ),
   },
   {
-    title: "Élő események",
+    title: "Nyílt Meditációs Estek",
     body: (
       <ul>
-        <li>
-          <strong>Nyílt Meditációs Est:</strong> bárki jelentkezhet; a részvételi díj nem tagoknak 4 940 Ft. Az eseménynél jelölt alkalmak adomány alapúak: ezeken a részvétel díjmentes, a helyszínen belátás szerint támogathatók. A személyes helyek legfeljebb 50%-a foglalható a Társaság tagjainak, hogy mindig maradjon hely a nem tagoknak. A Belső Kör
-          tagjai 48 órás elsőbbséggel és díjmentesen, A Társaság Tagjai a fennmaradó tagi helyekre 3 200 Ft-os díjjal
-          foglalhatnak.
-        </li>
-        <li><strong>Élő Gyakorlónap:</strong> kizárólag tagoknak; A Társaság Tagjainak 6 460 Ft, A Belső Kör Tagjainak díjmentes.</li>
-        <li>
-          <strong>Szabadság Elvonulás:</strong> kizárólag a III. lépcsőt elvégzett, megnyitott hozzáféréssel rendelkező
-          tagoknak; A Társaság Tagjainak eseményenként megadott önköltséges áron, A Belső Kör Tagjainak díjmentesen.
-        </li>
-        <li>
-          <strong>Online közös alkalmak</strong> (heti közös meditáció, havi kérdezz-felelek, játékest): a tagság részei, előzetes jelentkezés nélkül, a próbaidő után érhetők el. A belépő linket a szolgáltató a kezdés előtt 15 perccel teszi elérhetővé; a hívás a Google Meetben zajlik. A kérdezz-feleleken kérdezni A Belső Kör Tagjai tudnak.</li>
-        <li>
-          <strong>Közös túra:</strong> tagoknak és az általuk meghívott vendégeknek díjmentes; tagonként túránként
-          legfeljebb 2 vendég hívható meg. Az úti célt a tagok szavazzák meg.
-        </li>
+        <li>Bárki jelentkezhet; a részvételi díj 4 940 Ft. Az egyéni program résztvevőinek a program ideje alatt díjmentes.</li>
+        <li>Az eseménynél jelölt alkalmak adomány alapúak: ezeken a részvétel díjmentes, a helyszínen belátás szerint támogathatók.</li>
         <li>
           A foglalás a díj megfizetésével válik véglegessé. Ha az eseményt a szolgáltató mondja le, a befizetett díjat
           visszatérítjük. A résztvevő által lemondott vagy ki nem használt foglalás díját nem térítjük vissza.
@@ -202,53 +135,38 @@ const sections: LegalSection[] = [
   {
     title: "Egy Kedves Üzenet",
     body: (
-      <>
-        <ul>
-          <li>
-            <strong>Kedves Üzenet:</strong> bárki küldhet díjmentesen. Nem tagnál e-mailes megerősítés szükséges. A
-            beérkezés sorrendjében dolgozzuk fel; ha a címzettet három próbálkozásra sem érjük el, az üzenet lezárul.
-          </li>
-          <li>
-            <strong>Elsőbbségi Kedves Üzenet:</strong> csak tagoknak. Havonta díjmentesen (A Társaság Tagjainak 1, A
-            Belső Kör Tagjainak 3 darab, az első sikeres fizetéstől), azon felül a tag által választott, legalább
-            1 000 Ft-os díjért. Az elsőbbségi üzeneteket a díjmentesek előtt kézbesítjük, kézbesítési garanciával: három
-            sikertelen próbálkozás után is folytatjuk a próbálkozást. A kereten felüli üzenet digitális szolgáltatás,
-            nem adomány; számla készül róla.
-          </li>
-          <li>
-            A hívás élő adásban vagy rövid videóban hangozhat el. Az üzenet küldője szavatolja, hogy a címzett nevét és
-            telefonszámát jogszerűen adja meg. A szolgáltató megtagadhatja a sértő, jogellenes vagy más személy
-            jogait sértő üzenet kézbesítését.
-          </li>
-          <li>A címzett telefonszámát legfeljebb 180 napig őrizzük meg.</li>
-        </ul>
-      </>
+      <ul>
+        <li>
+          Bárki küldhet díjmentesen, e-mailes megerősítés után. Az üzeneteket a beérkezés sorrendjében dolgozzuk fel; ha
+          a címzettet három próbálkozásra sem érjük el, az üzenet lezárul.
+        </li>
+        <li>
+          A hívás élő adásban vagy rövid videóban hangozhat el. Az üzenet küldője szavatolja, hogy a címzett nevét és
+          telefonszámát jogszerűen adja meg. A szolgáltató megtagadhatja a sértő, jogellenes vagy más személy jogait
+          sértő üzenet kézbesítését.
+        </li>
+        <li>A címzett telefonszámát legfeljebb 180 napig őrizzük meg.</li>
+      </ul>
     ),
   },
   {
-    title: "Közösségi szabályok",
+    title: "A korábbi Társaság-tagságok",
     body: (
-      <>
-        <p>
-          A közösség alapelve: <strong>tapasztalat, nem tanácsadás</strong>. A tagok saját megfigyeléseiket osztják
-          meg; nem diagnosztizálják és nem okítják egymást. Tilos a sértő, megalázó, kéretlen reklámot tartalmazó vagy
-          jogszabályba ütköző tartalom, valamint mások személyes adatainak közzététele.
-        </p>
-        <p>
-          A szolgáltató a szabályokat sértő tartalmat elrejtheti; ismételt vagy súlyos szabálysértés esetén a tagságot
-          — előzetes figyelmeztetés után — megszüntetheti. Ilyenkor a még fel nem használt, előre kifizetett időszak
-          díját időarányosan visszatérítjük.
-        </p>
-      </>
+      <p>
+        A Társaság tagsága 2026. november 25-én megszűnt; új tagság nem köthető. A korábban indított előfizetések a
+        résztvevői felület Adataim oldalán mondhatók le; a már kifizetett időszak végéig a hozzáférés megmarad. A
+        korábbi előfizetésekre a megkötésükkor hatályos feltételek irányadók.
+      </p>
     ),
   },
   {
     title: "Szellemi tulajdon",
     body: (
       <p>
-        A tananyagok (szövegek, hang- és videóanyagok, gyakorlatleírások) a szolgáltató szellemi tulajdonát képezik.
-        Kizárólag személyes gyakorlásra használhatók; másolásuk, rögzítésük, továbbadásuk vagy nyilvános felhasználásuk
-        a szolgáltató írásos engedélye nélkül nem megengedett.
+        A tananyagok (szövegek, hang- és videóanyagok, gyakorlatleírások, gyakorlási tervek) a szolgáltató szellemi
+        tulajdonát képezik. Kizárólag személyes gyakorlásra használhatók; másolásuk, rögzítésük, továbbadásuk vagy
+        nyilvános felhasználásuk a szolgáltató írásos engedélye nélkül nem megengedett. Az egyéni alkalmakról
+        felvétel csak mindkét fél előzetes hozzájárulásával készülhet.
       </p>
     ),
   },
@@ -256,10 +174,10 @@ const sections: LegalSection[] = [
     title: "Felelősség és elérhetőség",
     body: (
       <p>
-        Törekszünk a folyamatos elérhetőségre, de a karbantartás vagy külső szolgáltatók (tárhely, fizetés, média)
-        hibája miatti rövid kiesésekért nem vállalunk felelősséget. A gyakorlatok végzése a 3. pontban leírtak szerint
-        saját felelősségre történik. A szolgáltató felelőssége — a jogszabály által nem korlátozható esetek kivételével
-        — legfeljebb az érintett szolgáltatásért kifizetett díj összegéig terjed.
+        Törekszünk a folyamatos elérhetőségre, de a karbantartás vagy külső szolgáltatók (tárhely, fizetés, média,
+        videóhívás) hibája miatti rövid kiesésekért nem vállalunk felelősséget. A gyakorlatok végzése a 3. pontban
+        leírtak szerint saját felelősségre történik. A szolgáltató felelőssége — a jogszabály által nem korlátozható
+        esetek kivételével — legfeljebb az érintett szolgáltatásért kifizetett díj összegéig terjed.
       </p>
     ),
   },
@@ -288,9 +206,8 @@ const sections: LegalSection[] = [
     title: "Az ÁSZF módosítása",
     body: (
       <p>
-        A szolgáltató az ÁSZF-et módosíthatja. A meglévő tagokat a módosításról legalább 15 nappal a hatálybalépés
-        előtt e-mailben értesítjük; ha nem fogadod el, a tagságot a következő időszak végére lemondhatod. Árváltozás
-        a már megkezdett, kifizetett időszakot nem érinti.
+        A szolgáltató az ÁSZF-et módosíthatja. A folyamatban lévő egyéni programokat a módosítás nem érinti; azokra a
+        szerződéskötéskor hatályos feltételek és a visszaigazolásban rögzítettek irányadók.
       </p>
     ),
   },
@@ -303,12 +220,12 @@ export default function TermsPage() {
       title="Általános Szerződési Feltételek"
       intro={
         <p>
-          Igyekeztünk érthetően fogalmazni. A legfontosabbak röviden: csak magánszemélyek vásárolhatnak; a lemondás
-          a következő időszaktól él, visszatérítés nélkül; visszatéréskor az út elölről indul; a gyakorlás nem
+          Igyekeztem érthetően fogalmazni. A legfontosabbak röviden: csak magánszemélyek vehetik igénybe; az egyéni
+          program feltételeit az ismerkedő konzultáción egyeztetjük, és írásban visszaigazolom; a gyakorlás nem
           helyettesíti az orvosi kezelést.
         </p>
       }
-      meta={`Verzió: 2026-11 · Hatályos: ${LEGAL.effectiveFrom}`}
+      meta={`Verzió: 2026-11-25 · Hatályos: ${LEGAL.effectiveFrom}`}
       sections={sections}
     />
   );

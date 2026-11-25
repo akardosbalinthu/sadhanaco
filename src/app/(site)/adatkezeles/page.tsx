@@ -35,7 +35,7 @@ const sections: LegalSection[] = [
         <li>Csak azt az adatot kérjük el, ami a szolgáltatáshoz tényleg kell.</li>
         <li>Nem adunk el és nem adunk át adatot reklámcélra; nincs hirdetési vagy követő süti.</li>
         <li>
-          A <strong>Belső Tükör</strong> (gyakorlási napló) bejegyzéseit csak te látod — a rendszer úgy épül fel, hogy
+          A <strong>napló</strong> bejegyzéseit csak te látod — a rendszer úgy épül fel, hogy
           az adminisztrátor felülete sem jeleníti meg őket.
         </li>
         <li>Bankkártyaadatot nem látunk és nem tárolunk; ezt a Stripe kezeli.</li>
@@ -62,28 +62,12 @@ const sections: LegalSection[] = [
           <Row what="Belső jegyzet a programról" why="a kísérés előkészítése; csak én látom" basis="szerződés teljesítése" until="a program végét követő 1 év" />
         </ul>
 
-        <p className="pt-3 font-serif text-lg text-forest">Tagság és fiók</p>
+        <p className="pt-3 font-serif text-lg text-forest">Fiók és belépés</p>
         <ul>
-          <Row what="E-mail-cím, név" why="a fiók létrehozása, belépés (belépő link), kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b)" until="a tagság megszűnése után 1 év, vagy amíg a közösségi bejegyzéseid megmaradnak" />
-          <Row what="Tagsági szint, előfizetési állapot, időszakok, keretek" why="a jogosultságok biztosítása" basis="szerződés teljesítése" until="a tagság megszűnése után 1 év" />
-          <Row what="Ország (a számlázási címből)" why="a számlázás és a jogszabályi bevételi határok figyelése" basis="jogi kötelezettség (6. cikk (1) c)" until="8 év" />
-          <Row what="Az elállási jogról szóló nyilatkozat és időbélyege, az ÁSZF verziója" why="annak igazolása, hogy kérted az azonnali teljesítést" basis="jogi kötelezettség, illetve jogos érdek (6. cikk (1) f)" until="5 év" />
-          <Row what="Próbaidő-használat (e-mail-cím és a bankkártya Stripe-ujjlenyomata — nem a kártyaszám)" why="hogy egy személy csak egyszer kaphasson próbaidőt" basis="jogos érdek" until="3 év" />
-        </ul>
-
-        <p className="pt-3 font-serif text-lg text-forest">Gyakorlás és haladás</p>
-        <ul>
-          <Row what="Kipipált leckék, XP, rang, megnyitott lépcsők, továbblépési kérések" why="a tananyag ütemezése, a haladás követése" basis="szerződés teljesítése" until="a tagság megszűnéséig; visszatéréskor nem állnak vissza" />
-          <Row what="A Ceremónia válaszai és eredménye (a rend)" why="a rend kiválasztása" basis="szerződés teljesítése" until="a tagság megszűnéséig" />
-          <Row what="Belső Tükör bejegyzések" why="saját gyakorlási napló, csak neked" basis="szerződés teljesítése" until="amíg nem törlöd, legkésőbb a tagság megszűnéséig" />
-          <Row what="Ranglista: név, rend, rang, az időszakban szerzett XP" why="a tagok közötti heti, havi és negyedéves ranglista" basis="jogos érdek — a ranglistáról bármikor elrejtheted magad" until="a tagság megszűnéséig" />
-        </ul>
-
-        <p className="pt-3 font-serif text-lg text-forest">Közösség</p>
-        <ul>
-          <Row what="Értesítési beállítás (kérsz-e levelet az újdonságokról)" why="értesítő levél az új eseményekről, bejegyzésekről és szavazásokról" basis="jogos érdek — bármikor leiratkozhatsz az Adataim oldalon vagy a levél alján" until="a tagság megszűnéséig" />
-          <Row what="Élő online alkalom: a jelenléted (a belépés időpontja)" why="a részvétel rögzítése (XP); maga a hívás a Google Meetben zajlik, ahol a Google adatkezelési feltételei is érvényesek" basis="szerződés teljesítése" until="a tagság megszűnéséig; felvétel csak az előre jelzett alkalmakról (pl. Q&A) készül" />
-          <Row what="Bejegyzések, hozzászólások, reakciók" why="a közösségi tér működése" basis="szerződés teljesítése; a tagság megszűnése után jogos érdek (a beszélgetések érthetősége)" until="a tagság után is a neveddel megmaradnak; kérésre töröljük" />
+          <Row what="E-mail-cím, név" why="a résztvevői fiók, a belépés (belépő link) és a kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b)" until="a program végét követő 1 év" />
+          <Row what="Napló-bejegyzések" why="saját gyakorlási napló, csak neked" basis="szerződés teljesítése" until="amíg nem törlöd, legkésőbb a fiók megszűnéséig" />
+          <Row what="Értesítési beállítás (kérsz-e levelet az újdonságokról)" why="értesítő levél az új alkalmakról" basis="jogos érdek — bármikor leiratkozhatsz az Adataim oldalon vagy a levél alján" until="a fiók megszűnéséig" />
+          <Row what="A megszűnt Társaság korábbi tagsági adatai (tagsági szint, előfizetés, haladás, közösségi bejegyzések)" why="a korábbi előfizetések lezárása és a jogszabályi kötelezettségek teljesítése" basis="szerződés teljesítése, illetve jogi kötelezettség (6. cikk (1) b) és c))" until="a tagság megszűnése után 1 év; a számlázási adatok 8 év" />
         </ul>
 
         <p className="pt-3 font-serif text-lg text-forest">Fizetés és számlázás</p>
@@ -96,7 +80,7 @@ const sections: LegalSection[] = [
           <Row what="Név, e-mail-cím, foglalás, jelenlét" why="a helyfoglalás és a részvétel szervezése" basis="szerződés teljesítése" until="az esemény után 1 év (a számlaadatok 8 év)" />
           <Row what="Telefonszám" why="kapcsolattartás az eseménnyel kapcsolatban (pl. változás, elérhetőség a helyszínen)" basis="szerződés teljesítése" until="az esemény után 30 nap, utána automatikusan töröljük" />
           <Row what="Biztonsági (egészségi) megjegyzés — amit a jelentkezéskor megadsz egészségi állapotról, sérülésről, várandósságról vagy érzékenységről" why="hogy a gyakorlást biztonságosan, rád figyelve vezethessük" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a)); a hozzájárulás a jelentkezéskor, időbélyeggel rögzül, és bármikor visszavonható" until="az esemény után 30 nap, utána automatikusan töröljük; csak a szervező látja" />
-          <Row what="Túravendég neve és e-mail-címe (a meghívó tag adja meg)" why="a meghívó elküldése és a részvétel szervezése" basis="jogos érdek" until="a túra után 30 nap" />
+          <Row what="Az elállási jogról szóló nyilatkozat és időbélyege, az ÁSZF verziója" why="annak igazolása, hogy a foglaláskor tudomásul vetted az elállási jog hiányát" basis="jogi kötelezettség, illetve jogos érdek (6. cikk (1) c) és f))" until="5 év" />
         </ul>
 
         <p className="pt-3 font-serif text-lg text-forest">Egy Kedves Üzenet</p>
@@ -122,14 +106,10 @@ const sections: LegalSection[] = [
           <li><strong>Stripe Payments Europe Ltd.</strong> (bankkártyás fizetés, Írország)</li>
           <li><strong>Resend</strong> (tranzakciós e-mailek, USA — EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>BunnyWay d.o.o. (bunny.net)</strong> (hang- és videóanyagok, Szlovénia)</li>
-          <li><strong>Google Ireland Ltd.</strong> (Google Meet — az élő online alkalmak, Írország)</li>
+          <li><strong>Google Ireland Ltd.</strong> (Google Meet — az egyéni online alkalmak, Írország)</li>
           <li><strong>Zoho</strong> (levelezés)</li>
           <li><strong>Billingo</strong> (számlázás, amint bekapcsoljuk)</li>
         </ul>
-        <p>
-          A <strong>Napi Közlöny</strong> szolgáltatás — amint elindul — a tagsági jogosultságot az e-mail-címed alapján
-          kérdezi le ebből a rendszerből; más adatot nem kap.
-        </p>
       </>
     ),
   },
@@ -147,7 +127,7 @@ const sections: LegalSection[] = [
     title: "Adatbiztonság",
     body: (
       <p>
-        Az adatbázisban minden táblán sorszintű jogosultság-ellenőrzés működik: minden tag csak a saját adatait éri el.
+        Az adatbázisban minden táblán sorszintű jogosultság-ellenőrzés működik: mindenki csak a saját adatait éri el.
         A kapcsolat titkosított (HTTPS), a belépés jelszó nélküli, egyszer használható linkkel történik, a hang- és
         videóanyagok pedig rövid ideig érvényes, aláírt linken érhetők el.
       </p>
@@ -177,7 +157,7 @@ const sections: LegalSection[] = [
     title: "Módosítás",
     body: (
       <p>
-        A tájékoztatót a szolgáltatás változásával frissítjük; lényeges változásról a tagokat e-mailben értesítjük. Az{" "}
+        A tájékoztatót a szolgáltatás változásával frissítjük; lényeges változásról a résztvevőket e-mailben értesítjük. Az{" "}
         <Link href="/aszf">ÁSZF</Link> a szerződési feltételeket tartalmazza.
       </p>
     ),
