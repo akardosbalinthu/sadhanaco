@@ -261,14 +261,14 @@ isOneToOne: false
                   ]
                 },"events": {
                   Row: {
-                    "allowed_tiers": (Database["public"]['Enums']["membership_tier"])[],"belso_kor_priority": boolean,"cancelled_at": string | null,"capacity": number | null,"created_at": string,"description": string | null,"ends_at": string | null,"id": string,"is_online": boolean,"is_published": boolean,"kind": Database["public"]['Enums']["event_kind"],"location": string | null,"member_quota_ratio": number | null,"members_only": boolean,"price_belso_kor_huf": number,"price_external_huf": number | null,"price_tarsasagi_huf": number,"registration_closes_at": string | null,"registration_opens_at": string,"requires_retreat_unlock": boolean,"starts_at": string,"title": string
+                    "allowed_tiers": (Database["public"]['Enums']["membership_tier"])[],"belso_kor_priority": boolean,"cancelled_at": string | null,"capacity": number | null,"created_at": string,"description": string | null,"donation_based": boolean,"ends_at": string | null,"id": string,"is_online": boolean,"is_published": boolean,"kind": Database["public"]['Enums']["event_kind"],"location": string | null,"member_quota_ratio": number | null,"members_only": boolean,"price_belso_kor_huf": number,"price_external_huf": number | null,"price_tarsasagi_huf": number,"registration_closes_at": string | null,"registration_opens_at": string,"requires_retreat_unlock": boolean,"starts_at": string,"title": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "allowed_tiers"?: (Database["public"]['Enums']["membership_tier"])[],"belso_kor_priority"?: boolean,"cancelled_at"?: string | null,"capacity"?: number | null,"created_at"?: string,"description"?: string | null,"ends_at"?: string | null,"id"?: string,"is_online"?: boolean,"is_published"?: boolean,"kind": Database["public"]['Enums']["event_kind"],"location"?: string | null,"member_quota_ratio"?: number | null,"members_only"?: boolean,"price_belso_kor_huf"?: number,"price_external_huf"?: number | null,"price_tarsasagi_huf"?: number,"registration_closes_at"?: string | null,"registration_opens_at": string,"requires_retreat_unlock"?: boolean,"starts_at": string,"title": string
+                    "allowed_tiers"?: (Database["public"]['Enums']["membership_tier"])[],"belso_kor_priority"?: boolean,"cancelled_at"?: string | null,"capacity"?: number | null,"created_at"?: string,"description"?: string | null,"donation_based"?: boolean,"ends_at"?: string | null,"id"?: string,"is_online"?: boolean,"is_published"?: boolean,"kind": Database["public"]['Enums']["event_kind"],"location"?: string | null,"member_quota_ratio"?: number | null,"members_only"?: boolean,"price_belso_kor_huf"?: number,"price_external_huf"?: number | null,"price_tarsasagi_huf"?: number,"registration_closes_at"?: string | null,"registration_opens_at": string,"requires_retreat_unlock"?: boolean,"starts_at": string,"title": string
                   }
                   Update: {
-                    "allowed_tiers"?: (Database["public"]['Enums']["membership_tier"])[],"belso_kor_priority"?: boolean,"cancelled_at"?: string | null,"capacity"?: number | null,"created_at"?: string,"description"?: string | null,"ends_at"?: string | null,"id"?: string,"is_online"?: boolean,"is_published"?: boolean,"kind"?: Database["public"]['Enums']["event_kind"],"location"?: string | null,"member_quota_ratio"?: number | null,"members_only"?: boolean,"price_belso_kor_huf"?: number,"price_external_huf"?: number | null,"price_tarsasagi_huf"?: number,"registration_closes_at"?: string | null,"registration_opens_at"?: string,"requires_retreat_unlock"?: boolean,"starts_at"?: string,"title"?: string
+                    "allowed_tiers"?: (Database["public"]['Enums']["membership_tier"])[],"belso_kor_priority"?: boolean,"cancelled_at"?: string | null,"capacity"?: number | null,"created_at"?: string,"description"?: string | null,"donation_based"?: boolean,"ends_at"?: string | null,"id"?: string,"is_online"?: boolean,"is_published"?: boolean,"kind"?: Database["public"]['Enums']["event_kind"],"location"?: string | null,"member_quota_ratio"?: number | null,"members_only"?: boolean,"price_belso_kor_huf"?: number,"price_external_huf"?: number | null,"price_tarsasagi_huf"?: number,"registration_closes_at"?: string | null,"registration_opens_at"?: string,"requires_retreat_unlock"?: boolean,"starts_at"?: string,"title"?: string
                   }
                   Relationships: [
                     
@@ -499,14 +499,14 @@ isOneToOne: false
                   ]
                 },"profiles": {
                   Row: {
-                    "billing_interval": Database["public"]['Enums']["billing_interval"] | null,"bio": string | null,"cancel_at_period_end": boolean,"compass_answers": Json | null,"compass_completed_at": string | null,"compass_scores": Json | null,"consultations_period_start": string | null,"country": string | null,"created_at": string,"current_period_end": string | null,"current_stage_label": string | null,"display_name": string,"email": string,"first_name": string | null,"free_consultations_remaining": number,"free_messages_remaining": number,"id": string,"ip3_purchased": boolean,"ip3_unlocked": boolean,"ip3_unlocked_at": string | null,"last_name": string | null,"leaderboard_hidden": boolean,"m2_purchased": boolean,"m2_unlocked": boolean,"m2_unlocked_at": string | null,"membership_ended_at": string | null,"membership_started_at": string | null,"nickname": string | null,"order_key": Database["public"]['Enums']["order_key"] | null,"past_due_since": string | null,"privat_kozlony_pro": boolean,"recurring_amount_huf": number | null,"retreat_unlocked": boolean,"role": Database["public"]['Enums']["user_role"],"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"subscription_status": Database["public"]['Enums']["subscription_status"],"tier": Database["public"]['Enums']["membership_tier"],"trial_ends_at": string | null,"updated_at": string
+                    "billing_interval": Database["public"]['Enums']["billing_interval"] | null,"bio": string | null,"cancel_at_period_end": boolean,"compass_answers": Json | null,"compass_completed_at": string | null,"compass_scores": Json | null,"consultations_period_start": string | null,"country": string | null,"created_at": string,"current_period_end": string | null,"current_stage_label": string | null,"display_name": string,"email": string,"first_name": string | null,"free_consultations_remaining": number,"free_messages_remaining": number,"id": string,"ip3_purchased": boolean,"ip3_unlocked": boolean,"ip3_unlocked_at": string | null,"last_name": string | null,"leaderboard_hidden": boolean,"m2_purchased": boolean,"m2_unlocked": boolean,"m2_unlocked_at": string | null,"membership_ended_at": string | null,"membership_started_at": string | null,"nickname": string | null,"onboarded_at": string | null,"order_key": Database["public"]['Enums']["order_key"] | null,"past_due_since": string | null,"privat_kozlony_pro": boolean,"recurring_amount_huf": number | null,"retreat_unlocked": boolean,"role": Database["public"]['Enums']["user_role"],"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"subscription_status": Database["public"]['Enums']["subscription_status"],"tier": Database["public"]['Enums']["membership_tier"],"trial_ends_at": string | null,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"compass_answers"?: Json | null,"compass_completed_at"?: string | null,"compass_scores"?: Json | null,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email": string,"first_name"?: string | null,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id": string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"last_name"?: string | null,"leaderboard_hidden"?: boolean,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"nickname"?: string | null,"order_key"?: Database["public"]['Enums']["order_key"] | null,"past_due_since"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
+                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"compass_answers"?: Json | null,"compass_completed_at"?: string | null,"compass_scores"?: Json | null,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email": string,"first_name"?: string | null,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id": string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"last_name"?: string | null,"leaderboard_hidden"?: boolean,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"nickname"?: string | null,"onboarded_at"?: string | null,"order_key"?: Database["public"]['Enums']["order_key"] | null,"past_due_since"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
                   }
                   Update: {
-                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"compass_answers"?: Json | null,"compass_completed_at"?: string | null,"compass_scores"?: Json | null,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email"?: string,"first_name"?: string | null,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id"?: string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"last_name"?: string | null,"leaderboard_hidden"?: boolean,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"nickname"?: string | null,"order_key"?: Database["public"]['Enums']["order_key"] | null,"past_due_since"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
+                    "billing_interval"?: Database["public"]['Enums']["billing_interval"] | null,"bio"?: string | null,"cancel_at_period_end"?: boolean,"compass_answers"?: Json | null,"compass_completed_at"?: string | null,"compass_scores"?: Json | null,"consultations_period_start"?: string | null,"country"?: string | null,"created_at"?: string,"current_period_end"?: string | null,"current_stage_label"?: string | null,"display_name"?: string,"email"?: string,"first_name"?: string | null,"free_consultations_remaining"?: number,"free_messages_remaining"?: number,"id"?: string,"ip3_purchased"?: boolean,"ip3_unlocked"?: boolean,"ip3_unlocked_at"?: string | null,"last_name"?: string | null,"leaderboard_hidden"?: boolean,"m2_purchased"?: boolean,"m2_unlocked"?: boolean,"m2_unlocked_at"?: string | null,"membership_ended_at"?: string | null,"membership_started_at"?: string | null,"nickname"?: string | null,"onboarded_at"?: string | null,"order_key"?: Database["public"]['Enums']["order_key"] | null,"past_due_since"?: string | null,"privat_kozlony_pro"?: boolean,"recurring_amount_huf"?: number | null,"retreat_unlocked"?: boolean,"role"?: Database["public"]['Enums']["user_role"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"subscription_status"?: Database["public"]['Enums']["subscription_status"],"tier"?: Database["public"]['Enums']["membership_tier"],"trial_ends_at"?: string | null,"updated_at"?: string
                   }
                   Relationships: [
                     
@@ -1113,6 +1113,7 @@ isOneToOne: false
 "membership_ended_at": string | null,
 "membership_started_at": string | null,
 "nickname": string | null,
+"onboarded_at": string | null,
 "order_key": Database["public"]['Enums']["order_key"] | null,
 "past_due_since": string | null,
 "privat_kozlony_pro": boolean,
@@ -1165,6 +1166,7 @@ isOneToOne: false
 "membership_ended_at": string | null,
 "membership_started_at": string | null,
 "nickname": string | null,
+"onboarded_at": string | null,
 "order_key": Database["public"]['Enums']["order_key"] | null,
 "past_due_since": string | null,
 "privat_kozlony_pro": boolean,
@@ -1214,6 +1216,7 @@ isOneToOne: false
 "membership_ended_at": string | null,
 "membership_started_at": string | null,
 "nickname": string | null,
+"onboarded_at": string | null,
 "order_key": Database["public"]['Enums']["order_key"] | null,
 "past_due_since": string | null,
 "privat_kozlony_pro": boolean,
@@ -1263,6 +1266,7 @@ isOneToOne: false
 "membership_ended_at": string | null,
 "membership_started_at": string | null,
 "nickname": string | null,
+"onboarded_at": string | null,
 "order_key": Database["public"]['Enums']["order_key"] | null,
 "past_due_since": string | null,
 "privat_kozlony_pro": boolean,
@@ -1293,7 +1297,7 @@ isOneToOne: false
                            },
 "public_open_evenings":
 { Args: Record<PropertyKey, never>; Returns: {
-              "description": string,"ends_at": string,"id": string,"is_online": boolean,"location": string,"price_external_huf": number,"registration_open": boolean,"seats_left": number,"starts_at": string,"title": string
+              "description": string,"donation_based": boolean,"ends_at": string,"id": string,"is_online": boolean,"location": string,"price_external_huf": number,"registration_open": boolean,"seats_left": number,"starts_at": string,"title": string
             }[]
                            },
 "purge_kind_message_phones":
@@ -1423,6 +1427,7 @@ isOneToOne: false
 "membership_ended_at": string | null,
 "membership_started_at": string | null,
 "nickname": string | null,
+"onboarded_at": string | null,
 "order_key": Database["public"]['Enums']["order_key"] | null,
 "past_due_since": string | null,
 "privat_kozlony_pro": boolean,

@@ -280,6 +280,8 @@ export async function createEvent(formData: FormData) {
     return v === null ? fallback : v;
   };
   const isTura = kind.data === "tura";
+  // Adomány alapú: a részvétel díjmentes, a helyszínen belátás szerint támogatható (online fizetés nincs).
+  const donation = bool(formData, "donation_based") && !isTura;
   const row = {
     kind: kind.data,
     title,
@@ -294,9 +296,10 @@ export async function createEvent(formData: FormData) {
     requires_retreat_unlock: d.retreat,
     registration_opens_at: budapestLocalToIso(str(formData, "registration_opens_at")) ?? new Date().toISOString(),
     registration_closes_at: budapestLocalToIso(str(formData, "registration_closes_at")),
-    price_tarsasagi_huf: isTura ? 0 : (pick("price_tarsasagi_huf", d.tarsasagi) ?? 0),
-    price_belso_kor_huf: isTura ? 0 : (pick("price_belso_kor_huf", d.belso) ?? 0),
-    price_external_huf: isTura || d.membersOnly ? null : pick("price_external_huf", d.external),
+    price_tarsasagi_huf: isTura || donation ? 0 : (pick("price_tarsasagi_huf", d.tarsasagi) ?? 0),
+    price_belso_kor_huf: isTura || donation ? 0 : (pick("price_belso_kor_huf", d.belso) ?? 0),
+    price_external_huf: isTura || d.membersOnly ? null : donation ? 0 : pick("price_external_huf", d.external),
+    donation_based: donation,
     is_published: bool(formData, "is_published"),
   };
   if ([row.capacity, row.price_tarsasagi_huf, row.price_belso_kor_huf, row.price_external_huf].some((n) => Number.isNaN(n))) {
@@ -457,4 +460,22 @@ export async function cancelConsultation(formData: FormData) {
     "A konzultációim",
   );
   done("/konzultaciok", null, (c.is_free ? "Lemondva; az alkalom visszakerült a tag keretébe." : "Lemondva.") + mailNote(sent));
+}
+
+/** Meglévő esemény adomány alapúvá tétele (az árak 0-ra állnak) vagy visszaállítása. */
+export async function setDonationBased(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(formData.get("id"));
+  const on = formData.get("on") === "true";
+  const { data: ev } = await supabase.from("events").select("kind, members_only").eq("id", id).single();
+  if (!ev || ev.kind === "tura") back(`/esemenyek?esemeny=${id}`, { hiba: "Ezt az eseményt nem lehet adomány alapúvá tenni." });
+  const patch = on
+    ? { donation_based: true, price_tarsasagi_huf: 0, price_belso_kor_huf: 0, ...(ev.members_only ? {} : { price_external_huf: 0 }) }
+    : { donation_based: false };
+  const { error } = await supabase.from("events").update(patch).eq("id", id);
+  done(
+    `/esemenyek?esemeny=${id}`,
+    error,
+    on ? "Az esemény adomány alapú lett; a részvétel díjmentes." : "Az esemény már nem adomány alapú. Ha díjat kérnél, hozz létre új eseményt a díjjal.",
+  );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Check, Circle, Lock, Sparkles } from "lucide-react";
 import { requireMember, ORDER_INFO, TRACK_LABEL, type OrderKey } from "@/lib/member";
 import { tp } from "@/lib/site";
@@ -25,6 +26,8 @@ type Card = {
 export default async function PracticePage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
   const { supabase, profile, hasAccess } = await requireMember();
+  // Első belépés: rövid bevezető a platformról.
+  if (hasAccess && !profile.onboarded_at) redirect(tp("/udvozlunk"));
 
   if (!hasAccess) {
     return (

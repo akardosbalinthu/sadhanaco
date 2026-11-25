@@ -144,7 +144,7 @@ export default async function EventsPage({ searchParams }: { searchParams: SP })
                     {e.is_online ? <Monitor className="h-4 w-4" strokeWidth={1.25} aria-hidden /> : <MapPin className="h-4 w-4" strokeWidth={1.25} aria-hidden />}
                     {e.is_online ? "online" : e.location ?? "a helyszínt hamarosan megírom"}
                   </span>
-                  <span>{isHike ? "díjmentes, vendégeknek is" : huf(price)}</span>
+                  <span>{isHike ? "díjmentes, vendégeknek is" : e.donation_based ? "adomány alapú" : huf(price)}</span>
                 </div>
                 {e.description && <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-ink">{e.description}</p>}
 

@@ -65,7 +65,7 @@ export async function bookOpenEvening(
   const admin = createAdminClient();
 
   // Az esemény saját ára dönt: díjmentes estnél nincs fizetés, fizetősnél az esemény ára kerül terhelésre.
-  const { data: ev } = await admin.from("events").select("title, starts_at, location, is_online, price_external_huf").eq("id", eventId).maybeSingle();
+  const { data: ev } = await admin.from("events").select("title, starts_at, location, is_online, price_external_huf, donation_based").eq("id", eventId).maybeSingle();
   if (!ev || ev.price_external_huf == null) return { status: "error", message: MESSAGES.EVENT_NOT_FOUND };
   const paid = ev.price_external_huf > 0;
   if (paid && parsed.data.waiver !== "on") {
@@ -93,7 +93,9 @@ export async function bookOpenEvening(
     const mail = await sendEmail(email, `Visszaigazolás — ${ev.title}`, [
       `Kedves ${name}!`,
       `Örömmel várunk: ${ev.title}, ${when}${ev.is_online ? " (online)" : ev.location ? `, ${ev.location}` : ""}.`,
-      "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassuk.",
+      ev.donation_based
+        ? "Az est adomány alapú: a részvétel díjmentes, a helyszínen belátásod szerint támogathatod. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassuk."
+        : "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassuk.",
     ]);
     return {
       status: "done",

@@ -40,6 +40,9 @@ export default async function MyDetailsPage({ searchParams }: { searchParams: SP
           Belépési e-mail-címed: <span className="text-forest">{profile.email}</span>. Ennek módosításához írj nekünk.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
+          <a href={tp("/udvozlunk")} className={buttonSecondary}>
+            A bevezető újra
+          </a>
           <form action={tp("/elofizetes")} method="post">
             <button className={buttonSecondary}>Előfizetés kezelése</button>
           </form>

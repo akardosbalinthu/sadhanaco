@@ -69,7 +69,7 @@ export function BookingForm({ eventId, priceLabel, free = false }: { eventId: st
         disabled={pending}
         className={`${buttonPrimary} w-full`}
       >
-        {pending ? "Egy pillanat…" : free ? "Jelentkezem (díjmentes)" : `Jelentkezés és fizetés (${priceLabel})`}
+        {pending ? "Egy pillanat…" : free ? `Jelentkezem (${priceLabel})` : `Jelentkezés és fizetés (${priceLabel})`}
       </button>
       {!free && (
         <p className="text-xs text-ink-soft">

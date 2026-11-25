@@ -65,7 +65,7 @@ export default async function OpenEveningsPage() {
             )}
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm text-ink-soft">
-                Részvételi díj: <span className="text-ink">{e.price_external_huf === 0 ? "díjmentes" : formatHuf(e.price_external_huf)}</span>
+                Részvételi díj: <span className="text-ink">{e.donation_based ? "adomány alapú" : e.price_external_huf === 0 ? "díjmentes" : formatHuf(e.price_external_huf)}</span>
                 {e.seats_left !== null && (
                   <> · {e.seats_left > 0 ? `${e.seats_left} szabad hely` : "Betelt"}</>
                 )}

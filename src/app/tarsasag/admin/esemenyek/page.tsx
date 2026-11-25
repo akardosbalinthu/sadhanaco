@@ -2,7 +2,7 @@ import Link from "next/link";
 import { EVENT_KIND_LABEL, fmtDateTime, huf, profilesById, requireAdmin } from "@/lib/admin";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
-import { cancelEvent, createEvent, markAttended, publishEvent, unpublishEvent } from "../actions";
+import { cancelEvent, createEvent, markAttended, publishEvent, setDonationBased, unpublishEvent } from "../actions";
 import { Empty, Flash, H2, label, one, smallButton, smallInput, smallPrimary, type SP } from "../ui";
 import { SubmitButton } from "../submit-button";
 
@@ -44,6 +44,8 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
                 <p className="mt-1 text-sm text-ink-soft">
                   {e.kind === "tura"
                     ? "Tagoknak és meghívott vendégeknek díjmentes"
+                    : e.donation_based
+                    ? "Adomány alapú — a részvétel díjmentes, a helyszínen belátás szerint támogatható"
                     : `A Társaság Tagja: ${huf(e.price_tarsasagi_huf)} · A Belső Kör Tagja: ${huf(e.price_belso_kor_huf)}${
                         e.price_external_huf != null ? ` · Külsős: ${huf(e.price_external_huf)}` : " · csak tagoknak"
                       }`}
@@ -56,6 +58,13 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
                 Bezárás
               </Link>
             </div>
+            {!e.cancelled_at && e.kind !== "tura" && (
+              <form action={setDonationBased} className="mt-4">
+                <input type="hidden" name="id" value={e.id} />
+                <input type="hidden" name="on" value={e.donation_based ? "false" : "true"} />
+                <button className={smallButton}>{e.donation_based ? "Már nem adomány alapú" : "Adomány alapúvá teszem (az árak 0 Ft-ra állnak)"}</button>
+              </form>
+            )}
             {!e.cancelled_at && (
               <form action={publishEvent} className="mt-6 flex flex-wrap gap-2">
                 <input type="hidden" name="id" value={e.id} />
@@ -200,6 +209,13 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
             <label className="sm:col-span-3">
               <span className={label}>Jelentkezés zárul</span>
               <input type="datetime-local" name="registration_closes_at" className={`${smallInput} mt-1 w-full`} />
+            </label>
+            <label className="flex items-start gap-2 text-sm sm:col-span-6">
+              <input type="checkbox" name="donation_based" className="mt-1 accent-[var(--color-gold)]" />
+              <span>
+                Adomány alapú — a részvétel díjmentes, a résztvevők a helyszínen, belátásuk szerint támogathatják (az árak
+                ilyenkor 0 Ft-ra állnak; túránál nem értelmezett)
+              </span>
             </label>
             <div className="flex items-center justify-between gap-3 sm:col-span-6">
               <label className="flex items-center gap-2 text-sm">
