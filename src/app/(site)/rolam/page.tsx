@@ -23,19 +23,20 @@ type Station = {
 const STATIONS: Station[] = [
   {
     when: "Gyerekkor",
-    title: "Falun, kíváncsian",
+    title: "Falun, szeretetben",
     Art: Sprout,
     paras: [
-      "Vidéken, falusi közegben nőttem fel. Másfél éves koromtól édesanyám egyedül nevelt; később újraházasodott, így lett egy húgom és egy öcsém, édesapám ágáról pedig még egy húgom.",
+      "Vidéken, falusi közegben nőttem fel, és nagyon jó gyerekkorom volt. Másfél éves koromtól édesanyám egyedül nevelt. Anyagilag nem volt gondtalan az élet, de gyerekként ebből semmit sem éreztem: mindig volt mit ennem, mindig volt tiszta ruhám, tető a fejem fölött, és bárhová fordultam, hatalmas szeretet vett körül. Tízéves koromig én voltam a család szeme fénye, minden figyelem középpontja.",
       "Kíváncsi, gyors észjárású gyerek voltam: hamar átláttam a helyzeteket, és már ugrottam is volna a következőre — tartósan lekötni a figyelmemet nem volt könnyű. Nagycsoportos óvodásként magamtól tanultam meg olvasni.",
     ],
   },
   {
-    when: "Gyerekkor és kamaszkor",
+    when: "10 évesen",
     title: "Menedék a fantáziavilágokban",
     Art: CrestMagusok,
     paras: [
-      "Nem volt túl fényes gyerekkorom, ezért sokszor a fantáziavilágokba menekültem. Nem csak olvastam őket — éltem bennük. A fejemben minden főszereplőhöz volt valamilyen viszonyom; én is a világ része voltam.",
+      "Édesanyám később újraházasodott, és tízéves koromtól másfél éven belül megszületett a húgom és az öcsém (édesapám ágáról pedig van még egy húgom). Nem hibáztatok érte senkit, de a világ közepéből hirtelen a legidősebb testvér lettem: egészen más szerep, más felelősséggel és jóval kevesebb figyelemmel, törődéssel.",
+      "Ekkor fordultam a fantáziavilágok felé. Nem csak olvastam őket — éltem bennük. A fejemben minden főszereplőhöz volt valamilyen viszonyom; én is a világ része voltam.",
       "A Harry Potterrel kezdődött, aztán jött a Warcraft, a Gyűrűk Ura és a Magus, és onnan egyenes út vezetett a világok mélyére. Kamaszként egy online szerepjátékban éreztem először, hogy lehetek nagy, különleges és erős — szinte mindig mágussal játszottam. Felnőttként egyre kevesebb idő jutott rá. Pedig mennyire szerettem…",
     ],
   },
@@ -70,6 +71,14 @@ const STATIONS: Station[] = [
       "Tanulni kezdtem — webfejlesztést, keresőoptimalizálást, közösségimédia-marketinget, projektmenedzsmentet —, pár év múlva pedig kiléptem, és szabadúszó online marketing- és projektmenedzserként dolgoztam tovább. Csapatokat vezettem, izgalmas projekteken, szinte bárhonnan dolgozhattam. Elértem az akkori álmomat.",
     ],
     photos: [{ src: "/images/rolam/eloadas.webp", alt: "Kardos Bálint előadást tart egy teremnyi hallgatóságnak", caption: "Előadás közben, a marketinges évek alatt", width: 1000, height: 1244 }],
+  },
+  {
+    when: "Ugyanebben az évben",
+    title: "„Szeretlek, apa”",
+    paras: [
+      "Édesapámat huszonegy évesen ismertem meg. Az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
+      "Aztán a kitartó felelősségvállalása, és ahogyan a tetteivel próbálta helyrehozni a hibáit, meggyőzött. Nagyon jóba lettünk. Alig másfél évvel később egyszer munkából hazafelé azzal hívtam fel: „Szeretlek, apa.” Három hónappal később már nem élt — gyomorrákban és annak szövődményeiben hunyt el.",
+    ],
   },
   {
     when: "A járvány évei",
