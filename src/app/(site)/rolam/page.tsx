@@ -64,7 +64,7 @@ const STATIONS: Station[] = [
     ],
   },
   {
-    when: "2016 · 21 évesen",
+    when: "2016–2018 · 21 és 23 éves korom között",
     title: "„Ez az élet?”",
     paras: [
       "A huszonegyedik születésnapom körül megfogalmazódott bennem egy kérdés: most akkor még kétszer annyi ideig, ahány éves vagyok, ezt kell csinálnom? Évente kétszer elmehetek egy rövid pihenésre, és ennyi? Szerettem volna azt hinni, hogy az élet ennél több.",
