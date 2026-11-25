@@ -93,7 +93,7 @@ const STATIONS: Station[] = [
     title: "Vacsoraestek egy tetőteraszon, aztán a nagykonyha",
     paras: [
       "Egy barátommal kibéreltünk egy elképesztően szép, háromszintes belvárosi penthouse-t, harminc négyzetméteres saját tetőterasszal. Itt kezdődtek a vacsoraestek, amelyekből később jótékonysági vacsorák lettek. Egy kórházban fekvő gyerekeket támogató adománygyűjtő kampány nagyköveteként ezeken a vacsorákon valamivel több mint félmillió forintot gyűjtöttem, amivel a kampány második legtöbbet gyűjtő nagykövete lettem. A kampányt követő öt hónapban pedig további közel egymillió forintot gyűjtöttünk ugyanilyen vacsorákon. A csúcs egy 2021. márciusi jótékonysági fine dining gálavacsora volt: hét fogás, harmincöt vendég. Ez megnyugtatta a lelkemet, de tartós választ nem adott.",
-      "Otthagytam a jól fizető marketingprojekteket, és elmentem szakácsnak. Kevesebb pénz, több és keményebb munka, alig szabadidő — mégis boldogabb voltam, mint addig bármikor. Végigjártam a konyhai ranglétrát a mosogatótól a konyhafőnökig. Néhány év után viszont azt éreztem: többre vagyok képes.",
+      "Ezután otthagytam a jól fizető marketingprojekteket, és elmentem szakácsnak. Kevesebb pénz, több és keményebb munka, alig szabadidő — mégis boldogabb voltam, mint addig bármikor. Végigjártam a konyhai ranglétrát a mosogatótól a konyhafőnökig. Néhány év után viszont azt éreztem: többre vagyok képes.",
     ],
     photos: [
       { src: "/images/rolam/jotekonysag.webp", alt: "Kardos Bálint az adománygyűjtő kampány nagyköveti oklevelével", caption: "Nagyköveti oklevél: a teljes kampány több mint 11,5 millió forintot gyűjtött a gyerekeknek", width: 1000, height: 1333 },
