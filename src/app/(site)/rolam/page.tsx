@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { publicEnv } from "@/lib/env";
 import { buttonPrimary, buttonSecondary, CompassDivider, CrestMagusok, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
-import { KindCall, MorningPaper, Sprout, WindingPath } from "@/components/illustrations";
+import { KindCall, Sprout, WindingPath } from "@/components/illustrations";
 
 export const metadata = {
   title: "Rólam · Kardos Bálint",
   description:
-    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig — és hogyan vezetett mindez a kapcsolódás felé.",
+    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig — és hogyan született belőle a módszerem.",
 };
 
 type Photo = { src: string; alt: string; caption: string; width: number; height: number };
@@ -141,26 +140,15 @@ const STATIONS: Station[] = [
       "Hiszem, hogy egy-egy ilyen üzenettel bearanyozhatjuk egymás napjait. Olyan ritkán mondjuk ki, ami szép, jó és szeretetteljes — melengeti a szívemet, hogy ezt visszahozhatom az emberek életébe. Így született az Egy Kedves Üzenet.",
     ],
   },
-  {
-    when: "2026",
-    title: "Visszavenni a figyelmünket",
-    Art: MorningPaper,
-    paras: [
-      "Az idegrendszerünk így is túlterhelt, és szinte minden körülöttünk azon dolgozik, hogy elrabolja a figyelmünket — vele pedig az erőnket. A telefon csak eszköz, mégis sokszor ő irányít minket, nem fordítva.",
-      "Szeretném visszavenni a figyelmemet, és segíteni másoknak is, hogy a nap legérzékenyebb perceit, az ébredés utániakat, a lehető legkevesebb ingerrel kezdjék. Ebből lett a Napi Közlöny.",
-    ],
-  },
+
 ];
 
 const CONVERGE = [
-  { from: "A százig számolás tizenkét évesen", to: "napi 10–15 perc vezetett légzés és meditáció" },
-  { from: "Az életmód-orvostan és az idegtudomány", to: "minden gyakorlat mögött ott a magyarázat: mit miért csinálsz" },
-  { from: "A fantáziavilágok és a mágus karakter", to: "a négy rend, a Ceremónia, a karakterkártya, a céhes rangok és a havi szerepjáték-est" },
-  { from: "A vacsoraestek a tetőteraszon", to: "a közös asztal és a negyedéves vacsorameghívás" },
-  { from: "A közösségszervezés", to: "egy közösség, ahol tapasztalatot osztunk meg, nem tanácsot" },
-  { from: "A túrák a barátaimmal", to: "a havi közös túra, amelynek úti célját a tagok szavazzák meg" },
-  { from: "Egy kedves üzenet", to: "elsőbbségi kedves üzenetek a tagoknak" },
-  { from: "A telefonmentes reggel", to: "a Napi Közlöny és az analóg reggel" },
+  { from: "A százig számolás tizenkét évesen", to: "a meditáció, amely a program gerince" },
+  { from: "A rishikeshi jógaoktató-képzés", to: "a módszer belső oldala: a jóga nyolc ága, az értékektől a meditációig" },
+  { from: "Az életmód-orvostan és az idegtudomány", to: "a módszer külső oldala: alvás, mozgás, étkezés, stresszkezelés és kapcsolatok — mindig a magyarázattal, hogy tudd, mit miért csinálsz" },
+  { from: "A közösségszervezés", to: "a Nyílt Meditációs Estek, ahol személyesen is találkozunk" },
+  { from: "Egy kedves üzenet", to: "az Egy Kedves Üzenet, amely emlékeztet: valaki gondol ránk" },
 ];
 
 const LESSONS = [
@@ -192,8 +180,8 @@ export default function AboutPage() {
             egy somogyi faluban nőttem fel.
           </p>
           <p>
-            Azért dolgozom, hogy egyre több ember kapcsolódjon önmagához és egymáshoz. Hiszem, hogy a magányra a
-            kapcsolódás a válasz: befelé, a saját testünk és légzésünk felé, és kifelé, egymás felé.
+            A jóga ősi gyakorlatait az életmód-orvostan keretrendszerével ötvözöm, hogy a meditáció ne csak a párnán,
+            hanem a hétköznapokban is működjön: abban, ahogyan alszol, eszel, mozogsz, és ahogyan a többiekhez fordulsz.
           </p>
           <p>
             Évekig kerestem, hol a helyem, és szinte mindent kipróbáltam a kukoricaföldtől a nagykonyháig. Ez az oldal
@@ -272,11 +260,10 @@ export default function AboutPage() {
       <CompassDivider className="my-20" />
 
       <section>
-        <SectionTitle eyebrow="Ahol minden összeér" title="A Társaság összeköti a múltamat a jelenemmel." />
+        <SectionTitle eyebrow="Ahol minden összeér" title="A program összeköti a múltamat a jelenemmel." />
         <p className="mt-4 max-w-2xl text-ink-soft">
           Komoly témában segít, tudományosan megalapozott eszközökkel — de nem veszi túl komolyan önmagát. Nem orvosi
-          kezelés és nem vallás, hanem hely, ahová tartozni lehet: befelé kapcsolódunk önmagunkhoz, kifelé egymáshoz.
-          Benne van minden, ami fontos nekem:
+          kezelés és nem vallás, hanem személyes út, amelyen végig kísérlek. Benne van minden, ami fontos nekem:
         </p>
         <ul className="mt-10 grid gap-x-10 gap-y-6 md:grid-cols-2">
           {CONVERGE.map(({ from, to }) => (
@@ -304,7 +291,7 @@ export default function AboutPage() {
           <p>Az idegrendszer kapcsolatban nyugszik meg: önmagunkkal és egymással.</p>
           <p>
             <strong className="font-normal text-forest">Befelé</strong> ez kapcsolódás a testünkkel, a légzésünkkel és a
-            belső hangunkkal. Ezt gyakoroljuk nap mint nap a Társaságban.
+            belső hangunkkal. Ezt gyakoroljuk nap mint nap a programban.
           </p>
           <p>
             <strong className="font-normal text-forest">Kifelé</strong> ez kapcsolódás a többi emberrel, a
@@ -318,10 +305,10 @@ export default function AboutPage() {
       <CompassDivider className="my-20" />
 
       <section>
-        <SectionTitle eyebrow="A közösségünk alappillérei" title="Tanulságok Indiából" />
+        <SectionTitle eyebrow="A munkám alappillérei" title="Tanulságok Indiából" />
         <p className="mt-4 max-w-2xl text-ink-soft">
-          Ezek a gondolatok nemcsak az én utamat formálták: a közösségünk alappillérei. Ezek mentén gyakorlunk, és
-          ezek mentén vagyunk jelen egymás életében.
+          Ezek a gondolatok nemcsak az én utamat formálták: a munkám alappillérei. Ezek mentén kísérlek a programban
+          is.
         </p>
         <ol className="mt-10 grid gap-x-10 gap-y-4 md:grid-cols-2">
           {LESSONS.map((l, i) => (
@@ -359,16 +346,16 @@ export default function AboutPage() {
       <section className="text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha magadra ismertél</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest sm:text-4xl">
-          Gyere, tartozz közénk.
+          Kezdjük el együtt.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Ha valamelyik állomásban magadra ismertél, A Társaságban jó helyen leszel. Ha előbb személyesen
+          Ha valamelyik állomásban magadra ismertél, és most kezdenél, töltsd ki a felmérést. Ha előbb személyesen
           ismerkednél, gyere el egy Nyílt Meditációs Estre — szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={buttonPrimary}>
-            Megnézem A Társaságot
-          </a>
+          <Link href="/jelentkezes" className={buttonPrimary}>
+            Jelentkezem konzultációra
+          </Link>
           <Link href="/nyilt-estek" className={buttonSecondary}>
             Közelgő Nyílt Estek
           </Link>

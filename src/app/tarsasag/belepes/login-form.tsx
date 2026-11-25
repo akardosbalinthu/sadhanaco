@@ -15,7 +15,7 @@ export function LoginForm({ tovabb }: { tovabb?: string }) {
     return (
       <div className="rounded-md border border-gold/40 bg-gold-soft/20 p-5 text-ink-soft">
         <p>
-          Ha a <span className="text-ink">{state.email}</span> címmel van tagságod,
+          Ha a <span className="text-ink">{state.email}</span> címmel van fiókod,
           pár percen belül érkezik egy belépő link. Nyugodtan nézd meg a levelezésedet,
           ráérsz.
         </p>

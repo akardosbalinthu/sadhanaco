@@ -9,7 +9,7 @@ import { MemberNav } from "@/components/member-nav";
 import { buttonPrimary, buttonSecondary, GildedCard } from "@/components/ornaments";
 import { toggleCompletion } from "../actions";
 
-export const metadata = { title: "Gyakorlás · A Társaság", robots: { index: false, follow: false } };
+export const metadata = { title: "Gyakorlás · Programom", robots: { index: false, follow: false } };
 
 export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

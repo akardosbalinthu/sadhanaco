@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { MapPin, Shirt, Sprout as SproutIcon, Ticket, Users } from "lucide-react";
-import { publicEnv } from "@/lib/env";
 import { createPublicClient } from "@/lib/supabase/public";
 import { formatEventDate, formatHuf, formatTime } from "@/lib/site";
 import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
@@ -14,13 +13,13 @@ const FLOW = [
 ];
 
 const GOOD_TO_KNOW = [
-  { Icon: Users, title: "Kis csoport", text: "Legfeljebb 15 fő, hogy mindenkire jusson figyelem. A helyek fele mindig a nem tagoknak marad." },
+  { Icon: Users, title: "Kis csoport", text: "Legfeljebb 15 fő, hogy mindenkire jusson figyelem." },
   { Icon: SproutIcon, title: "Nem kell tapasztalat", text: "Ha még sosem meditáltál, éppen jó helyen vagy. Ha már gyakorolsz, elmélyítheted." },
   { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni." },
   {
     Icon: Ticket,
     title: "Részvételi díj: 4 940 Ft",
-    text: "Előre, online fizetve. A Társaság tagjainak kedvezményes, a Belső Kör tagjainak díjmentes. A decemberi est kivételesen adomány alapú.",
+    text: "Előre, online fizetve. Az egyéni programom résztvevőinek díjmentes. A 2026. decemberi est kivételesen adomány alapú.",
   },
 ];
 
@@ -131,16 +130,16 @@ export default async function OpenEveningsPage() {
       <section className="text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha jólesett az este</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest">
-          Vidd haza a nyugalmat — napi néhány perccel.
+          Vidd haza a nyugalmat — és tartsd is meg.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          A Társaságban ugyanezt a nyugalmat gyakorolod tovább, vezetett gyakorlásokkal és közösségben. A következő
-          estére pedig már tagi áron jöhetsz.
+          Nyolc hónapos egyéni programomban személyesen kísérlek: a meditációtól a légzésen és a mozgáson át az alvásig
+          és az étkezésig, a te életedre szabva. A program ideje alatt a Nyílt Estekre díjmentesen jöhetsz.
         </p>
         <div className="mt-8">
-          <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={buttonSecondary}>
-            Megnézem A Társaságot
-          </a>
+          <Link href="/#menete" className={buttonSecondary}>
+            Megnézem a programot
+          </Link>
         </div>
       </section>
     </main>

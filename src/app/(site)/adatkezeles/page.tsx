@@ -46,7 +46,23 @@ const sections: LegalSection[] = [
     title: "Milyen adatokat, miért és meddig",
     body: (
       <>
-        <p className="font-serif text-lg text-forest">Tagság és fiók</p>
+        <p id="jelentkezes" className="scroll-mt-24 font-serif text-lg text-forest">Jelentkezés az egyéni programra</p>
+        <ul>
+          <Row what="A felmérés válaszai: az életmódodra és egészségedre vonatkozó adatok (táplálkozás, mozgás, alvás, stressz, szerhasználat, kapcsolatok), a problémád leírása, súlyossága és sürgőssége, valamint a szándékaid" why="az ismerkedő konzultáció előkészítése és — ha résztvevő leszel — a program személyre szabása" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a) és 6. cikk (1) a)); a hozzájárulás a felmérés beküldésekor, időbélyeggel és a szöveg változatával rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a kitöltéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
+          <Row what="Név, e-mail-cím, telefonszám (nem kötelező), a lefoglalt konzultációs időpont" why="kapcsolattartás és a konzultáció megszervezése" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b)" until="ugyanaddig, mint a felmérés válaszai" />
+        </ul>
+        <p className="text-sm text-ink-soft">
+          A felmérés válaszait csak én látom. Ha visszavonod a hozzájárulásodat, a válaszaidat töröljük; ez a visszavonás
+          előtti adatkezelés jogszerűségét nem érinti.
+        </p>
+
+        <p className="pt-3 font-serif text-lg text-forest">Az egyéni program</p>
+        <ul>
+          <Row what="A program kezdete és szakaszai, a személyre szabott gyakorlási terv, az alkalmak időpontja és megjegyzései, a heti beszámolóid és az azokra adott visszajelzés, a kipipált gyakorlások" why="a program lebonyolítása és a kísérés" basis="szerződés teljesítése (GDPR 6. cikk (1) b)); ha a beszámolóidban egészségi adatot is megosztasz, kifejezett hozzájárulásod alapján (9. cikk (2) a))" until="a program végét követő 1 év, utána automatikusan töröljük" />
+          <Row what="Belső jegyzet a programról" why="a kísérés előkészítése; csak én látom" basis="szerződés teljesítése" until="a program végét követő 1 év" />
+        </ul>
+
+        <p className="pt-3 font-serif text-lg text-forest">Tagság és fiók</p>
         <ul>
           <Row what="E-mail-cím, név" why="a fiók létrehozása, belépés (belépő link), kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b)" until="a tagság megszűnése után 1 év, vagy amíg a közösségi bejegyzéseid megmaradnak" />
           <Row what="Tagsági szint, előfizetési állapot, időszakok, keretek" why="a jogosultságok biztosítása" basis="szerződés teljesítése" until="a tagság megszűnése után 1 év" />

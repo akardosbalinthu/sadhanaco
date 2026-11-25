@@ -5,12 +5,12 @@ import { MemberNav } from "@/components/member-nav";
 import { buttonPrimary, GildedCard, inputClass, PageHeader } from "@/components/ornaments";
 import { addEntry } from "./actions";
 
-export const metadata = { title: "Belső Tükör · A Társaság" };
+export const metadata = { title: "Napló · Programom" };
 export const dynamic = "force-dynamic";
 
 export default async function JournalPage() {
   const { supabase, hasAccess } = await requireMember();
-  if (!hasAccess) redirect(tp("/gyakorlas"));
+  if (!hasAccess) redirect(tp("/program"));
   const { data: entries } = await supabase
     .from("journal_entries")
     .select("id, entry_on, body")
@@ -21,7 +21,7 @@ export default async function JournalPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
       <MemberNav active="/naplo" />
-      <PageHeader eyebrow="Belső Tükör" title="Gyakorlónapló">
+      <PageHeader eyebrow="Napló" title="Gyakorlónapló">
         <p>
           Néhány sor arról, mit vettél észre ma — a légzésedben, a testedben, egy helyzetben. A naplódat csak te
           látod; még én sem.

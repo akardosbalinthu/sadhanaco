@@ -39,6 +39,8 @@ export function tp(path: string = "/"): string {
 export const SITE = {
   name: "Kardos Bálint",
   email: "info@akardosbalint.hu",
+  /** Ide mennek az admin-értesítők (új jelentkezés, foglalás); ADMIN_NOTIFY_EMAIL felülírja. */
+  adminEmail: process.env.ADMIN_NOTIFY_EMAIL || "balint@akardosbalint.hu",
   egyKedvesUzenetUrl: "https://egykedvesuzenet.hu",
 } as const;
 

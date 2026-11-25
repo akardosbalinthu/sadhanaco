@@ -1,9 +1,8 @@
 import { LoginForm } from "./login-form";
-import Link from "next/link";
+import { publicEnv } from "@/lib/env";
 import { GildedCard, linkClass } from "@/components/ornaments";
-import { tp } from "@/lib/site";
 
-export const metadata = { title: "Belépés · A Társaság" };
+export const metadata = { title: "Belépés · Programom" };
 
 export default async function LoginPage({
   searchParams,
@@ -15,7 +14,7 @@ export default async function LoginPage({
     <main className="mx-auto flex max-w-sm flex-col justify-center px-6 py-24">
       <GildedCard className="p-8">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">
-          A Társaság
+          Programom
         </p>
         <h1 className="mt-3 font-serif text-3xl text-forest">Belépés</h1>
         <p className="mt-2 mb-8 text-sm text-ink-soft">
@@ -29,10 +28,10 @@ export default async function LoginPage({
         <LoginForm tovabb={tovabb} />
       </GildedCard>
       <p className="mt-6 text-center text-sm text-ink-soft">
-        Még nem vagy tag?{" "}
-        <Link href={`${tp("/")}#csatlakozas`} className={linkClass}>
-          Így csatlakozhatsz
-        </Link>
+        Még nem vagy a program résztvevője?{" "}
+        <a href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/jelentkezes`} className={linkClass}>
+          Jelentkezés konzultációra
+        </a>
       </p>
     </main>
   );

@@ -3,13 +3,10 @@ import { tp } from "@/lib/site";
 import { createClient } from "@/lib/supabase/server";
 
 const ITEMS = [
+  { href: "/program", label: "Programom" },
   { href: "/gyakorlas", label: "Gyakorlás" },
-  { href: "/kozosseg", label: "Közösség" },
-  { href: "/esemenyek", label: "Események" },
-  { href: "/kedves-uzenet", label: "Kedves Üzenet" },
-  { href: "/konzultacio", label: "Konzultáció" },
-  { href: "/naplo", label: "Belső Tükör" },
-  { href: "/ranglista", label: "Ranglista" },
+  { href: "/beszamolo", label: "Heti beszámoló" },
+  { href: "/naplo", label: "Napló" },
   { href: "/adataim", label: "Adataim" },
 ];
 

@@ -18,7 +18,7 @@ const schema = z.object({
 
 /** Csak belső, relatív útvonalra engedünk visszairányítani (open redirect ellen). */
 function safeNext(next: string | undefined) {
-  if (!next || !next.startsWith("/") || next.startsWith("//")) return tp("/gyakorlas");
+  if (!next || !next.startsWith("/") || next.startsWith("//")) return tp("/program");
   return next;
 }
 
@@ -51,10 +51,10 @@ export async function sendMagicLink(_prev: LoginState, formData: FormData): Prom
   }
   const res = await sendEmail(
     email,
-    "Belépő link — A Társaság",
+    "Belépő link — Programom",
     [
-      profile.first_name ? `Kedves ${profile.first_name}!` : "Kedves Tagtárs!",
-      "Ezzel a linkkel léphetsz be A Társaságba. A link egyszer használható, és egy órán át érvényes — bármelyik eszközön megnyithatod.",
+      profile.first_name ? `Kedves ${profile.first_name}!` : "Kedves Résztvevő!",
+      "Ezzel a linkkel léphetsz be a programod felületére. A link egyszer használható, és egy órán át érvényes — bármelyik eszközön megnyithatod.",
       "Ha nem te kérted, nyugodtan hagyd figyelmen kívül ezt a levelet.",
     ],
     { href: link, label: "Belépek" },

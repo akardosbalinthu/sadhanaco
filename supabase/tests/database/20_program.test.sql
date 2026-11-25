@@ -4,7 +4,7 @@
 -- =============================================================================
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(31);
+select plan(34);
 
 create function pg_temp.mk_user(p_email text) returns uuid language plpgsql as $f$
 declare v uuid := gen_random_uuid();
@@ -113,6 +113,15 @@ returning id as id \gset ev_
 select pg_temp.as_service();
 select is((public.reserve_guest_seat(:'ev_id', 'Résztvevő', 'resztvevo@example.com')).price_huf, 0, 'a résztvevő díjmentesen jön');
 select is((public.reserve_guest_seat(:'ev_id', 'Külsős', 'kulsos@example.com')).price_huf, 4940, 'mindenki más 4 940 Ft');
+
+-- 6. Adattakarékosság
+update public.applications set created_at = now() - interval '200 days' where token = :'nq_t';
+select pg_temp.as_service();
+select ok(public.purge_old_applications() >= 1, 'a 180 napnál régebbi, programba nem került jelentkezés törlődik');
+select is((select count(*)::int from public.applications where token = :'nq_t'), 0, 'a régi jelentkezés eltűnt');
+update public.program_enrollments set starts_on = public.budapest_today() - 800, stage2_from = public.budapest_today() - 700 where user_id = :'p_id';
+select public.purge_old_applications();
+select is((select count(*)::int from public.weekly_reports), 0, 'a program vége után 1 évvel a beszámolók törlődnek');
 
 select * from finish();
 rollback;

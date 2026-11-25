@@ -1,19 +1,18 @@
 import { Check } from "lucide-react";
 import { KindMessageForm } from "@/components/kind-message-form";
 import { submitGuestMessage } from "./actions";
-import { publicEnv } from "@/lib/env";
-import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
+import { buttonPrimary, CompassDivider, GildedCard, PageHeader, SectionTitle } from "@/components/ornaments";
 import { KindCall } from "@/components/illustrations";
 
 export const metadata = {
   title: "Egy Kedves Üzenet · Kardos Bálint",
   description:
-    "Írd meg, mit üzennél valakinek — én egy meglepetés-telefonhívásban átadom. Bárkinek, díjmentesen; A Társaság tagjainak elsőbbséggel és kézbesítési garanciával.",
+    "Írd meg, mit üzennél valakinek — én egy meglepetés-telefonhívásban átadom. Bárkinek, díjmentesen.",
 };
 
 const STEPS = [
   { title: "Megírod", text: "Kinek szól, mit üzennél neki, és milyen számon érem el. Néhány őszinte mondat elég." },
-  { title: "Megerősíted", text: "Küldök egy e-mailt, és egy kattintással megerősíted, hogy tényleg te küldted. A Társaság tagjainak erre nincs szükségük." },
+  { title: "Megerősíted", text: "Küldök egy e-mailt, és egy kattintással megerősíted, hogy tényleg te küldted." },
   { title: "Felhívom", text: "Élő adásban vagy rövid videóban felhívom a címzettet, és felolvasom neki az üzenetedet. Ha szeretnéd, a nevedet nem mondom ki." },
   { title: "Célba ér", text: "Valaki egy átlagos hétköznapon váratlanul megtudja, hogy számít. Ennyi az egész — és sokszor ennyi is elég." },
 ];
@@ -25,12 +24,6 @@ const FREE = [
   "Ha a címzettet három próbálkozásra sem érem el, az üzenet lezárul",
 ];
 
-const PRIORITY = [
-  "Elsőként kézbesítem, a díjmentes üzenetek előtt",
-  "Kézbesítési garanciával: addig próbálom, amíg el nem érem a címzettet",
-  "Havonta díjmentesen: A Társaság Tagjainak 1, A Belső Kör Tagjainak 3",
-  "A kereten felül is küldhetsz, általad választott összegért (legalább 1 000 Ft); ezeket az összeg szerint csökkenő sorrendben kézbesítem",
-];
 
 function Bullets({ items }: { items: string[] }) {
   return (
@@ -85,31 +78,14 @@ export default function KindMessagePage() {
 
       <CompassDivider className="my-20" />
 
-      <section>
-        <SectionTitle eyebrow="Kétféle üzenet" title="Bárki küldhet. A Társaság tagjai elsőbbséget kapnak." />
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          <GildedCard className="flex flex-col p-8">
-            <h3 className="font-serif text-2xl text-forest">Kedves Üzenet</h3>
-            <p className="mt-1 text-sm text-gold">Bárkinek · díjmentes</p>
-            <Bullets items={FREE} />
-            <a href="#kuldes" className={`${buttonSecondary} mt-8`}>
-              Megírom az üzenetem
-            </a>
-          </GildedCard>
-
-          <GildedCard ornate className="flex flex-col border-gold/40 p-8">
-            <h3 className="font-serif text-2xl text-forest">Elsőbbségi Kedves Üzenet</h3>
-            <p className="mt-1 text-sm text-gold">A Társaság tagjainak</p>
-            <Bullets items={PRIORITY} />
-            <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={`${buttonSecondary} mt-8`}>
-              Megnézem A Társaságot
-            </a>
-          </GildedCard>
+      <section className="grid items-start gap-10 md:grid-cols-[1fr_1fr]">
+        <SectionTitle eyebrow="Jó tudni" title="Bárki küldhet, díjmentesen." />
+        <div>
+          <Bullets items={FREE} />
+          <p className="mt-6 text-sm text-ink-soft">
+            A címzett telefonszámát csak a kézbesítéshez használom, és legfeljebb 180 napig őrzöm meg.
+          </p>
         </div>
-        <p className="mt-6 max-w-2xl text-sm text-ink-soft">
-          A címzett telefonszámát csak a kézbesítéshez használom, és legfeljebb 180 napig őrzöm meg. A kereten felüli
-          elsőbbségi üzenet digitális szolgáltatás, nem adomány: minden befizetésről számla készül.
-        </p>
       </section>
 
       <CompassDivider className="my-20" />
@@ -117,8 +93,7 @@ export default function KindMessagePage() {
       <section id="kuldes" className="scroll-mt-24">
         <SectionTitle eyebrow="Küldés" title="Kinek mondanál ma valami kedveset?" />
         <p className="mt-4 max-w-2xl text-ink-soft">
-          Gondold végig nyugodtan, és írd meg úgy, ahogy élőszóban mondanád. Ha A Társaság tagja vagy, elsőbbségi
-          üzenetet a gyakorlótérből küldhetsz.
+          Gondold végig nyugodtan, és írd meg úgy, ahogy élőszóban mondanád.
         </p>
         <GildedCard ornate className="mt-8 max-w-3xl p-8">
           <KindMessageForm action={submitGuestMessage} guest termsHref="/aszf#p11" />

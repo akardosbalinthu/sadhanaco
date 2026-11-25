@@ -29,7 +29,7 @@ export function announceToMembers(
     const messages: BulkMessage[] = recipients.map((r) => {
       const unsubPage = `${site}/leiratkozas?t=${r.email_token}`;
       const { html, text } = renderEmail([r.first_name ? `Kedves ${r.first_name}!` : "Kedves Tagtárs!", ...content.paragraphs], link, {
-        text: "A Társaság újdonságairól azért kapod ezt a levelet, mert tag vagy.",
+        text: "Az újdonságokról azért kapod ezt a levelet, mert a programom résztvevője vagy.",
         href: unsubPage,
         label: "Leiratkozom ezekről a levelekről",
       });

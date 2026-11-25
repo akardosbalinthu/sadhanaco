@@ -2,8 +2,8 @@ import Link from "next/link";
 import { fmtDateTime, huf, requireAdmin } from "@/lib/admin";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
-import { markNotificationRead, setRegistrationOpen } from "./actions";
-import { Empty, Flash, H2, smallButton, smallPrimary, type SP } from "./ui";
+import { markNotificationRead } from "./actions";
+import { Empty, Flash, H2, smallButton, type SP } from "./ui";
 
 type Revenue = {
   year: number;
@@ -30,17 +30,30 @@ const NOTE_LABEL: Record<string, string> = {
   overbooking: "Túlfoglalás egy eseményen",
   payment_failed: "Sikertelen terhelés",
   progression_request: "Új továbblépési kérés",
+  application: "Új jelentkezés",
+  consultation_booked: "Új konzultáció lefoglalva",
+  weekly_report: "Új heti beszámoló",
 };
 
 export default async function AdminHome({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
   const { supabase } = await requireAdmin();
-  const [{ data: rev }, { data: notes }, { count: members }, { count: trialing }] = await Promise.all([
+  const nowIso = new Date().toISOString();
+  const [{ data: rev }, { data: notes }, { count: newApps }, { data: upcoming }, { count: participants }, { count: openReports }] = await Promise.all([
     supabase.rpc("kata_revenue_status"),
     supabase.from("admin_notifications").select("*").is("read_at", null).order("created_at", { ascending: false }).limit(20),
-    supabase.from("profiles").select("id", { count: "exact", head: true }).in("subscription_status", ["active", "past_due"]),
-    supabase.from("profiles").select("id", { count: "exact", head: true }).eq("subscription_status", "trialing"),
+    supabase.from("applications").select("id", { count: "exact", head: true }).eq("qualified", true).eq("status", "uj"),
+    supabase
+      .from("consultation_slots")
+      .select("id, starts_at, application_id, applications(full_name)")
+      .not("application_id", "is", null)
+      .gte("starts_at", nowIso)
+      .order("starts_at")
+      .limit(5),
+    supabase.from("program_enrollments").select("id", { count: "exact", head: true }).eq("status", "aktiv"),
+    supabase.from("weekly_reports").select("id", { count: "exact", head: true }).is("admin_reply", null),
   ]);
+
   const r = rev as Revenue | null;
   const pct = r ? Math.round(r.usage_ratio * 1000) / 10 : 0;
 
@@ -50,26 +63,39 @@ export default async function AdminHome({ searchParams }: { searchParams: SP }) 
 
       <section className="grid gap-5 md:grid-cols-3">
         <GildedCard>
-          <p className="text-xs uppercase tracking-[0.18em] text-gold">Tagok</p>
-          <p className="mt-3 font-serif text-3xl text-forest">{members ?? 0}</p>
-          <p className="mt-1 text-sm text-ink-soft">fizető tag · {trialing ?? 0} próbaidőn</p>
-          <Link href={tp("/admin/tagok")} className="mt-4 inline-block text-sm text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
-            Tagok listája
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Új jelentkezések</p>
+          <p className="mt-3 font-serif text-3xl text-forest">{newApps ?? 0}</p>
+          <p className="mt-1 text-sm text-ink-soft">azonnal kezdene, még nem foglalt</p>
+          <Link href={tp("/admin/jelentkezesek")} className="mt-4 inline-block text-sm text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
+            Jelentkezések
           </Link>
         </GildedCard>
-
-        <GildedCard className="md:col-span-2">
-          <p className="text-xs uppercase tracking-[0.18em] text-gold">Új jelentkezések</p>
-          <p className="mt-3 font-serif text-2xl text-forest">{r?.registration_open ? "Nyitva" : "Lezárva"}</p>
-          <p className="mt-1 text-sm text-ink-soft">
-            Lezárva senki sem tud új tagságot indítani; a meglévő tagok előfizetése változatlanul fut tovább.
-          </p>
-          <form action={setRegistrationOpen} className="mt-4">
-            <input type="hidden" name="open" value={r?.registration_open ? "false" : "true"} />
-            <button className={r?.registration_open ? smallButton : smallPrimary}>
-              {r?.registration_open ? "Jelentkezések lezárása" : "Jelentkezések megnyitása"}
-            </button>
-          </form>
+        <GildedCard>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Résztvevők</p>
+          <p className="mt-3 font-serif text-3xl text-forest">{participants ?? 0}</p>
+          <p className="mt-1 text-sm text-ink-soft">aktív program · {openReports ?? 0} megválaszolatlan beszámoló</p>
+          <Link href={tp("/admin/resztvevok")} className="mt-4 inline-block text-sm text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
+            Résztvevők
+          </Link>
+        </GildedCard>
+        <GildedCard>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Közelgő konzultációk</p>
+          {(upcoming ?? []).length === 0 ? (
+            <p className="mt-3 text-sm text-ink-soft">Nincs lefoglalt konzultáció.</p>
+          ) : (
+            <ul className="mt-3 space-y-1.5 text-sm">
+              {upcoming!.map((u) => (
+                <li key={u.id}>
+                  <Link href={tp(`/admin/jelentkezesek/${u.application_id}`)} className="text-forest hover:text-gold">
+                    {fmtDateTime(u.starts_at)} · {(u.applications as unknown as { full_name: string } | null)?.full_name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          <Link href={tp("/admin/idopontok")} className="mt-4 inline-block text-sm text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
+            Időpontok
+          </Link>
         </GildedCard>
       </section>
 

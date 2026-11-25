@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 
 const ITEMS = [
   { href: "", label: "Áttekintés" },
-  { href: "/tagok", label: "Tagok" },
-  { href: "/tovabblepes", label: "Továbblépések" },
-  { href: "/konzultaciok", label: "Konzultációk" },
-  { href: "/kedves-uzenetek", label: "Kedves Üzenetek" },
-  { href: "/szamlak", label: "Számlák" },
+  { href: "/jelentkezesek", label: "Jelentkezések" },
+  { href: "/idopontok", label: "Időpontok" },
+  { href: "/resztvevok", label: "Résztvevők" },
   { href: "/tananyag", label: "Tananyag" },
   { href: "/esemenyek", label: "Események" },
-  { href: "/turak", label: "Túrák" },
+  { href: "/kedves-uzenetek", label: "Kedves Üzenetek" },
+  { href: "/szamlak", label: "Számlák" },
+  { href: "/tagok", label: "Fiókok" },
 ];
 
 /** Az admin alrészek menüje; a számok csak tájékoztatnak (nincs villogó jelvény). */

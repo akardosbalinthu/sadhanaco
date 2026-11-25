@@ -9,7 +9,6 @@ const nav = [
   { href: "/rolam", label: "Rólam" },
   { href: "/nyilt-estek", label: "Nyílt Estek" },
   { href: "/egy-kedves-uzenet", label: "Egy Kedves Üzenet" },
-  { href: "/napi-kozlony", label: "Napi Közlöny" },
 ];
 
 const navLink = "transition-colors duration-300 hover:text-gold";
@@ -27,12 +26,15 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <a
-            href={publicEnv.NEXT_PUBLIC_TARSASAG_URL}
+          <a href={`${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/belepes`} className={navLink}>
+            Belépés
+          </a>
+          <Link
+            href="/jelentkezes"
             className="rounded-md border border-forest bg-forest px-3 py-1 text-paper transition-all duration-300 hover:border-gold"
           >
-            A Társaság
-          </a>
+            Jelentkezem
+          </Link>
           <ThemeToggle />
         </nav>
       </div>
@@ -47,7 +49,7 @@ export function SiteFooter() {
         <CompassDivider />
       </div>
       <div className="mx-auto flex max-w-5xl flex-wrap justify-between gap-4 px-6 py-8 text-sm text-ink-soft">
-        <p className="text-xs uppercase tracking-[0.18em] text-gold">Kapcsolódj — önmagadhoz és egymáshoz.</p>
+        <p className="max-w-sm text-xs uppercase leading-relaxed tracking-[0.18em] text-gold">Jógikus hátterű gyakorlatok, modern életmód-orvostani keretrendszerben — rád szabva.</p>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           <a href={`mailto:${SITE.email}`} className={navLink}>
             {SITE.email}

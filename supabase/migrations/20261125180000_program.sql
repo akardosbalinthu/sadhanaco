@@ -622,6 +622,22 @@ begin
     returning 1
   )
   select count(*) into v_n from del;
+
+  -- A program vége (kezdés + 8 hónap, vagy a korábbi lezárás) után 1 évvel: a jelentkezés,
+  -- a heti beszámolók és az alkalmak törlése (a fiók és a napló a fiókkal együtt kezelendő).
+  with ended as (
+    select e.id, e.application_id from public.program_enrollments e
+     where least((e.starts_on + interval '8 months'), coalesce(e.closed_at, 'infinity'::timestamptz)) < now() - interval '1 year'
+  ), del_r as (
+    delete from public.weekly_reports r using ended where r.enrollment_id = ended.id returning 1
+  ), del_s as (
+    delete from public.program_sessions s using ended where s.enrollment_id = ended.id returning 1
+  ), clr as (
+    update public.program_enrollments e set practice_plan = null, admin_note = null, application_id = null
+      from ended where e.id = ended.id returning ended.application_id
+  )
+  delete from public.applications a using clr where a.id = clr.application_id;
+
   return v_n;
 end;
 $$;

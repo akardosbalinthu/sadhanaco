@@ -10,7 +10,7 @@ export default async function UnsubscribePage({ searchParams }: { searchParams: 
   const settingsHref = `${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/adataim`;
   return (
     <main className="py-16">
-      <PageHeader eyebrow="A Társaság" title="Leiratkozás az újdonságokról">
+      <PageHeader eyebrow="Kardos Bálint" title="Leiratkozás az újdonságokról">
         <p>
           Ha nem szeretnél levelet kapni az új eseményekről, bejegyzésekről és szavazásokról, egy kattintással
           leiratkozhatsz. A foglalásaidról és fizetéseidről szóló leveleket továbbra is megkapod.

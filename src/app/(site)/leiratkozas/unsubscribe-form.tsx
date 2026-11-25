@@ -12,7 +12,7 @@ export function UnsubscribeForm({ token, settingsHref }: { token: string; settin
       <div role="status" className="flex items-start gap-3 text-forest">
         <Check className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.5} aria-hidden />
         <p className="leading-relaxed">
-          Kész, több ilyen levelet nem küldök. Az újdonságokat továbbra is látod A Társaság felületén, és az{" "}
+          Kész, több ilyen levelet nem küldök. Az{" "}
           <a href={settingsHref} className="underline decoration-gold/60 underline-offset-4">Adataim</a> oldalon bármikor
           visszakapcsolhatod.
         </p>
