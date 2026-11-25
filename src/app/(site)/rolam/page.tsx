@@ -76,7 +76,7 @@ const STATIONS: Station[] = [
     when: "2016–2018",
     title: "„Szeretlek, apa”",
     paras: [
-      "Édesapámat huszonegy évesen ismertem meg. Az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
+      "Édesapámat huszonegy évesen ismertem meg. Kisgyerekkoromban elhagyott, és két évtizedig nem is keresett — ezért az elején sok dühvel fordultam felé. Az első találkozásunkkor az egyik első mondatom az volt: „Remélem, tudod, hogy soha nem foglak apámnak hívni.”",
       "Aztán a kitartó felelősségvállalása, és ahogyan a tetteivel próbálta helyrehozni a hibáit, meggyőzött. Jóban lettünk — igazi apa–fia kapcsolatunk lett. Alig másfél évvel később egyszer munkából hazafelé azzal hívtam fel: „Szeretlek, apa.” Három hónappal később már nem élt — gyomorrákban és annak szövődményeiben hunyt el.",
     ],
   },
