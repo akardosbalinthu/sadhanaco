@@ -73,7 +73,14 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               </form>
             )}
 
-            <h3 className="mt-8 border-t border-line pt-6 font-serif text-lg text-forest">Résztvevők</h3>
+            <div className="mt-8 flex flex-wrap items-baseline justify-between gap-3 border-t border-line pt-6">
+              <h3 className="font-serif text-lg text-forest">Résztvevők</h3>
+              {registrations.length > 0 && (
+                <a href={tp(`/admin/esemenyek/${e.id}/resztvevok.csv`)} className="text-sm text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold">
+                  Letöltés (CSV, Excelhez)
+                </a>
+              )}
+            </div>
             {registrations.length === 0 ? (
               <Empty>Még nincs jelentkező.</Empty>
             ) : (

@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { back, budapestLocalToIso, requireAdmin } from "@/lib/admin";
-import { tp } from "@/lib/site";
+import { sendEmail } from "@/lib/email";
+import { resolvedTarsasagUrl, tp } from "@/lib/site";
 
 const uuid = z.string().uuid();
 const str = (fd: FormData, k: string) => String(fd.get(k) ?? "").trim();
@@ -15,6 +16,22 @@ const intOrNull = (fd: FormData, k: string) => {
   const n = Number(v.replace(/\s/g, ""));
   return Number.isFinite(n) ? Math.round(n) : NaN;
 };
+
+const whenFmt = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", dateStyle: "full", timeStyle: "short" });
+
+type Admin = Awaited<ReturnType<typeof requireAdmin>>["supabase"];
+
+/** Értesítő e-mail a tagnak; a hiba nem akasztja meg a műveletet. Igazat ad, ha kiment. */
+async function notifyMember(supabase: Admin, userId: string, subject: string, paragraphs: string[], linkPath?: string, linkLabel?: string) {
+  const { data: p } = await supabase.from("profiles").select("email, first_name, display_name").eq("id", userId).single();
+  if (!p?.email) return false;
+  const name = p.first_name || p.display_name || "";
+  const link = linkPath ? { href: `${resolvedTarsasagUrl().replace(/\/$/, "")}${linkPath}`, label: linkLabel ?? "Megnyitom" } : undefined;
+  const res = await sendEmail(p.email, subject, [name ? `Kedves ${name}!` : "Kedves Tagtárs!", ...paragraphs], link);
+  return res.ok;
+}
+
+const mailNote = (sent: boolean) => (sent ? " A tagot e-mailben értesítettem." : " Az e-mail nem ment ki — kérlek, szólj neki te.");
 
 function done(path: string, error: { message: string } | null, ok: string): never {
   revalidatePath(tp("/admin"), "layout");
@@ -92,11 +109,25 @@ export async function scheduleConsultation(formData: FormData) {
   const id = uuid.parse(formData.get("id"));
   const at = budapestLocalToIso(str(formData, "consultation_at"));
   if (!at) back("/tovabblepes", { hiba: "Add meg a konzultáció időpontját." });
-  const { error } = await supabase
+  const { data: row, error } = await supabase
     .from("progression_requests")
     .update({ consultation_at: at, status: "scheduled", admin_note: optStr(formData, "admin_note") })
-    .eq("id", id);
-  done("/tovabblepes", error, "A konzultáció időpontja rögzítve.");
+    .eq("id", id)
+    .select("user_id")
+    .single();
+  if (error) done("/tovabblepes", error, "");
+  const sent = await notifyMember(
+    supabase,
+    row.user_id,
+    "A továbblépési beszélgetésünk időpontja",
+    [
+      `Örülök, hogy készen állsz a következő lépcsőre. A rövid beszélgetésünk időpontja: ${whenFmt.format(new Date(at))}.`,
+      "Ha ez nem jó neked, válaszolj erre a levélre, és keresünk másikat.",
+    ],
+    "/gyakorlas",
+    "A gyakorlótér",
+  );
+  done("/tovabblepes", null, "A konzultáció időpontja rögzítve." + mailNote(sent));
 }
 
 // A gombok értéke (name/value) nem jut el megbízhatóan a Server Actionig, ezért
@@ -374,8 +405,25 @@ export async function scheduleConsultationSlot(formData: FormData) {
   const id = uuid.parse(formData.get("id"));
   const at = budapestLocalToIso(str(formData, "requested_for"));
   if (!at) back("/konzultaciok", { hiba: "Add meg az időpontot." });
-  const { error } = await supabase.from("consultations").update({ requested_for: at, status: "scheduled" }).eq("id", id);
-  done("/konzultaciok", error, "Az időpont rögzítve.");
+  const { data: row, error } = await supabase
+    .from("consultations")
+    .update({ requested_for: at, status: "scheduled" })
+    .eq("id", id)
+    .select("user_id")
+    .single();
+  if (error) done("/konzultaciok", error, "");
+  const sent = await notifyMember(
+    supabase,
+    row.user_id,
+    "A konzultációnk időpontja",
+    [
+      `A személyes konzultációnk időpontja: ${whenFmt.format(new Date(at))}.`,
+      "A részleteket (helyszín vagy online link) külön is megírom. Ha az időpont mégsem jó, válaszolj erre a levélre.",
+    ],
+    "/konzultacio",
+    "A konzultációim",
+  );
+  done("/konzultaciok", null, "Az időpont rögzítve." + mailNote(sent));
 }
 
 export async function markConsultationDone(formData: FormData) {
@@ -396,5 +444,17 @@ export async function cancelConsultation(formData: FormData) {
     const { data: p } = await supabase.from("profiles").select("free_consultations_remaining").eq("id", c.user_id).single();
     await supabase.from("profiles").update({ free_consultations_remaining: (p?.free_consultations_remaining ?? 0) + 1 }).eq("id", c.user_id);
   }
-  done("/konzultaciok", error, c.is_free ? "Lemondva; az alkalom visszakerült a tag keretébe." : "Lemondva.");
+  if (error) done("/konzultaciok", error, "");
+  const sent = await notifyMember(
+    supabase,
+    c.user_id,
+    "A konzultációnk elmarad",
+    [
+      "Sajnos a tervezett konzultációnk elmarad.",
+      c.is_free ? "A díjmentes alkalmad visszakerült a keretedbe — bármikor kérhetsz új időpontot." : "Hamarosan jelentkezem, hogy egyeztessünk egy új időpontot.",
+    ],
+    "/konzultacio",
+    "A konzultációim",
+  );
+  done("/konzultaciok", null, (c.is_free ? "Lemondva; az alkalom visszakerült a tag keretébe." : "Lemondva.") + mailNote(sent));
 }
