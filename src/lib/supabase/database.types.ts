@@ -39,14 +39,28 @@ export type Database = {
                   ]
                 },"app_settings": {
                   Row: {
-                    "belso_kor_priority_hours": number,"belso_kor_yearly_consultations": number,"billing_entity": NonNullable<Json>,"event_member_quota_ratio": number,"free_messages_per_tier": NonNullable<Json>,"hike_guest_invites_per_member": number,"id": boolean,"invoice_provider": string,"kind_message_confirm_hours": number,"kind_message_max_attempts": number,"kind_message_min_huf": number,"last_friday_checkin_on": string | null,"last_monthly_reset_on": string | null,"oss_warning_huf": number,"participation_weights": NonNullable<Json>,"past_due_grace_days": number,"payment_hold_minutes": number,"phone_retention_days": number,"progression_points_required": NonNullable<Json>,"registration_open": boolean,"revenue_warning_ratio": number,"stage_completion_min_ratio": number,"superadmin_emails": (string)[],"terms_version": string,"trial_days": number,"updated_at": string,"xp_daily_cap": number,"xp_ranks": NonNullable<Json>,"xp_rules": NonNullable<Json>
+                    "application_retention_days": number,"belso_kor_priority_hours": number,"belso_kor_yearly_consultations": number,"billing_entity": NonNullable<Json>,"consultation_default_minutes": number,"consultation_meet_url": string | null,"event_member_quota_ratio": number,"free_messages_per_tier": NonNullable<Json>,"health_consent_version": string,"hike_guest_invites_per_member": number,"id": boolean,"invoice_provider": string,"kind_message_confirm_hours": number,"kind_message_max_attempts": number,"kind_message_min_huf": number,"last_friday_checkin_on": string | null,"last_monthly_reset_on": string | null,"oss_warning_huf": number,"participation_weights": NonNullable<Json>,"past_due_grace_days": number,"payment_hold_minutes": number,"phone_retention_days": number,"progression_points_required": NonNullable<Json>,"registration_open": boolean,"revenue_warning_ratio": number,"stage_completion_min_ratio": number,"superadmin_emails": (string)[],"terms_version": string,"trial_days": number,"updated_at": string,"xp_daily_cap": number,"xp_ranks": NonNullable<Json>,"xp_rules": NonNullable<Json>
                   }
                   ComputedFields: never
                   Insert: {
-                    "belso_kor_priority_hours"?: number,"belso_kor_yearly_consultations"?: number,"billing_entity"?: NonNullable<Json>,"event_member_quota_ratio"?: number,"free_messages_per_tier"?: NonNullable<Json>,"hike_guest_invites_per_member"?: number,"id"?: boolean,"invoice_provider"?: string,"kind_message_confirm_hours"?: number,"kind_message_max_attempts"?: number,"kind_message_min_huf"?: number,"last_friday_checkin_on"?: string | null,"last_monthly_reset_on"?: string | null,"oss_warning_huf"?: number,"participation_weights"?: NonNullable<Json>,"past_due_grace_days"?: number,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"progression_points_required"?: NonNullable<Json>,"registration_open"?: boolean,"revenue_warning_ratio"?: number,"stage_completion_min_ratio"?: number,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"xp_daily_cap"?: number,"xp_ranks"?: NonNullable<Json>,"xp_rules"?: NonNullable<Json>
+                    "application_retention_days"?: number,"belso_kor_priority_hours"?: number,"belso_kor_yearly_consultations"?: number,"billing_entity"?: NonNullable<Json>,"consultation_default_minutes"?: number,"consultation_meet_url"?: string | null,"event_member_quota_ratio"?: number,"free_messages_per_tier"?: NonNullable<Json>,"health_consent_version"?: string,"hike_guest_invites_per_member"?: number,"id"?: boolean,"invoice_provider"?: string,"kind_message_confirm_hours"?: number,"kind_message_max_attempts"?: number,"kind_message_min_huf"?: number,"last_friday_checkin_on"?: string | null,"last_monthly_reset_on"?: string | null,"oss_warning_huf"?: number,"participation_weights"?: NonNullable<Json>,"past_due_grace_days"?: number,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"progression_points_required"?: NonNullable<Json>,"registration_open"?: boolean,"revenue_warning_ratio"?: number,"stage_completion_min_ratio"?: number,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"xp_daily_cap"?: number,"xp_ranks"?: NonNullable<Json>,"xp_rules"?: NonNullable<Json>
                   }
                   Update: {
-                    "belso_kor_priority_hours"?: number,"belso_kor_yearly_consultations"?: number,"billing_entity"?: NonNullable<Json>,"event_member_quota_ratio"?: number,"free_messages_per_tier"?: NonNullable<Json>,"hike_guest_invites_per_member"?: number,"id"?: boolean,"invoice_provider"?: string,"kind_message_confirm_hours"?: number,"kind_message_max_attempts"?: number,"kind_message_min_huf"?: number,"last_friday_checkin_on"?: string | null,"last_monthly_reset_on"?: string | null,"oss_warning_huf"?: number,"participation_weights"?: NonNullable<Json>,"past_due_grace_days"?: number,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"progression_points_required"?: NonNullable<Json>,"registration_open"?: boolean,"revenue_warning_ratio"?: number,"stage_completion_min_ratio"?: number,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"xp_daily_cap"?: number,"xp_ranks"?: NonNullable<Json>,"xp_rules"?: NonNullable<Json>
+                    "application_retention_days"?: number,"belso_kor_priority_hours"?: number,"belso_kor_yearly_consultations"?: number,"billing_entity"?: NonNullable<Json>,"consultation_default_minutes"?: number,"consultation_meet_url"?: string | null,"event_member_quota_ratio"?: number,"free_messages_per_tier"?: NonNullable<Json>,"health_consent_version"?: string,"hike_guest_invites_per_member"?: number,"id"?: boolean,"invoice_provider"?: string,"kind_message_confirm_hours"?: number,"kind_message_max_attempts"?: number,"kind_message_min_huf"?: number,"last_friday_checkin_on"?: string | null,"last_monthly_reset_on"?: string | null,"oss_warning_huf"?: number,"participation_weights"?: NonNullable<Json>,"past_due_grace_days"?: number,"payment_hold_minutes"?: number,"phone_retention_days"?: number,"progression_points_required"?: NonNullable<Json>,"registration_open"?: boolean,"revenue_warning_ratio"?: number,"stage_completion_min_ratio"?: number,"superadmin_emails"?: (string)[],"terms_version"?: string,"trial_days"?: number,"updated_at"?: string,"xp_daily_cap"?: number,"xp_ranks"?: NonNullable<Json>,"xp_rules"?: NonNullable<Json>
+                  }
+                  Relationships: [
+                    
+                  ]
+                },"applications": {
+                  Row: {
+                    "admin_note": string | null,"created_at": string,"email": string,"full_name": string,"health_consent_at": string,"health_consent_version": string,"id": string,"invest_energy": string,"invest_money": string,"invest_time": string,"phone": string | null,"pillars": NonNullable<Json>,"privacy_consent_at": string,"problem": string,"qualified": boolean | null,"severity": number,"start_when": Database["public"]['Enums']["application_start"],"status": Database["public"]['Enums']["application_status"],"token": string,"urgency": number
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "admin_note"?: string | null,"created_at"?: string,"email": string,"full_name": string,"health_consent_at": string,"health_consent_version": string,"id"?: string,"invest_energy": string,"invest_money": string,"invest_time": string,"phone"?: string | null,"pillars": NonNullable<Json>,"privacy_consent_at": string,"problem": string,"qualified"?: never,"severity": number,"start_when": Database["public"]['Enums']["application_start"],"status"?: Database["public"]['Enums']["application_status"],"token"?: string,"urgency": number
+                  }
+                  Update: {
+                    "admin_note"?: string | null,"created_at"?: string,"email"?: string,"full_name"?: string,"health_consent_at"?: string,"health_consent_version"?: string,"id"?: string,"invest_energy"?: string,"invest_money"?: string,"invest_time"?: string,"phone"?: string | null,"pillars"?: NonNullable<Json>,"privacy_consent_at"?: string,"problem"?: string,"qualified"?: never,"severity"?: number,"start_when"?: Database["public"]['Enums']["application_start"],"status"?: Database["public"]['Enums']["application_status"],"token"?: string,"urgency"?: number
                   }
                   Relationships: [
                     
@@ -96,6 +110,26 @@ isOneToOne: false
                   }
                   Relationships: [
                     
+                  ]
+                },"consultation_slots": {
+                  Row: {
+                    "application_id": string | null,"booked_at": string | null,"created_at": string,"duration_minutes": number,"id": string,"meet_url": string | null,"starts_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "application_id"?: string | null,"booked_at"?: string | null,"created_at"?: string,"duration_minutes"?: number,"id"?: string,"meet_url"?: string | null,"starts_at": string
+                  }
+                  Update: {
+                    "application_id"?: string | null,"booked_at"?: string | null,"created_at"?: string,"duration_minutes"?: number,"id"?: string,"meet_url"?: string | null,"starts_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "consultation_slots_application_id_fkey"
+      columns: ["application_id"]
+isOneToOne: true
+      referencedRelation: "applications"
+      referencedColumns: ["id"]
+    }
                   ]
                 },"consultations": {
                   Row: {
@@ -531,6 +565,52 @@ isOneToOne: false
                   Relationships: [
                     
                   ]
+                },"program_enrollments": {
+                  Row: {
+                    "admin_note": string | null,"application_id": string | null,"closed_at": string | null,"created_at": string,"id": string,"practice_plan": string | null,"stage2_from": string,"starts_on": string,"status": Database["public"]['Enums']["enrollment_status"],"user_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "admin_note"?: string | null,"application_id"?: string | null,"closed_at"?: string | null,"created_at"?: string,"id"?: string,"practice_plan"?: string | null,"stage2_from": string,"starts_on": string,"status"?: Database["public"]['Enums']["enrollment_status"],"user_id": string
+                  }
+                  Update: {
+                    "admin_note"?: string | null,"application_id"?: string | null,"closed_at"?: string | null,"created_at"?: string,"id"?: string,"practice_plan"?: string | null,"stage2_from"?: string,"starts_on"?: string,"status"?: Database["public"]['Enums']["enrollment_status"],"user_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "program_enrollments_application_id_fkey"
+      columns: ["application_id"]
+isOneToOne: false
+      referencedRelation: "applications"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "program_enrollments_user_id_fkey"
+      columns: ["user_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"program_sessions": {
+                  Row: {
+                    "created_at": string,"duration_minutes": number,"enrollment_id": string,"id": string,"meet_url": string | null,"note": string | null,"starts_at": string,"status": Database["public"]['Enums']["program_session_status"]
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"duration_minutes": number,"enrollment_id": string,"id"?: string,"meet_url"?: string | null,"note"?: string | null,"starts_at": string,"status"?: Database["public"]['Enums']["program_session_status"]
+                  }
+                  Update: {
+                    "created_at"?: string,"duration_minutes"?: number,"enrollment_id"?: string,"id"?: string,"meet_url"?: string | null,"note"?: string | null,"starts_at"?: string,"status"?: Database["public"]['Enums']["program_session_status"]
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "program_sessions_enrollment_id_fkey"
+      columns: ["enrollment_id"]
+isOneToOne: false
+      referencedRelation: "program_enrollments"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"progression_requests": {
                   Row: {
                     "admin_note": string | null,"consultation_at": string | null,"created_at": string,"decided_at": string | null,"decided_by": string | null,"id": string,"note": string | null,"status": Database["public"]['Enums']["progression_status"],"target_stage": number,"user_id": string
@@ -628,6 +708,26 @@ isOneToOne: false
       columns: ["user_id"]
 isOneToOne: false
       referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"weekly_reports": {
+                  Row: {
+                    "admin_reply": string | null,"created_at": string,"enrollment_id": string,"id": string,"practice_days": number,"question": string | null,"replied_at": string | null,"updated_at": string,"was_hard": string | null,"week_start": string,"went_well": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "admin_reply"?: string | null,"created_at"?: string,"enrollment_id": string,"id"?: string,"practice_days": number,"question"?: string | null,"replied_at"?: string | null,"updated_at"?: string,"was_hard"?: string | null,"week_start": string,"went_well"?: string | null
+                  }
+                  Update: {
+                    "admin_reply"?: string | null,"created_at"?: string,"enrollment_id"?: string,"id"?: string,"practice_days"?: number,"question"?: string | null,"replied_at"?: string | null,"updated_at"?: string,"was_hard"?: string | null,"week_start"?: string,"went_well"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "weekly_reports_enrollment_id_fkey"
+      columns: ["enrollment_id"]
+isOneToOne: false
+      referencedRelation: "program_enrollments"
       referencedColumns: ["id"]
     }
                   ]
@@ -795,6 +895,9 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"admin_enrollment_notes":
+{ Args: { "p_enrollment_id": string }; Returns: string
+                           },
 "admin_kind_message_queue":
 { Args: Record<PropertyKey, never>; Returns: {
               "amount_huf": number,
@@ -867,9 +970,28 @@ isOneToOne: false
               "email": string,"email_token": string,"first_name": string
             }[]
                            },
+"application_booking_info":
+{ Args: { "p_token": string }; Returns: Json
+                           },
 "award_external_xp":
 { Args: { "p_on"?: string,"p_ref": string,"p_source": Database["public"]['Enums']["xp_source"],"p_user": string }; Returns: number
                            },
+"book_consultation_slot":
+{ Args: { "p_slot_id": string,"p_token": string }; Returns: {
+              "application_id": string | null,
+"booked_at": string | null,
+"created_at": string,
+"duration_minutes": number,
+"id": string,
+"meet_url": string | null,
+"starts_at": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "consultation_slots"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "book_event":
 { Args: { "p_event_id": string }; Returns: {
               "attended_at": string | null,
@@ -1124,6 +1246,9 @@ isOneToOne: false
 "is_paying_member":
 { Args: Record<PropertyKey, never>; Returns: boolean
                            },
+"is_program_participant":
+{ Args: Record<PropertyKey, never>; Returns: boolean
+                           },
 "is_superadmin":
 { Args: Record<PropertyKey, never>; Returns: boolean
                            },
@@ -1352,6 +1477,9 @@ isOneToOne: false
 "my_character_card":
 { Args: { "p_user"?: string }; Returns: Json
                            },
+"my_program":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
 "participation_score":
 { Args: { "p_user"?: string }; Returns: Json
                            },
@@ -1364,6 +1492,9 @@ isOneToOne: false
             }[]
                            },
 "purge_kind_message_phones":
+{ Args: Record<PropertyKey, never>; Returns: number
+                           },
+"purge_old_applications":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
 "purge_registration_details":
@@ -1466,6 +1597,35 @@ isOneToOne: false
 "stage_progress":
 { Args: { "p_stage": number }; Returns: Json
                            },
+"submit_application":
+{ Args: { "p_email": string,"p_full_name": string,"p_health_consent": boolean,"p_invest_energy": string,"p_invest_money": string,"p_invest_time": string,"p_phone": string,"p_pillars": Json,"p_privacy_consent": boolean,"p_problem": string,"p_severity": number,"p_start_when": Database["public"]['Enums']["application_start"],"p_urgency": number }; Returns: {
+              "admin_note": string | null,
+"created_at": string,
+"email": string,
+"full_name": string,
+"health_consent_at": string,
+"health_consent_version": string,
+"id": string,
+"invest_energy": string,
+"invest_money": string,
+"invest_time": string,
+"phone": string | null,
+"pillars": NonNullable<Json>,
+"privacy_consent_at": string,
+"problem": string,
+"qualified": boolean | null,
+"severity": number,
+"start_when": Database["public"]['Enums']["application_start"],
+"status": Database["public"]['Enums']["application_status"],
+"token": string,
+"urgency": number
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "applications"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "submit_compass":
 { Args: { "p_answers": Json,"p_tiebreak"?: Database["public"]['Enums']["order_key"] }; Returns: Database["public"]['Enums']["order_key"]
                            },
@@ -1474,6 +1634,26 @@ isOneToOne: false
               "confirm_token": string,"message_id": string,"status": string
             }[]
                            },
+"submit_weekly_report":
+{ Args: { "p_practice_days": number,"p_question": string,"p_was_hard": string,"p_went_well": string }; Returns: {
+              "admin_reply": string | null,
+"created_at": string,
+"enrollment_id": string,
+"id": string,
+"practice_days": number,
+"question": string | null,
+"replied_at": string | null,
+"updated_at": string,
+"was_hard": string | null,
+"week_start": string,
+"went_well": string | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "weekly_reports"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "superadmin_set_order":
 { Args: { "p_order": Database["public"]['Enums']["order_key"],"p_user": string }; Returns: {
               "billing_interval": Database["public"]['Enums']["billing_interval"] | null,
@@ -1531,7 +1711,7 @@ isOneToOne: false
                            }
           }
           Enums: {
-            "billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok"|"magusok","post_kind": "normal"|"penteki_kor","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
+            "application_start": "azonnal"|"egy_heten_belul"|"egy_honapon_belul"|"kesobb"|"nem_tudom","application_status": "uj"|"foglalt"|"konzultalt"|"resztvevo"|"nem_lett"|"archiv","billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","enrollment_status": "aktiv"|"lezart","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok"|"magusok","post_kind": "normal"|"penteki_kor","program_session_status": "tervezett"|"megtartott"|"elmaradt","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -1651,7 +1831,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok", "magusok"],"post_kind": ["normal", "penteki_kor"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
+            "application_start": ["azonnal", "egy_heten_belul", "egy_honapon_belul", "kesobb", "nem_tudom"],"application_status": ["uj", "foglalt", "konzultalt", "resztvevo", "nem_lett", "archiv"],"billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"enrollment_status": ["aktiv", "lezart"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok", "magusok"],"post_kind": ["normal", "penteki_kor"],"program_session_status": ["tervezett", "megtartott", "elmaradt"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
           }
         }
 } as const
