@@ -133,6 +133,8 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 ## 7. Rögzített üzleti döntések (2026. november — kötelező érvényű)
 
+> **Arculat (2026. november 25-től mérvadó):** minden felhasználónak látható szövegnek a `docs/ARCULAT.md` arculati alapjához kell illeszkednie (cél: kapcsolódás; a meditáció és az idegrendszer-fejlesztés eszköz, nem cél). Ahol ez és a korábbi pontok (pl. 7.10 bemutatkozó mondat, 7.11 küldetés) ütköznek, az ARCULAT.md az irányadó.
+
 ### 7.1 KATA bevételi határ
 - A KATA éves bevételi határának elérésekor **lezárjuk az új jelentkezéseket** (admin kapcsoló: `app_settings.registration_open`). Később valószínűleg Kft. lesz a megoldás — a számlázási réteg legyen cserélhető (számlázási entitás konfigurálható, ne legyen hardcode-olva).
 - A rendszer naptári évenként összesíti a kiállított számlák összegét, és a **várható megújulásokat is beszámítva** figyelmeztet (pl. 80%-nál), mert a lezárás csak az új tagokat állítja meg.

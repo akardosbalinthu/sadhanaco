@@ -47,7 +47,7 @@ export function SiteFooter() {
         <CompassDivider />
       </div>
       <div className="mx-auto flex max-w-5xl flex-wrap justify-between gap-4 px-6 py-8 text-sm text-ink-soft">
-        <p className="text-xs uppercase tracking-[0.18em] text-gold">Jelenlét – Tudatosság – Szabadság</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-gold">Kapcsolódj — önmagadhoz és egymáshoz.</p>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           <a href={`mailto:${SITE.email}`} className={navLink}>
             {SITE.email}

@@ -4,7 +4,7 @@ import { themeInitScript } from "@/components/theme";
 
 export const metadata: Metadata = {
   title: "Kardos Bálint · A Társaság",
-  description: "Jelenlét – Tudatosság – Szabadság. Kardos Bálint és A Társaság.",
+  description: "Kapcsolódj — önmagadhoz és egymáshoz. Kardos Bálint és A Társaság.",
 };
 
 export default function RootLayout({

@@ -6,23 +6,23 @@ import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, SectionTitl
 import { DawnLandscape, EveningLamp, KindCall, MorningPaper, SittingCircle } from "@/components/illustrations";
 
 export const metadata = {
-  title: "Kardos Bálint · Nyugodtabb idegrendszer, kedvesebb hétköznapok",
+  title: "Kardos Bálint · Kapcsolódj — önmagadhoz és egymáshoz",
   description:
-    "Légzés, figyelem és testérzékelés a modern idegtudomány alapján, misztikum nélkül. A Társaság online gyakorlóközössége, budapesti Nyílt Meditációs Estek, Egy Kedves Üzenet és Napi Közlöny.",
+    "Meditáció, légzés és közösség a kapcsolódásért: A Társaság online gyakorlóközössége, budapesti Nyílt Meditációs Estek, Egy Kedves Üzenet és Napi Közlöny.",
 };
 
 const BENEFITS = [
-  "Könnyebben elalszol, és kipihentebben ébredsz",
-  "Stresszes helyzetben is nyugodtabban reagálsz",
-  "Kevesebbet pörögsz, tisztábban figyelsz",
+  "Kapcsolódsz a testedhez, a légzésedhez és a belső hangodhoz",
+  "Olyan emberek közé tartozhatsz, akik ugyanezt az utat járják",
+  "Több figyelmed marad azokra, akik körülötted vannak",
 ];
 
 const PATHS = [
   {
-    need: "Rendszeresen gyakorolnál, közösségben",
+    need: "Tartoznál valahová",
     Art: SittingCircle,
     title: "A Társaság",
-    text: "Napi 10–15 perc vezetett gyakorlás, nyolchetes programok és egy közösség, amely megtart. Lépésről lépésre tanítod meg az idegrendszeredet megnyugodni — online, a saját tempódban, élő közös alkalmakkal és havi túrával.",
+    text: "Online gyakorlóközösség, ahol napi 10–15 perc vezetett légzéssel és meditációval megtanulsz kapcsolódni önmagadhoz, és olyan emberek közé tartozhatsz, akik ugyanezt az utat járják. Közös meditáció, túrák, szerepjáték-estek és budapesti találkozók: hely, ahová tartozni lehet.",
     note: "A havi tagság első 7 napja díjmentes.",
     href: publicEnv.NEXT_PUBLIC_TARSASAG_URL,
     cta: "Megnézem A Társaságot",
@@ -30,10 +30,10 @@ const PATHS = [
     featured: true,
   },
   {
-    need: "Előbb személyesen kipróbálnád",
+    need: "Személyesen találkoznál",
     Art: EveningLamp,
     title: "Nyílt Meditációs Estek",
-    text: "Havonta egy nyugodt este Budapesten, legfeljebb 15 fővel. Nem kell hozzá tapasztalat: ez a legjobb kezdőpont.",
+    text: "Havonta egy este Budapesten, legfeljebb 15 emberrel. Közös gyakorlás és személyes jelenlét, telefon és képernyő nélkül.",
     note: "",
     href: "/nyilt-estek",
     cta: "Közelgő alkalmak",
@@ -44,7 +44,7 @@ const PATHS = [
     need: "Valakinek jólesne egy kedves szó",
     Art: KindCall,
     title: "Egy Kedves Üzenet",
-    text: "Megírod, mit üzennél — köszönetet, bátorítást vagy egy rég kimondatlan mondatot —, én pedig egy meglepetés-telefonhívásban átadom. Bárkinek, díjmentesen.",
+    text: "Írj kedves üzenetet valakinek, és én meglepetés-telefonhívásban adom át. Egy hívás, amely emlékeztet: valaki gondol rád.",
     note: "",
     href: "/egy-kedves-uzenet",
     cta: "Így működik",
@@ -55,7 +55,7 @@ const PATHS = [
     need: "Telefon nélkül kezdenéd a napot",
     Art: MorningPaper,
     title: "Napi Közlöny",
-    text: "Személyes reggeli újság a leveleidből és a naptáradból, papíron — hogy a nap első percei a tieid legyenek, ne a képernyőé.",
+    text: "Személyes napi újság a leveleidből és a naptáradból, hajnalban kinyomtatva, hogy a napod ne a telefonnal induljon, és több figyelmed maradjon azokra, akik körülötted vannak.",
     note: "A Társaságban, várhatóan karácsonytól.",
     href: "/napi-kozlony",
     cta: "Bővebben",
@@ -67,7 +67,7 @@ const PATHS = [
 const PRINCIPLES = [
   {
     title: "Tudomány, nem dogma",
-    text: "Ősi meditációs gyakorlatok, a modern idegtudomány és az életmód-orvostan nyelvén elmagyarázva. Mindig tudod, mit miért csinálsz.",
+    text: "A meditáció és a légzés eszköz, nem cél: az idegtudomány és az életmód-orvostan nyelvén elmagyarázva, hogy mindig tudd, mit miért csinálsz.",
   },
   {
     title: "Gyakorlás, nem teljesítmény",
@@ -84,13 +84,12 @@ export default function HomePage() {
     <main>
       <section className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.15fr_1fr]">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-gold">Jelenlét · Tudatosság · Szabadság</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Kardos Bálint</p>
           <h1 className="mt-5 text-balance font-serif text-4xl leading-tight text-forest sm:text-5xl">
-            Nyugodtabb idegrendszer. Kedvesebb hétköznapok.
+            Kapcsolódj — önmagadhoz és egymáshoz.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink">
-            Megtanítom, hogyan válts vissza a feszültségből nyugalomba — napi néhány perc légzéssel és figyelemmel, a
-            modern idegtudomány alapján, misztikum nélkül.
+            A célom egy kapcsolódóbb világ, ahol egyre kevesebb ember marad egyedül. Ehhez két út vezet: befelé, a saját testünk és légzésünk felé, és kifelé, egymás felé.
           </p>
           <ul className="mt-6 space-y-2">
             {BENEFITS.map((b) => (
@@ -124,14 +123,10 @@ export default function HomePage() {
         />
         <div>
         <p className="font-serif text-xl leading-relaxed text-ink">
-          A nevem Kardos Bálint. Kedves üzeneteket kézbesítek, segítek telefon nélkül kezdeni a napot, A Társaság
-          tagjaival pedig azon dolgozunk, hogy jobb hellyé tegyük a világot — először magunkkal kezdve.
+          A nevem Kardos Bálint. Integratív meditációs és idegrendszer-fejlesztő tréner, életmód-tanácsadó és jógaoktató vagyok. Babócsán, egy somogyi faluban nőttem fel.
         </p>
         <p className="mt-5 text-ink-soft">
-          A légzés, a figyelem és a testérzékelés ősi meditációs gyakorlatait tanítom, a modern idegtudomány és az
-          életmód-orvostan felől megközelítve: megmutatom, hogyan hat a légzés a vagusideg működésére és a
-          szívritmus-változékonyságra, és hogyan csendesedik el a figyelem. Dogmák és misztifikálás nélkül — úgy,
-          hogy a hétköznapokban is működjön.
+          Azért dolgozom, hogy egyre több ember kapcsolódjon önmagához és egymáshoz. Hiszem, hogy a magányra a kapcsolódás a válasz: befelé, a saját testünk és légzésünk felé, és kifelé, egymás felé.
         </p>
         <Link href="/rolam" className="mt-5 inline-flex items-center gap-1.5 text-forest underline decoration-gold/50 underline-offset-4 transition-colors duration-500 hover:decoration-gold">
           Az én történetem <ArrowRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
@@ -142,7 +137,7 @@ export default function HomePage() {
       <CompassDivider className="my-20" />
 
       <section>
-        <SectionTitle eyebrow="Hol kezdenéd?" title="Négy út — válaszd azt, amelyikre most szükséged van." />
+        <SectionTitle eyebrow="Hol kezdenéd?" title="Négy út a kapcsolódáshoz — válaszd azt, amelyikre most szükséged van." />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {PATHS.map(({ need, Art, title, text, note, href, cta, external, featured }) => {
             const body = (
@@ -205,10 +200,10 @@ export default function HomePage() {
       <section className="pb-8 text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha csak egy mondatot viszel magaddal</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest sm:text-4xl">
-          Az idegrendszered tanítható — és ezt nem kell egyedül csinálnod.
+          Gyere, tartozz valahová.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          A Társaságban napi néhány perccel, közösségben tanulod meg, hogyan válts vissza készenlétből nyugalomba.
+          A Társaságban napi 10–15 perccel kapcsolódsz önmagadhoz, és olyan emberek között gyakorolsz, akik ugyanezt az utat járják.
         </p>
         <div className="mt-8 flex flex-col items-center gap-3">
           <a href={publicEnv.NEXT_PUBLIC_TARSASAG_URL} className={buttonPrimary}>
