@@ -10,8 +10,12 @@ import { bookOpenEvening, type GuestBookingState } from "./actions";
 
 const initial: GuestBookingState = { status: "idle" };
 
-export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLabel: string }) {
+export function BookingForm({ eventId, priceLabel, free = false }: { eventId: string; priceLabel: string; free?: boolean }) {
   const [state, action, pending] = useActionState(bookOpenEvening, initial);
+
+  if (state.status === "done") {
+    return <p role="status" className="leading-relaxed text-forest">{state.message}</p>;
+  }
 
   return (
     <form onSubmit={keepFields(action)} className="space-y-4">
@@ -50,25 +54,29 @@ export function BookingForm({ eventId, priceLabel }: { eventId: string; priceLab
         </span>
       </label>
 
-      <label className="flex items-start gap-3 text-sm text-ink-soft">
-        <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
-        <span>
-          Kérem a szolgáltatás teljesítését a megrendeléssel, és tudomásul veszem, hogy ezzel elveszítem
-          a 14 napos elállási jogomat.
-        </span>
-      </label>
+      {!free && (
+        <label className="flex items-start gap-3 text-sm text-ink-soft">
+          <input type="checkbox" name="waiver" required className="mt-1 accent-forest" />
+          <span>
+            Kérem a szolgáltatás teljesítését a megrendeléssel, és tudomásul veszem, hogy ezzel elveszítem
+            a 14 napos elállási jogomat.
+          </span>
+        </label>
+      )}
       {state.status === "error" && <p className="text-sm text-ink">{state.message}</p>}
       <button
         type="submit"
         disabled={pending}
         className={`${buttonPrimary} w-full`}
       >
-        {pending ? "Egy pillanat…" : `Jelentkezés és fizetés (${priceLabel})`}
+        {pending ? "Egy pillanat…" : free ? "Jelentkezem (díjmentes)" : `Jelentkezés és fizetés (${priceLabel})`}
       </button>
-      <p className="text-xs text-ink-soft">
-        A fizetés a Stripe biztonságos oldalán történik. A részvételi díjról alanyi adómentes számlát
-        állítunk ki.
-      </p>
+      {!free && (
+        <p className="text-xs text-ink-soft">
+          A fizetés a Stripe biztonságos oldalán történik. A részvételi díjról alanyi adómentes számlát
+          állítunk ki.
+        </p>
+      )}
     </form>
   );
 }

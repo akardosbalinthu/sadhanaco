@@ -50,7 +50,7 @@ export default async function OpenEveningPage({
                 A fizetés megszakadt. A helyedet egy rövid ideig még tartjuk, nyugodtan próbáld újra.
               </p>
             )}
-            <BookingForm eventId={event.id} priceLabel={formatHuf(event.price_external_huf)} />
+            <BookingForm eventId={event.id} free={event.price_external_huf === 0} priceLabel={event.price_external_huf === 0 ? "díjmentes" : formatHuf(event.price_external_huf)} />
           </>
         ) : (
           <p className="text-ink-soft">Erre az alkalomra a jelentkezés most nem lehetséges.</p>

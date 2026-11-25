@@ -7,16 +7,19 @@ import { publicEnv } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe, onlinePaymentsEnabled } from "@/lib/stripe";
 import { SITE } from "@/lib/site";
+import { sendEmail } from "@/lib/email";
 
 export type GuestBookingState =
   | { status: "idle" }
+  | { status: "done"; message: string }
   | { status: "error"; message: string };
 
 const schema = z.object({
   eventId: z.string().uuid(),
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().toLowerCase().email(),
-  waiver: z.literal("on"),
+  // Az elállási nyilatkozat csak fizetős alkalomnál kell (lent ellenőrizzük, az esemény ára alapján).
+  waiver: z.literal("on").optional(),
   terms: z.literal("on"),
 });
 
@@ -43,7 +46,7 @@ export async function bookOpenEvening(
     eventId: formData.get("eventId"),
     name: formData.get("name"),
     email: formData.get("email"),
-    waiver: formData.get("waiver"),
+    waiver: formData.get("waiver") ?? undefined,
     terms: formData.get("terms"),
   });
   if (!parsed.success) {
@@ -58,15 +61,22 @@ export async function bookOpenEvening(
     };
   }
 
-  if (!onlinePaymentsEnabled()) {
+  const { eventId, name, email } = parsed.data;
+  const admin = createAdminClient();
+
+  // Az esemény saját ára dönt: díjmentes estnél nincs fizetés, fizetősnél az esemény ára kerül terhelésre.
+  const { data: ev } = await admin.from("events").select("title, starts_at, location, is_online, price_external_huf").eq("id", eventId).maybeSingle();
+  if (!ev || ev.price_external_huf == null) return { status: "error", message: MESSAGES.EVENT_NOT_FOUND };
+  const paid = ev.price_external_huf > 0;
+  if (paid && parsed.data.waiver !== "on") {
+    return { status: "error", message: "A jelentkezéshez kérlek, fogadd el az azonnali teljesítésről szóló nyilatkozatot." };
+  }
+  if (paid && !onlinePaymentsEnabled()) {
     return {
       status: "error",
       message: `Az online jelentkezés hamarosan nyílik. Addig írj nekünk: ${SITE.email}`,
     };
   }
-
-  const { eventId, name, email } = parsed.data;
-  const admin = createAdminClient();
 
   const { data: reg, error } = await admin.rpc("reserve_guest_seat", {
     p_event_id: eventId,
@@ -77,6 +87,25 @@ export async function bookOpenEvening(
     return { status: "error", message: MESSAGES[error?.hint ?? ""] ?? "Most nem sikerült. Kérlek, próbáld újra." };
   }
 
+  if (reg.status === "confirmed") {
+    // Díjmentes alkalom: a hely azonnal a vendégé; visszaigazoló levél (ha nem megy ki, a foglalás attól még él).
+    const when = new Intl.DateTimeFormat("hu-HU", { timeZone: "Europe/Budapest", dateStyle: "full", timeStyle: "short" }).format(new Date(ev.starts_at));
+    const mail = await sendEmail(email, `Visszaigazolás — ${ev.title}`, [
+      `Kedves ${name}!`,
+      `Örömmel várunk: ${ev.title}, ${when}${ev.is_online ? " (online)" : ev.location ? `, ${ev.location}` : ""}.`,
+      "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassuk.",
+    ]);
+    return {
+      status: "done",
+      message: mail.ok
+        ? "Köszönöm, a helyed le van foglalva. A visszaigazolást e-mailben is elküldtem. Szeretettel várunk!"
+        : "Köszönöm, a helyed le van foglalva. Szeretettel várunk!",
+    };
+  }
+
+  if (parsed.data.waiver !== "on") {
+    return { status: "error", message: "A jelentkezéshez kérlek, fogadd el az azonnali teljesítésről szóló nyilatkozatot." };
+  }
   const h = await headers();
   const { data: settings } = await admin.from("app_settings").select("terms_version").single();
   await admin.from("purchase_consents").insert({
@@ -88,17 +117,23 @@ export async function bookOpenEvening(
   });
 
   const stripe = getStripe();
-  const prices = await stripe.prices.list({ lookup_keys: ["nyilt_est_kulsos"], active: true, limit: 1 });
-  const price = prices.data[0];
-  if (!price) {
-    return { status: "error", message: "Most nem sikerült. Kérlek, próbáld újra később." };
-  }
+  const { data: product } = await admin.from("price_catalog").select("stripe_product_id").eq("code", "nyilt_est_kulsos").maybeSingle();
 
   const base = publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     locale: "hu",
-    line_items: [{ price: price.id, quantity: 1 }],
+    // Az esemény saját ára (nem a katalógus alapára), a Nyílt Est termékhez kötve.
+    line_items: [
+      {
+        quantity: 1,
+        price_data: {
+          currency: "huf",
+          unit_amount: reg.price_huf * 100,
+          ...(product?.stripe_product_id ? { product: product.stripe_product_id } : { product_data: { name: ev.title } }),
+        },
+      },
+    ],
     customer_email: email,
     billing_address_collection: "required",
     tax_id_collection: { enabled: false },

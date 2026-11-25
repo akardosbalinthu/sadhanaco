@@ -5,6 +5,7 @@ import { GildedCard } from "@/components/ornaments";
 import type { Database } from "@/lib/supabase/database.types";
 import { saveLesson } from "../actions";
 import { Empty, Flash, H2, label, one, smallInput, smallPrimary, type SP } from "../ui";
+import { SubmitButton } from "../submit-button";
 
 type Lesson = Database["public"]["Tables"]["lessons"]["Row"];
 
@@ -77,7 +78,7 @@ function LessonForm({ moduleId, moduleSlug, lesson, maxWeek }: { moduleId: strin
           <input type="checkbox" name="is_published" defaultChecked={lesson?.is_published ?? false} className="accent-[var(--color-gold)]" />
           Közzétéve (a tagok látják)
         </label>
-        <button className={smallPrimary}>{lesson ? "Mentés" : "Lecke felvétele"}</button>
+        <SubmitButton className={smallPrimary}>{lesson ? "Mentés" : "Lecke felvétele"}</SubmitButton>
       </div>
     </form>
   );

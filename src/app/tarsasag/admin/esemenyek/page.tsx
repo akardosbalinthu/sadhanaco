@@ -4,6 +4,7 @@ import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
 import { cancelEvent, createEvent, markAttended, publishEvent, unpublishEvent } from "../actions";
 import { Empty, Flash, H2, label, one, smallButton, smallInput, smallPrimary, type SP } from "../ui";
+import { SubmitButton } from "../submit-button";
 
 const REG_STATUS = { pending_payment: "fizetésre vár", confirmed: "megerősítve", cancelled: "lemondva" } as const;
 
@@ -204,7 +205,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               <label className="flex items-center gap-2 text-sm">
                 <input type="checkbox" name="is_published" className="accent-[var(--color-gold)]" /> Azonnal közzéteszem
               </label>
-              <button className={smallPrimary}>Esemény létrehozása</button>
+              <SubmitButton className={smallPrimary}>Esemény létrehozása</SubmitButton>
             </div>
           </form>
         </GildedCard>

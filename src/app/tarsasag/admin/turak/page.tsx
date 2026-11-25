@@ -4,6 +4,7 @@ import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
 import { closePoll, createPoll, linkPollEvent } from "../actions";
 import { Empty, Flash, H2, label, smallButton, smallInput, smallPrimary, type SP } from "../ui";
+import { SubmitButton } from "../submit-button";
 
 const monthName = (d: string) => new Intl.DateTimeFormat("hu-HU", { year: "numeric", month: "long", timeZone: "UTC" }).format(new Date(d));
 
@@ -141,7 +142,7 @@ export default async function AdminHikes({ searchParams }: { searchParams: SP })
               <input type="datetime-local" name="closes_at" required className={`${smallInput} mt-1 w-full`} />
             </label>
             <div className="flex items-end justify-end sm:col-span-3">
-              <button className={smallPrimary}>Szavazás kiírása</button>
+              <SubmitButton className={smallPrimary}>Szavazás kiírása</SubmitButton>
             </div>
           </form>
         </GildedCard>
