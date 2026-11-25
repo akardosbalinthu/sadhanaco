@@ -18,6 +18,7 @@ type Station = {
   paras: string[];
   Art?: (p: { className?: string }) => React.ReactElement;
   photos?: Photo[];
+  note?: { summary: string; paras: string[] };
 };
 
 const STATIONS: Station[] = [
@@ -105,8 +106,15 @@ const STATIONS: Station[] = [
     title: "Sok minden — és egyetlen dolog",
     paras: [
       "Dolgoztam a kereskedelemben és telefonos értékesítőként, voltam értékesítéstámogató egy multinál, kis- és középvállalkozások marketing- és értékesítési vezetője, közösségszervező, jótékonysági vacsorák házigazdája, egy gyerekeket segítő alapítvány kuratóriumi elnöke, privát séf, sofőr, raktáros és podcaster — egyszer még szinkronszínésznek is jelentkeztem. Építettem vályogházat Marokkóban, és több országban vigyáztam macskákra, „hivatásszerűen”.",
-      "Ha van tankönyvi példája annak, akit mindig elcsábít a következő izgalmas dolog, az én vagyok. Egyetlen kivétellel: három és fél éve minden áldott nap, kihagyás nélkül gyakorlok egy dogma- és vallásmentes önismereti technikát. Ez az egyetlen, amely mellett valóban kitartottam.",
+      "Ha van tankönyvi példája annak, akit mindig elcsábít a következő izgalmas dolog, az én vagyok. Egyetlen kivétellel: három és fél éve minden áldott nap, kihagyás nélkül gyakorlok egy dogma- és vallásmentes önismereti technikát, az ECO-t. Ez az egyetlen, amely mellett valóban kitartottam.",
     ],
+    note: {
+      summary: "Mi az ECO?",
+      paras: [
+        "Az ECO (Energy of Consciousness) régi korok energiagyógyászatán alapuló modern harmonizálási technika, készségfejlesztés, független spirituális irányzat és önismereti út. Vallás- és dogmamentes, őszinte megtapasztalási út, amelyben a gyakorló kinyithatja a saját tudatában és energetikai rendszerében rejlő lehetőségeket.",
+        "Az ECO útja sokszintű, változatos gyakorlatok és módszerek elsajátításán keresztül ad lehetőséget arra, hogy a gyakorlók egyre inkább rendbe tegyék a saját egészségüket, életüket és kapcsolataikat, és sikeressé váljanak életük minden területén. A modulokon átbeszélt témakörökkel együtt kiváló spirituális életvezetési támasz: önismereti és tapasztalati megértéseken alapuló útmutató egy boldog élethez.",
+      ],
+    },
   },
   {
     when: "2026 nyara",
@@ -152,7 +160,7 @@ const CONVERGE = [
   { from: "A vacsoraestek a tetőteraszon", to: "a közös asztal és a negyedéves vacsorameghívás" },
   { from: "A közösségszervezés", to: "egy közösség, ahol tapasztalatot osztunk meg, nem tanácsot" },
   { from: "A túrák a barátaimmal", to: "a havi közös túra, amelynek úti célját a tagok szavazzák meg" },
-  { from: "Egy kedves üzenet Indiából", to: "elsőbbségi kedves üzenetek a tagoknak" },
+  { from: "Egy kedves üzenet", to: "elsőbbségi kedves üzenetek a tagoknak" },
   { from: "A telefonmentes reggel", to: "a Napi Közlöny és az analóg reggel" },
 ];
 
@@ -206,7 +214,7 @@ export default function AboutPage() {
           Az utam
         </h2>
         <ol className="relative mt-12 max-w-3xl border-l border-gold/35 pl-8 sm:pl-10">
-          {STATIONS.map(({ when, title, paras, Art, photos }) => (
+          {STATIONS.map(({ when, title, paras, Art, photos, note }) => (
             <li key={title} className="relative pb-14 last:pb-0">
               <span className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rotate-45 border border-gold bg-paper sm:-left-[45px]" aria-hidden />
               <p className="text-xs uppercase tracking-[0.18em] text-gold">{when}</p>
@@ -219,6 +227,21 @@ export default function AboutPage() {
                   <p key={p.slice(0, 32)}>{p}</p>
                 ))}
               </div>
+              {note && (
+                <details className="group mt-4 max-w-2xl rounded-lg border border-line bg-paper-deep/50 px-4 py-3">
+                  <summary className="cursor-pointer list-none text-sm text-forest marker:hidden">
+                    <span className="underline decoration-gold/50 underline-offset-4">{note.summary}</span>
+                    <span className="ml-2 inline-block text-gold transition-transform duration-500 group-open:rotate-45" aria-hidden>
+                      +
+                    </span>
+                  </summary>
+                  <div className="mt-3 space-y-2 text-sm leading-relaxed text-ink-soft">
+                    {note.paras.map((p) => (
+                      <p key={p.slice(0, 24)}>{p}</p>
+                    ))}
+                  </div>
+                </details>
+              )}
               {photos && (
                 <div className={`mt-6 grid gap-4 ${photos.length > 1 ? "grid-cols-2" : "max-w-sm"}`}>
                   {photos.map((ph) => (
@@ -266,7 +289,11 @@ export default function AboutPage() {
       <CompassDivider className="my-20" />
 
       <section>
-        <SectionTitle eyebrow="Hazafelé, a repülőn" title="Néhány tanulság Indiából" />
+        <SectionTitle eyebrow="A közösségünk alappillérei" title="Tanulságok Indiából" />
+        <p className="mt-4 max-w-2xl text-ink-soft">
+          Ezek a gondolatok nemcsak az én utamat formálták: a közösségünk alappillérei. Ezek mentén gyakorlunk, és
+          ezek mentén vagyunk jelen egymás életében.
+        </p>
         <ol className="mt-10 grid gap-x-10 gap-y-4 md:grid-cols-2">
           {LESSONS.map((l, i) => (
             <li key={l} className="flex gap-3 text-ink-soft">
@@ -293,7 +320,7 @@ export default function AboutPage() {
           <ul className="mt-3 space-y-1.5 text-[15px] text-ink-soft">
             <li>Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy)</li>
             <li>Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh)</li>
-            <li>Tizenkét éves korom óta meditálok, három és fél éve minden nap gyakorlok egy önismereti technikát</li>
+            <li>Tizenkét éves korom óta meditálok, három és fél éve minden nap gyakorlom az ECO önismereti technikát</li>
           </ul>
         </GildedCard>
       </section>
