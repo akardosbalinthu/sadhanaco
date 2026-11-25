@@ -15,6 +15,7 @@ import {
   Wind,
 } from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
+import { publicEnv } from "@/lib/env";
 import { Sprout, WindingPath } from "@/components/illustrations";
 import { formatHuf, tp } from "@/lib/site";
 import { notifyHref } from "@/lib/cta";
@@ -746,6 +747,9 @@ export default async function TarsasagHome() {
             <li>Életmód-tanácsadó (Lifestyle Medicine Consultant, LifestylePro Academy)</li>
             <li>Jógaoktató (RYT-500, Rudra YogPeeth Yoga Ashram, Rishikesh)</li>
           </ul>
+          <a href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/rolam`} className="mt-5 inline-block text-sm text-forest underline decoration-gold/50 underline-offset-4 hover:decoration-gold">
+            Az én történetem
+          </a>
         </GildedCard>
       </section>
 

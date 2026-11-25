@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme";
 
 const nav = [
   { href: "/", label: "Kezdőlap" },
+  { href: "/rolam", label: "Rólam" },
   { href: "/nyilt-estek", label: "Nyílt Estek" },
   { href: "/egy-kedves-uzenet", label: "Egy Kedves Üzenet" },
   { href: "/napi-kozlony", label: "Napi Közlöny" },

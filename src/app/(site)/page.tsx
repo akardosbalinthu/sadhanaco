@@ -123,6 +123,9 @@ export default function HomePage() {
           szívritmus-változékonyságra, és hogyan csendesedik el a figyelem. Dogmák és misztifikálás nélkül — úgy,
           hogy a hétköznapokban is működjön.
         </p>
+        <Link href="/rolam" className="mt-5 inline-flex items-center gap-1.5 text-forest underline decoration-gold/50 underline-offset-4 transition-colors duration-500 hover:decoration-gold">
+          Az én történetem <ArrowRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
+        </Link>
       </section>
 
       <CompassDivider className="my-20" />
