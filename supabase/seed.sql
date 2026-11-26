@@ -6,13 +6,13 @@
 
 insert into public.modules (stage, slug, title, subtitle, description, total_weeks) values
   (1, 'jelenlet',
-   'I. Modul — Jelenlét',
-   'Online modul + I. Integrációs Program (IP 1) · 8+1 hét',
+   'Jelenlét',
+   'A program első szakasza · nagyjából az 1–2. hónap',
    'Online modul a jelenlét alapjairól — a légzés, a paraszimpatikus idegrendszer és a figyelem —, utána nyolc hét reggeli és esti gyakorlás, heti beszámolóval és gyakorlótársakkal.',
    9),
   (2, 'tudatossag',
-   'II. Modul — Tudatosság',
-   'Online modul + II. Integrációs Program (IP 2) · 8+1 hét',
+   'Tudatosság',
+   'A program második szakasza · nagyjából a 3–4. hónap',
    'A szívritmus-változékonyság stabilizálása, az agyféltekék összehangolása és a belső csend; utána nyolc hét az érzelmi stabilitásért. Admin jóváhagyással nyílik meg.',
    9),
   (3, 'ip3',
