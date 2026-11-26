@@ -292,24 +292,47 @@ export default function AboutPage() {
       <CompassDivider className="my-20" />
 
       <section id="miert" className="scroll-mt-24">
-        <SectionTitle eyebrow="Miért?" title="A kapcsolódásról" />
+        <SectionTitle eyebrow="Miért?" title="Az idegrendszerről és a stresszről" />
         <div className="mt-6 max-w-2xl space-y-4 text-ink-soft">
           <p className="font-serif text-xl text-ink">
-            A magány korunk egyik legnagyobb, mégis láthatatlan egészségügyi veszélye. Az Egészségügyi Világszervezet
-            (WHO) 2025-ös jelentése szerint világszerte minden hatodik ember magányos, és a magány évente több mint
-            871 000 halálesettel hozható összefüggésbe: óránként mintegy százzal.
-          </p>
-          <p>Az idegrendszer kapcsolatban nyugszik meg: önmagunkkal és egymással.</p>
-          <p>
-            <strong className="font-normal text-forest">Befelé</strong> ez kapcsolódás a testünkkel, a légzésünkkel és a
-            belső hangunkkal. Ezt gyakoroljuk nap mint nap a programban.
+            A tartós stressz ma szinte mindannyiunk életének része – és sokszor csak akkor vesszük észre, amikor a
+            testünk már jelez.
           </p>
           <p>
-            <strong className="font-normal text-forest">Kifelé</strong> ez kapcsolódás a többi emberrel, a
-            barátainkkal, a közösségünkkel és minden élőlénnyel. A társas kapcsolódás az életmód-orvostan hat
-            alappillérének egyike.
+            Az Egészségügyi Világszervezet (WHO) szerint 2019-ben világszerte közel egymilliárd ember élt valamilyen
+            mentális zavarral, leggyakrabban szorongással vagy depresszióval. A kiégést 2019 óta a betegségek nemzetközi
+            osztályozása (BNO-11) is leírja: a munkahelyi krónikus stressz következménye, amelyet nem sikerült jól
+            kezelni.
           </p>
-          <p>Úgy tapasztalom, hogy a kettő összetartozik: aki jobban kapcsolódik önmagához, kedvesebben fordul a másik felé is.</p>
+          <p>
+            A kutatások a tartós stresszt összefüggésbe hozzák a szív- és érrendszeri betegségekkel, a depresszióval és
+            a fertőzésekkel szembeni gyengébb ellenálló képességgel is. A hétköznapokban sokan így ismerik: rossz alvás,
+            feszült váll és állkapocs, emésztési panaszok, ingerlékenység, szétszórt figyelem, vagy az az érzés, hogy a
+            fejünkben soha nincs csend.
+          </p>
+          <p>
+            És van egy csendesebb stresszforrás is: a magány. A WHO 2025-ös jelentése szerint világszerte minden hatodik
+            ember magányos, és a magány évente több mint 871 000 halálesettel hozható összefüggésbe – óránként mintegy
+            százzal.
+          </p>
+          <p>
+            A jó hír az, hogy az idegrendszer nemcsak alkalmazkodik, hanem tanul is: a megnyugvás képessége gyakorlással
+            fejleszthető. Erre épül a program, két irányból.
+          </p>
+          <p>
+            <strong className="font-normal text-forest">Befelé</strong> a testünkkel, a légzésünkkel és a figyelmünkkel
+            dolgozunk: ez a napi gyakorlás, amely segít, hogy stresszhelyzetben is hamarabb visszatalálj a nyugalomhoz.
+          </p>
+          <p>
+            <strong className="font-normal text-forest">Kifelé</strong> az életmódod kerül sorra: az alvás, a mozgás, az
+            étkezés, a stresszkezelés és a kapcsolataid – az életmód-orvostan hat alappillére. A nyugalom ott marad meg
+            tartósan, ahol a hétköznapjaid is támogatják.
+          </p>
+          <p className="rounded-lg border border-line bg-paper-deep/50 px-4 py-3 text-sm">
+            Fontos: a program nem orvosi kezelés, és nem helyettesíti azt. Ha diagnosztizált betegséggel élsz vagy
+            gyógyszert szedsz, a programot az orvosi kezelés mellett, azt kiegészítve érdemes végezni – a konzultáción ezt
+            is átbeszéljük.
+          </p>
         </div>
       </section>
 
@@ -391,6 +414,9 @@ export default function AboutPage() {
       <footer className="mt-20 border-t border-line pt-6 text-xs text-ink-soft">
         <p className="uppercase tracking-[0.16em] text-gold">Források</p>
         <ul className="mt-2 space-y-1">
+          <li>WHO (2022): World mental health report: transforming mental health for all</li>
+          <li>WHO (2019): Burn-out an „occupational phenomenon”: International Classification of Diseases (BNO-11)</li>
+          <li>Cohen, S., Janicki-Deverts, D., Miller, G. E. (2007): Psychological Stress and Disease. JAMA, 298(14)</li>
           <li>WHO Commission on Social Connection (2025): From loneliness to social connection: charting a path to healthier societies</li>
           <li>American College of Lifestyle Medicine – az életmód-orvostan hat pillére</li>
           <li>Holt-Lunstad, J., Smith, T. B., Layton, J. B. (2010): Social Relationships and Mortality Risk: A Meta-analytic Review. PLoS Medicine</li>
