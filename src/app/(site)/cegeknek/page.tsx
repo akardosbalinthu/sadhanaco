@@ -8,7 +8,7 @@ import { InquiryForm } from "./inquiry-form";
 export const metadata = {
   title: "Cégeknek · Kardos Bálint",
   description:
-    "Cégre szabott tréningnapok és programok idegrendszer-fejlesztésről, jógikus légző- és meditációs gyakorlatokkal, modern életmód-orvostani keretrendszerben. Kérj személyre szabott ajánlatot.",
+    "Cégre szabott tréningnapok és programok idegrendszer-fejlesztésről, több ezer éves jógikus légző- és meditációs gyakorlatokkal, modern életmód-orvostani keretrendszerben. Kérj személyre szabott ajánlatot.",
 };
 
 // P – a csapat helyzete
@@ -52,7 +52,7 @@ export default function BusinessPage() {
       <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
         <PageHeader eyebrow="Cégeknek" title="Nyugodtabb csapat – a nyomás alatt is.">
           <p className="font-serif text-xl text-ink">
-            Cégre szabott tréningnapok és programok jógikus légző- és meditációs gyakorlatokkal, modern életmód-orvostani
+            Cégre szabott tréningnapok és programok több ezer éves jógikus légző- és meditációs gyakorlatokkal, modern életmód-orvostani
             keretrendszerben.
           </p>
           <p>

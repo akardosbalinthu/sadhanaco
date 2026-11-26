@@ -50,7 +50,7 @@ export function SiteFooter() {
         <CompassDivider />
       </div>
       <div className="mx-auto flex max-w-5xl flex-wrap justify-between gap-4 px-6 py-8 text-sm text-ink-soft">
-        <p className="max-w-sm text-xs uppercase leading-relaxed tracking-[0.18em] text-gold">Jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.</p>
+        <p className="max-w-sm text-xs uppercase leading-relaxed tracking-[0.18em] text-gold">Több ezer éves jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.</p>
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           <a href={`mailto:${SITE.email}`} className={navLink}>
             {SITE.email}
