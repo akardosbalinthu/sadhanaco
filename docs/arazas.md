@@ -29,3 +29,19 @@
 ## Bevételi korlát
 
 - 2027-ben az alanyi adómentesség határa 20 M Ft (a céges bevétellel együtt). 22 M Ft-hoz adózási váltás kell – könyvelővel egyeztetni.
+
+## 2027-es terv – legalább 22 M Ft
+
+| Tétel | Mennyiség | Bevétel |
+|---|---|---|
+| Egyéni program | 22 ügyfél × átlag kb. 720 000 Ft | 15,8 M |
+| Egész napos tréningnap | 6 × 540 000 Ft | 3,24 M |
+| Félnapos tréning | 4 × 320 000 Ft | 1,28 M |
+| Előadás | 6 × 150 000 Ft | 0,9 M |
+| Egyéni program vezetőknek | 1 × 990 000 Ft | 0,99 M |
+| Nyílt Est | 11 alkalom × kb. 10 fizető × 4 940 Ft | 0,54 M |
+| **Összesen** | | **kb. 22,8 M Ft** |
+
+- Az átlagos egyéni díj feltételezése: 50% egy összegben, 30% négy részletben, 20% havonta.
+- Munkaidő: kb. 800 óra / év (≈ heti 17–18 óra, 46 munkahéttel).
+- Értékesítési tölcsér (becslés): havonta kb. 2 új ügyfél → kb. 4–5 konzultáció / hó → kb. 10 kitöltött kérdőív / hó.
