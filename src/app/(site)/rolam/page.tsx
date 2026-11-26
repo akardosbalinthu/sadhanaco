@@ -311,6 +311,12 @@ export default function AboutPage() {
             fejünkben soha nincs csend.
           </p>
           <p>
+            Magyarországon a szív- és érrendszeri betegségek a leggyakoribb halálokok: a KSH adatai szerint 2024-ben
+            több mint 60 000 ember, az összes elhunyt csaknem fele halt meg a keringési rendszer valamelyik betegségében.
+            Ezeknek több kockázati tényezője van – a dohányzás, a magas vérnyomás, a mozgásszegény életmód és az
+            egészségtelen étkezés mellett a tartós stressz is.
+          </p>
+          <p>
             És van egy csendesebb stresszforrás is: a magány. A WHO 2025-ös jelentése szerint világszerte minden hatodik
             ember magányos, és a magány évente több mint 871 000 halálesettel hozható összefüggésbe – óránként mintegy
             százzal.
@@ -416,6 +422,7 @@ export default function AboutPage() {
         <ul className="mt-2 space-y-1">
           <li>WHO (2022): World mental health report: transforming mental health for all</li>
           <li>WHO (2019): Burn-out an „occupational phenomenon”: International Classification of Diseases (BNO-11)</li>
+          <li>KSH (2025): Halálozások halálokok szerint, 2024</li>
           <li>Cohen, S., Janicki-Deverts, D., Miller, G. E. (2007): Psychological Stress and Disease. JAMA, 298(14)</li>
           <li>WHO Commission on Social Connection (2025): From loneliness to social connection: charting a path to healthier societies</li>
           <li>American College of Lifestyle Medicine – az életmód-orvostan hat pillére</li>
