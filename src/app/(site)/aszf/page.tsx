@@ -69,9 +69,11 @@ const sections: LegalSection[] = [
         </p>
         <p>
           <strong>A program nem vásárolható meg közvetlenül.</strong> A jelentkezés egy felméréssel indul, amelyet egy
-          ismerkedő konzultáció követ. A szerződés a konzultáción egyeztetett feltételekkel (a program díja, a
-          fizetés módja és ütemezése, a kezdés napja) jön létre, amikor ezeket a szolgáltató e-mailben írásban
-          visszaigazolja. Az ismerkedő konzultáció önmagában nem keletkeztet fizetési kötelezettséget.
+          ismerkedő konzultáció követ. A konzultáció után a szolgáltató e-mailben
+          fizetési linket küld. A fizetési oldalon választható fizetési módok: egy összegben, négy havi részletben vagy
+          havi részletekben. A szerződés a fizetési oldalon leadott megrendeléssel és a díj, illetve az első részlet
+          megfizetésével jön létre; a visszaigazolást e-mailben küldjük. Az ismerkedő konzultáció önmagában nem
+          keletkeztet fizetési kötelezettséget.
         </p>
         <p>
           Az alkalmak időpontját közösen egyeztetjük. Az alkalmak áthelyezésére, az elmaradt alkalmakra és a program idő
@@ -89,9 +91,16 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Az egyéni program díját a konzultáción egyeztetjük. A Nyílt Meditációs Est részvételi díja a weboldalon
-          szerepel, és bankkártyával, a Stripe biztonságos fizetési oldalán fizethető; a kártyaadatokat a szolgáltató
-          nem látja és nem tárolja.
+          Az egyéni program díját és a választható fizetési módokat a konzultáció után küldött fizetési oldal
+          tartalmazza. A Nyílt Meditációs Est részvételi díja a weboldalon szerepel. Mindkettő bankkártyával, a Stripe
+          biztonságos fizetési oldalán fizethető; a kártyaadatokat a szolgáltató nem látja és nem tárolja.
+        </p>
+        <p>
+          Részletfizetésnél a további részleteket a Stripe havonta automatikusan terheli ugyanarra a kártyára; a kártya a
+          résztvevői felület Adataim oldalán bármikor frissíthető. A részletfizetés a teljes programdíj megosztott
+          megfizetése, nem havonta lemondható előfizetés. Sikertelen terhelés esetén e-mailben értesítünk, és a terhelést a
+          következő napokban újrapróbáljuk; ha 10 napon belül nem rendeződik, a résztvevői felület szünetel, amíg a fizetés
+          rendben nem lesz.
         </p>
         <p>
           Minden fizetésről <strong>alanyi adómentes (AAM)</strong> elektronikus számla készül. A díjak egyike sem
@@ -225,7 +234,7 @@ export default function TermsPage() {
           helyettesíti az orvosi kezelést.
         </p>
       }
-      meta={`Verzió: 2026-11-25 · Hatályos: ${LEGAL.effectiveFrom}`}
+      meta={`Verzió: 2026-11-26 · Hatályos: ${LEGAL.effectiveFrom}`}
       sections={sections}
     />
   );

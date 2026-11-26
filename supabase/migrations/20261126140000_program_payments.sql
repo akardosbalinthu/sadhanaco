@@ -10,6 +10,9 @@
 --   * Sikertelen részlet → 10 nap türelmi idő (past_due_grace_days), utána a felület szünetel.
 -- =============================================================================
 
+-- Az ÁSZF új változata (a fizetési oldal hozzájárulásai ezt rögzítik).
+update public.app_settings set terms_version = '2026-11-26' where id;
+
 insert into public.price_catalog (code, label, amount_huf, stripe_product_id, is_active) values
   ('egyeni_program_egyben',    'Egyéni program – egy összegben',     690000, 'prod_VhIC69usAOqsTU', true),
   ('egyeni_program_4_reszlet', 'Egyéni program – négy részletben',   180000, 'prod_VhIC69usAOqsTU', true),
