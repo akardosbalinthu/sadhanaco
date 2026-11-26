@@ -15,6 +15,9 @@ exception when others then
   return h;
 end $f$;
 
+-- tiszta lap (a tranzakció végén minden visszaáll)
+delete from public.business_inquiries;
+
 select set_config('request.jwt.claims', '{"role":"authenticated","sub":"00000000-0000-0000-0000-000000000001"}', true);
 select is(pg_temp.err($$ select public.submit_business_inquiry('Példa Kft.', 'Budapest', 40, 20, 'Teszt Elek', 'HR-vezető', 'hr@example.com', null, 'Csapatnap.', array['treningnap'], array['nalunk'], '1_3_honap', null, true) $$), 'FORBIDDEN', 'csak szerveroldalról hívható');
 
