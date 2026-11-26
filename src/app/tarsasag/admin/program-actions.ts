@@ -356,3 +356,23 @@ export async function replyReport(fd: FormData) {
   }
   done(`/resztvevok/${enrollment}`, error, "Visszajelzés elmentve.");
 }
+
+// ---------------------------------------------------------------------------
+// Céges ajánlatkérések
+// ---------------------------------------------------------------------------
+
+export async function setInquiryStatus(fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(fd.get("id"));
+  const status = z.enum(["uj", "folyamatban", "ajanlat_kiment", "megnyert", "nem_lett"]).parse(fd.get("status"));
+  const { error } = await supabase.from("business_inquiries").update({ status, admin_note: optStr(fd, "admin_note") }).eq("id", id);
+  done(`/ajanlatkeresek/${id}`, error, "Elmentve.");
+}
+
+export async function deleteInquiry(fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(fd.get("id"));
+  const { error } = await supabase.from("business_inquiries").delete().eq("id", id);
+  if (error) back(`/ajanlatkeresek/${id}`, { hiba: error.message });
+  done("/ajanlatkeresek", null, "Az ajánlatkérést töröltem.");
+}

@@ -33,6 +33,7 @@ const NOTE_LABEL: Record<string, string> = {
   application: "Új jelentkezés",
   consultation_booked: "Új konzultáció lefoglalva",
   weekly_report: "Új heti beszámoló",
+  business_inquiry: "Új céges ajánlatkérés",
 };
 
 export default async function AdminHome({ searchParams }: { searchParams: SP }) {

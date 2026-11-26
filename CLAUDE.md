@@ -137,6 +137,8 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 > **Arculat (2026. november 25-től mérvadó):** minden felhasználónak látható szövegnek a `docs/ARCULAT.md` arculati alapjához kell illeszkednie: egyéni, holisztikus program (a jóga nyolc ága + az életmód-orvostan hat pillére), fő cím: „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”, alcím: „Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.” Központi üzenet: hosszú távú út, már ma használható eszközökkel. Tipográfia: magyar gondolatjel (–). Végzettség: RYT-500 marad mindenhol. Ahol ez és a korábbi pontok ütköznek, az ARCULAT.md az irányadó.
 
+> **Cégeknek (2026. november 26.):** van „Cégeknek” oldal (`/cegeknek`) cégre szabott tréningnapokkal, többalkalmas programmal, előadással és vezetői egyéni programmal; ár nincs kiírva, csak ajánlatkérő űrlap (`business_inquiries`, `submit_business_inquiry`, admin: Ajánlatkérések, 1 év után automatikus törlés). Bálint közlése szerint 2027-től KATA mellett is lehet cégnek számlázni; addig céggel szerződés és számla nem köthető. A gyakorlatnév-tilalom itt is érvényes. Az ÁSZF jelenleg csak magánszemélyekről szól – céges szerződés előtt ki kell egészíteni.
+
 ### 7.1 KATA bevételi határ
 - A KATA éves bevételi határának elérésekor **lezárjuk az új jelentkezéseket** (admin kapcsoló: `app_settings.registration_open`). Később valószínűleg Kft. lesz a megoldás — a számlázási réteg legyen cserélhető (számlázási entitás konfigurálható, ne legyen hardcode-olva).
 - A rendszer naptári évenként összesíti a kiállított számlák összegét, és a **várható megújulásokat is beszámítva** figyelmeztet (pl. 80%-nál), mert a lezárás csak az új tagokat állítja meg.

@@ -65,6 +65,20 @@ export type Database = {
                   Relationships: [
                     
                   ]
+                },"business_inquiries": {
+                  Row: {
+                    "admin_note": string | null,"budget": string | null,"company_name": string,"company_size": number,"contact_name": string,"contact_role": string | null,"created_at": string,"email": string,"formats": (string)[],"goal": string,"hq_city": string,"id": string,"locations": (string)[],"participants": number | null,"phone": string | null,"privacy_consent_at": string,"status": Database["public"]['Enums']["business_inquiry_status"],"timing": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "admin_note"?: string | null,"budget"?: string | null,"company_name": string,"company_size": number,"contact_name": string,"contact_role"?: string | null,"created_at"?: string,"email": string,"formats": (string)[],"goal": string,"hq_city": string,"id"?: string,"locations": (string)[],"participants"?: number | null,"phone"?: string | null,"privacy_consent_at": string,"status"?: Database["public"]['Enums']["business_inquiry_status"],"timing": string
+                  }
+                  Update: {
+                    "admin_note"?: string | null,"budget"?: string | null,"company_name"?: string,"company_size"?: number,"contact_name"?: string,"contact_role"?: string | null,"created_at"?: string,"email"?: string,"formats"?: (string)[],"goal"?: string,"hq_city"?: string,"id"?: string,"locations"?: (string)[],"participants"?: number | null,"phone"?: string | null,"privacy_consent_at"?: string,"status"?: Database["public"]['Enums']["business_inquiry_status"],"timing"?: string
+                  }
+                  Relationships: [
+                    
+                  ]
                 },"comments": {
                   Row: {
                     "author_id": string | null,"body": string,"created_at": string,"edited_at": string | null,"id": string,"is_hidden": boolean,"post_id": string
@@ -1497,6 +1511,9 @@ isOneToOne: false
 "purge_old_applications":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
+"purge_old_business_inquiries":
+{ Args: Record<PropertyKey, never>; Returns: number
+                           },
 "purge_registration_details":
 { Args: Record<PropertyKey, never>; Returns: number
                            },
@@ -1661,6 +1678,33 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"submit_business_inquiry":
+{ Args: { "p_budget": string,"p_company_name": string,"p_company_size": number,"p_contact_name": string,"p_contact_role": string,"p_email": string,"p_formats": (string)[],"p_goal": string,"p_hq_city": string,"p_locations": (string)[],"p_participants": number,"p_phone": string,"p_privacy_consent": boolean,"p_timing": string }; Returns: {
+              "admin_note": string | null,
+"budget": string | null,
+"company_name": string,
+"company_size": number,
+"contact_name": string,
+"contact_role": string | null,
+"created_at": string,
+"email": string,
+"formats": (string)[],
+"goal": string,
+"hq_city": string,
+"id": string,
+"locations": (string)[],
+"participants": number | null,
+"phone": string | null,
+"privacy_consent_at": string,
+"status": Database["public"]['Enums']["business_inquiry_status"],
+"timing": string
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "business_inquiries"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "submit_compass":
 { Args: { "p_answers": Json,"p_tiebreak"?: Database["public"]['Enums']["order_key"] }; Returns: Database["public"]['Enums']["order_key"]
                            },
@@ -1746,7 +1790,7 @@ isOneToOne: false
                            }
           }
           Enums: {
-            "application_start": "azonnal"|"egy_heten_belul"|"egy_honapon_belul"|"kesobb"|"nem_tudom","application_status": "uj"|"foglalt"|"konzultalt"|"resztvevo"|"nem_lett"|"archiv","billing_interval": "month"|"year","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","enrollment_status": "aktiv"|"lezart","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok"|"magusok","post_kind": "normal"|"penteki_kor","program_session_status": "tervezett"|"megtartott"|"elmaradt","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
+            "application_start": "azonnal"|"egy_heten_belul"|"egy_honapon_belul"|"kesobb"|"nem_tudom","application_status": "uj"|"foglalt"|"konzultalt"|"resztvevo"|"nem_lett"|"archiv","billing_interval": "month"|"year","business_inquiry_status": "uj"|"folyamatban"|"ajanlat_kiment"|"megnyert"|"nem_lett","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","enrollment_status": "aktiv"|"lezart","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok"|"magusok","post_kind": "normal"|"penteki_kor","program_session_status": "tervezett"|"megtartott"|"elmaradt","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -1866,7 +1910,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "application_start": ["azonnal", "egy_heten_belul", "egy_honapon_belul", "kesobb", "nem_tudom"],"application_status": ["uj", "foglalt", "konzultalt", "resztvevo", "nem_lett", "archiv"],"billing_interval": ["month", "year"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"enrollment_status": ["aktiv", "lezart"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok", "magusok"],"post_kind": ["normal", "penteki_kor"],"program_session_status": ["tervezett", "megtartott", "elmaradt"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
+            "application_start": ["azonnal", "egy_heten_belul", "egy_honapon_belul", "kesobb", "nem_tudom"],"application_status": ["uj", "foglalt", "konzultalt", "resztvevo", "nem_lett", "archiv"],"billing_interval": ["month", "year"],"business_inquiry_status": ["uj", "folyamatban", "ajanlat_kiment", "megnyert", "nem_lett"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"enrollment_status": ["aktiv", "lezart"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok", "magusok"],"post_kind": ["normal", "penteki_kor"],"program_session_status": ["tervezett", "megtartott", "elmaradt"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
           }
         }
 } as const

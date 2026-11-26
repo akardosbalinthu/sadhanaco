@@ -62,6 +62,11 @@ const sections: LegalSection[] = [
           <Row what="Belső jegyzet a programról" why="a kísérés előkészítése; csak én látom" basis="szerződés teljesítése" until="a program végét követő 1 év" />
         </ul>
 
+        <p id="cegeknek" className="scroll-mt-24 pt-3 font-serif text-lg text-forest">Céges ajánlatkérés</p>
+        <ul>
+          <Row what="A cég neve, székhelye és mérete, a kapcsolattartó neve, beosztása, e-mail-címe és telefonszáma, valamint az igényre vonatkozó válaszok" why="a céges ajánlat elkészítése és a kapcsolattartás" basis="a szerződés megkötését megelőző lépések, illetve jogos érdek (GDPR 6. cikk (1) b) és f))" until="az ajánlatkéréstől számított 1 év, utána automatikusan töröljük; szerződés esetén a szerződésre vonatkozó szabályok szerint" />
+        </ul>
+
         <p className="pt-3 font-serif text-lg text-forest">Fiók és belépés</p>
         <ul>
           <Row what="E-mail-cím, név" why="a résztvevői fiók, a belépés (belépő link) és a kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b)" until="a program végét követő 1 év" />

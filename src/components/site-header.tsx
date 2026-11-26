@@ -9,6 +9,7 @@ const nav = [
   { href: "/rolam", label: "Rólam" },
   { href: "/nyilt-estek", label: "Nyílt Estek" },
   { href: "/egy-kedves-uzenet", label: "Egy Kedves Üzenet" },
+  { href: "/cegeknek", label: "Cégeknek" },
 ];
 
 const navLink = "transition-colors duration-300 hover:text-gold";

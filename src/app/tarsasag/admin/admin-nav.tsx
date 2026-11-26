@@ -8,6 +8,7 @@ const ITEMS = [
   { href: "/jelentkezesek", label: "Jelentkezések" },
   { href: "/idopontok", label: "Időpontok" },
   { href: "/resztvevok", label: "Résztvevők" },
+  { href: "/ajanlatkeresek", label: "Ajánlatkérések" },
   { href: "/tananyag", label: "Tananyag" },
   { href: "/esemenyek", label: "Események" },
   { href: "/kedves-uzenetek", label: "Kedves Üzenetek" },
