@@ -72,7 +72,7 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 
 ## 6. Új arculati alap – jóváhagyva, részletek: `docs/ARCULAT.md`
 
-- **Leíró mondat (alcím):** Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva. Fő cím (jóváhagyva): „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”
+- **Leíró mondat (alcím):** Jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva. Fő cím (jóváhagyva): „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”
 
 - **A fő üzenet:** egy teljes, holisztikus út – meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
 - **A cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával.

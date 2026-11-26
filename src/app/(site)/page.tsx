@@ -7,7 +7,7 @@ import { DawnLandscape, EveningLamp, KindCall, Sprout, WindingPath } from "@/com
 export const metadata = {
   title: "Kardos Bálint · Találd meg a nyugalmad – és tartsd is meg a hétköznapokban",
   description:
-    "Nyolchónapos egyéni idegrendszer-fejlesztő program tradicionális jógikus gyakorlatokkal, modern életmód-orvostani keretrendszerben. Hosszú távú út, de az első lépést már ma megteheted.",
+    "Nyolchónapos egyéni idegrendszer-fejlesztő program jógikus légző- és meditációs gyakorlatokkal, modern életmód-orvostani keretrendszerben. Hosszú távú út, de az első lépést már ma megteheted.",
 };
 
 // A felsorolások sorrendje a jóga nyolc ágát követi: önfegyelem és mértékletesség → test → légzés →
@@ -95,7 +95,7 @@ export default function HomePage() {
             Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.
           </h1>
           <p className="mt-5 font-serif text-xl leading-relaxed text-ink">
-            Tradicionális jógikus gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.
+            Jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.
           </p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
             Hosszú távú út ez, nem gyorstalpaló – az első lépést mégis már ma megteheted.
