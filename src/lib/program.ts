@@ -13,6 +13,8 @@ export type MyProgram = {
   practice_plan: string | null;
   week_start: string;
   report_done: boolean;
+  payment_overdue?: boolean;
+  payment_paused?: boolean;
   next_session: {
     id: string;
     starts_at: string;

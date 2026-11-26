@@ -2,7 +2,7 @@ import Link from "next/link";
 import { fmtDate, requireAdmin } from "@/lib/admin";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
-import { enrollParticipant } from "../program-actions";
+import { createPaymentOffer, enrollParticipant } from "../program-actions";
 import { SubmitButton } from "../submit-button";
 import { Empty, Flash, H2, label, smallInput, smallPrimary, type SP } from "../ui";
 
@@ -67,7 +67,18 @@ export default async function ParticipantsPage({ searchParams }: { searchParams:
       </section>
 
       <section>
-        <H2>Résztvevő felvétele jelentkezés nélkül</H2>
+        <H2>Fizetési link jelentkezés nélkül</H2>
+        <p className="mt-2 text-sm text-ink-soft">Ha valaki nem a kérdőíven keresztül érkezett. Fizetés után a rendszer magától felveszi.</p>
+        <form action={createPaymentOffer} className="mt-5 grid gap-4 sm:grid-cols-3">
+          <label className="block"><span className={label}>Név</span><input name="full_name" required className={`${smallInput} mt-1 w-full`} /></label>
+          <label className="block"><span className={label}>E-mail</span><input name="email" type="email" required className={`${smallInput} mt-1 w-full`} /></label>
+          <label className="block"><span className={label}>A program kezdőnapja</span><input name="starts_on" type="date" defaultValue={today} min={today} required className={`${smallInput} mt-1 w-full`} /></label>
+          <div className="sm:col-span-3"><SubmitButton className={smallPrimary}>Fizetési linket küldök</SubmitButton></div>
+        </form>
+      </section>
+
+      <section>
+        <H2>Résztvevő felvétele kézzel (fizetés a rendszeren kívül)</H2>
         <form action={enrollParticipant} className="mt-5 grid gap-4 sm:grid-cols-2">
           <label className="block"><span className={label}>Név</span><input name="full_name" required className={`${smallInput} mt-1 w-full`} /></label>
           <label className="block"><span className={label}>E-mail (ezzel lép be)</span><input name="email" type="email" required className={`${smallInput} mt-1 w-full`} /></label>

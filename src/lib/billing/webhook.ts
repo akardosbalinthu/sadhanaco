@@ -20,7 +20,20 @@ export interface WebhookDeps {
   sendWelcome: (email: string) => Promise<void>;
   /** Értesítés sikertelen terhelésről. */
   sendPaymentFailed: (email: string) => Promise<void>;
+  /** Egyéni program: az előfizetés lezárása a részletek számának megfelelő időpontban. */
+  setSubscriptionEnd: (subscriptionId: string, installments: number) => Promise<void>;
+  /** Egyéni program: üdvözlő levél (belépő linkkel) és értesítő Bálintnak. */
+  sendProgramWelcome: (email: string, name: string, startsOn: string, created: boolean) => Promise<void>;
+  /** Egyéni program: sikertelen részlet — levél az ügyfélnek és Bálintnak. */
+  sendProgramPaymentFailed: (email: string, name: string) => Promise<void>;
 }
+
+const PROGRAM_INSTALLMENTS: Record<string, number> = {
+  egyeni_program_egyben: 1,
+  egyeni_program_4_reszlet: 4,
+  egyeni_program_havi: 8,
+};
+const isProgramCode = (c: string | null | undefined): c is string => !!c && c in PROGRAM_INSTALLMENTS;
 
 const iso = (unix: number | null | undefined) => (unix ? new Date(unix * 1000).toISOString() : null);
 const idOf = (v: string | { id: string } | null | undefined) => (typeof v === "string" ? v : v?.id ?? null);
@@ -104,8 +117,95 @@ async function rpcOrThrow(p: PromiseLike<{ error: { message: string } | null }>,
   if (error) throw new Error(`${what}: ${error.message}`);
 }
 
+/** Egyéni program: sikeres első fizetés → fiók, program, (részletnél) az előfizetés vége, számlatétel, levelek. */
+async function onProgramCheckout(s: Stripe.Checkout.Session, d: WebhookDeps) {
+  const offerId = s.metadata?.offer_id;
+  const plan = s.metadata?.plan;
+  if (s.payment_status !== "paid" || !offerId || !isProgramCode(plan)) return;
+  const { data: offer } = await d.admin.from("program_payment_offers").select("full_name, email, starts_on").eq("id", offerId).maybeSingle();
+  if (!offer) throw new Error(`Ismeretlen fizetési ajánlat: ${offerId}`);
+  const parts = offer.full_name.trim().split(/\s+/);
+  const names = parts.length > 1 ? { last_name: parts[0], first_name: parts.slice(1).join(" ") } : { first_name: parts[0] };
+  const email = (s.customer_details?.email ?? s.customer_email ?? offer.email).toLowerCase();
+  const customerId = idOf(s.customer);
+  const subscriptionId = idOf(s.subscription);
+  const user = await ensureUser(d.admin, email, customerId, names);
+  await d.admin.from("profiles").update({ country: s.customer_details?.address?.country ?? null }).eq("id", user.id).is("country", null);
+  await d.admin.from("purchase_consents").update({ user_id: user.id }).eq("stripe_checkout_session_id", s.id);
+
+  const { error } = await d.admin.rpc("program_payment_completed", {
+    p_offer_id: offerId,
+    p_user_id: user.id,
+    p_plan: plan,
+    p_customer: customerId ?? "",
+    p_subscription: subscriptionId ?? "",
+  });
+  if (error) throw new Error(`A program rögzítése nem sikerült: ${error.message}`);
+
+  if (subscriptionId) {
+    // Pontosan N részlet: az előfizetés a kezdéstől számított N. hónap végén magától lezárul.
+    await d.setSubscriptionEnd(subscriptionId, PROGRAM_INSTALLMENTS[plan]);
+  } else {
+    const pi = idOf(s.payment_intent);
+    const { data: existing } = pi ? await d.admin.from("invoices").select("id").eq("stripe_payment_intent_id", pi).limit(1) : { data: [] };
+    if (!existing?.length) {
+      await recordInvoice(d.admin, {
+        userId: user.id,
+        code: plan,
+        amount: hufFromStripe(s.amount_total ?? 0),
+        country: s.customer_details?.address?.country ?? null,
+        stripeInvoiceId: null,
+        paymentIntentId: pi,
+      });
+    }
+  }
+  await d.sendProgramWelcome(user.email, offer.full_name, offer.starts_on, user.created);
+}
+
+/** Az előfizetés egyéni programhoz tartozik-e (a Checkout a metaadatba írja). */
+const subscriptionKind = (inv: Stripe.Invoice) => inv.parent?.subscription_details?.metadata?.kind ?? null;
+
+async function onProgramInvoicePaid(inv: Stripe.Invoice, d: WebhookDeps) {
+  const subId = idOf(inv.parent?.subscription_details?.subscription ?? null);
+  if (!subId || (inv.amount_paid ?? 0) <= 0) return;
+  const { data: enrollmentId, error } = await d.admin.rpc("program_installment_paid", { p_subscription: subId });
+  if (error) throw new Error(`A részlet rögzítése nem sikerült: ${error.message}`);
+  // Ha a Checkout-esemény még nem futott le, a Stripe később újrapróbálja ezt az eseményt.
+  if (!enrollmentId) throw new Error(`A részlethez még nincs program rögzítve (${subId}).`);
+  const { data: e } = await d.admin.from("program_enrollments").select("user_id, payment_plan").eq("id", enrollmentId).single();
+  const { data: profile } = await d.admin.from("profiles").select("country").eq("id", e!.user_id).single();
+  await recordInvoice(d.admin, {
+    userId: e!.user_id,
+    code: e!.payment_plan ?? "egyeni_program_havi",
+    amount: hufFromStripe(inv.amount_paid),
+    country: inv.customer_address?.country ?? profile?.country ?? null,
+    stripeInvoiceId: inv.id ?? null,
+    paymentIntentId: null,
+  });
+}
+
+async function onProgramPaymentFailed(inv: Stripe.Invoice, d: WebhookDeps) {
+  const subId = idOf(inv.parent?.subscription_details?.subscription ?? null);
+  if (!subId) return;
+  const { data: first, error } = await d.admin.rpc("program_installment_failed", { p_subscription: subId });
+  if (error) throw new Error(`A sikertelen részlet rögzítése nem sikerült: ${error.message}`);
+  if (!first) return;
+  const { data: e } = await d.admin
+    .from("program_enrollments")
+    .select("profiles(email, first_name, last_name)")
+    .eq("stripe_subscription_id", subId)
+    .maybeSingle();
+  const p = e?.profiles as unknown as { email: string; first_name: string | null; last_name: string | null } | null;
+  if (p?.email) await d.sendProgramPaymentFailed(p.email, [p.last_name, p.first_name].filter(Boolean).join(" ") || p.email);
+}
+
 async function onCheckoutCompleted(s: Stripe.Checkout.Session, d: WebhookDeps) {
   const kind = s.metadata?.kind;
+
+  if (kind === "program") {
+    await onProgramCheckout(s, d);
+    return;
+  }
 
   if (kind === "open_evening_guest") {
     if (s.payment_status !== "paid" || !s.metadata?.registration_id) return;
@@ -271,6 +371,10 @@ async function membershipLine(inv: Stripe.Invoice, d: WebhookDeps) {
 }
 
 async function onInvoicePaid(inv: Stripe.Invoice, d: WebhookDeps) {
+  if (subscriptionKind(inv) === "program") {
+    await onProgramInvoicePaid(inv, d);
+    return;
+  }
   if ((inv.amount_paid ?? 0) <= 0) return; // a próbaidő 0 Ft-os nyitó számlája
   if (!inv.parent?.subscription_details?.subscription) return;
   const line = await membershipLine(inv, d);
@@ -307,6 +411,10 @@ async function userByCustomer(admin: Admin, customer: string | { id: string } | 
 }
 
 async function onPaymentFailed(inv: Stripe.Invoice, d: WebhookDeps) {
+  if (subscriptionKind(inv) === "program") {
+    await onProgramPaymentFailed(inv, d);
+    return;
+  }
   const user = await userByCustomer(d.admin, inv.customer);
   if (!user) return;
   const { data: first, error } = await d.admin.rpc("membership_payment_failed", { p_user: user.id });
@@ -315,6 +423,7 @@ async function onPaymentFailed(inv: Stripe.Invoice, d: WebhookDeps) {
 }
 
 async function onSubscriptionUpdated(sub: Stripe.Subscription, d: WebhookDeps) {
+  if (sub.metadata?.kind === "program") return; // a program előfizetése nem tagság
   const user = await userByCustomer(d.admin, sub.customer);
   if (!user) return;
   await d.admin
@@ -324,6 +433,8 @@ async function onSubscriptionUpdated(sub: Stripe.Subscription, d: WebhookDeps) {
 }
 
 async function onSubscriptionDeleted(sub: Stripe.Subscription, d: WebhookDeps) {
+  // A program előfizetése a részletek után magától lezárul; a program ettől nem ér véget.
+  if (sub.metadata?.kind === "program") return;
   const user = await userByCustomer(d.admin, sub.customer);
   if (!user) return;
   await rpcOrThrow(d.admin.rpc("membership_ended", { p_user: user.id }), "Tagság lezárása");

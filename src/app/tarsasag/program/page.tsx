@@ -60,11 +60,20 @@ export default async function MyProgramPage() {
       <h1 className="mt-3 font-serif text-4xl text-forest">Üdv{name ? `, ${name}` : ""}!</h1>
       <p className="mt-3 text-ink-soft">
         {p.phase === "hamarosan"
-          ? `A programod ${fmtDay(p.starts_on)}-én indul.`
+          ? `A programod kezdete: ${fmtDay(p.starts_on)}.`
           : p.phase === "lezarult"
           ? "A programod lezárult. A tananyag és a napló továbbra is itt van, amíg a hozzáférésed tart."
           : `${monthShown}. hónap a nyolcból · ${fmtDay(p.starts_on)} – ${fmtDay(p.ends_on)}`}
       </p>
+
+      {(p.payment_paused || p.payment_overdue) && (
+        <div role="status" className={`mt-6 max-w-2xl rounded-lg border px-5 py-4 text-sm ${p.payment_paused ? "border-alert/50 text-alert" : "border-gold/60 text-ink"}`}>
+          {p.payment_paused
+            ? "A legutóbbi részlet terhelése nem sikerült, ezért a felület szünetel. Amint a fizetés rendben van, minden visszaáll – a haladásod megmarad."
+            : "A legutóbbi részlet terhelése nem sikerült. A hozzáférésed megmarad, és automatikusan újrapróbáljuk."}{" "}
+          <Link href={tp("/adataim")} className="underline decoration-gold/60 underline-offset-4">A fizetési kártya frissítése</Link>
+        </div>
+      )}
 
       {p.phase !== "hamarosan" && p.phase !== "lezarult" && (
         <div className="mt-6 max-w-xl">

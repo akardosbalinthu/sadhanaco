@@ -15,3 +15,6 @@ export function getStripe(): Stripe {
 export function onlinePaymentsEnabled(): boolean {
   return process.env.ONLINE_PAYMENTS_ENABLED === "true" && Boolean(process.env.STRIPE_SECRET_KEY);
 }
+
+/** Az egyéni program saját ügyfélportálja: csak kártyacsere (a részletek nem mondhatók le a portálon). */
+export const PROGRAM_PORTAL_CONFIGURATION_ID = process.env.STRIPE_PROGRAM_PORTAL_CONFIGURATION_ID || "bpc_1UftgOKKK49wrBvL9wk856Fd";

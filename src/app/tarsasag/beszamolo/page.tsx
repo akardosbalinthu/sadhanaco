@@ -30,7 +30,7 @@ export default async function WeeklyReportPage({ searchParams }: { searchParams:
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
       <MemberNav active="/beszamolo" />
-      <PageHeader eyebrow={`A ${fmtDay(p.week_start)}-i hét`} title="Heti beszámoló">
+      <PageHeader eyebrow={`A hét kezdete: ${fmtDay(p.week_start)}`} title="Heti beszámoló">
         <p>
           Pár sor arról, hogyan ment a gyakorlás ezen a héten. Nem kell szépen fogalmaznod: őszinte jegyzetnek szánd, nem
           dolgozatnak. Elolvasom, és visszajelzek rá.

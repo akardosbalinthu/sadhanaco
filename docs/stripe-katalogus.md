@@ -63,3 +63,18 @@ amikor a Stripe lezárja az előfizetést.
   kikapcsolva (a hivatalos számla a kézi AAM-számla, a belépési azonosító az e-mail-cím).
   A fiók első portál-beállításaként a Stripe alapértelmezettnek jelölte; más előfizetésnél csak kártyacsere és lemondás érhető el.
 - A két tagsági termék neve 2026-11-25-én a 7.16 szerinti csomagnevekre változott (a Checkout és a portál ezt mutatja).
+
+## Egyéni program (2026-11-26)
+
+| Termék | Product ID | lookup_key | Ár | Price ID |
+| --- | --- | --- | --- | --- |
+| Egyéni idegrendszer-fejlesztő program (8 hónap) | `prod_VhIC69usAOqsTU` | `egyeni_program_egyben` | 690 000 Ft egyszeri | `price_1Uftc2KKK49wrBvLEhgSr0Cg` |
+| | | `egyeni_program_4_reszlet` | 180 000 Ft / hó, 4 részlet | `price_1Uftc6KKK49wrBvLrRF5WJio` |
+| | | `egyeni_program_havi` | 100 000 Ft / hó, 8 részlet | `price_1UftcAKKK49wrBvLtBaDarfB` |
+
+- Folyamat: admin → Jelentkezés → „Fizetési linket küldök” (`program_payment_offers`) → `/fizetes?t=…` (az ügyfél választ, hozzájárul) → Stripe Checkout
+  (`metadata.kind = program`, `offer_id`, `plan`; részletnél `subscription_data.metadata` is) → webhook: fiók + program (`program_payment_completed`),
+  számlatétel, üdvözlő levél; részletnél az előfizetés `cancel_at` = kezdés + N hónap (pontosan N terhelés).
+- Részletek: `invoice.paid` → `program_installment_paid` + számlatétel; `invoice.payment_failed` → `program_installment_failed` (10 nap türelmi idő, utána a felület szünetel).
+- Ügyfélportál a programhoz: `bpc_1UftgOKKK49wrBvL9wk856Fd` – csak kártyacsere (lemondás, váltás kikapcsolva). Felülírható: `STRIPE_PROGRAM_PORTAL_CONFIGURATION_ID`.
+- A kártyakivonaton: „AKARDOSBALINT.HU” (fiókszintű beállítás).

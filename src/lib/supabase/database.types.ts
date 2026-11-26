@@ -581,14 +581,14 @@ isOneToOne: false
                   ]
                 },"program_enrollments": {
                   Row: {
-                    "admin_note": string | null,"application_id": string | null,"closed_at": string | null,"created_at": string,"id": string,"practice_plan": string | null,"stage2_from": string,"starts_on": string,"status": Database["public"]['Enums']["enrollment_status"],"user_id": string
+                    "admin_note": string | null,"application_id": string | null,"closed_at": string | null,"created_at": string,"id": string,"installments_paid": number,"installments_total": number | null,"offer_id": string | null,"past_due_since": string | null,"payment_plan": string | null,"practice_plan": string | null,"stage2_from": string,"starts_on": string,"status": Database["public"]['Enums']["enrollment_status"],"stripe_customer_id": string | null,"stripe_subscription_id": string | null,"user_id": string,"_enrollment_open": boolean | null
                   }
-                  ComputedFields: never
+                  ComputedFields: "_enrollment_open"
                   Insert: {
-                    "admin_note"?: string | null,"application_id"?: string | null,"closed_at"?: string | null,"created_at"?: string,"id"?: string,"practice_plan"?: string | null,"stage2_from": string,"starts_on": string,"status"?: Database["public"]['Enums']["enrollment_status"],"user_id": string
+                    "admin_note"?: string | null,"application_id"?: string | null,"closed_at"?: string | null,"created_at"?: string,"id"?: string,"installments_paid"?: number,"installments_total"?: number | null,"offer_id"?: string | null,"past_due_since"?: string | null,"payment_plan"?: string | null,"practice_plan"?: string | null,"stage2_from": string,"starts_on": string,"status"?: Database["public"]['Enums']["enrollment_status"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"user_id": string
                   }
                   Update: {
-                    "admin_note"?: string | null,"application_id"?: string | null,"closed_at"?: string | null,"created_at"?: string,"id"?: string,"practice_plan"?: string | null,"stage2_from"?: string,"starts_on"?: string,"status"?: Database["public"]['Enums']["enrollment_status"],"user_id"?: string
+                    "admin_note"?: string | null,"application_id"?: string | null,"closed_at"?: string | null,"created_at"?: string,"id"?: string,"installments_paid"?: number,"installments_total"?: number | null,"offer_id"?: string | null,"past_due_since"?: string | null,"payment_plan"?: string | null,"practice_plan"?: string | null,"stage2_from"?: string,"starts_on"?: string,"status"?: Database["public"]['Enums']["enrollment_status"],"stripe_customer_id"?: string | null,"stripe_subscription_id"?: string | null,"user_id"?: string
                   }
                   Relationships: [
                     {
@@ -598,10 +598,42 @@ isOneToOne: false
       referencedRelation: "applications"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "program_enrollments_offer_id_fkey"
+      columns: ["offer_id"]
+isOneToOne: false
+      referencedRelation: "program_payment_offers"
+      referencedColumns: ["id"]
+    },{
       foreignKeyName: "program_enrollments_user_id_fkey"
       columns: ["user_id"]
 isOneToOne: false
       referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"program_payment_offers": {
+                  Row: {
+                    "application_id": string | null,"created_at": string,"email": string,"enrollment_id": string | null,"full_name": string,"id": string,"paid_at": string | null,"plan": string | null,"starts_on": string,"status": Database["public"]['Enums']["payment_offer_status"],"stripe_checkout_session_id": string | null,"token": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "application_id"?: string | null,"created_at"?: string,"email": string,"enrollment_id"?: string | null,"full_name": string,"id"?: string,"paid_at"?: string | null,"plan"?: string | null,"starts_on": string,"status"?: Database["public"]['Enums']["payment_offer_status"],"stripe_checkout_session_id"?: string | null,"token"?: string
+                  }
+                  Update: {
+                    "application_id"?: string | null,"created_at"?: string,"email"?: string,"enrollment_id"?: string | null,"full_name"?: string,"id"?: string,"paid_at"?: string | null,"plan"?: string | null,"starts_on"?: string,"status"?: Database["public"]['Enums']["payment_offer_status"],"stripe_checkout_session_id"?: string | null,"token"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "program_payment_offers_application_id_fkey"
+      columns: ["application_id"]
+isOneToOne: false
+      referencedRelation: "applications"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "program_payment_offers_enrollment_fk"
+      columns: ["enrollment_id"]
+isOneToOne: false
+      referencedRelation: "program_enrollments"
       referencedColumns: ["id"]
     }
                   ]
@@ -793,6 +825,9 @@ isOneToOne: false
           Functions: {
             "_award_xp":
 { Args: { "p_on"?: string,"p_ref": string,"p_source": Database["public"]['Enums']["xp_source"],"p_user": string }; Returns: number
+                           },
+"_enrollment_open":
+{ Args: { "e": Omit<Database["public"]['Tables']["program_enrollments"]['Row'], Database["public"]['Tables']["program_enrollments"]['ComputedFields']> }; Returns: boolean
                            },
 "_leaderboard_scores":
 { Args: { "p_from": string,"p_to": string }; Returns: {
@@ -1497,6 +1532,18 @@ isOneToOne: false
 "participation_score":
 { Args: { "p_user"?: string }; Returns: Json
                            },
+"payment_offer_info":
+{ Args: { "p_token": string }; Returns: Json
+                           },
+"program_installment_failed":
+{ Args: { "p_subscription": string }; Returns: boolean
+                           },
+"program_installment_paid":
+{ Args: { "p_subscription": string }; Returns: string
+                           },
+"program_payment_completed":
+{ Args: { "p_customer": string,"p_offer_id": string,"p_plan": string,"p_subscription": string,"p_user_id": string }; Returns: string
+                           },
 "progression_status":
 { Args: Record<PropertyKey, never>; Returns: Json
                            },
@@ -1790,7 +1837,7 @@ isOneToOne: false
                            }
           }
           Enums: {
-            "application_start": "azonnal"|"egy_heten_belul"|"egy_honapon_belul"|"kesobb"|"nem_tudom","application_status": "uj"|"foglalt"|"konzultalt"|"resztvevo"|"nem_lett"|"archiv","billing_interval": "month"|"year","business_inquiry_status": "uj"|"folyamatban"|"ajanlat_kiment"|"megnyert"|"nem_lett","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","enrollment_status": "aktiv"|"lezart","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok"|"magusok","post_kind": "normal"|"penteki_kor","program_session_status": "tervezett"|"megtartott"|"elmaradt","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
+            "application_start": "azonnal"|"egy_heten_belul"|"egy_honapon_belul"|"kesobb"|"nem_tudom","application_status": "uj"|"foglalt"|"konzultalt"|"resztvevo"|"nem_lett"|"archiv","billing_interval": "month"|"year","business_inquiry_status": "uj"|"folyamatban"|"ajanlat_kiment"|"megnyert"|"nem_lett","consultation_status": "requested"|"scheduled"|"done"|"cancelled"|"pending_payment","enrollment_status": "aktiv"|"lezart","event_kind": "nyilt_est"|"gyakorlonap"|"elvonulas"|"online_meditacio"|"qa_elo"|"tura","kind_message_kind": "standard"|"priority","kind_message_status": "queued"|"scheduled"|"delivered"|"rejected"|"pending_confirmation"|"followup"|"failed"|"pending_payment","lesson_kind": "video"|"audio"|"text","membership_tier": "none"|"tarsasagi"|"belso_kor","order_key": "tundek"|"kertorzok"|"torpok"|"vandorok"|"magusok","payment_offer_status": "kikuldve"|"fizetve"|"visszavonva","post_kind": "normal"|"penteki_kor","program_session_status": "tervezett"|"megtartott"|"elmaradt","progression_status": "requested"|"scheduled"|"approved"|"declined"|"cancelled","reaction_kind": "koszonom"|"hasonlot","registration_status": "pending_payment"|"confirmed"|"cancelled","revenue_region": "HU"|"EU"|"NON_EU","subscription_status": "none"|"trialing"|"active"|"past_due"|"canceled"|"unpaid"|"incomplete"|"incomplete_expired"|"paused","user_role": "member"|"admin"|"superadmin","xp_source": "lesson"|"ritual"|"knowledge"|"journal"|"kozlony"|"post"|"answer"|"helpful_received"|"friday_circle"|"online_meditation"|"event_attendance"|"hike"|"kind_message"|"stage"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -1910,7 +1957,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "application_start": ["azonnal", "egy_heten_belul", "egy_honapon_belul", "kesobb", "nem_tudom"],"application_status": ["uj", "foglalt", "konzultalt", "resztvevo", "nem_lett", "archiv"],"billing_interval": ["month", "year"],"business_inquiry_status": ["uj", "folyamatban", "ajanlat_kiment", "megnyert", "nem_lett"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"enrollment_status": ["aktiv", "lezart"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok", "magusok"],"post_kind": ["normal", "penteki_kor"],"program_session_status": ["tervezett", "megtartott", "elmaradt"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
+            "application_start": ["azonnal", "egy_heten_belul", "egy_honapon_belul", "kesobb", "nem_tudom"],"application_status": ["uj", "foglalt", "konzultalt", "resztvevo", "nem_lett", "archiv"],"billing_interval": ["month", "year"],"business_inquiry_status": ["uj", "folyamatban", "ajanlat_kiment", "megnyert", "nem_lett"],"consultation_status": ["requested", "scheduled", "done", "cancelled", "pending_payment"],"enrollment_status": ["aktiv", "lezart"],"event_kind": ["nyilt_est", "gyakorlonap", "elvonulas", "online_meditacio", "qa_elo", "tura"],"kind_message_kind": ["standard", "priority"],"kind_message_status": ["queued", "scheduled", "delivered", "rejected", "pending_confirmation", "followup", "failed", "pending_payment"],"lesson_kind": ["video", "audio", "text"],"membership_tier": ["none", "tarsasagi", "belso_kor"],"order_key": ["tundek", "kertorzok", "torpok", "vandorok", "magusok"],"payment_offer_status": ["kikuldve", "fizetve", "visszavonva"],"post_kind": ["normal", "penteki_kor"],"program_session_status": ["tervezett", "megtartott", "elmaradt"],"progression_status": ["requested", "scheduled", "approved", "declined", "cancelled"],"reaction_kind": ["koszonom", "hasonlot"],"registration_status": ["pending_payment", "confirmed", "cancelled"],"revenue_region": ["HU", "EU", "NON_EU"],"subscription_status": ["none", "trialing", "active", "past_due", "canceled", "unpaid", "incomplete", "incomplete_expired", "paused"],"user_role": ["member", "admin", "superadmin"],"xp_source": ["lesson", "ritual", "knowledge", "journal", "kozlony", "post", "answer", "helpful_received", "friday_circle", "online_meditation", "event_attendance", "hike", "kind_message", "stage"]
           }
         }
 } as const

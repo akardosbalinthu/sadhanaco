@@ -19,7 +19,10 @@ const subA = `sub_A_${run}`;
 const subB = `sub_B_${run}`;
 const now = Math.floor(Date.now() / 1000);
 
-const calls = { welcome: [] as string[], failed: [] as string[], endTrial: [] as string[] };
+const calls = {
+  welcome: [] as string[], failed: [] as string[], endTrial: [] as string[],
+  subEnd: [] as [string, number][], programWelcome: [] as string[], programFailed: [] as string[],
+};
 const PRICES: Record<string, { code: string; unitAmount: number }> = {
   price_th: { code: "tarsasagi_havi", unitAmount: 994000 },
   price_bh: { code: "belso_kor_havi", unitAmount: 2794000 },
@@ -32,6 +35,9 @@ const deps: WebhookDeps = {
   endTrialNow: async (id) => void calls.endTrial.push(id),
   sendWelcome: async (e) => void calls.welcome.push(e),
   sendPaymentFailed: async (e) => void calls.failed.push(e),
+  setSubscriptionEnd: async (id, n) => void calls.subEnd.push([id, n]),
+  sendProgramWelcome: async (e) => void calls.programWelcome.push(e),
+  sendProgramPaymentFailed: async (e) => void calls.programFailed.push(e),
 };
 
 let seq = 0;
@@ -212,4 +218,71 @@ test("gyorsított hozzáférés: a vásárlás rögzül, a lépcső nem nyílik 
   assert.deepEqual({ m2: p.m2_purchased, ip3: p.ip3_purchased, unlocked: p.m2_unlocked }, { m2: true, ip3: true, unlocked: false });
   const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_st_${run}`);
   assert.deepEqual(invs, [{ amount_huf: 89940, product_code: "gyorsitott_m2_ip3_csomag" }]);
+});
+
+// ---------------------------------------------------------------------------
+// Egyéni program
+// ---------------------------------------------------------------------------
+
+async function offer(name: string, email: string) {
+  const { data, error } = await admin
+    .from("program_payment_offers")
+    .insert({ full_name: name, email, starts_on: new Date().toISOString().slice(0, 10) })
+    .select("id")
+    .single();
+  assert.equal(error, null);
+  return data!.id;
+}
+
+test("egyéni program, egy összegben: fiók és program jön létre, egy számlatétel, üdvözlő levél", async () => {
+  const email = `prog1-${run}@example.test`;
+  const offerId = await offer("Program Péter", email);
+  const session = { id: `cs_p1_${run}`, payment_status: "paid", amount_total: 69000000, payment_intent: `pi_p1_${run}`,
+    customer: `cus_p1_${run}`, customer_details: { email, address: { country: "HU" } },
+    metadata: { kind: "program", offer_id: offerId, plan: "egyeni_program_egyben" } };
+  assert.equal(await processStripeEvent(ev("checkout.session.completed", session), deps), "processed");
+  await processStripeEvent(ev("checkout.session.completed", session), deps); // ismétlés
+  const p = await profile(email);
+  const { data: enr } = await admin.from("program_enrollments").select("payment_plan, installments_paid, installments_total, status").eq("user_id", p.id);
+  assert.deepEqual(enr, [{ payment_plan: "egyeni_program_egyben", installments_paid: 1, installments_total: 1, status: "aktiv" }]);
+  const { data: invs } = await admin.from("invoices").select("amount_huf, product_code").eq("stripe_payment_intent_id", `pi_p1_${run}`);
+  assert.deepEqual(invs, [{ amount_huf: 690000, product_code: "egyeni_program_egyben" }]);
+  assert.ok(calls.programWelcome.includes(email));
+  assert.equal(p.first_name, "Péter");
+});
+
+test("egyéni program, négy részlet: az előfizetés 4 hónap után zárul, részletenként számlatétel, a tagsághoz nem nyúl", async () => {
+  const email = `prog4-${run}@example.test`;
+  const sub = `sub_p4_${run}`;
+  const offerId = await offer("Részlet Réka", email);
+  const invoice = (n: number) => ({ id: `in_p4_${n}_${run}`, amount_paid: 18000000, customer: `cus_p4_${run}`, customer_email: email,
+    customer_address: { country: "HU" }, lines: { data: [] },
+    parent: { subscription_details: { subscription: sub, metadata: { kind: "program" } } } });
+  // a számla eseménye előbb érkezik, mint a Checkouté → hiba, a Stripe újrapróbálja
+  await assert.rejects(processStripeEvent(ev("invoice.paid", invoice(1)), deps));
+  const session = { id: `cs_p4_${run}`, payment_status: "paid", amount_total: 18000000, subscription: sub,
+    customer: `cus_p4_${run}`, customer_details: { email, address: { country: "HU" } },
+    metadata: { kind: "program", offer_id: offerId, plan: "egyeni_program_4_reszlet" } };
+  assert.equal(await processStripeEvent(ev("checkout.session.completed", session), deps), "processed");
+  assert.deepEqual(calls.subEnd.at(-1), [sub, 4]);
+  assert.equal(await processStripeEvent(ev("invoice.paid", invoice(1)), deps), "processed");
+  assert.equal(await processStripeEvent(ev("invoice.paid", invoice(2)), deps), "processed");
+  const p = await profile(email);
+  const { data: enr } = await admin.from("program_enrollments").select("installments_paid, installments_total").eq("user_id", p.id).single();
+  assert.deepEqual(enr, { installments_paid: 2, installments_total: 4 });
+  const { data: invs } = await admin.from("invoices").select("product_code").in("stripe_invoice_id", [`in_p4_1_${run}`, `in_p4_2_${run}`]);
+  assert.equal(invs?.length, 2);
+  assert.equal(p.subscription_status, "none"); // a program nem tagság
+
+  // sikertelen részlet: türelmi idő, egyszeri levél
+  const failed = { ...invoice(3), amount_paid: 0 };
+  await processStripeEvent(ev("invoice.payment_failed", failed), deps);
+  await processStripeEvent(ev("invoice.payment_failed", { ...failed, id: `in_p4_3b_${run}` }), deps);
+  assert.equal(calls.programFailed.filter((e) => e === email).length, 1);
+  const { data: due } = await admin.from("program_enrollments").select("past_due_since").eq("user_id", p.id).single();
+  assert.ok(due?.past_due_since);
+  // a program előfizetésének lezárása nem zárja le a programot
+  await processStripeEvent(ev("customer.subscription.deleted", { id: sub, customer: `cus_p4_${run}`, metadata: { kind: "program" } }), deps);
+  const { data: still } = await admin.from("program_enrollments").select("status").eq("user_id", p.id).single();
+  assert.equal(still?.status, "aktiv");
 });

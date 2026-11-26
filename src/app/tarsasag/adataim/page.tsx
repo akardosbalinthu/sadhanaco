@@ -11,7 +11,13 @@ type SP = Promise<Record<string, string | string[] | undefined>>;
 
 export default async function MyDetailsPage({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
-  const { profile } = await requireMember();
+  const { supabase, profile } = await requireMember();
+  const { data: paidProgram } = await supabase
+    .from("program_enrollments")
+    .select("id")
+    .eq("user_id", profile.id)
+    .in("payment_plan", ["egyeni_program_4_reszlet", "egyeni_program_havi"])
+    .limit(1);
   const hiba = typeof sp.hiba === "string" ? sp.hiba : "";
 
   return (
@@ -54,6 +60,11 @@ export default async function MyDetailsPage({ searchParams }: { searchParams: SP
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           {/* A megszűnt Társaság régi előfizetéseinek kezelése (ha van ilyen). */}
+          {(paidProgram?.length ?? 0) > 0 && profile.stripe_customer_id && (
+            <form action={tp("/elofizetes")} method="post">
+              <button className={buttonSecondary}>Fizetési kártya frissítése</button>
+            </form>
+          )}
           {profile.tier !== "none" && (
             <form action={tp("/elofizetes")} method="post">
               <button className={buttonSecondary}>Korábbi előfizetés kezelése</button>

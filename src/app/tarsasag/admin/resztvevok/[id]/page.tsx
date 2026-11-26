@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fmtDate, fmtDateTime, isoToBudapestLocal, requireAdmin } from "@/lib/admin";
 import { tp } from "@/lib/site";
+import { PROGRAM_PLAN_LABEL } from "@/lib/program-payment";
 import { GildedCard } from "@/components/ornaments";
 import {
   addSession,
@@ -26,7 +27,7 @@ export default async function ParticipantDetail({ params, searchParams }: { para
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const { data: e } = await supabase
     .from("program_enrollments")
-    .select("id, user_id, application_id, starts_on, stage2_from, status, practice_plan, created_at, closed_at, profiles(first_name, last_name, email)")
+    .select("id, user_id, application_id, starts_on, stage2_from, status, practice_plan, created_at, closed_at, payment_plan, installments_paid, installments_total, past_due_since, profiles(first_name, last_name, email)")
     .eq("id", id)
     .maybeSingle();
   if (!e) notFound();
@@ -55,6 +56,12 @@ export default async function ParticipantDetail({ params, searchParams }: { para
               <Link href={tp(`/admin/jelentkezesek/${e.application_id}`)} className="underline decoration-gold/50 underline-offset-4">felmérés</Link>
             </>
           )}
+        </p>
+        <p className={`mt-2 text-sm ${e.past_due_since ? "text-alert" : "text-ink-soft"}`}>
+          {e.payment_plan
+            ? `Fizetés: ${PROGRAM_PLAN_LABEL[e.payment_plan]} · ${e.installments_paid}/${e.installments_total} részlet rendezve`
+            : "Fizetés: a rendszeren kívül (kézi felvétel)"}
+          {e.past_due_since ? ` · elmaradt részlet ${fmtDateTime(e.past_due_since)} óta (10 nap után a felület szünetel)` : ""}
         </p>
       </div>
 
@@ -143,7 +150,7 @@ export default async function ParticipantDetail({ params, searchParams }: { para
               <li key={r.id}>
                 <GildedCard className={`p-5 ${r.admin_reply ? "" : "border-gold/50"}`}>
                   <p className="text-xs uppercase tracking-[0.16em] text-gold">
-                    A {fmtDate(r.week_start)}-i hét · {r.practice_days} gyakorlónap · beküldve {fmtDateTime(r.updated_at)}
+                    A hét kezdete: {fmtDate(r.week_start)} · {r.practice_days} gyakorlónap · beküldve {fmtDateTime(r.updated_at)}
                   </p>
                   {r.went_well && <p className="mt-3 text-sm text-ink"><span className="text-ink-soft">Jól ment: </span>{r.went_well}</p>}
                   {r.was_hard && <p className="mt-1 text-sm text-ink"><span className="text-ink-soft">Nehéz volt: </span>{r.was_hard}</p>}

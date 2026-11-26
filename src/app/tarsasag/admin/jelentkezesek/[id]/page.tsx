@@ -7,7 +7,9 @@ import { LifestyleRadar } from "@/components/lifestyle-map";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { tp } from "@/lib/site";
 import { GildedCard } from "@/components/ornaments";
-import { deleteApplication, enrollParticipant, setApplicationStatus } from "../../program-actions";
+import { createPaymentOffer, deleteApplication, enrollParticipant, revokePaymentOffer, setApplicationStatus } from "../../program-actions";
+import { PROGRAM_PLAN_LABEL } from "@/lib/program-payment";
+import { publicEnv } from "@/lib/env";
 import { SubmitButton } from "../../submit-button";
 import { Flash, H2, label, smallButton, smallInput, smallPrimary, type SP } from "../../ui";
 
@@ -31,6 +33,13 @@ export default async function ApplicationDetail({ params, searchParams }: { para
   const map = answers ? lifestyleMap(answers) : null;
   const meet = slot?.meet_url ?? settings?.consultation_meet_url ?? null;
   const today = new Date().toISOString().slice(0, 10);
+  const { data: offers } = await supabase
+    .from("program_payment_offers")
+    .select("id, token, starts_on, status, plan, created_at, paid_at")
+    .eq("application_id", id)
+    .order("created_at", { ascending: false });
+  const site = publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+  const OFFER_STATUS: Record<string, string> = { kikuldve: "Kiküldve, fizetésre vár", fizetve: "Fizetve", visszavonva: "Visszavonva" };
 
   return (
     <div className="space-y-12">
@@ -177,7 +186,48 @@ export default async function ApplicationDetail({ params, searchParams }: { para
       </section>
 
       <section>
-        <H2>Felvétel a programba</H2>
+        <H2>Fizetési link</H2>
+        <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+          A konzultáció után innen küldöd el a fizetési linket. Az ügyfél kiválasztja a fizetés módját (egy összegben,
+          négy havi részletben vagy havonta), és a Stripe-on fizet. Sikeres fizetés után a rendszer magától felveszi a
+          programba a megadott kezdőnappal, és belépő linket küld neki.
+        </p>
+        {(offers ?? []).length > 0 && (
+          <ul className="mt-5 divide-y divide-line border-y border-line text-sm">
+            {offers!.map((o) => (
+              <li key={o.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
+                <span>
+                  <span className={o.status === "fizetve" ? "text-forest" : "text-ink"}>{OFFER_STATUS[o.status]}</span>
+                  <span className="text-ink-soft"> · kezdés: {o.starts_on}{o.plan ? ` · ${PROGRAM_PLAN_LABEL[o.plan]}` : ""} · küldve: {fmtDateTime(o.created_at)}</span>
+                </span>
+                {o.status === "kikuldve" && (
+                  <span className="flex flex-wrap items-center gap-2">
+                    <a href={`${site}/fizetes?t=${o.token}`} target="_blank" rel="noopener" className={smallButton}>A link</a>
+                    <form action={revokePaymentOffer}>
+                      <input type="hidden" name="id" value={o.id} />
+                      <input type="hidden" name="from" value={`/jelentkezesek/${a.id}`} />
+                      <button className={smallButton}>Visszavonás</button>
+                    </form>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+        {!enrollment && (
+          <form action={createPaymentOffer} className="mt-5 grid gap-4 sm:grid-cols-3">
+            <input type="hidden" name="application_id" value={a.id} />
+            <label className="block"><span className={label}>Név</span><input name="full_name" defaultValue={a.full_name} required className={`${smallInput} mt-1 w-full`} /></label>
+            <label className="block"><span className={label}>E-mail</span><input name="email" type="email" defaultValue={a.email} required className={`${smallInput} mt-1 w-full`} /></label>
+            <label className="block"><span className={label}>A program kezdőnapja</span><input name="starts_on" type="date" defaultValue={today} min={today} required className={`${smallInput} mt-1 w-full`} /></label>
+            <div className="sm:col-span-3"><SubmitButton className={smallPrimary}>Fizetési linket küldök</SubmitButton></div>
+          </form>
+        )}
+      </section>
+
+      <section>
+        <H2>Felvétel a programba kézzel</H2>
+        <p className="mt-2 text-sm text-ink-soft">Csak ha a fizetés nem a rendszeren keresztül történt (például átutalással).</p>
         {enrollment ? (
           <p className="mt-3 text-sm text-ink-soft">
             Már résztvevő. <Link href={tp(`/admin/resztvevok/${enrollment.id}`)} className="text-forest underline decoration-gold/60 underline-offset-4">A programja</Link>

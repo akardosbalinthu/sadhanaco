@@ -102,7 +102,7 @@ export async function cancelBooking(fd: FormData) {
         "Új időpontot kérek a konzultációhoz",
         [
           `Kedves ${app.full_name.split(/\s+/).slice(-1)[0]}!`,
-          `Sajnos a ${fmtFull(slot.starts_at)}-i időpont nekem nem jó. Kérlek, válassz egy újat ezen a linken – elnézést a kényelmetlenségért.`,
+          `Sajnos ez az időpont nekem nem jó: ${fmtFull(slot.starts_at)}. Kérlek, válassz egy újat ezen a linken – elnézést a kényelmetlenségért.`,
         ],
         { href: `${site}/jelentkezes/idopont?t=${app.token}`, label: "Új időpontot választok" },
       );
@@ -375,4 +375,47 @@ export async function deleteInquiry(fd: FormData) {
   const { error } = await supabase.from("business_inquiries").delete().eq("id", id);
   if (error) back(`/ajanlatkeresek/${id}`, { hiba: error.message });
   done("/ajanlatkeresek", null, "Az ajánlatkérést töröltem.");
+}
+
+// ---------------------------------------------------------------------------
+// Fizetési link (egyéni program)
+// ---------------------------------------------------------------------------
+
+export async function createPaymentOffer(fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const applicationId = str(fd, "application_id") || null;
+  const from = applicationId ? `/jelentkezesek/${applicationId}` : "/resztvevok";
+  const parsed = z
+    .object({ full_name: z.string().trim().min(2).max(120), email: z.string().trim().toLowerCase().email(), starts_on: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) })
+    .safeParse({ full_name: fd.get("full_name"), email: fd.get("email"), starts_on: fd.get("starts_on") });
+  if (!parsed.success) back(from, { hiba: "Add meg a nevet, az e-mail-címet és a kezdés napját." });
+  const d = parsed.data!;
+  const { data: offer, error } = await supabase
+    .from("program_payment_offers")
+    .insert({ application_id: applicationId, full_name: d.full_name, email: d.email, starts_on: d.starts_on })
+    .select("token")
+    .single();
+  if (error || !offer) back(from, { hiba: error?.message ?? "Nem sikerült létrehozni a linket." });
+  const url = `${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/fizetes?t=${offer!.token}`;
+  const first = d.full_name.split(/\s+/).slice(-1)[0];
+  const res = await sendEmail(
+    d.email,
+    "A programod fizetése",
+    [
+      `Kedves ${first}!`,
+      "Köszönöm a beszélgetést, örülök, hogy együtt dolgozunk. Ezen a linken választhatod ki a fizetés módját – egy összegben, négy havi részletben vagy havonta –, és a Stripe biztonságos oldalán fizethetsz.",
+      `A programod kezdete: ${new Intl.DateTimeFormat("hu-HU", { year: "numeric", month: "long", day: "numeric" }).format(new Date(`${d.starts_on}T12:00:00Z`))}. A fizetés után e-mailben megkapod a belépő linket a programod felületére.`,
+    ],
+    { href: url, label: "A fizetés módja és a fizetés" },
+  );
+  revalidatePath(tp("/admin"), "layout");
+  back(from, res.ok ? { ok: "A fizetési linket elküldtem." } : { hiba: `A link elkészült, de a levél nem ment ki. Küldd el te: ${url}` });
+}
+
+export async function revokePaymentOffer(fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = uuid.parse(fd.get("id"));
+  const from = str(fd, "from") || "/jelentkezesek";
+  const { error } = await supabase.from("program_payment_offers").update({ status: "visszavonva" }).eq("id", id).eq("status", "kikuldve");
+  done(from, error, "A fizetési linket visszavontam.");
 }

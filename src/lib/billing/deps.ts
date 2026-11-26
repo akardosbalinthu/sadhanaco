@@ -4,6 +4,9 @@ import { getStripe } from "@/lib/stripe";
 import { sendEmail } from "@/lib/email";
 import { magicLinkFor } from "@/lib/auth-links";
 import type { WebhookDeps } from "./webhook";
+import { subscriptionEndUnix } from "@/lib/program-payment";
+import { SITE, tp } from "@/lib/site";
+import { publicEnv } from "@/lib/env";
 
 const priceCache = new Map<string, { code: string | null; unitAmount: number | null }>();
 
@@ -36,6 +39,42 @@ export function liveWebhookDeps(): WebhookDeps {
         ],
         link ? { href: link, label: "Belépek A Társaságba" } : undefined,
       );
+    },
+    async setSubscriptionEnd(id, installments) {
+      const sub = await stripe.subscriptions.retrieve(id);
+      const anchor = sub.billing_cycle_anchor ?? sub.start_date;
+      await stripe.subscriptions.update(id, { cancel_at: subscriptionEndUnix(anchor, installments), proration_behavior: "none" });
+    },
+    async sendProgramWelcome(email, name, startsOn, created) {
+      const first = name.trim().split(/\s+/).slice(-1)[0];
+      const when = new Intl.DateTimeFormat("hu-HU", { year: "numeric", month: "long", day: "numeric" }).format(new Date(`${startsOn}T12:00:00Z`));
+      const link = await magicLinkFor(email, tp("/program"));
+      await sendEmail(
+        email,
+        "Megkaptam a fizetést – indul a programod",
+        [
+          `Kedves ${first}!`,
+          "Köszönöm, megkaptam a fizetést. Örülök, hogy együtt dolgozunk.",
+          `A programod kezdete: ${when}. A felületeden megtalálod a tananyagot, a gyakorlási tervedet, a heti beszámolót és az alkalmaink időpontjait – az első alkalmunk időpontját hamarosan beírom.`,
+          "Belépni jelszó nélkül tudsz: a lenti gomb egy órán át érvényes, később a belépési oldalon bármikor kérhetsz új linket. A számlát külön küldöm.",
+        ],
+        link ? { href: link, label: "Belépek a programomba" } : undefined,
+      );
+      await sendEmail(SITE.adminEmail, `Fizetett: ${name} – indul a program`, [
+        `${name} (${email}) kifizette a programot${created ? ", a fiókja elkészült" : ""}. Kezdés: ${when}.`,
+        "Teendők: ütemezd az alkalmakat, írd meg a gyakorlási tervet, és állítsd ki a számlát.",
+      ], { href: `${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/resztvevok`, label: "Résztvevők" });
+    },
+    async sendProgramPaymentFailed(email, name) {
+      const first = name.trim().split(/\s+/).slice(-1)[0];
+      await sendEmail(email, "Nem sikerült a részlet terhelése", [
+        `Kedves ${first}!`,
+        "A program legutóbbi részletének terhelése nem sikerült. Semmi gond: a hozzáférésed megmarad, és a következő napokban automatikusan újrapróbáljuk.",
+        "Ha közben lejárt vagy megváltozott a kártyád, a programod felületén, az Adataim oldalon a „Fizetési kártya frissítése” gombbal cserélheted. Ha 10 napon belül nem rendeződik, a felület szünetel, amíg a fizetés rendben nem lesz.",
+      ]);
+      await sendEmail(SITE.adminEmail, `Sikertelen részlet: ${name}`, [
+        `${name} (${email}) részletének terhelése nem sikerült. Az ügyfelet értesítettem; 10 nap türelmi idő indult.`,
+      ]);
     },
     async sendPaymentFailed(email) {
       await sendEmail(email, "Nem sikerült a tagsági díj terhelése", [
