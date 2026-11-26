@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { buttonPrimary, buttonSecondary, inputClass } from "@/components/ornaments";
-import { QUESTIONS, type QuestionKey } from "@/lib/application";
+import { HEARD_FROM, QUESTIONS, type QuestionKey } from "@/lib/application";
 import { keepFields } from "@/lib/keep-fields";
 import { submitApplication, type ApplyState } from "./actions";
 
@@ -12,7 +12,7 @@ import { submitApplication, type ApplyState } from "./actions";
  * Minden mező egyetlen űrlapban van; a lépések csak a láthatóságot váltják,
  * így a beküldéskor minden válasz együtt megy el.
  */
-export function ApplicationForm() {
+export function ApplicationForm({ utmSource }: { utmSource?: string }) {
   const [state, action, pending] = useActionState(submitApplication, { status: "idle" } as ApplyState);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Partial<Record<QuestionKey, number>>>({});
@@ -62,6 +62,8 @@ export function ApplicationForm() {
           <div className="h-full bg-gold transition-all duration-500" style={{ width: `${((step + (onQuestion ? 0 : 1)) / steps) * 100}%` }} />
         </div>
       </div>
+
+      {utmSource && <input type="hidden" name="utm_source" value={utmSource} />}
 
       {/* A válaszok rejtett mezőkben – így minden lépés együtt megy el */}
       {QUESTIONS.map((x) => (
@@ -124,6 +126,15 @@ export function ApplicationForm() {
           <label className="block">
             <span className="mb-1.5 block text-sm text-ink-soft">Telefonszám (nem kötelező)</span>
             <input name="phone" type="tel" inputMode="tel" maxLength={40} autoComplete="tel" className={inputClass} />
+          </label>
+          <label className="block sm:col-span-2">
+            <span className="mb-1.5 block text-sm text-ink-soft">Honnan hallottál rólam? (nem kötelező)</span>
+            <select name="heard_from" defaultValue="" className={inputClass}>
+              <option value="">Válassz, ha szeretnél</option>
+              {Object.entries(HEARD_FROM).map(([k, v]) => (
+                <option key={k} value={k}>{v}</option>
+              ))}
+            </select>
           </label>
         </div>
         <div className="space-y-4 rounded-lg bg-paper-deep/70 p-5 text-sm text-ink-soft">

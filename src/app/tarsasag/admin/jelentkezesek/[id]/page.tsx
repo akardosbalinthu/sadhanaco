@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarPlus } from "lucide-react";
 import { fmtDateTime, requireAdmin } from "@/lib/admin";
-import { APP_STATUS_LABEL, INVEST_LABEL, lifestyleMap, PILLARS, QUESTIONS, RATING_LABELS, START_LABEL, type Answers } from "@/lib/application";
+import { APP_STATUS_LABEL, HEARD_FROM, INVEST_LABEL, lifestyleMap, PILLARS, QUESTIONS, RATING_LABELS, START_LABEL, type Answers } from "@/lib/application";
 import { LifestyleRadar } from "@/components/lifestyle-map";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { tp } from "@/lib/site";
@@ -50,6 +50,8 @@ export default async function ApplicationDetail({ params, searchParams }: { para
         <p className="mt-1 text-sm text-ink-soft">
           <a href={`mailto:${a.email}`} className="underline decoration-gold/50 underline-offset-4">{a.email}</a>
           {a.phone ? ` · ${a.phone}` : ""} · kitöltve: {fmtDateTime(a.created_at)}
+          {a.heard_from ? ` · honnan hallott rólam: ${HEARD_FROM[a.heard_from as keyof typeof HEARD_FROM] ?? a.heard_from}` : ""}
+          {a.utm_source ? ` · link forrása: ${a.utm_source}` : ""}
         </p>
         <p className="mt-2 text-sm">
           <span className={a.qualified ? "text-forest" : "text-ink-soft"}>{a.questionnaire_version === 2 ? `„Most van itt az ideje?” ${a.start_score}/10` : START_LABEL[a.start_when ?? ""]}</span>

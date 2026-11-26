@@ -110,6 +110,25 @@ export function lifestyleMap(a: Answers) {
 
 const answerSchema = z.coerce.number().int().min(1).max(10);
 
+/** „Honnan hallottál rólam?” – nem kötelező válaszlehetőségek. */
+export const HEARD_FROM = {
+  youtube: "YouTube",
+  instagram: "Instagram",
+  facebook: "Facebook",
+  tiktok: "TikTok",
+  ismeros: "Egy ismerősöm ajánlotta",
+  nyilt_est: "Nyílt Meditációs Esten voltam",
+  kereses: "Google-keresés",
+  egyeb: "Máshonnan",
+} as const;
+const HEARD_FROM_KEYS = Object.keys(HEARD_FROM) as [keyof typeof HEARD_FROM, ...(keyof typeof HEARD_FROM)[]];
+
+/** A link forrásjelölése (?utm_source=…): kisbetűs, legfeljebb 60 karakter, csak betű, szám, _ . - */
+export function normalizeUtm(v: string | null | undefined): string | undefined {
+  const s = (v ?? "").trim().toLowerCase().slice(0, 60);
+  return /^[a-z0-9_.-]+$/.test(s) ? s : undefined;
+}
+
 export const applicationV2Schema = z.object({
   full_name: z.string().trim().min(2).max(120),
   email: z.string().trim().toLowerCase().email(),
@@ -118,6 +137,8 @@ export const applicationV2Schema = z.object({
   problem: z.string().trim().max(4000).optional(),
   health_consent: z.literal("on"),
   privacy_consent: z.literal("on"),
+  heard_from: z.enum(HEARD_FROM_KEYS).optional().catch(undefined),
+  utm_source: z.string().optional().transform(normalizeUtm),
 });
 
 export function applicationV2Input(fd: FormData) {
@@ -133,5 +154,7 @@ export function applicationV2Input(fd: FormData) {
     problem: str("problem"),
     health_consent: str("health_consent"),
     privacy_consent: str("privacy_consent"),
+    heard_from: str("heard_from"),
+    utm_source: str("utm_source"),
   };
 }

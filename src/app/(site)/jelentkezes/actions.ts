@@ -48,6 +48,10 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
   if (error || !app) {
     return { status: "error", message: "Most nem sikerült elküldeni. Kérlek, próbáld újra pár perc múlva." };
   }
+  if (d.heard_from || d.utm_source) {
+    // A forrás csak statisztika: ha a mentése nem sikerül, a jelentkezés attól még rendben van.
+    await admin.from("applications").update({ heard_from: d.heard_from ?? null, utm_source: d.utm_source ?? null }).eq("id", app.id);
+  }
 
   const first = d.full_name.split(/\s+/).slice(-1)[0];
   const map = lifestyleMap(d.answers);

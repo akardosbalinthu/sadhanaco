@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/ornaments";
+import { normalizeUtm } from "@/lib/application";
 import { ApplicationForm } from "./application-form";
 
 export const metadata = {
@@ -7,7 +8,10 @@ export const metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function ApplyPage() {
+export default async function ApplyPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const sp = await searchParams;
+  const raw = sp.utm_source ?? sp.forras;
+  const utmSource = normalizeUtm(Array.isArray(raw) ? raw[0] : raw);
   return (
     <main className="py-16">
       <PageHeader eyebrow="Jelentkezés konzultációra" title="Hol tartasz most? Nézzük meg két perc alatt.">
@@ -17,7 +21,7 @@ export default function ApplyPage() {
         </p>
       </PageHeader>
       <div className="mt-12 max-w-2xl">
-        <ApplicationForm />
+        <ApplicationForm utmSource={utmSource} />
       </div>
     </main>
   );

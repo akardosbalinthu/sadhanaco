@@ -50,6 +50,7 @@ const sections: LegalSection[] = [
         <ul>
           <Row what="A felmérés válaszai: az életmódodra és egészségedre vonatkozó adatok (táplálkozás, mozgás, alvás, stressz, szerhasználat, kapcsolatok), a problémád leírása, súlyossága és sürgőssége, valamint a szándékaid" why="az ismerkedő konzultáció előkészítése és — ha résztvevő leszel — a program személyre szabása" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a) és 6. cikk (1) a)); a hozzájárulás a felmérés beküldésekor, időbélyeggel és a szöveg változatával rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a kitöltéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
           <Row what="Név, e-mail-cím, telefonszám (nem kötelező), a lefoglalt konzultációs időpont" why="kapcsolattartás és a konzultáció megszervezése" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b)" until="ugyanaddig, mint a felmérés válaszai" />
+          <Row what="Honnan hallottál rólam (nem kötelező válasz), illetve a link forrásjelölése, ha a felméréshez például egy YouTube-videó leírásából érkeztél" why="annak megértése, hogyan találnak rám az érdeklődők" basis="jogos érdek (GDPR 6. cikk (1) f))" until="ugyanaddig, mint a felmérés válaszai" />
         </ul>
         <p className="text-sm text-ink-soft">
           A felmérés válaszait csak én látom. Ha visszavonod a hozzájárulásodat, a válaszaidat töröljük; ez a visszavonás
@@ -107,7 +108,7 @@ const sections: LegalSection[] = [
         <p>A szolgáltatás működéséhez az alábbi partnerek szolgáltatásait használjuk; csak a feladatukhoz szükséges adatot kapják meg:</p>
         <ul>
           <li><strong>Supabase</strong> (adatbázis és belépés; a szerver az EU-ban, Írországban van)</li>
-          <li><strong>Vercel Inc.</strong> (tárhely, USA — EU–USA adatvédelmi keretrendszer)</li>
+          <li><strong>Vercel Inc.</strong> (tárhely és süti nélküli, összesített látogatottságmérés, USA — EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>Stripe Payments Europe Ltd.</strong> (bankkártyás fizetés, Írország)</li>
           <li><strong>Resend</strong> (tranzakciós e-mailek, USA — EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>BunnyWay d.o.o. (bunny.net)</strong> (hang- és videóanyagok, Szlovénia)</li>
@@ -123,8 +124,9 @@ const sections: LegalSection[] = [
     body: (
       <p>
         Csak a működéshez szükséges sütit használunk: a bejelentkezés munkamenetét. A sötét/világos mód választását a
-        böngésződ helyi tárhelyén (localStorage) jegyezzük meg. Hirdetési, elemző vagy követő süti nincs, ezért nem
-        kérünk hozzájárulást.
+        böngésződ helyi tárhelyén (localStorage) jegyezzük meg. A látogatottságot süti nélkül, összesítve mérjük
+        (Vercel Web Analytics): látjuk például, hány látogatás érkezett egy oldalra és honnan, de téged nem azonosít, és
+        más oldalakon nem követ. Hirdetési, elemző vagy követő süti nincs, ezért nem kérünk hozzájárulást.
       </p>
     ),
   },
