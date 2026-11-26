@@ -12,6 +12,11 @@
 - **Üzleti cél:** 2027-ben legalább 22 M Ft bevétel. A kapacitás annyi fő, amennyi ehhez kell.
   - ⚠️ Ez meghaladja az alanyi adómentesség 20 M Ft-os határát, ezért adózási formaváltás kell (könyvelő). A számlázási réteg cserélhető.
 
+## 1/a. Célcsoport (jóváhagyva, 2026. november 26.)
+
+- **Fő célcsoport (egyéni program):** kb. 30–55 éves magánszemély, dolgozó szakember, vezető vagy vállalkozó, stabil jövedelemmel; sokat dolgozik, nagy felelősséggel; egészségtudatos, de kevés az ideje. Egész nap pörög, nehezen kapcsol ki; próbált már meditálni vagy életmódot váltani, de nem maradt meg; személyes kísérést keres, és most akar elkezdeni.
+- **Másodlagos:** cégek (HR- és cégvezetők; vezetői egyéni program) – számlázás 2027-től; ismerkedők (Nyílt Est); bárki, aki kedves szót küldene (Egy Kedves Üzenet).
+
 ## 2. Az út a látogatótól a résztvevőig
 
 1. **Weboldal → „Jelentkezem konzultációra”.**
