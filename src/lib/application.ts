@@ -59,7 +59,7 @@ export const QUESTIONS: Question[] = [
   { key: "q9", area: "Kifelé", text: "Ha holnap segítségre lenne szükséged, hány emberre számíthatnál?", low: "senkire", high: "többekre is, habozás nélkül" },
   { key: "q10", area: "Kifelé", text: "Mennyire érzed, hogy tartozol valahová (család, barátok, közösség)?", low: "sehová", high: "erősen" },
   { key: "q11", area: "Szándék", text: "Mennyire nehezíti most a mindennapjaidat az, amin változtatni szeretnél?", low: "alig", high: "nagyon" },
-  { key: "q12", area: "Szándék", text: "Mennyire állsz készen arra, hogy pénzt is áldozz a változásra?", low: "most nem", high: "teljesen" },
+  { key: "q12", area: "Szándék", text: "Mennyire állsz készen arra, hogy pénzt, időt és energiát fektess a változtatásba?", low: "most nem", high: "teljesen" },
   { key: "q13", area: "Szándék", text: "Mennyire fér bele a napjaidba egy napi gyakorlás és heti egy alkalom?", low: "most nem fér bele", high: "gond nélkül" },
   { key: "q14", area: "Szándék", text: "Mennyire állsz készen arra, hogy a megszokásaidon is változtass?", low: "most nem", high: "teljesen" },
   { key: "q15", area: "Kezdés", text: "Mennyire érzed úgy, hogy most van itt az ideje elkezdeni?", low: "ráér még", high: "ma vagy holnap kezdeném" },
