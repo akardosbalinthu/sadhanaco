@@ -7,7 +7,7 @@
 | Fizetési mód | Összesen |
 |---|---|
 | Egy összegben | **690 000 Ft** |
-| Négy részletben | **750 000 Ft** (4 × 187 500 Ft) |
+| Négy részletben | **720 000 Ft** (4 × 180 000 Ft) |
 | Havonta | **800 000 Ft** (8 × 100 000 Ft) |
 
 - Munkaidő ügyfelenként: kb. 28–30 óra (18 × 60 perc, 4 × 45 perc, konzultáció, heti beszámolók, gyakorlási terv, szervezés).
