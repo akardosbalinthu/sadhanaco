@@ -194,7 +194,7 @@ export default function AboutPage() {
             hanem a hétköznapokban is működjön: abban, ahogyan alszol, eszel, mozogsz, és ahogyan a többiekhez fordulsz.
           </p>
           <p>
-            Évekig kerestem, hol a helyem, és szinte mindent kipróbáltam a kukoricaföldtől a nagykonyháig. Ez az oldal
+            Évekig kerestem, hol a helyem, és szinte mindent kipróbáltam a gyári műszakoktól a szabadúszó online marketingmenedzseri munkáig. Ez az oldal
             arról szól, hogyan jutottam idáig.
           </p>
         </PageHeader>
