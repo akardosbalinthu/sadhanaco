@@ -79,7 +79,7 @@ export function InquiryForm() {
 
       <div className="space-y-8">
         <label className="block">
-          <span className={legend}>Mi a cél, vagy milyen helyzet miatt kerestek?</span>
+          <span className={legend}>Mi a cél, vagy milyen helyzet miatt kerestek meg?</span>
           <span className="mt-1 block text-sm text-ink-soft">Néhány mondat elég: mi zajlik most a csapatban, és mit szeretnétek elérni.</span>
           <textarea name="goal" required rows={5} maxLength={4000} className={`${inputClass} mt-3`} />
         </label>

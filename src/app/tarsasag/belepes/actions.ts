@@ -51,7 +51,7 @@ export async function sendMagicLink(_prev: LoginState, formData: FormData): Prom
   }
   const res = await sendEmail(
     email,
-    "Belépő link – Programom",
+    "Belépő link a programodhoz",
     [
       profile.first_name ? `Kedves ${profile.first_name}!` : "Kedves Résztvevő!",
       "Ezzel a linkkel léphetsz be a programod felületére. A link egyszer használható, és egy órán át érvényes – bármelyik eszközön megnyithatod.",

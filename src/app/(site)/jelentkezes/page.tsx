@@ -14,7 +14,7 @@ export default async function ApplyPage({ searchParams }: { searchParams: Promis
   const utmSource = normalizeUtm(Array.isArray(raw) ? raw[0] : raw);
   return (
     <main className="py-16">
-      <PageHeader eyebrow="Jelentkezés konzultációra" title="Hol tartasz most? Nézzük meg két perc alatt.">
+      <PageHeader eyebrow="Jelentkezés konzultációra" title="Hol tartasz most? Nézzük meg pár perc alatt.">
         <p>
           15 rövid kérdés, mindegyikre egy számmal válaszolsz 1-től 10-ig. A végén megkapod az Életmód-térképedet: hol
           vagy már erős, mi lehet a következő kis lépésed, és egy tanácsot, amelyet még ma kipróbálhatsz.

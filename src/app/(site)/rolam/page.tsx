@@ -7,7 +7,7 @@ import { KindCall, Sprout, WindingPath } from "@/components/illustrations";
 export const metadata = {
   title: "Rólam · Kardos Bálint",
   description:
-    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig – és hogyan született belőle a módszerem.",
+    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig: így lettem meditációs és idegrendszer-fejlesztő tréner, és így született a módszerem.",
 };
 
 type Photo = { src: string; alt: string; caption: string; width: number; height: number };
@@ -118,7 +118,7 @@ const STATIONS: Station[] = [
     when: "2026 nyara",
     title: "Egy mély pont, és egy felismerés",
     paras: [
-      "Egy szakítás után nagyon mélyre kerültem – annyira, hogy sürgősen beszélgetést kértem az egyik önismereti oktatómtól. Ott vált világossá, ami évek óta érlelődött bennem: semmi nem érdekel igazán, ami nem az emberi tudat fejlődéséről szól. Ezért tudtam kitartani az önismereti gyakorlás mellett – és ezért nem ment hosszan semmi más.",
+      "Egy szakítás után nagyon mélyre kerültem – annyira, hogy sürgősen beszélgetést kértem az egyik önismereti oktatómtól. Ott vált világossá, ami évek óta érlelődött bennem: semmi nem érdekel igazán, ami nem az emberi tudat fejlődéséről szól. Ezért tudtam kitartani az önismereti gyakorlás mellett – és ezért nem ment sokáig semmi más.",
       "Egy több százalékkal sikeresebb kampánytól nem csillan fel a szemem. Attól viszont igen, ha valaki egy önismereti folyamat végén felismer magában egy mintát, megdolgozik vele, és ettől kedvesebben szól a társához, ki meri mutatni a szeretetét a gyerekeinek, vagy önazonosabban húzza meg a határait. Szerintem ezek tesznek minket tartósan boldogabbá – nem a több pénz, a szebb autó vagy a két szobával nagyobb ház.",
     ],
   },
@@ -274,7 +274,7 @@ export default function AboutPage() {
         <SectionTitle eyebrow="Ahol minden összeér" title="A program összeköti a múltamat a jelenemmel." />
         <p className="mt-4 max-w-2xl text-ink-soft">
           Komoly témában segít, tudományosan megalapozott eszközökkel – de nem veszi túl komolyan önmagát. Nem orvosi
-          kezelés és nem vallás, hanem személyes út, amelyen végig kísérlek. Benne van minden, ami fontos nekem:
+          kezelés és nem vallás, hanem személyes út, amelyen végigkísérlek. Benne van minden, ami fontos nekem:
         </p>
         <ul className="mt-10 grid gap-x-10 gap-y-6 md:grid-cols-2">
           {CONVERGE.map(({ from, to }) => (
@@ -306,7 +306,7 @@ export default function AboutPage() {
           </p>
           <p>
             A kutatások a tartós stresszt összefüggésbe hozzák a szív- és érrendszeri betegségekkel, a depresszióval és
-            a fertőzésekkel szembeni gyengébb ellenálló képességgel is. A hétköznapokban sokan így ismerik: rossz alvás,
+            a fertőzésekkel szembeni gyengébb ellenállóképességgel is. A hétköznapokban sokan így ismerik: rossz alvás,
             feszült váll és állkapocs, emésztési panaszok, ingerlékenység, szétszórt figyelem, vagy az az érzés, hogy a
             fejünkben soha nincs csend.
           </p>
@@ -404,7 +404,7 @@ export default function AboutPage() {
           Kezdjük el együtt.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Ha valamelyik állomásban magadra ismertél, és most kezdenél, töltsd ki a kérdőívet: két perc alatt megnézheted,
+          Ha valamelyik történetben magadra ismertél, és most kezdenél, töltsd ki a kérdőívet: két-három perc alatt megnézheted,
           hol tartasz most. Ha előbb személyesen ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

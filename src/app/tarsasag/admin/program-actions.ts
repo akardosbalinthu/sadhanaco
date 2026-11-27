@@ -406,7 +406,7 @@ export async function createPaymentOffer(fd: FormData) {
       "Köszönöm a beszélgetést, örülök, hogy együtt dolgozunk. Ezen a linken választhatod ki a fizetés módját – egy összegben, négy havi részletben vagy havonta –, és a Stripe biztonságos oldalán fizethetsz.",
       `A programod kezdete: ${new Intl.DateTimeFormat("hu-HU", { year: "numeric", month: "long", day: "numeric" }).format(new Date(`${d.starts_on}T12:00:00Z`))}. A fizetés után e-mailben megkapod a belépő linket a programod felületére.`,
     ],
-    { href: url, label: "A fizetés módja és a fizetés" },
+    { href: url, label: "Kiválasztom a fizetési módot" },
   );
   revalidatePath(tp("/admin"), "layout");
   back(from, res.ok ? { ok: "A fizetési linket elküldtem." } : { hiba: `A link elkészült, de a levél nem ment ki. Küldd el te: ${url}` });

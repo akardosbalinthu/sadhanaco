@@ -25,10 +25,12 @@ export function announceToMembers(
     if (!recipients?.length) return;
 
     const site = resolvedSiteUrl().replace(/\/$/, "");
-    const link = { href: `${resolvedTarsasagUrl().replace(/\/$/, "")}${content.linkPath}`, label: content.linkLabel };
+    // A linkPath a résztvevői felületen belüli útvonal, vagy teljes cím (például a fő oldal Nyílt Estek oldala).
+    const href = /^https?:\/\//.test(content.linkPath) ? content.linkPath : `${resolvedTarsasagUrl().replace(/\/$/, "")}${content.linkPath}`;
+    const link = { href, label: content.linkLabel };
     const messages: BulkMessage[] = recipients.map((r) => {
       const unsubPage = `${site}/leiratkozas?t=${r.email_token}`;
-      const { html, text } = renderEmail([r.first_name ? `Kedves ${r.first_name}!` : "Kedves Tagtárs!", ...content.paragraphs], link, {
+      const { html, text } = renderEmail([r.first_name ? `Kedves ${r.first_name}!` : "Kedves Résztvevő!", ...content.paragraphs], link, {
         text: "Az újdonságokról azért kapod ezt a levelet, mert a programom résztvevője vagy.",
         href: unsubPage,
         label: "Leiratkozom ezekről a levelekről",

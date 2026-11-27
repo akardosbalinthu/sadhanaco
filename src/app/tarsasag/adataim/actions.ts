@@ -32,7 +32,7 @@ export async function saveNames(formData: FormData) {
     .from("profiles")
     .update({ ...parsed.data, nickname: parsed.data.nickname || null })
     .eq("id", user.id);
-  if (error) redirect(`${tp("/adataim")}?hiba=${encodeURIComponent("A mentés most nem sikerült.")}`);
+  if (error) redirect(`${tp("/adataim")}?hiba=${encodeURIComponent("Most nem sikerült menteni. Kérlek, próbáld újra.")}`);
   revalidatePath(tp("/"), "layout");
   redirect(`${tp("/adataim")}?ok=1`);
 }
@@ -46,7 +46,7 @@ export async function setNotifications(formData: FormData) {
   } = await supabase.auth.getUser();
   if (!user) redirect(tp("/belepes"));
   const { error } = await supabase.from("profiles").update({ notify_admin_updates: on }).eq("id", user.id);
-  if (error) redirect(`${tp("/adataim")}?hiba=${encodeURIComponent("A mentés most nem sikerült.")}#ertesitesek`);
+  if (error) redirect(`${tp("/adataim")}?hiba=${encodeURIComponent("Most nem sikerült menteni. Kérlek, próbáld újra.")}#ertesitesek`);
   revalidatePath(tp("/adataim"));
   redirect(`${tp("/adataim")}?ok=1#ertesitesek`);
 }

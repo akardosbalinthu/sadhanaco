@@ -12,7 +12,7 @@ export const metadata = {
 function Row({ what, why, basis, until }: { what: string; why: string; basis: string; until: string }) {
   return (
     <li>
-      <strong>{what}</strong> — {why}. <span className="text-ink-soft">Jogalap: {basis}. Időtartam: {until}.</span>
+      <strong>{what}</strong> – {why}. <span className="text-ink-soft">Jogalap: {basis}. Időtartam: {until}.</span>
     </li>
   );
 }
@@ -35,7 +35,7 @@ const sections: LegalSection[] = [
         <li>Csak azt az adatot kérjük el, ami a szolgáltatáshoz tényleg kell.</li>
         <li>Nem adunk el és nem adunk át adatot reklámcélra; nincs hirdetési vagy követő süti.</li>
         <li>
-          A <strong>napló</strong> bejegyzéseit csak te látod — a rendszer úgy épül fel, hogy
+          A <strong>napló</strong> bejegyzéseit csak te látod – a rendszer úgy épül fel, hogy
           az adminisztrátor felülete sem jeleníti meg őket.
         </li>
         <li>Bankkártyaadatot nem látunk és nem tárolunk; ezt a Stripe kezeli.</li>
@@ -48,12 +48,12 @@ const sections: LegalSection[] = [
       <>
         <p id="jelentkezes" className="scroll-mt-24 font-serif text-lg text-forest">Jelentkezés az egyéni programra</p>
         <ul>
-          <Row what="A felmérés válaszai: az életmódodra és egészségedre vonatkozó adatok (táplálkozás, mozgás, alvás, stressz, szerhasználat, kapcsolatok), a problémád leírása, súlyossága és sürgőssége, valamint a szándékaid" why="az ismerkedő konzultáció előkészítése és — ha résztvevő leszel — a program személyre szabása" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a) és 6. cikk (1) a)); a hozzájárulás a felmérés beküldésekor, időbélyeggel és a szöveg változatával rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a kitöltéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
-          <Row what="Név, e-mail-cím, telefonszám (nem kötelező), a lefoglalt konzultációs időpont" why="kapcsolattartás és a konzultáció megszervezése" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b)" until="ugyanaddig, mint a felmérés válaszai" />
-          <Row what="Honnan hallottál rólam (nem kötelező válasz), illetve a link forrásjelölése, ha a felméréshez például egy YouTube-videó leírásából érkeztél" why="annak megértése, hogyan találnak rám az érdeklődők" basis="jogos érdek (GDPR 6. cikk (1) f))" until="ugyanaddig, mint a felmérés válaszai" />
+          <Row what="A kérdőív válaszai: az életmódodra és egészségedre vonatkozó adatok (táplálkozás, mozgás, alvás, stressz, szerhasználat, kapcsolatok), a problémád leírása, súlyossága és sürgőssége, valamint a szándékaid" why="az ismerkedő konzultáció előkészítése és – ha résztvevő leszel – a program személyre szabása" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a) és 6. cikk (1) a)); a hozzájárulás a kérdőív beküldésekor, időbélyeggel és a szöveg változatával rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a kitöltéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
+          <Row what="Név, e-mail-cím, telefonszám (nem kötelező), a lefoglalt konzultációs időpont" why="kapcsolattartás és a konzultáció megszervezése" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b))" until="ugyanaddig, mint a kérdőív válaszai" />
+          <Row what="Honnan hallottál rólam (nem kötelező válasz), illetve a link forrásjelölése, ha a kérdőívhez például egy YouTube-videó leírásából érkeztél" why="annak megértése, hogyan találnak rám az érdeklődők" basis="jogos érdek (GDPR 6. cikk (1) f))" until="ugyanaddig, mint a kérdőív válaszai" />
         </ul>
         <p className="text-sm text-ink-soft">
-          A felmérés válaszait csak én látom. Ha visszavonod a hozzájárulásodat, a válaszaidat töröljük; ez a visszavonás
+          A kérdőív válaszait csak én látom. Ha visszavonod a hozzájárulásodat, a válaszaidat töröljük; ez a visszavonás
           előtti adatkezelés jogszerűségét nem érinti.
         </p>
 
@@ -70,9 +70,9 @@ const sections: LegalSection[] = [
 
         <p className="pt-3 font-serif text-lg text-forest">Fiók és belépés</p>
         <ul>
-          <Row what="E-mail-cím, név" why="a résztvevői fiók, a belépés (belépő link) és a kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b)" until="a program végét követő 1 év" />
-          <Row what="Napló-bejegyzések" why="saját gyakorlási napló, csak neked" basis="szerződés teljesítése" until="amíg nem törlöd, legkésőbb a fiók megszűnéséig" />
-          <Row what="Értesítési beállítás (kérsz-e levelet az újdonságokról)" why="értesítő levél az új alkalmakról" basis="jogos érdek — bármikor leiratkozhatsz az Adataim oldalon vagy a levél alján" until="a fiók megszűnéséig" />
+          <Row what="E-mail-cím, név" why="a résztvevői fiók, a belépés (belépő link) és a kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b))" until="a program végét követő 1 év" />
+          <Row what="Naplóbejegyzések" why="saját gyakorlási napló, csak neked" basis="szerződés teljesítése" until="amíg nem törlöd, legkésőbb a fiók megszűnéséig" />
+          <Row what="Értesítési beállítás (kérsz-e levelet az újdonságokról)" why="értesítő levél az új alkalmakról" basis="jogos érdek – bármikor leiratkozhatsz az Adataim oldalon vagy a levél alján" until="a fiók megszűnéséig" />
           <Row what="A megszűnt Társaság korábbi tagsági adatai (tagsági szint, előfizetés, haladás, közösségi bejegyzések)" why="a korábbi előfizetések lezárása és a jogszabályi kötelezettségek teljesítése" basis="szerződés teljesítése, illetve jogi kötelezettség (6. cikk (1) b) és c))" until="a tagság megszűnése után 1 év; a számlázási adatok 8 év" />
         </ul>
 
@@ -85,14 +85,14 @@ const sections: LegalSection[] = [
         <ul>
           <Row what="Név, e-mail-cím, foglalás, jelenlét" why="a helyfoglalás és a részvétel szervezése" basis="szerződés teljesítése" until="az esemény után 1 év (a számlaadatok 8 év)" />
           <Row what="Telefonszám" why="kapcsolattartás az eseménnyel kapcsolatban (pl. változás, elérhetőség a helyszínen)" basis="szerződés teljesítése" until="az esemény után 30 nap, utána automatikusan töröljük" />
-          <Row what="Biztonsági (egészségi) megjegyzés — amit a jelentkezéskor megadsz egészségi állapotról, sérülésről, várandósságról vagy érzékenységről" why="hogy a gyakorlást biztonságosan, rád figyelve vezethessük" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a)); a hozzájárulás a jelentkezéskor, időbélyeggel rögzül, és bármikor visszavonható" until="az esemény után 30 nap, utána automatikusan töröljük; csak a szervező látja" />
+          <Row what="Biztonsági (egészségi) megjegyzés – amit a jelentkezéskor megadsz egészségi állapotról, sérülésről, várandósságról vagy érzékenységről" why="hogy a gyakorlást biztonságosan, rád figyelve vezethessük" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a)); a hozzájárulás a jelentkezéskor, időbélyeggel rögzül, és bármikor visszavonható" until="az esemény után 30 nap, utána automatikusan töröljük; csak a szervező látja" />
           <Row what="Az elállási jogról szóló nyilatkozat és időbélyege, az ÁSZF verziója" why="annak igazolása, hogy a foglaláskor tudomásul vetted az elállási jog hiányát" basis="jogi kötelezettség, illetve jogos érdek (6. cikk (1) c) és f))" until="5 év" />
         </ul>
 
         <p className="pt-3 font-serif text-lg text-forest">Egy Kedves Üzenet</p>
         <ul>
           <Row what="A küldő neve és e-mail-címe, valamint az, hogy névtelenséget kért-e" why="az üzenet megerősítése és a kapcsolattartás; névtelenségnél a nevet a hívásban nem mondjuk ki" basis="szerződés teljesítése" until="a kézbesítés után 1 év" />
-          <Row what="A címzett neve, telefonszáma és az üzenet szövege" why="a meglepetés-hívás lebonyolítása" basis="jogos érdek (a küldő és a címzett érdeke az üzenet átadásában)" until="a telefonszámot legfeljebb 180 napig, utána automatikusan töröljük" />
+          <Row what="A címzett neve, telefonszáma és az üzenet szövege" why="a meglepetéshívás lebonyolítása" basis="jogos érdek (a küldő és a címzett érdeke az üzenet átadásában)" until="a telefonszámot legfeljebb 180 napig, utána automatikusan töröljük" />
         </ul>
         <p className="text-sm text-ink-soft">
           A címzettet a hívás elején tájékoztatjuk arról, ki és miért keresi, és hogy kérheti adatai törlését. Élő adásba
@@ -108,11 +108,11 @@ const sections: LegalSection[] = [
         <p>A szolgáltatás működéséhez az alábbi partnerek szolgáltatásait használjuk; csak a feladatukhoz szükséges adatot kapják meg:</p>
         <ul>
           <li><strong>Supabase</strong> (adatbázis és belépés; a szerver az EU-ban, Írországban van)</li>
-          <li><strong>Vercel Inc.</strong> (tárhely és süti nélküli, összesített látogatottságmérés, USA — EU–USA adatvédelmi keretrendszer)</li>
+          <li><strong>Vercel Inc.</strong> (tárhely és süti nélküli, összesített látogatottságmérés, USA – EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>Stripe Payments Europe Ltd.</strong> (bankkártyás fizetés, Írország)</li>
-          <li><strong>Resend</strong> (tranzakciós e-mailek, USA — EU–USA adatvédelmi keretrendszer)</li>
+          <li><strong>Resend</strong> (tranzakciós e-mailek, USA – EU–USA adatvédelmi keretrendszer)</li>
           <li><strong>BunnyWay d.o.o. (bunny.net)</strong> (hang- és videóanyagok, Szlovénia)</li>
-          <li><strong>Google Ireland Ltd.</strong> (Google Meet — az egyéni online alkalmak, Írország)</li>
+          <li><strong>Google Ireland Ltd.</strong> (Google Meet – az egyéni online alkalmak, Írország)</li>
           <li><strong>Zoho</strong> (levelezés)</li>
           <li><strong>Billingo</strong> (számlázás, amint bekapcsoljuk)</li>
         </ul>

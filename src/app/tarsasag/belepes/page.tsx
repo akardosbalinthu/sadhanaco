@@ -30,7 +30,7 @@ export default async function LoginPage({
       <p className="mt-6 text-center text-sm text-ink-soft">
         Még nem vagy a program résztvevője?{" "}
         <a href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/jelentkezes`} className={linkClass}>
-          Jelentkezés konzultációra
+          Jelentkezem konzultációra
         </a>
       </p>
     </main>

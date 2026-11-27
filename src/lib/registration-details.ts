@@ -29,4 +29,4 @@ export const detailsError = (hint: string | null | undefined) =>
     INVALID_PHONE: "Adj meg egy érvényes telefonszámot.",
     NOTE_REQUIRED: "Kérlek, válaszolj a biztonsági kérdésre (a „Nincs” is jó válasz).",
     CONSENT_REQUIRED: "A biztonsági információ kezeléséhez kérlek, add meg a hozzájárulásod.",
-  })[hint ?? ""] ?? "A jelentkezési adatok mentése nem sikerült.";
+  })[hint ?? ""] ?? "Nem sikerült elmenteni a jelentkezési adatokat. Kérlek, próbáld újra.";

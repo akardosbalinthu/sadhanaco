@@ -41,11 +41,11 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       <MemberNav active="/gyakorlas" />
 
       <Link href={tp("/gyakorlas")} className="inline-flex items-center gap-1.5 text-sm text-ink-soft transition-colors duration-300 hover:text-gold">
-        <ArrowLeft className="h-4 w-4" strokeWidth={1.5} aria-hidden /> Vissza a gyakorlótérbe
+        <ArrowLeft className="h-4 w-4" strokeWidth={1.5} aria-hidden /> Vissza a gyakorláshoz
       </Link>
 
       <p className="mt-8 text-xs uppercase tracking-[0.18em] text-gold">
-        {TRACK_LABEL[lesson.track] ?? "Küldetés"} · {moduleTitle} · {lesson.week_number === 9 ? "+1. hét" : `${lesson.week_number}. hét`}
+        {TRACK_LABEL[lesson.track] ?? "Gyakorlás"} · {moduleTitle} · {lesson.week_number === 9 ? "+1. hét" : `${lesson.week_number}. hét`}
         {lesson.duration_seconds ? ` · ${Math.round(lesson.duration_seconds / 60)} perc` : ""}
       </p>
       <h1 className="mt-3 font-serif text-3xl text-forest sm:text-4xl">{lesson.title}</h1>

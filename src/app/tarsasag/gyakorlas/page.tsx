@@ -93,7 +93,7 @@ export default async function PracticePage() {
                         className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded border transition-colors duration-300 ${
                           isDone ? "border-gold bg-gold text-paper" : "border-line hover:border-gold"
                         }`}
-                        aria-label={isDone ? "Mai pipa visszavonása" : "Ma elvégeztem"}
+                        aria-label={isDone ? "A mai pipa visszavonása" : "Ma elvégeztem"}
                       >
                         {isDone && <Check className="h-4 w-4" strokeWidth={2} aria-hidden />}
                       </button>

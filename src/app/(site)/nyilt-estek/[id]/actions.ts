@@ -108,8 +108,8 @@ export async function bookOpenEvening(
       `Kedves ${name}!`,
       `Örömmel várlak: ${ev.title}, ${when}${ev.is_online ? " (online)" : ev.location ? `, ${ev.location}` : ""}.`,
       ev.donation_based
-        ? "Az est adomány alapú: a részvétel díjmentes, a helyszínen belátásod szerint támogathatod. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassam."
-        : "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, írj egy rövid levelet, hogy a helyed másnak adhassam.",
+        ? "Az est adomány alapú: a részvétel díjmentes, a helyszínen belátásod szerint támogathatod. Ha mégsem tudsz jönni, kérlek, válaszolj erre a levélre, hogy a helyedet másnak adhassam."
+        : "A részvétel díjmentes. Ha mégsem tudsz jönni, kérlek, válaszolj erre a levélre, hogy a helyedet másnak adhassam.",
     ]);
     return {
       status: "done",

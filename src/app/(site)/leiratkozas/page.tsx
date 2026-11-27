@@ -12,7 +12,7 @@ export default async function UnsubscribePage({ searchParams }: { searchParams: 
     <main className="py-16">
       <PageHeader eyebrow="Kardos Bálint" title="Leiratkozás az újdonságokról">
         <p>
-          Ha nem szeretnél levelet kapni az új eseményekről, bejegyzésekről és szavazásokról, egy kattintással
+          Ha nem szeretnél levelet kapni az új alkalmakról és eseményekről, egy kattintással
           leiratkozhatsz. A foglalásaidról és fizetéseidről szóló leveleket továbbra is megkapod.
         </p>
       </PageHeader>

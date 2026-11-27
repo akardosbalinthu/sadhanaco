@@ -16,8 +16,8 @@ export function LoginForm({ tovabb }: { tovabb?: string }) {
       <div className="rounded-md border border-gold/40 bg-gold-soft/20 p-5 text-ink-soft">
         <p>
           Ha a <span className="text-ink">{state.email}</span> címmel van fiókod,
-          pár percen belül érkezik egy belépő link. Nyugodtan nézd meg a levelezésedet,
-          ráérsz.
+          pár percen belül érkezik egy belépő link. Ha nem látod a beérkezett levelek között, nézd meg
+          a levélszemét mappát is.
         </p>
       </div>
     );
@@ -45,7 +45,7 @@ export function LoginForm({ tovabb }: { tovabb?: string }) {
         disabled={pending}
         className={`${buttonPrimary} w-full`}
       >
-        {pending ? "Küldés…" : "Belépő link kérése"}
+        {pending ? "Küldés…" : "Kérem a belépő linket"}
       </button>
     </form>
   );

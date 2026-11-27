@@ -5,9 +5,9 @@ import { buttonPrimary, buttonSecondary, CompassDivider, GildedCard, SectionTitl
 import { DawnLandscape, EveningLamp, KindCall, Sprout, WindingPath } from "@/components/illustrations";
 
 export const metadata = {
-  title: "Kardos Bálint · Találd meg a nyugalmad – és tartsd is meg a hétköznapokban",
+  title: "Meditáció és idegrendszer-fejlesztés egyénileg · Kardos Bálint",
   description:
-    "Nyolchónapos egyéni idegrendszer-fejlesztő program több ezer éves jógikus légző- és meditációs gyakorlatokkal, modern életmód-orvostani keretrendszerben. Hosszú távú út, de az első lépést már ma megteheted.",
+    "Nyolchónapos egyéni program jógikus légző- és meditációs gyakorlatokkal, életmód-orvostani keretben. Kezdd egy rövid kérdőívvel – az eredményt azonnal látod.",
 };
 
 // A felsorolások sorrendje a jóga nyolc ágát követi: önfegyelem és mértékletesség → test → légzés →
@@ -34,11 +34,11 @@ const NERVOUS_SYSTEM = [
   },
   {
     title: "Megtanulod segíteni a visszaváltást",
-    text: "A légzéssel, a figyelemmel és a testérzékeléssel tudatosan segítheted, hogy egy nehéz helyzet után hamarabb visszatalálj a nyugalomhoz. Ez tanulható, mint bármely más készség.",
+    text: "A légzéssel, a figyelemmel és a testérzékeléssel tudatosan segítheted, hogy egy nehéz helyzet után hamarabb visszatalálj a nyugalomhoz. Ez ugyanúgy tanulható, mint bármely más készség.",
   },
   {
     title: "Megteremted hozzá az alapokat",
-    text: "Az étkezés, a mozgás és az alvás adja azt a hátteret, amelyre a gyakorlás épülhet. Ezért nem csak a meditációval foglalkozunk, hanem az egész napoddal.",
+    text: "Az étkezés, a mozgás és az alvás adja azt a hátteret, amelyre a gyakorlás épülhet. Ezért a meditáció mellett az egész napoddal foglalkozunk.",
   },
 ];
 
@@ -61,13 +61,13 @@ const OUTCOMES = [
 const INCLUDED = [
   "egyéni alkalmak online: az első négy hónapban heti 60, a második négyben havi 45 perc",
   "személyre szabott gyakorlási terv, amely veled együtt változik",
-  "videós és hanganyagos modulok, napi gyakorlás-pipálás és napló a saját felületeden",
+  "videók és vezetett hanganyagok a saját felületeden, ahol naponta kipipálhatod a gyakorlást, és naplót is vezethetsz",
   "rövid heti beszámoló két alkalom között, amelyet elolvasok, és visszajelzek rá",
   "díjmentes részvétel a budapesti Nyílt Meditációs Esteken a program ideje alatt",
 ];
 
 const STEPS = [
-  { title: "Kérdőív és Életmód-térkép", text: "Két-három perc, 15 kérdés. A végén látod, hol tartasz most, és kapsz egy első tanácsot." },
+  { title: "Kérdőív és Életmód-térkép", text: "15 kérdés, két-három perc. A végén látod, hol tartasz most, és kapsz egy első tanácsot." },
   { title: "Ismerkedő konzultáció", text: "Online beszélgetünk arról, mit szeretnél, és hogy a program jó választás-e neked. Itt beszéljük meg a részleteket és a díjat is." },
   { title: "Indulás", text: "Ha mindketten igent mondunk, elkészítem a személyre szabott tervedet, és elindulunk." },
 ];
@@ -113,7 +113,7 @@ export default function HomePage() {
               {CTA}
             </Link>
             <a href="#menete" className={buttonSecondary}>
-              Hogyan működik?
+              Megnézem, hogyan működik
             </a>
           </div>
           <p className="mt-4 text-sm text-ink-soft">15 kérdés, két-három perc. A végén kapsz egy tanácsot is, amelyet még aznap kipróbálhatsz.</p>
@@ -143,7 +143,7 @@ export default function HomePage() {
             A gyors megoldások – egy szabad hétvége, egy új alkalmazás, egy jó könyv – néhány napig segítenek. Aztán jön
             egy nehezebb hét, és minden visszaáll a régi kerékvágásba.
           </p>
-          <p className="text-ink">Nem veled van a baj. Erre ritkán tanít meg bárki: hogyan működik ez belül, és mit tehetsz érte.</p>
+          <p className="text-ink">Nem veled van a baj. Azt ugyanis szinte senki nem tanítja meg nekünk, hogyan működik ez belül, és mit tehetünk érte.</p>
         </div>
       </section>
 
@@ -178,8 +178,8 @@ export default function HomePage() {
             hogyan kezeljük a terhelést, mihez nyúlunk, és kikhez kapcsolódunk.
           </p>
           <p>
-            A kettőt egyedi módszerré ötvözöm. Az egyik a belső, a másik a külső oldal – együtt az egész embert fogják át,
-            nem egy tünetet. Ebben van a program ereje.
+            A kettőt egy módszerbe ötvözöm: az egyik a belső, a másik a külső oldalt adja. Együtt az egész embert fogják át,
+            nem csak egy tünetet.
           </p>
         </div>
 
@@ -215,8 +215,8 @@ export default function HomePage() {
             <p className="mt-5 text-xs uppercase tracking-[0.16em] text-gold">1–4. hónap</p>
             <h3 className="mt-2 font-serif text-2xl text-forest">Tanulás és beépítés</h3>
             <p className="mt-3 text-ink-soft">
-              Hetente egy 60 perces online alkalom. Először a jelenléttel, majd a tudatossággal foglalkozunk, mindkettőt egy-egy
-              integrációs programmal, hogy a gyakorlás a hétköznapjaid része legyen. Két alkalom között rövid heti
+              Hetente egy 60 perces online alkalom. Először a jelenléttel, aztán a tudatossággal foglalkozunk, és mindkettő után
+              néhány hétig azon dolgozunk, hogy a gyakorlás a hétköznapjaid része legyen. Két alkalom között rövid heti
               beszámolót írsz, amelyre visszajelzek.
             </p>
           </GildedCard>
@@ -348,7 +348,7 @@ export default function HomePage() {
       <CompassDivider className="my-20" />
 
       <section>
-        <SectionTitle eyebrow="Ha most még csak ismerkednél" title="Két másik kapu" />
+        <SectionTitle eyebrow="Ha most még csak ismerkednél" title="Két másik lehetőség" />
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <Link href="/nyilt-estek" className="group block">
             <GildedCard className="h-full transition-colors duration-500 group-hover:border-gold/50">
@@ -382,10 +382,10 @@ export default function HomePage() {
       <section className="pb-8 text-center">
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Ha most kezdenéd</p>
         <h2 className="mx-auto mt-4 max-w-2xl text-balance font-serif text-3xl leading-snug text-forest sm:text-4xl">
-          Az első lépés mindössze két perc.
+          Az első lépés két-három perc.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Töltsd ki a kérdőívet, és nézd meg, hol tartasz most. Utána egy ismerkedő beszélgetésen eldönthetjük, hogy a
+          Töltsd ki a kérdőívet, és nézd meg, hol tartasz most. Utána egy ismerkedő konzultáción eldönthetjük, hogy a
           program jó választás-e neked.
         </p>
         <div className="mt-8">

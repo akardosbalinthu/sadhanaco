@@ -18,15 +18,15 @@ const GOOD_TO_KNOW = [
   { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni." },
   {
     Icon: Ticket,
-    title: "Részvételi díj: 4 940 Ft",
-    text: "Előre, online fizetve. Az egyéni programom résztvevőinek díjmentes. A 2026. decemberi est kivételesen adomány alapú.",
+    title: "Részvételi díj: 4\u00a0940 Ft",
+    text: "Előre, online fizeted. Az egyéni programom résztvevőinek díjmentes. A 2026. decemberi est kivételesen adomány alapú.",
   },
 ];
 
 export const metadata = {
   title: "Nyílt Meditációs Estek · Kardos Bálint",
   description:
-    "Havonta egy nyugodt este Budapesten, legfeljebb 15 fővel. Vezetett légzés- és figyelemgyakorlás, előzetes tapasztalat nélkül.",
+    "Havonta egy nyugodt este Budapesten, legfeljebb 15 fővel: vezetett légzés- és figyelemgyakorlás, előzetes tapasztalat nélkül. Meditáció kezdőknek is.",
 };
 export const dynamic = "force-dynamic"; // a szabad helyek mindig frissek legyenek
 
@@ -134,7 +134,7 @@ export default async function OpenEveningsPage() {
           Vidd haza a nyugalmat – és tartsd is meg.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Nyolc hónapos egyéni programomban személyesen kísérlek: a meditációtól a légzésen és a mozgáson át az alvásig
+          Nyolchónapos egyéni programomban személyesen kísérlek: a meditációtól a légzésen és a mozgáson át az alvásig
           és az étkezésig, a te életedre szabva. A program ideje alatt a Nyílt Estekre díjmentesen jöhetsz.
         </p>
         <div className="mt-8">

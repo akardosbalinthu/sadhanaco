@@ -26,10 +26,10 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
     return (
       <main className="py-16">
         <PageHeader eyebrow="Időpontfoglalás" title="Ez a link nem érvényes.">
-          <p>Lehet, hogy elírás történt, vagy a jelentkezés már nem érhető el. Kérlek, töltsd ki újra a felmérést.</p>
+          <p>Lehet, hogy elírás történt, vagy a jelentkezés már nem érhető el. Kérlek, töltsd ki újra a kérdőívet.</p>
         </PageHeader>
         <Link href="/jelentkezes" className={`${buttonPrimary} mt-8`}>
-          A felméréshez
+          A kérdőívhez
         </Link>
       </main>
     );
@@ -43,12 +43,12 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
         <PageHeader eyebrow="Időpontfoglalás" title={`Köszönöm, ${first}!`}>
           <p>
             Most még nem kezdenéd el a programot, ezért konzultációs időpontot ezen a linken nem lehet foglalni. Addig is
-            szeretettel várlak egy Nyílt Meditációs Esten. Ha eljött az ideje, töltsd ki újra a felmérést.
+            szeretettel várlak egy Nyílt Meditációs Esten. Ha eljött az ideje, töltsd ki újra a kérdőívet.
           </p>
         </PageHeader>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link href="/nyilt-estek" className={buttonPrimary}>Közelgő Nyílt Estek</Link>
-          <Link href="/jelentkezes" className={buttonSecondary}>Újra kitöltöm a felmérést</Link>
+          <Link href="/jelentkezes" className={buttonSecondary}>Újra kitöltöm a kérdőívet</Link>
         </div>
       </main>
     );
@@ -81,7 +81,7 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
           )}
         </div>
         <p className="mt-10 max-w-2xl text-ink-soft">
-          A felmérésedet átolvasom a beszélgetés előtt. Neked semmire nem kell készülnöd: elég, ha egy nyugodt, csendes
+          A kérdőívedet átolvasom a konzultáció előtt. Neked semmire nem kell készülnöd: elég, ha egy nyugodt, csendes
           helyről csatlakozol.
         </p>
       </main>

@@ -12,7 +12,7 @@ export function ConfirmForm({ token }: { token: string }) {
       <div role="status" className="flex items-start gap-3 text-forest">
         <Check className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.5} aria-hidden />
         <p className="leading-relaxed">
-          Megerősítve. A(z) {state.recipient} részére írt üzeneted bekerült a kézbesítési sorba. Köszönöm, hogy
+          Megerősítve: az üzeneted, amelyet {state.recipient} kap tőled, bekerült a kézbesítési sorba. Köszönöm, hogy
           szóltál – valaki hamarosan megtudja, hogy számít.
         </p>
       </div>

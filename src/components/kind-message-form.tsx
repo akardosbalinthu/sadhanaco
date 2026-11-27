@@ -160,7 +160,7 @@ export function KindMessageForm({
       )}
 
       <button type="submit" disabled={pending} className={buttonPrimary}>
-        {pending ? "Egy pillanat…" : guest ? "Elküldöm" : isPaid ? "Tovább a fizetéshez" : "Elküldöm az üzenetet"}
+        {pending ? "Egy pillanat…" : guest ? "Elküldöm az üzenetet" : isPaid ? "Tovább a fizetéshez" : "Elküldöm az üzenetet"}
       </button>
     </form>
   );

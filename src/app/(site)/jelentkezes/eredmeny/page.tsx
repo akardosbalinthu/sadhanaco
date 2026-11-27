@@ -84,7 +84,7 @@ export default async function ResultPage({ searchParams }: { searchParams: SP })
             </Link>
           )}
           <Link href="/#modszer" className={buttonSecondary}>
-            A módszerem
+            Megismerem a módszert
           </Link>
         </div>
         <p className="mt-6 text-sm text-ink-soft">Az eredményedet e-mailben is elküldtem.</p>

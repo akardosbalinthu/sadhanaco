@@ -27,7 +27,7 @@ export function NameFields({ last, first, nick }: { last: string; first: string;
       </div>
       {field("nick", "Becenév (nem kötelező)", { maxLength: 30, pattern: '[^"]*', title: "Idézőjel nélkül" })}
       <p className="text-sm text-ink-soft">
-        Így jelensz meg a közösségben és a ranglistán:{" "}
+        Így jelenik meg a neved:{" "}
         <span className="font-serif text-lg text-forest">{shown || "–"}</span>
       </p>
     </div>

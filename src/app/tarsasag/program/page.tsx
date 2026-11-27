@@ -71,7 +71,7 @@ export default async function MyProgramPage() {
           {p.payment_paused
             ? "A legutóbbi részlet terhelése nem sikerült, ezért a felület szünetel. Amint a fizetés rendben van, minden visszaáll – a haladásod megmarad."
             : "A legutóbbi részlet terhelése nem sikerült. A hozzáférésed megmarad, és automatikusan újrapróbáljuk."}{" "}
-          <Link href={tp("/adataim")} className="underline decoration-gold/60 underline-offset-4">A fizetési kártya frissítése</Link>
+          <Link href={tp("/adataim")} className="underline decoration-gold/60 underline-offset-4">Frissítem a fizetési kártyát</Link>
         </div>
       )}
 
@@ -115,7 +115,7 @@ export default async function MyProgramPage() {
                   rel="noopener"
                   className={buttonSecondary}
                 >
-                  <CalendarPlus className="h-4 w-4" strokeWidth={1.5} aria-hidden /> Google Naptár
+                  <CalendarPlus className="h-4 w-4" strokeWidth={1.5} aria-hidden /> Hozzáadom a Google Naptárhoz
                 </a>
               </div>
             </>
@@ -156,7 +156,7 @@ export default async function MyProgramPage() {
           )}
         </GildedCard>
         <Link href={tp("/gyakorlas")} className={`${buttonSecondary} mt-6`}>
-          A heti tananyag és a napi gyakorlás
+          Megnyitom a heti tananyagot
         </Link>
       </section>
 
@@ -165,7 +165,7 @@ export default async function MyProgramPage() {
       <section>
         <p className="text-xs uppercase tracking-[0.18em] text-gold">Alkalmaink</p>
         <h2 className="mt-2 font-serif text-3xl text-forest">
-          {total > 0 ? `${done} megtartva a ${total}-ból` : "Időpontok"}
+          {total > 0 ? `${done} / ${total} alkalom megtartva` : "Időpontok"}
         </h2>
         {upcoming.length === 0 ? (
           <p className="mt-4 text-ink-soft">Most nincs beírt következő időpont.</p>

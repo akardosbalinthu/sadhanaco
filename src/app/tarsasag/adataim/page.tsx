@@ -24,7 +24,7 @@ export default async function MyDetailsPage({ searchParams }: { searchParams: SP
     <main className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <MemberNav active="/adataim" />
       <p className="text-xs uppercase tracking-[0.18em] text-gold">Programom · Adataim</p>
-      <h1 className="mt-3 font-serif text-4xl text-forest">Hogyan szólíthatunk?</h1>
+      <h1 className="mt-3 font-serif text-4xl text-forest">Hogyan szólítsalak?</h1>
       <p className="mt-4 max-w-2xl text-ink-soft">
         Így szólítalak a felületen és a leveleimben. Ha van beceneved, amit szívesen hallasz, add meg.
       </p>

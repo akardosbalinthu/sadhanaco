@@ -30,7 +30,7 @@ export function consultationEvent(info: BookingInfo, forAdmin = false): Calendar
     start,
     end: new Date(start.getTime() + info.booked.duration_minutes * 60_000),
     description: forAdmin
-      ? `Jelentkező: ${info.full_name} (${info.email})\nFelmérés: ${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/jelentkezesek/${info.application_id}`
+      ? `Jelentkező: ${info.full_name} (${info.email})\nKérdőív: ${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/jelentkezesek/${info.application_id}`
       : info.booked.meet_url
       ? "Online, Google Meeten. A belépő link lent."
       : "Online, Google Meeten. A belépő linket a konzultáció előtt e-mailben küldöm.",
@@ -72,7 +72,7 @@ export async function notifyBooking(token: string) {
     [
       `${info.full_name} (${info.email}) lefoglalta az ismerkedő konzultációt: ${when}, ${info.booked.duration_minutes} perc.`,
       info.booked.meet_url ? `Meet-link: ${info.booked.meet_url}` : "Ehhez az időponthoz még nincs Meet-link – a konzultáció előtt küldd el neki.",
-      `A felmérése: ${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/jelentkezesek/${info.application_id}`,
+      `A kérdőíve: ${publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "")}/admin/jelentkezesek/${info.application_id}`,
     ],
     { href: googleCalendarUrl(mine), label: "Beteszem a Google Naptáramba" },
     [{ filename: "konzultacio.ics", content: buildIcs(mine), contentType: "text/calendar; charset=utf-8" }],

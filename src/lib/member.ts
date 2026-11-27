@@ -35,6 +35,6 @@ export type OrderKey = keyof typeof ORDER_INFO;
 export const TRACK_LABEL: Record<string, string> = {
   gyakorlas: "Napi gyakorlás",
   tudas: "Elmélet",
-  ritual_reggeli: "Reggeli rituálé",
-  ritual_esti: "Esti rituálé",
+  ritual_reggeli: "Reggeli gyakorlás",
+  ritual_esti: "Esti gyakorlás",
 };

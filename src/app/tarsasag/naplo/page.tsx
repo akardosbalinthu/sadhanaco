@@ -24,7 +24,7 @@ export default async function JournalPage() {
       <PageHeader eyebrow="Napló" title="Gyakorlónapló">
         <p>
           Néhány sor arról, mit vettél észre ma – a légzésedben, a testedben, egy helyzetben. A naplódat csak te
-          látod; még én sem.
+          látod, még én sem.
         </p>
       </PageHeader>
       <GildedCard className="mt-8 p-6">

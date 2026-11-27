@@ -5,7 +5,7 @@ import { z } from "zod";
 import { back, budapestLocalToIso, EVENT_KIND_LABEL, requireAdmin } from "@/lib/admin";
 import { sendEmail } from "@/lib/email";
 import { announceToMembers } from "@/lib/announce";
-import { resolvedTarsasagUrl, tp } from "@/lib/site";
+import { resolvedSiteUrl, resolvedTarsasagUrl, tp } from "@/lib/site";
 
 const uuid = z.string().uuid();
 const str = (fd: FormData, k: string) => String(fd.get(k) ?? "").trim();
@@ -343,12 +343,13 @@ async function announceEvent(supabase: Admin, id: string) {
   announceToMembers("event", id, {
     subject: `Új alkalom: ${e.title}`,
     paragraphs: [
-      `Új alkalmat írtam ki A Társaságban: ${label} – ${e.title}.`,
+      `Új alkalmat írtam ki: ${label} – ${e.title}.`,
       `Időpont: ${whenFmt.format(new Date(e.starts_at))}. Helyszín: ${where}.`,
       ...(e.description ? [e.description.length > 400 ? `${e.description.slice(0, 400)}…` : e.description] : []),
-      e.is_online ? "Előre jelentkezni nem kell: a kezdés előtt 15 perccel az Események oldalon nyílik a belépés." : "A részleteket és a jelentkezést az Események oldalon találod.",
+      e.kind === "nyilt_est" ? "A részleteket és a jelentkezést a Nyílt Estek oldalán találod." : "A részleteket a programod felületén találod.",
     ],
-    linkPath: `/esemenyek#e-${id}`,
+    // Az Események oldal a Társasággal megszűnt: a Nyílt Est a fő oldalra, minden más a Programom oldalra visz.
+    linkPath: e.kind === "nyilt_est" ? `${resolvedSiteUrl().replace(/\/$/, "")}/nyilt-estek` : "/program",
     linkLabel: "Megnézem",
   });
 }

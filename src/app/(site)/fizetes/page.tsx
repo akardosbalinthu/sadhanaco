@@ -117,7 +117,7 @@ export default async function PaymentPage({ searchParams }: { searchParams: SP }
             <button className={buttonPrimary}>Tovább a biztonságos fizetéshez</button>
             <ul className="mt-4 space-y-1.5 text-sm text-ink-soft">
               <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />Bankkártyával, a Stripe biztonságos fizetési oldalán.</li>
-              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />Részletfizetésnél a további részleteket havonta automatikusan terheljük, a kártyádat bármikor frissítheted.</li>
+              <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />Részletfizetésnél a további részletek havonta automatikusan terhelődnek a kártyádra, amelyet bármikor frissíthetsz.</li>
               <li className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />Minden fizetésről számlát küldök.</li>
             </ul>
           </div>

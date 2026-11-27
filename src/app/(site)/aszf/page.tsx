@@ -62,13 +62,13 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Az egyéni program nyolc hónapos, online kísérés. Az első négy hónapban hetente egy 60 perces, a második négy
+          Az egyéni program nyolchónapos, online kísérés. Az első négy hónapban hetente egy 60 perces, a második négy
           hónapban havonta egy 45 perces egyéni alkalom van (Google Meeten), személyre szabott gyakorlási tervvel,
           heti írásos beszámolóval és visszajelzéssel. A program ideje alatt a résztvevő hozzáfér a résztvevői
           felületen lévő tananyaghoz (videós és hanganyagos modulok), a gyakorlás-követéshez és a naplóhoz.
         </p>
         <p>
-          <strong>A program nem vásárolható meg közvetlenül.</strong> A jelentkezés egy felméréssel indul, amelyet egy
+          <strong>A program nem vásárolható meg közvetlenül.</strong> A jelentkezés egy kérdőívvel indul, amelyet egy
           ismerkedő konzultáció követ. A konzultáció után a szolgáltató e-mailben
           fizetési linket küld. A fizetési oldalon választható fizetési módok: egy összegben, négy havi részletben vagy
           havi részletekben. A szerződés a fizetési oldalon leadott megrendeléssel és a díj, illetve az első részlet
@@ -150,7 +150,7 @@ const sections: LegalSection[] = [
           a címzettet három próbálkozásra sem érjük el, az üzenet lezárul.
         </li>
         <li>
-          A hívás élő adásban vagy rövid videóban hangozhat el. Az üzenet küldője szavatolja, hogy a címzett nevét és
+          A hívásról rövid videó készülhet. Az üzenet küldője szavatolja, hogy a címzett nevét és
           telefonszámát jogszerűen adja meg. A szolgáltató megtagadhatja a sértő, jogellenes vagy más személy jogait
           sértő üzenet kézbesítését.
         </li>
@@ -185,8 +185,8 @@ const sections: LegalSection[] = [
       <p>
         Törekszünk a folyamatos elérhetőségre, de a karbantartás vagy külső szolgáltatók (tárhely, fizetés, média,
         videóhívás) hibája miatti rövid kiesésekért nem vállalunk felelősséget. A gyakorlatok végzése a 3. pontban
-        leírtak szerint saját felelősségre történik. A szolgáltató felelőssége — a jogszabály által nem korlátozható
-        esetek kivételével — legfeljebb az érintett szolgáltatásért kifizetett díj összegéig terjed.
+        leírtak szerint saját felelősségre történik. A szolgáltató felelőssége – a jogszabály által nem korlátozható
+        esetek kivételével – legfeljebb az érintett szolgáltatásért kifizetett díj összegéig terjed.
       </p>
     ),
   },
@@ -196,9 +196,9 @@ const sections: LegalSection[] = [
       <>
         <p>
           Panaszodat a {SITE.email} címre küldheted; 30 napon belül írásban válaszolunk. Ha a panasz rendezése nem
-          sikerül, a lakóhelyed szerint illetékes békéltető testülethez fordulhatsz — a szolgáltató székhelye szerint
+          sikerül, a lakóhelyed szerint illetékes békéltető testülethez fordulhatsz – a szolgáltató székhelye szerint
           a Budapesti Békéltető Testülethez (1016 Budapest, Krisztina krt. 99. III. em. 310.;
-          bekelteto.testulet@bkik.hu) —, illetve bírósághoz.
+          bekelteto.testulet@bkik.hu) –, illetve bírósághoz.
         </p>
       </>
     ),
@@ -230,7 +230,7 @@ export default function TermsPage() {
       intro={
         <p>
           Igyekeztem érthetően fogalmazni. A legfontosabbak röviden: csak magánszemélyek vehetik igénybe; az egyéni
-          program feltételeit az ismerkedő konzultáción egyeztetjük, és írásban visszaigazolom; a gyakorlás nem
+          program feltételeit az ismerkedő konzultáción egyeztetjük, és írásban visszaigazoljuk; a gyakorlás nem
           helyettesíti az orvosi kezelést.
         </p>
       }

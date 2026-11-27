@@ -56,10 +56,10 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
   const link = `${resolvedSiteUrl().replace(/\/$/, "")}/egy-kedves-uzenet/megerosites?t=${data.confirm_token}`;
   const sent = await sendEmail(
     d.guest_email,
-    "Erősítsd meg a Kedves Üzenetedet",
+    "Erősítsd meg a kedves üzenetedet",
     [
       `Kedves ${d.guest_name}!`,
-      `Köszönöm, hogy üzenetet küldenél ${d.recipient_name} részére${wantsAnonymity(fd) ? " – névtelenül, a neved a hívásban nem hangzik el" : ""}. Egy kattintással erősítsd meg, hogy tényleg te küldted – utána bekerül a kézbesítési sorba.`,
+      `Köszönöm a kedves üzenetet, amelyet ${d.recipient_name} kap tőled${wantsAnonymity(fd) ? " – névtelenül: a nevedet a hívásban nem mondom ki" : ""}. Egy kattintással erősítsd meg, hogy tényleg te küldted, és az üzenet bekerül a kézbesítési sorba.`,
       "A link 48 óráig érvényes. Ha nem te küldted, egyszerűen hagyd figyelmen kívül ezt a levelet.",
     ],
     { href: link, label: "Megerősítem az üzenetet" },
@@ -69,7 +69,7 @@ export async function submitGuestMessage(_prev: FormState, fd: FormData): Promis
   }
   return {
     status: "done",
-    message: `Köszönöm! Küldtem egy megerősítő e-mailt erre a címre: ${d.guest_email}. A benne lévő linkkel erősítsd meg az üzenetet – utána bekerül a sorba.`,
+    message: `Köszönöm! Küldtem egy megerősítő e-mailt erre a címre: ${d.guest_email}. A benne lévő linkkel erősítsd meg az üzenetet, és bekerül a kézbesítési sorba.`,
   };
 }
 
