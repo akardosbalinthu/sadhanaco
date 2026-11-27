@@ -91,7 +91,7 @@ Havonta egy este Budapesten, legfeljebb 15 emberrel. Közös gyakorlás és szem
 ## 9. Bemutatkozás
 
 **Változatlan, szó szerint:**
-A nevem Kardos Bálint. Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó vagyok. Babócsán, egy somogyi faluban nőttem fel.
+A nevem Kardos Bálint. Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó vagyok. (A „Babócsán, egy somogyi faluban nőttem fel.” mondat 2026. november 27-től nem része a bemutatkozásnak; a szülőfalu a Rólam oldal történetében szerepel.)
 
 **A második bekezdésre javaslat, jóváhagyásra vár:**
 A jóga ősi gyakorlatait az életmód-orvostan keretrendszerével ötvözöm, hogy a meditáció ne csak a párnán, hanem a hétköznapokban is működjön: abban, ahogyan alszol, eszel, mozogsz, és ahogyan a többiekhez fordulsz.

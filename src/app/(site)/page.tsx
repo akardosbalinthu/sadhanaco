@@ -309,7 +309,7 @@ export default function HomePage() {
         <div>
           <p className="font-serif text-xl leading-relaxed text-ink">
             A nevem Kardos Bálint. Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó
-            vagyok. Babócsán, egy somogyi faluban nőttem fel.
+            vagyok.
           </p>
           <p className="mt-5 text-ink-soft">
             A jóga ősi gyakorlatait az életmód-orvostan keretrendszerével ötvözöm, hogy a meditáció ne csak a párnán, hanem

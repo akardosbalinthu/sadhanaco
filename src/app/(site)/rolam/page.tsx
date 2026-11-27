@@ -187,8 +187,7 @@ export default function AboutPage() {
       <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
         <PageHeader eyebrow="Rólam" title="A nevem Kardos Bálint.">
           <p className="font-serif text-xl text-ink">
-            Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó vagyok. Babócsán,
-            egy somogyi faluban nőttem fel.
+            Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó vagyok.
           </p>
           <p>
             A jóga ősi gyakorlatait az életmód-orvostan keretrendszerével ötvözöm, hogy a meditáció ne csak a párnán,
