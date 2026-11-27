@@ -31,10 +31,10 @@ export function SiteHeader() {
             Belépés
           </a>
           <Link
-            href="/jelentkezes"
+            href="/#idegrendszer"
             className="rounded-md border border-forest bg-forest px-3 py-1 text-paper transition-all duration-300 hover:border-gold"
           >
-            Jelentkezem
+            A Program
           </Link>
           <ThemeToggle />
         </nav>
