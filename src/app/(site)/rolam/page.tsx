@@ -7,7 +7,7 @@ import { KindCall, Sprout, WindingPath } from "@/components/illustrations";
 export const metadata = {
   title: "Rólam · Kardos Bálint",
   description:
-    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig: így lettem meditációs és idegrendszer-fejlesztő tréner, és így született a módszerem.",
+    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig: így lettem idegrendszer-fejlesztő mentor, és így született a módszerem.",
 };
 
 type Photo = { src: string; alt: string; caption: string; width: number; height: number };
@@ -187,7 +187,7 @@ export default function AboutPage() {
       <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_1fr]">
         <PageHeader eyebrow="Rólam" title="A nevem Kardos Bálint.">
           <p className="font-serif text-xl text-ink">
-            Integratív meditációs és idegrendszer-fejlesztő tréner, életmód-tanácsadó és jógaoktató vagyok. Babócsán,
+            Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó vagyok. Babócsán,
             egy somogyi faluban nőttem fel.
           </p>
           <p>

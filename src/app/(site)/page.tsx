@@ -308,7 +308,7 @@ export default function HomePage() {
         />
         <div>
           <p className="font-serif text-xl leading-relaxed text-ink">
-            A nevem Kardos Bálint. Integratív meditációs és idegrendszer-fejlesztő tréner, életmód-tanácsadó és jógaoktató
+            A nevem Kardos Bálint. Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó
             vagyok. Babócsán, egy somogyi faluban nőttem fel.
           </p>
           <p className="mt-5 text-ink-soft">

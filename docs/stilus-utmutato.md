@@ -8,6 +8,7 @@
 - **Ki beszél:** Bálint, egyes szám első személyben („kísérlek”, „várlak”, „elküldöm”). Többes szám („szólíthatunk”, „küldünk”) csak a jogi szövegekben.
 - **Megszólítás:** tegezés mindenhol, a Cégeknek oldalon is. Ott a cégre többes számban utalunk („a csapatotok”, „nálatok”), a kitöltőhöz egyes számban szólunk („kitöltöd”, „bejelölheted”).
 - **Bemutatkozás:** „A nevem Kardos Bálint.” Soha nem „Kardos Bálint vagyok” vagy „Bálint vagyok”.
+- **Titulus (2026. november 27.):** „Idegrendszer-fejlesztő mentor, légzés- és meditációoktató, holisztikus életmód-tanácsadó”. Rövid alak (névjegy, közösségi profil): „idegrendszer-fejlesztő mentor”. Az „integratív” és a „tréner” szót nem használjuk.
 - **Levelek:** „Kedves [keresztnév]!” Ha nincs név: „Kedves Résztvevő!” (programnál), „Szia!” helyett is ez. A „Kedves Tagtárs!” megszűnt.
 
 ## 2. Egységes szóhasználat
@@ -32,7 +33,7 @@
 ## 3. Tiltólista
 
 - **Tükörfordítás és angolos szerkezet:** „nagyszerű módja annak, hogy”, „a … világában”, „merülj el”, „fedezd fel”, „utazás” (metaforaként), „X által”, „került bevezetésre”, „földelés”, „1-on-1”, „&”.
-- **Divatszó:** holisztikus, átalakító, kulcsfontosságú, egyedülálló, egyedi (dicsérő értelemben), forradalmi, „a következő szintre”, „életre szóló”.
+- **Divatszó:** holisztikus (kivétel: a titulusban és a keresőszövegekben kulcsszóként), átalakító, kulcsfontosságú, egyedülálló, egyedi (dicsérő értelemben), forradalmi, „a következő szintre”, „életre szóló”.
 - **Gépies ritmus:** minden felsorolás hármas; „Nem csak X, hanem Y”; költői kérdéssel induló bekezdés; egyforma hosszú mondatok sora.
 - **Főnévi szerkezet ige helyett:** „a gyakorlás elvégzése” → „gyakorolsz”; „pipálás” → „kipipálod”.
 - **Hangnem:** ezoterikus szavak (energia, rezgés, ébredés), harci szókincs, teljesítménykényszer, címkézés („Szorongó vagy?”), kávé.

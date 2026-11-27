@@ -3,7 +3,7 @@
 ## 1. Alapító, Számlázási Entitás és Szakmai Háttér
 - **Név:** Kardos Bálint
 - **Szakmai titulus és kompetenciák:**
-  - Integratív meditációs és idegrendszer-fejlesztő tréner
+  - Idegrendszer-fejlesztő mentor, légzés- és meditációoktató, holisztikus életmód-tanácsadó (titulus, 2026. november 27.; rövid alak: idegrendszer-fejlesztő mentor; az „integratív” szó nem használható)
   - Életmód-orvostani konzulens (Lifestyle Medicine Consultant)
   - RYT-500 minősítésű jógaoktató (Rishikesh, India — 500 órás képzés)
   - Az *Egy Kedves Üzenet* (műsor és márka) házigazdája és az *Integrált meditációs és idegrendszer-fejlesztő podcast* alkotója

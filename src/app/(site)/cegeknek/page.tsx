@@ -161,7 +161,7 @@ export default function BusinessPage() {
         />
         <div>
           <p className="font-serif text-xl leading-relaxed text-ink">
-            A nevem Kardos Bálint. Integratív meditációs és idegrendszer-fejlesztő tréner, életmód-tanácsadó és jógaoktató
+            A nevem Kardos Bálint. Idegrendszer-fejlesztő mentor, légzés- és meditációoktató és holisztikus életmód-tanácsadó
             vagyok.
           </p>
           <div className="mt-5 rounded-lg bg-paper-deep/70 px-5 py-4">
