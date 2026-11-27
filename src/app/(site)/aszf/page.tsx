@@ -92,7 +92,7 @@ const sections: LegalSection[] = [
       <>
         <p>
           Az egyéni program díját és a választható fizetési módokat a konzultáció után küldött fizetési oldal
-          tartalmazza. A Nyílt Meditációs Est részvételi díja a weboldalon szerepel. Mindkettő bankkártyával, a Stripe
+          tartalmazza. A díj bankkártyával, a Stripe
           biztonságos fizetési oldalán fizethető; a kártyaadatokat a szolgáltató nem látja és nem tárolja.
         </p>
         <p>
@@ -121,9 +121,8 @@ const sections: LegalSection[] = [
           e-mailben jelezheted a {SITE.email} címen.
         </p>
         <p>
-          <strong>Nyílt Meditációs Est:</strong> a meghatározott időpontra szóló szabadidős szolgáltatás a fenti rendelet
-          29. § (1) l) pontja szerinti kivétel, ezért ennél nincs elállási jog. A foglaláskor erről külön nyilatkozol;
-          a nyilatkozatot időbélyeggel rögzítjük.
+          <strong>Nyílt Meditációs Est:</strong> a részvétel díjmentes (adomány alapú), ezért díjfizetés és elállás nem
+          merül fel.
         </p>
       </>
     ),
@@ -132,11 +131,10 @@ const sections: LegalSection[] = [
     title: "Nyílt Meditációs Estek",
     body: (
       <ul>
-        <li>Bárki jelentkezhet; a részvételi díj 4 940 Ft. Az egyéni program résztvevőinek a program ideje alatt díjmentes.</li>
-        <li>Az eseménynél jelölt alkalmak adomány alapúak: ezeken a részvétel díjmentes, a helyszínen belátás szerint támogathatók.</li>
+        <li>Bárki jelentkezhet. A részvétel adomány alapú: díjmentes, és a helyszínen belátás szerint támogatható.</li>
         <li>
-          A foglalás a díj megfizetésével válik véglegessé. Ha az eseményt a szolgáltató mondja le, a befizetett díjat
-          visszatérítjük. A résztvevő által lemondott vagy ki nem használt foglalás díját nem térítjük vissza.
+          A helyfoglalás a jelentkezéssel válik véglegessé. Ha a résztvevő mégsem tud eljönni, kérjük, jelezze e-mailben,
+          hogy a helyét másnak adhassuk. Ha az eseményt a szolgáltató mondja le, erről e-mailben értesítjük a jelentkezőket.
         </li>
       </ul>
     ),

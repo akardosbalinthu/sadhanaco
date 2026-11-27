@@ -137,6 +137,8 @@ A tananyag négy egymásra épülő lépcsőből áll. A belépő tagok látják
 
 > **Arculat (2026. november 25-től mérvadó):** minden felhasználónak látható szövegnek a `docs/ARCULAT.md` arculati alapjához kell illeszkednie: egyéni, holisztikus program (a jóga nyolc ága + az életmód-orvostan hat pillére), fő cím: „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”, alcím: „Több ezer éves jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.” Központi üzenet: hosszú távú út, már ma használható eszközökkel. Tipográfia: magyar gondolatjel (–). Végzettség: RYT-500 marad mindenhol. Ahol ez és a korábbi pontok ütköznek, az ARCULAT.md az irányadó.
 
+> **Nyílt Estek (2026. november 27.):** minden Nyílt Meditációs Est adomány alapú (díjmentes részvétel, a helyszínen belátás szerint támogatható); a 4 940 Ft-os részvételi díj és a „program résztvevőinek díjmentes” előny megszűnt. Az admin felületen új eseménynél az „Adomány alapú” alapból be van jelölve.
+
 > **Cégeknek (2026. november 26.):** van „Cégeknek” oldal (`/cegeknek`) cégre szabott tréningnapokkal, többalkalmas programmal, előadással és vezetői egyéni programmal; ár nincs kiírva, csak ajánlatkérő űrlap (`business_inquiries`, `submit_business_inquiry`, admin: Ajánlatkérések, 1 év után automatikus törlés). Bálint közlése szerint 2027-től KATA mellett is lehet cégnek számlázni; addig céggel szerződés és számla nem köthető. A gyakorlatnév-tilalom itt is érvényes. Az ÁSZF jelenleg csak magánszemélyekről szól – céges szerződés előtt ki kell egészíteni.
 
 ### 7.1 KATA bevételi határ

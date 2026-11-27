@@ -253,7 +253,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: SP }
               <input type="datetime-local" name="registration_closes_at" className={`${smallInput} mt-1 w-full`} />
             </label>
             <label className="flex items-start gap-2 text-sm sm:col-span-6">
-              <input type="checkbox" name="donation_based" className="mt-1 accent-[var(--color-gold)]" />
+              <input type="checkbox" name="donation_based" defaultChecked className="mt-1 accent-[var(--color-gold)]" />
               <span>
                 Adomány alapú – a részvétel díjmentes, a résztvevők a helyszínen, belátásuk szerint támogathatják (az árak
                 ilyenkor 0 Ft-ra állnak; túránál nem értelmezett)

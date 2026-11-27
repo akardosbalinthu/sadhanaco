@@ -63,7 +63,6 @@ const INCLUDED = [
   "személyre szabott gyakorlási terv, amely veled együtt változik",
   "videók és vezetett hanganyagok a saját felületeden, ahol naponta kipipálhatod a gyakorlást, és naplót is vezethetsz",
   "rövid heti beszámoló két alkalom között, amelyet elolvasok, és visszajelzek rá",
-  "díjmentes részvétel a budapesti Nyílt Meditációs Esteken a program ideje alatt",
 ];
 
 const STEPS = [

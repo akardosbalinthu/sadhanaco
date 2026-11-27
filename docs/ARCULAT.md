@@ -81,9 +81,7 @@ Nyolc hónapos egyéni program, amelyben a jóga nyolc ágát az életmód-orvos
 
 **Nyílt Meditációs Estek** (szó szerint):
 Havonta egy este Budapesten, legfeljebb 15 emberrel. Közös gyakorlás és személyes jelenlét, telefon és képernyő nélkül.
-- Részvételi díj: 4 940 Ft mindenkinek.
-- A program résztvevőinek díjmentes.
-- A 2026. decemberi est adomány alapú.
+- 2026. november 27-től minden Nyílt Est adomány alapú: a részvétel díjmentes, a helyszínen belátás szerint támogatható.
 
 **Egy Kedves Üzenet** (szó szerint):
 Írj kedves üzenetet valakinek, és én meglepetés-telefonhívásban adom át. Egy hívás, amely emlékeztet: valaki gondol rád.

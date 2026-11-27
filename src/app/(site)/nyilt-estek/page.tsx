@@ -135,7 +135,7 @@ export default async function OpenEveningsPage() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
           Nyolchónapos egyéni programomban személyesen kísérlek: a meditációtól a légzésen és a mozgáson át az alvásig
-          és az étkezésig, a te életedre szabva. A program ideje alatt a Nyílt Estekre díjmentesen jöhetsz.
+          és az étkezésig, a te életedre szabva.
         </p>
         <div className="mt-8">
           <Link href="/#menete" className={buttonSecondary}>
