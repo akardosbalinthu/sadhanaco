@@ -7,7 +7,7 @@ import { KindCall, Sprout, WindingPath } from "@/components/illustrations";
 export const metadata = {
   title: "Rólam · Kardos Bálint",
   description:
-    "A kukoricaföldtől a nemzetközi irodán és a nagykonyhán át Rishikeshig: így lettem idegrendszer-fejlesztő mentor, és így született a módszerem.",
+    "A gyári műszakoktól az online marketingen és a nagykonyhán át Rishikeshig: így lettem idegrendszer-fejlesztő mentor, és így született a módszerem.",
 };
 
 type Photo = { src: string; alt: string; caption: string; width: number; height: number };
