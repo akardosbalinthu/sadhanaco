@@ -18,8 +18,8 @@ const GOOD_TO_KNOW = [
   { Icon: Shirt, title: "Kényelmes ruha", text: "Olyat vegyél fel, amiben nyugodtan tudsz ülni és lélegezni." },
   {
     Icon: Ticket,
-    title: "Részvételi díj: 4\u00a0940 Ft",
-    text: "Előre, online fizeted. Az egyéni programom résztvevőinek díjmentes. A 2026. decemberi est kivételesen adomány alapú.",
+    title: "Adomány alapú",
+    text: "A részvétel díjmentes, a helyszínen belátásod szerint támogathatod az estet.",
   },
 ];
 
