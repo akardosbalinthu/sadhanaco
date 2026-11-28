@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CalendarPlus, Video } from "lucide-react";
 import { requireMember } from "@/lib/member";
-import { fmtDay, fmtFull, PHASE_LABEL, type MyProgram } from "@/lib/program";
+import { fmtDay, fmtFull, PHASE_LABEL, PROGRAM_WEEKS, type MyProgram } from "@/lib/program";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { SITE, tp } from "@/lib/site";
 import { MemberNav } from "@/components/member-nav";
@@ -50,7 +50,8 @@ export default async function MyProgramPage() {
   const total = (sessions ?? []).filter((s) => s.status !== "elmaradt").length;
   const next = p.next_session;
   const lastReply = replies?.[0];
-  const monthShown = Math.min(Math.max(p.month, 1), 8);
+  const weekShown = Math.min(Math.max(p.week ?? 1, 1), PROGRAM_WEEKS);
+  const reportsOpen = p.reports_open ?? p.phase === "tanulas";
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-12">
@@ -62,8 +63,8 @@ export default async function MyProgramPage() {
         {p.phase === "hamarosan"
           ? `A programod kezdete: ${fmtDay(p.starts_on)}.`
           : p.phase === "lezarult"
-          ? "A programod lezárult. A tananyag és a napló továbbra is itt van, amíg a hozzáférésed tart."
-          : `${monthShown}. hónap a nyolcból · ${fmtDay(p.starts_on)} – ${fmtDay(p.ends_on)}`}
+          ? "A programod 16 hete lezárult. A tananyag, a gyakorlási terved és a napló továbbra is itt van – bármikor visszatérhetsz hozzájuk."
+          : `${weekShown}. hét a tizenhatból · ${fmtDay(p.starts_on)} – ${fmtDay(p.ends_on)}`}
       </p>
 
       {(p.payment_paused || p.payment_overdue) && (
@@ -78,11 +79,11 @@ export default async function MyProgramPage() {
       {p.phase !== "hamarosan" && p.phase !== "lezarult" && (
         <div className="mt-6 max-w-xl">
           <div className="flex h-1.5 overflow-hidden rounded-full bg-line" aria-hidden>
-            <div className="h-full bg-gold" style={{ width: `${(monthShown / 8) * 100}%` }} />
+            <div className="h-full bg-gold" style={{ width: `${(weekShown / PROGRAM_WEEKS) * 100}%` }} />
           </div>
           <div className="mt-2 flex justify-between text-xs text-ink-soft">
-            <span>1–4. hónap: tanulás és beépítés</span>
-            <span>5–8. hónap: önálló integráció</span>
+            <span>1–8. hét: Jelenlét</span>
+            <span>9–16. hét: Tudatosság</span>
           </div>
         </div>
       )}
@@ -124,6 +125,7 @@ export default async function MyProgramPage() {
           )}
         </GildedCard>
 
+        {reportsOpen ? (
         <GildedCard className="p-7">
           <p className="text-xs uppercase tracking-[0.18em] text-gold">Heti beszámoló</p>
           {p.report_done ? (
@@ -141,6 +143,19 @@ export default async function MyProgramPage() {
             </div>
           )}
         </GildedCard>
+        ) : (
+          <GildedCard className="p-7">
+            <p className="text-xs uppercase tracking-[0.18em] text-gold">Gyakorlás</p>
+            <p className="mt-3 text-ink-soft">
+              {p.phase === "hamarosan"
+                ? "A heti beszámoló a program első hetén nyílik meg."
+                : "A 16 hét lezárult, heti beszámolót már nem kell írnod. A tananyagot és a naplót továbbra is használhatod."}
+            </p>
+            <Link href={tp("/gyakorlas")} className={`${buttonSecondary} mt-5`}>
+              Megnyitom a tananyagot
+            </Link>
+          </GildedCard>
+        )}
       </section>
 
       <CompassDivider className="my-14" />

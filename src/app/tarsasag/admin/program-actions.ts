@@ -182,7 +182,7 @@ export async function enrollParticipant(fd: FormData) {
 
   // 2. Program (a Tudatosság alapból a 10. héttől nyílik)
   const s2 = new Date(`${d.starts_on}T12:00:00Z`);
-  s2.setUTCDate(s2.getUTCDate() + 63);
+  s2.setUTCDate(s2.getUTCDate() + 56); // a Tudatosság a 9. héten nyílik
   const { data: enr, error: enrErr } = await admin
     .from("program_enrollments")
     .insert({
@@ -403,7 +403,7 @@ export async function createPaymentOffer(fd: FormData) {
     "A programod fizetése",
     [
       `Kedves ${first}!`,
-      "Köszönöm a beszélgetést, örülök, hogy együtt dolgozunk. Ezen a linken választhatod ki a fizetés módját – egy összegben, négy havi részletben vagy havonta –, és a Stripe biztonságos oldalán fizethetsz.",
+      "Köszönöm a beszélgetést, örülök, hogy együtt dolgozunk. Ezen a linken választhatod ki a fizetés módját – egy összegben vagy négy havi részletben –, és a Stripe biztonságos oldalán fizethetsz.",
       `A programod kezdete: ${new Intl.DateTimeFormat("hu-HU", { year: "numeric", month: "long", day: "numeric" }).format(new Date(`${d.starts_on}T12:00:00Z`))}. A fizetés után e-mailben megkapod a belépő linket a programod felületére.`,
     ],
     { href: url, label: "Kiválasztom a fizetési módot" },

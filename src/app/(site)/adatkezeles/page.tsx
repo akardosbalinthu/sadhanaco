@@ -59,7 +59,8 @@ const sections: LegalSection[] = [
 
         <p className="pt-3 font-serif text-lg text-forest">Az egyéni program</p>
         <ul>
-          <Row what="A program kezdete és szakaszai, a személyre szabott gyakorlási terv, az alkalmak időpontja és megjegyzései, a heti beszámolóid és az azokra adott visszajelzés, a kipipált gyakorlások" why="a program lebonyolítása és a kísérés" basis="szerződés teljesítése (GDPR 6. cikk (1) b)); ha a beszámolóidban egészségi adatot is megosztasz, kifejezett hozzájárulásod alapján (9. cikk (2) a))" until="a program végét követő 1 év, utána automatikusan töröljük" />
+          <Row what="A program kezdete és szakaszai, az alkalmak időpontja és megjegyzései, a heti beszámolóid és az azokra adott visszajelzés, a kipipált gyakorlások" why="a program lebonyolítása és a kísérés" basis="szerződés teljesítése (GDPR 6. cikk (1) b)); ha a beszámolóidban egészségi adatot is megosztasz, kifejezett hozzájárulásod alapján (9. cikk (2) a))" until="a program végét követő 1 év, utána automatikusan töröljük" />
+          <Row what="A személyre szabott gyakorlási terv" why="hogy a program után is visszatérhess hozzá" basis="szerződés teljesítése (GDPR 6. cikk (1) b))" until="a fiók megszűnéséig; kérésedre bármikor töröljük" />
           <Row what="Belső jegyzet a programról" why="a kísérés előkészítése; csak én látom" basis="szerződés teljesítése" until="a program végét követő 1 év" />
         </ul>
 
@@ -70,7 +71,7 @@ const sections: LegalSection[] = [
 
         <p className="pt-3 font-serif text-lg text-forest">Fiók és belépés</p>
         <ul>
-          <Row what="E-mail-cím, név" why="a résztvevői fiók, a belépés (belépő link) és a kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b))" until="a program végét követő 1 év" />
+          <Row what="E-mail-cím, név" why="a résztvevői fiók, a belépés (belépő link) és a kapcsolattartás" basis="szerződés teljesítése (GDPR 6. cikk (1) b))" until="a fiók megszűnéséig: a tananyag és a napló a program után is elérhető marad; kérésedre a fiókot bármikor megszüntetjük" />
           <Row what="Naplóbejegyzések" why="saját gyakorlási napló, csak neked" basis="szerződés teljesítése" until="amíg nem törlöd, legkésőbb a fiók megszűnéséig" />
           <Row what="Értesítési beállítás (kérsz-e levelet az újdonságokról)" why="értesítő levél az új alkalmakról" basis="jogos érdek – bármikor leiratkozhatsz az Adataim oldalon vagy a levél alján" until="a fiók megszűnéséig" />
           <Row what="A megszűnt Társaság korábbi tagsági adatai (tagsági szint, előfizetés, haladás, közösségi bejegyzések)" why="a korábbi előfizetések lezárása és a jogszabályi kötelezettségek teljesítése" basis="szerződés teljesítése, illetve jogi kötelezettség (6. cikk (1) b) és c))" until="a tagság megszűnése után 1 év; a számlázási adatok 8 év" />

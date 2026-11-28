@@ -7,14 +7,14 @@ import { DawnLandscape, EveningLamp, KindCall, Sprout, WindingPath } from "@/com
 export const metadata = {
   title: "Meditáció és idegrendszer-fejlesztés egyénileg · Kardos Bálint",
   description:
-    "Nyolchónapos egyéni program jógikus légző- és meditációs gyakorlatokkal, életmód-orvostani keretben. Kezdd egy rövid kérdőívvel – az eredményt azonnal látod.",
+    "16 hetes egyéni program jógikus légző- és meditációs gyakorlatokkal, életmód-orvostani keretben, heti személyes alkalommal. Kezdd egy rövid kérdőívvel.",
 };
 
 // A felsorolások sorrendje a jóga nyolc ágát követi: önfegyelem és mértékletesség → test → légzés →
 // az érzékek befelé fordítása → figyelem → meditáció. A kapcsolatok nem eszköz, hanem eredmény.
 const BENEFITS = [
   "Saját gyakorlási terv, amely illeszkedik a napjaidhoz",
-  "Személyes kísérés: négy hónapig hetente, utána havonta beszélünk",
+  "Személyes kísérés: 16 héten át hetente beszélünk",
   "Az étkezésedtől a mozgáson, a légzésen és az alváson át a figyelmedig és a meditációig: minden számít",
 ];
 
@@ -54,15 +54,16 @@ const PAIRS = [
 // O – mi változik (cél, nem garancia)
 const OUTCOMES = [
   { title: "Hamarabb visszatalálsz a nyugalomhoz", text: "Egy nehéz nap vagy egy feszült beszélgetés után tudod, mit tehetsz, hogy ne vigyed magaddal estig." },
-  { title: "Olyan szokásaid lesznek, amelyek megmaradnak", text: "Nyolc hónap alatt a gyakorlás a napjaid természetes része lesz, nem egy újabb feladat a listán." },
+  { title: "Olyan szokásaid lesznek, amelyek megmaradnak", text: "A 16 hét alatt a gyakorlás a napjaid természetes része lesz, nem egy újabb feladat a listán." },
   { title: "Javul a kapcsolatod önmagaddal és a világgal", text: "Ha jobban figyelsz magadra, a körülötted élőkre is több figyelmed marad. Ez a munka valódi eredménye." },
 ];
 
 const INCLUDED = [
-  "egyéni alkalmak online: az első négy hónapban heti 60, a második négyben havi 45 perc",
+  "16 egyéni online alkalom, hetente 60 perc",
   "személyre szabott gyakorlási terv, amely veled együtt változik",
   "videók és vezetett hanganyagok a saját felületeden, ahol naponta kipipálhatod a gyakorlást, és naplót is vezethetsz",
   "rövid heti beszámoló két alkalom között, amelyet elolvasok, és visszajelzek rá",
+  "a tananyag, a gyakorlási terved és a naplód a program után is megmarad",
 ];
 
 const STEPS = [
@@ -77,6 +78,7 @@ const FAQ = [
   { q: "Mennyi időt kér naponta?", a: "Reggel és este egy rövid gyakorlást, emellett hetente néhány hosszabb, elmélyültebb ülést. A pontos ütemet a napjaidhoz igazítjuk." },
   { q: "Kell hozzá előzetes tapasztalat?", a: "Nem. Ha még sosem meditáltál, az elejéről indulunk; ha már gyakorolsz, onnan folytatjuk, ahol tartasz." },
   { q: "Mi van, ha közben elakadok?", a: "Erre való a heti beszámoló és a heti alkalom: ha elakadsz, együtt nézzük meg, hogyan lépj tovább." },
+  { q: "Mi marad meg a program után?", a: "A tananyag, a személyre szabott gyakorlási terved és a naplód a 16 hét után is elérhető marad a felületeden, így bármikor visszatérhetsz hozzájuk." },
   { q: "Online vagy személyesen zajlik?", a: "Az egyéni alkalmak online, Google Meeten zajlanak, így bárhonnan részt vehetsz. Budapesten a Nyílt Meditációs Esteken személyesen is találkozhatunk." },
   { q: "Terápia ez?", a: "Nem. A program nem helyettesíti az orvosi vagy pszichológiai kezelést. Ha ilyen kezelés alatt állsz, a konzultáción erről is beszéljünk." },
 ];
@@ -89,7 +91,7 @@ export default function HomePage() {
       {/* Nyitókép: a haszon egy mondatban, kinek szól, egy gomb */}
       <section className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.15fr_1fr]">
         <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-gold">Idegrendszer-fejlesztés · egyénileg · 8 hónap</p>
+          <p className="text-xs uppercase tracking-[0.18em] text-gold">Idegrendszer-fejlesztés · egyénileg · 16 hét</p>
           <h1 className="mt-5 text-balance font-serif text-4xl leading-tight text-forest sm:text-5xl">
             Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.
           </h1>
@@ -207,25 +209,24 @@ export default function HomePage() {
 
       {/* S: a program menete */}
       <section id="menete" className="scroll-mt-24">
-        <SectionTitle eyebrow="A program menete" title="Négy hónap tanulás, négy hónap önálló beépítés." />
+        <SectionTitle eyebrow="A program menete" title="16 hét, két szakaszban: jelenlét és tudatosság." />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           <GildedCard ornate className="p-8">
             <Sprout className="h-12 w-12" />
-            <p className="mt-5 text-xs uppercase tracking-[0.16em] text-gold">1–4. hónap</p>
-            <h3 className="mt-2 font-serif text-2xl text-forest">Tanulás és beépítés</h3>
+            <p className="mt-5 text-xs uppercase tracking-[0.16em] text-gold">1–8. hét</p>
+            <h3 className="mt-2 font-serif text-2xl text-forest">Jelenlét</h3>
             <p className="mt-3 text-ink-soft">
-              Hetente egy 60 perces online alkalom. Először a jelenléttel, aztán a tudatossággal foglalkozunk, és mindkettő után
-              néhány hétig azon dolgozunk, hogy a gyakorlás a hétköznapjaid része legyen. Két alkalom között rövid heti
-              beszámolót írsz, amelyre visszajelzek.
+              Hetente egy 60 perces online alkalom. Megérted, mi történik benned stressz alatt, és lépésről lépésre
+              felépítjük a napi gyakorlásodat. Két alkalom között rövid heti beszámolót írsz, amelyre visszajelzek.
             </p>
           </GildedCard>
           <GildedCard className="p-8">
             <WindingPath className="h-12 w-12" />
-            <p className="mt-5 text-xs uppercase tracking-[0.16em] text-gold">5–8. hónap</p>
-            <h3 className="mt-2 font-serif text-2xl text-forest">Önálló integráció</h3>
+            <p className="mt-5 text-xs uppercase tracking-[0.16em] text-gold">9–16. hét</p>
+            <h3 className="mt-2 font-serif text-2xl text-forest">Tudatosság</h3>
             <p className="mt-3 text-ink-soft">
-              Havonta egy 45 perces online alkalom. Önállóan gyakorolsz és alakítod az életmódodat, én pedig figyelemmel
-              kísérlek, és ott vagyok, ha elakadsz. A tananyag és a napló közben végig a rendelkezésedre áll.
+              Hetente egy 60 perces online alkalom. Elmélyítjük a gyakorlást, és azon dolgozunk, hogy az új szokásaid a
+              hétköznapjaid részévé váljanak. A program után a tananyag, a terved és a naplód továbbra is a tiéd.
             </p>
           </GildedCard>
         </div>
@@ -247,7 +248,7 @@ export default function HomePage() {
 
       {/* O: mi változik */}
       <section>
-        <SectionTitle eyebrow="Amiért dolgozunk" title="Mi változik nyolc hónap alatt?" />
+        <SectionTitle eyebrow="Amiért dolgozunk" title="Mi változik 16 hét alatt?" />
         <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
           {OUTCOMES.map(({ title, text }) => (
             <div key={title} className="border-t border-gold/30 pt-5">
@@ -259,7 +260,7 @@ export default function HomePage() {
         <div className="mt-10 grid max-w-3xl gap-5 sm:grid-cols-2">
           <div className="rounded-lg bg-paper-deep/70 px-5 py-4">
             <p className="font-serif text-lg text-forest">Hosszú távú út</p>
-            <p className="mt-1 text-[15px] text-ink-soft">A változás nem harminc nap alatt történik. Nyolc hónapon át, lépésről lépésre építjük fel, hogy utána is veled maradjon.</p>
+            <p className="mt-1 text-[15px] text-ink-soft">A változás nem harminc nap alatt történik. Tizenhat héten át, lépésről lépésre építjük fel, és utána is veled marad: a tananyag és a napló a program után is elérhető.</p>
           </div>
           <div className="rounded-lg bg-paper-deep/70 px-5 py-4">
             <p className="font-serif text-lg text-forest">Már ma elkezdheted</p>

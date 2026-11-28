@@ -79,7 +79,7 @@ export const MAP_PILLARS = [
 ] as const satisfies readonly { key: QuestionKey; name: string; strength: string; tip: string }[];
 
 export const RESULT_TEXT = {
-  longTerm: "Ez az első lépés, és már ma megteheted. A programban hónapról hónapra erre építünk.",
+  longTerm: "Ez az első lépés, és már ma megteheted. A programban hétről hétre erre építünk.",
   qualified: "A válaszaid alapján most jó időben vagy. Beszéljünk egy ismerkedő konzultáción.",
   qualifiedCta: "Időpontot választok",
   later: "Úgy tűnik, most még nem sürget a kezdés, és ez rendben van. Addig gyere el egy Nyílt Estre, és nézd meg, hogyan dolgozom.",

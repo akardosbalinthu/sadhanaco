@@ -4,7 +4,7 @@
 -- =============================================================================
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(34);
+select plan(40);
 
 create function pg_temp.mk_user(p_email text) returns uuid language plpgsql as $f$
 declare v uuid := gen_random_uuid();
@@ -105,6 +105,18 @@ set local role authenticated;
 select is(pg_temp.err($$ select public.submit_weekly_report(3::smallint, null, null, null) $$), 'NOT_PARTICIPANT', 'nem résztvevő nem küldhet beszámolót');
 reset role;
 
+-- 4/b. A 16 hét után: lezárult, beszámoló már nem kell, a tananyag örökre elérhető
+update public.program_enrollments set starts_on = public.budapest_today() - 120, stage2_from = public.budapest_today() - 64 where user_id = :'p_id';
+select pg_temp.act_as(:'p_id');
+set local role authenticated;
+select is((public.my_program())->>'phase', 'lezarult', 'a 16. hét után a program lezárult');
+select is((public.my_program())->>'week', '18', 'a hét sorszáma a kezdéstől számít');
+select is((public.my_program())->>'reports_open', 'false', 'a 16. hét után nincs heti beszámoló');
+select is(pg_temp.err($$ select public.submit_weekly_report(4::smallint, null, null, null) $$), 'PROGRAM_ENDED', 'a 16. hét után beszámoló nem küldhető');
+select ok(public.can_access_stage(1::smallint) and public.can_access_stage(2::smallint), 'a tananyag a program után is elérhető');
+reset role;
+update public.program_enrollments set starts_on = public.budapest_today() - 70, stage2_from = public.budapest_today() - 7 where user_id = :'p_id';
+
 -- 5. Nyílt Est: résztvevőnek díjmentes
 insert into public.events (kind, title, is_online, starts_at, ends_at, members_only, allowed_tiers, registration_opens_at, is_published, price_external_huf, capacity)
 values ('nyilt_est', 'Nyílt Est', false, now() + interval '3 days', now() + interval '3 days 2 hours', false,
@@ -122,6 +134,7 @@ select is((select count(*)::int from public.applications where token = :'nq_t'),
 update public.program_enrollments set starts_on = public.budapest_today() - 800, stage2_from = public.budapest_today() - 700 where user_id = :'p_id';
 select public.purge_old_applications();
 select is((select count(*)::int from public.weekly_reports), 0, 'a program vége után 1 évvel a beszámolók törlődnek');
+select ok((select practice_plan from public.program_enrollments where user_id = :'p_id') is not null, 'a gyakorlási terv a résztvevőé marad');
 
 select * from finish();
 rollback;

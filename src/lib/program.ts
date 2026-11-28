@@ -9,10 +9,12 @@ export type MyProgram = {
   stage2_from: string;
   started: boolean;
   month: number;
+  week?: number;
   phase: "hamarosan" | "tanulas" | "integracio" | "lezarult";
   practice_plan: string | null;
   week_start: string;
   report_done: boolean;
+  reports_open?: boolean;
   payment_overdue?: boolean;
   payment_paused?: boolean;
   next_session: {
@@ -26,8 +28,8 @@ export type MyProgram = {
 
 export const PHASE_LABEL: Record<MyProgram["phase"], string> = {
   hamarosan: "Hamarosan indul",
-  tanulas: "Tanulás és beépítés",
-  integracio: "Önálló integráció",
+  tanulas: "16 hetes program",
+  integracio: "16 hetes program", // régi érték (a 8 hónapos programból), már nem fordul elő
   lezarult: "Lezárult",
 };
 
@@ -57,28 +59,23 @@ export function budapestParts(at: Date) {
   return { y: g("year"), mo: g("month"), d: g("day"), h: g("hour"), mi: g("minute") };
 }
 
+/** A program hossza: 16 hét. */
+export const PROGRAM_WEEKS = 16;
+
 /**
  * Az alkalmak menetrendje budapesti idő szerint, mindig ugyanabban az órában:
- * az első 4 hónapban hetente (60 perc), a második 4-ben havonta (45 perc).
+ * a 16 hét alatt hetente egy 60 perces alkalom (a kezdéstől számított 16. hét végéig).
  */
 export function sessionSchedule(firstSession: Date, startsOn: string) {
   const [sy, sm, sd] = startsOn.split("-").map(Number);
-  const learningEnd = Date.UTC(sy, sm - 1 + 4, sd);
-  const programEnd = Date.UTC(sy, sm - 1 + 8, sd);
+  const programEnd = Date.UTC(sy, sm - 1, sd + PROGRAM_WEEKS * 7);
   const f = budapestParts(firstSession);
   const out: { starts_at: string; duration_minutes: number }[] = [];
-  // heti alkalmak: a falióra-idő marad, a nap hetente 7-tel nő
+  // a falióra-idő marad, a nap hetente 7-tel nő
   for (let i = 0; ; i++) {
     const day = new Date(Date.UTC(f.y, f.mo - 1, f.d + 7 * i));
-    if (day.getTime() >= learningEnd) break;
-    out.push({ starts_at: budapestToUtc(day.getUTCFullYear(), day.getUTCMonth() + 1, day.getUTCDate(), f.h, f.mi).toISOString(), duration_minutes: 60 });
-  }
-  // havi alkalmak: az utolsó heti alkalom után egy hónappal, ugyanazon a napon és órában
-  const last = out.length ? budapestParts(new Date(out[out.length - 1].starts_at)) : f;
-  for (let i = 1; ; i++) {
-    const day = new Date(Date.UTC(last.y, last.mo - 1 + i, last.d));
     if (day.getTime() >= programEnd) break;
-    out.push({ starts_at: budapestToUtc(day.getUTCFullYear(), day.getUTCMonth() + 1, day.getUTCDate(), f.h, f.mi).toISOString(), duration_minutes: 45 });
+    out.push({ starts_at: budapestToUtc(day.getUTCFullYear(), day.getUTCMonth() + 1, day.getUTCDate(), f.h, f.mi).toISOString(), duration_minutes: 60 });
   }
   return out;
 }

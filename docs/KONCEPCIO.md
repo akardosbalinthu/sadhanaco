@@ -4,7 +4,7 @@
 
 ## 1. A szolgáltatás
 
-- **Egyéni (1:1), online idegrendszer-fejlesztő és meditációs program**, 4+4 hónap.
+- **Egyéni (1:1), online idegrendszer-fejlesztő és meditációs program**, 16 hét (2026. november 28-ig 4+4 hónap volt).
 - **Módszertan:** a jóga nyolc ága és az életmód-orvostan hat pillére (táplálkozás, mozgás, alvás, stresszkezelés, kockázatos szerek kerülése, társas kapcsolódás) együtt.
 - **Tananyag:** Jelenlét modul + IP 1, Tudatosság modul + IP 2 (`docs/tananyag.md`). Nyilvánosan konkrét gyakorlatnevet továbbra sem említünk.
 - **Nincs neve**, és egyelőre nem is kell.
@@ -38,8 +38,8 @@
 
 | Szakasz | Időtartam | Tartalom | Kapcsolat |
 |---|---|---|---|
-| Tanulás és beépítés | 1–4. hónap | Jelenlét + IP 1, majd Tudatosság + IP 2, személyre szabott gyakorlási tervvel | heti 60 perc online + aszinkron heti beszámoló |
-| Önálló integráció | 5–8. hónap | önálló gyakorlás a hétköznapokban | havi 45 perc online |
+| Jelenlét | 1–8. hét | a jelenlét alapjai, a napi gyakorlás felépítése, személyre szabott gyakorlási tervvel | heti 60 perc online |
+| Tudatosság | 9–16. hét | elmélyítés és beépítés a hétköznapokba | heti 60 perc online |
 
 **A platform a program otthona.** Közösség nincs. A platformon ezek érhetők el:
 
@@ -81,7 +81,7 @@ A program ereje a két rendszer **vegyítésében** van: a jóga nyolc ága a be
 
 - **A fő üzenet:** egy teljes, holisztikus út – meditáció, légzés, test, életmód és kapcsolatok egy programban —, ősi gyakorlat és modern életmód-orvostan egyedi vegyítésével, személyes vezetéssel, a saját életedre szabva.
 - **A cél:** minél több ügyfél, a saját erkölcsi szabályaink betartásával.
-- **Ígéret (gyógyulási ígéret nélkül):** nyolc hónap alatt felépíted a saját gyakorlásodat és életmódodat – a meditációtól az alvásig —, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
+- **Ígéret (gyógyulási ígéret nélkül):** 16 hét alatt felépíted a saját gyakorlásodat és életmódodat – a meditációtól az alvásig —, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
 - **Hangnem:** nyugodt, szakszerű, személyes és egyenes; konkrét (kinek szól, mit kap, hogyan zajlik, mennyi időt kér), de átfogó képet fest.
 - **Vizuális nyelv:** a paletta marad (törtfehér, erdőzöld, arany), letisztultabban, kevesebb meseszerű díszítéssel.
 - **Erkölcsi korlátok (változatlanok):** nincs kitalált vélemény; nincs hamis sürgetés vagy szűkösség; nincs gyógyulási vagy terápiás ígéret; nincs ezoterikus nyelv; nincs új, nem ellenőrzött tudományos állítás; a szűrés őszinte – aki most nem kezdene, azt nem győzködjük.

@@ -39,7 +39,7 @@ export default async function ParticipantDetail({ params, searchParams }: { para
   const p = e.profiles as unknown as { first_name: string | null; last_name: string | null; email: string } | null;
   const name = [p?.last_name, p?.first_name].filter(Boolean).join(" ") || p?.email;
   const end = new Date(`${e.starts_on}T12:00:00Z`);
-  end.setUTCMonth(end.getUTCMonth() + 8);
+  end.setUTCDate(end.getUTCDate() + 16 * 7 - 1); // 16 hetes program
   const done = (sessions ?? []).filter((s) => s.status === "megtartott").length;
 
   return (

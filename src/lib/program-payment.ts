@@ -12,19 +12,12 @@ export const PROGRAM_PLANS = [
     code: "egyeni_program_4_reszlet",
     title: "Négy részletben",
     amountText: "4 × 180 000 Ft",
-    detail: "havonta, az első négy hónapban (összesen 720 000 Ft)",
+    detail: "havonta, a program négy hónapja alatt (összesen 720 000 Ft)",
     installments: 4,
     totalHuf: 720000,
   },
-  {
-    code: "egyeni_program_havi",
-    title: "Havonta",
-    amountText: "8 × 100 000 Ft",
-    detail: "havonta, a program nyolc hónapja alatt (összesen 800 000 Ft)",
-    installments: 8,
-    totalHuf: 800000,
-  },
 ] as const;
+// A havi (8 részletes) mód 2026. november 28-án megszűnt (a program 16 hetes); a régi rekordok felirata lent marad.
 
 export type ProgramPlanCode = (typeof PROGRAM_PLANS)[number]["code"];
 
@@ -32,7 +25,10 @@ export function isProgramPlan(v: unknown): v is ProgramPlanCode {
   return typeof v === "string" && PROGRAM_PLANS.some((p) => p.code === v);
 }
 
-export const PROGRAM_PLAN_LABEL = Object.fromEntries(PROGRAM_PLANS.map((p) => [p.code, `${p.title} (${p.amountText})`])) as Record<string, string>;
+export const PROGRAM_PLAN_LABEL = {
+  ...Object.fromEntries(PROGRAM_PLANS.map((p) => [p.code, `${p.title} (${p.amountText})`])),
+  egyeni_program_havi: "Havonta (8 × 100 000 Ft, megszűnt mód)",
+} as Record<string, string>;
 
 export function installmentsOf(code: ProgramPlanCode) {
   return PROGRAM_PLANS.find((p) => p.code === code)!.installments;

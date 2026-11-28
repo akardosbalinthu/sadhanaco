@@ -68,9 +68,9 @@ amikor a Stripe lezárja az előfizetést.
 
 | Termék | Product ID | lookup_key | Ár | Price ID |
 | --- | --- | --- | --- | --- |
-| Egyéni idegrendszer-fejlesztő program (8 hónap) | `prod_VhIC69usAOqsTU` | `egyeni_program_egyben` | 690 000 Ft egyszeri | `price_1Uftc2KKK49wrBvLEhgSr0Cg` |
+| Egyéni idegrendszer-fejlesztő program (16 hét) | `prod_VhIC69usAOqsTU` | `egyeni_program_egyben` | 690 000 Ft egyszeri | `price_1Uftc2KKK49wrBvLEhgSr0Cg` |
 | | | `egyeni_program_4_reszlet` | 180 000 Ft / hó, 4 részlet | `price_1Uftc6KKK49wrBvLrRF5WJio` |
-| | | `egyeni_program_havi` | 100 000 Ft / hó, 8 részlet | `price_1UftcAKKK49wrBvLtBaDarfB` |
+| | | `egyeni_program_havi` | 100 000 Ft / hó, 8 részlet – **megszűnt (2026. 11. 28.), a weboldal nem kínálja** | `price_1UftcAKKK49wrBvLtBaDarfB` |
 
 - Folyamat: admin → Jelentkezés → „Fizetési linket küldök” (`program_payment_offers`) → `/fizetes?t=…` (az ügyfél választ, hozzájárul) → Stripe Checkout
   (`metadata.kind = program`, `offer_id`, `plan`; részletnél `subscription_data.metadata` is) → webhook: fiók + program (`program_payment_completed`),

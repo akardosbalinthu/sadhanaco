@@ -31,10 +31,10 @@ A program ereje a két rendszer **vegyítésében** van. A jóga nyolc ága a be
 
 ## 3. Az ígéret
 
-Nyolc hónap alatt felépíted a saját gyakorlásodat és életmódodat, a meditációtól az alvásig, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
+16 hét alatt felépíted a saját gyakorlásodat és életmódodat, a meditációtól az alvásig, és beépíted a hétköznapjaidba. Közben végig személyesen kísérlek.
 
-- Az első négy hónap a tanulásé, heti egyéni alkalommal.
-- A második négy hónap az önálló integrációé, havi egyéni alkalommal.
+- 16 héten át hetente egy 60 perces egyéni online alkalom: 1–8. hét Jelenlét, 9–16. hét Tudatosság.
+- A tananyag, a gyakorlási terv és a napló a program után is elérhető marad (2026. november 28.).
 
 Gyógyulási vagy terápiás ígéretet nem teszünk.
 
@@ -77,7 +77,7 @@ Gyógyulási vagy terápiás ígéretet nem teszünk.
 ## 8. Szolgáltatások
 
 **Az egyéni program** – JAVASLAT, jóváhagyásra vár:
-Nyolc hónapos egyéni program, amelyben a jóga nyolc ágát az életmód-orvostan hat pillérével ötvözöm, a te életedre szabva. Az első négy hónapban hetente találkozunk online, és lépésről lépésre felépítjük a gyakorlásodat: a meditációt, a légzést, a mozgást, az alvást és az étkezést. A második négy hónapban havonta egyszer beszélünk, te pedig önállóan építed be mindezt a hétköznapjaidba. A programba ismerkedő konzultáció után lehet bekerülni.
+16 hetes egyéni program, amelyben a jóga nyolc ágát az életmód-orvostan hat pillérével ötvözöm, a te életedre szabva. 16 héten át hetente találkozunk online, és lépésről lépésre felépítjük a gyakorlásodat: a meditációt, a légzést, a mozgást, az alvást és az étkezést – úgy, hogy a hétköznapjaid részévé váljon. A tananyag és a napló a program után is a tiéd marad. A programba ismerkedő konzultáció után lehet bekerülni.
 
 **Nyílt Meditációs Estek** (szó szerint):
 Havonta egy este Budapesten, legfeljebb 15 emberrel. Közös gyakorlás és személyes jelenlét, telefon és képernyő nélkül.

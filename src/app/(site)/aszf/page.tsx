@@ -62,16 +62,17 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>
-          Az egyéni program nyolchónapos, online kísérés. Az első négy hónapban hetente egy 60 perces, a második négy
-          hónapban havonta egy 45 perces egyéni alkalom van (Google Meeten), személyre szabott gyakorlási tervvel,
-          heti írásos beszámolóval és visszajelzéssel. A program ideje alatt a résztvevő hozzáfér a résztvevői
-          felületen lévő tananyaghoz (videós és hanganyagos modulok), a gyakorlás-követéshez és a naplóhoz.
+          Az egyéni program 16 hetes, online kísérés: hetente egy 60 perces egyéni alkalom (Google Meeten),
+          személyre szabott gyakorlási tervvel, heti írásos beszámolóval és visszajelzéssel. A résztvevő a résztvevői
+          felületen lévő tananyaghoz (videós és hanganyagos modulok), a gyakorlási tervéhez, a gyakorlás-követéshez
+          és a naplóhoz a program alatt és a 16 hét lezárulta után is hozzáfér, a résztvevői felület működéséig. Az
+          egyéni alkalmak és a heti beszámoló a 16 hétre szólnak.
         </p>
         <p>
           <strong>A program nem vásárolható meg közvetlenül.</strong> A jelentkezés egy kérdőívvel indul, amelyet egy
           ismerkedő konzultáció követ. A konzultáció után a szolgáltató e-mailben
-          fizetési linket küld. A fizetési oldalon választható fizetési módok: egy összegben, négy havi részletben vagy
-          havi részletekben. A szerződés a fizetési oldalon leadott megrendeléssel és a díj, illetve az első részlet
+          fizetési linket küld. A fizetési oldalon választható fizetési módok: egy összegben vagy négy havi
+          részletben. A szerződés a fizetési oldalon leadott megrendeléssel és a díj, illetve az első részlet
           megfizetésével jön létre; a visszaigazolást e-mailben küldjük. Az ismerkedő konzultáció önmagában nem
           keletkeztet fizetési kötelezettséget.
         </p>
@@ -232,7 +233,7 @@ export default function TermsPage() {
           helyettesíti az orvosi kezelést.
         </p>
       }
-      meta={`Verzió: 2026-11-26 · Hatályos: ${LEGAL.effectiveFrom}`}
+      meta={`Verzió: 2026-11-28 · Hatályos: ${LEGAL.effectiveFrom}`}
       sections={sections}
     />
   );

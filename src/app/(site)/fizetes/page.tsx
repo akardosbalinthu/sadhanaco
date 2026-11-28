@@ -60,8 +60,8 @@ export default async function PaymentPage({ searchParams }: { searchParams: SP }
     <main className="py-16">
       <PageHeader eyebrow="Egyéni program · fizetés" title={`Kedves ${first}, válaszd ki a fizetés módját.`}>
         <p>
-          Nyolchónapos egyéni program: az első négy hónapban heti 60, a második négyben havi 45 perces online
-          alkalommal, személyre szabott gyakorlási tervvel és heti beszámolóval. Kezdés: {fmtDay(info.starts_on)}.
+          16 hetes egyéni program: hetente egy 60 perces online alkalom, személyre szabott gyakorlási terv és heti
+          beszámoló. A tananyag és a napló a program után is elérhető marad. Kezdés: {fmtDay(info.starts_on)}.
         </p>
       </PageHeader>
 

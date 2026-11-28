@@ -2,13 +2,15 @@
 
 > 2026. november 26. A weboldalon ár nem jelenik meg. Az egyéni program díját a konzultáción, a céges díjakat az ajánlatban közöljük.
 
-## Egyéni program (B2C) – 8 hónap
+## Egyéni program (B2C) – 16 hét
+
+> 2026. november 28.: a program 16 hetes lett (heti 60 perc). Az ár még nincs újra eldöntve – addig a lenti egy összeg és a négy részlet érvényes; a havi (8 részletes) mód megszűnt.
 
 | Fizetési mód | Összesen |
 |---|---|
 | Egy összegben | **690 000 Ft** |
 | Négy részletben | **720 000 Ft** (4 × 180 000 Ft) |
-| Havonta | **800 000 Ft** (8 × 100 000 Ft) |
+| ~~Havonta~~ | ~~800 000 Ft (8 × 100 000 Ft)~~ – megszűnt |
 
 - Munkaidő ügyfelenként: kb. 28–30 óra (18 × 60 perc, 4 × 45 perc, konzultáció, heti beszámolók, gyakorlási terv, szervezés).
 - Későbbi emelés: 8–10 elégedett ügyfél után 790–890 ezer Ft (egy összegben).

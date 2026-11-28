@@ -190,8 +190,8 @@ export default async function ApplicationDetail({ params, searchParams }: { para
       <section>
         <H2>Fizetési link</H2>
         <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-          A konzultáció után innen küldöd el a fizetési linket. Az ügyfél kiválasztja a fizetés módját (egy összegben,
-          négy havi részletben vagy havonta), és a Stripe-on fizet. Sikeres fizetés után a rendszer magától felveszi a
+          A konzultáció után innen küldöd el a fizetési linket. Az ügyfél kiválasztja a fizetés módját (egy összegben
+          vagy négy havi részletben), és a Stripe-on fizet. Sikeres fizetés után a rendszer magától felveszi a
           programba a megadott kezdőnappal, és belépő linket küld neki.
         </p>
         {(offers ?? []).length > 0 && (
@@ -243,8 +243,8 @@ export default async function ApplicationDetail({ params, searchParams }: { para
             <label className="block"><span className={label}>Az első alkalom (nem kötelező)</span><input name="first_session" type="datetime-local" className={`${smallInput} mt-1 w-full`} /></label>
             <label className="block sm:col-span-2"><span className={label}>Állandó Meet-link (nem kötelező)</span><input name="meet_url" type="url" placeholder="https://meet.google.com/…" className={`${smallInput} mt-1 w-full`} /></label>
             <p className="text-xs text-ink-soft sm:col-span-2">
-              Ha megadod az első alkalmat, a rendszer beütemezi a heti (1–4. hónap, 60 perc) és a havi (5–8. hónap, 45 perc)
-              alkalmakat ugyanabban az órában; később egyenként módosíthatod őket. A résztvevő üdvözlő levelet kap belépő linkkel.
+              Ha megadod az első alkalmat, a rendszer beütemezi a 16 heti, 60 perces
+              alkalmat ugyanabban az órában; később egyenként módosíthatod őket. A résztvevő üdvözlő levelet kap belépő linkkel.
             </p>
             <div className="sm:col-span-2"><SubmitButton className={smallPrimary}>Felveszem résztvevőnek</SubmitButton></div>
           </form>
