@@ -10,6 +10,7 @@ A weboldal egyetlen célja a konzultációfoglalás az **Acélidegek Mentorprogr
 - **Az „acélideg”** nem érzéketlenség, hanem nyugalom nyomás alatt.
 - **Célcsoport:** 30–45 éves szakértők, senior munkatársak, vezetők (prezentáció, tárgyalás, nehéz beszélgetés, pörgő fej este, hajnali felébredés, szétszórt munkanap).
 - **Az oldalon nem jelenhet meg:** ár, előleg, részletfizetés, kedvezmény; a program felépítése (hetek, szakaszok, alkalmak száma és hossza); gyakorlatnevek; bónuszok, garanciák; heti beszámoló, mérőeszközök, kérdőívek; létszám és kezdési időpontok. Helyette: „a konzultáción személyesen átbeszéljük”. (Az 5. pont „semmit nem rejtünk el” mondata ezzel módosul: a részletek a konzultáción hangzanak el.)
+- **Árhorgony (2026. november 28., Bálint kérésére):** a „Mennyibe kerül?” kérdésnél szerepelhet, hogy az igényektől függően néhány százezer forinttól akár néhány millió forintig terjedhet. Pontos ár továbbra sem jelenik meg.
 - **Megjelenhet:** személyes, egyéni, online mentorálás, 16 hét; idegtudomány és életmód-orvostan, kiegészítve a jóga gyakorlati bölcsességével; mérhető fejlődés (HRV); „egyszerre csak kevés emberrel dolgozom” (szám nélkül).
 - **Konzultáció:** ingyenes, 30 perces, online; a „Foglalj konzultációt” gomb a `/konzultacio` rövid űrlapjára visz (név, e-mail, telefon, „Mi az, amin a legjobban szeretnél változtatni?”), utána a saját foglalóban időpontválasztás.
 - **Nem központi üzenet:** a magány és a „kapcsolódás”; A Társaság nem szerepel.

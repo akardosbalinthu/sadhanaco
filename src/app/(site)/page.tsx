@@ -94,7 +94,7 @@ const FAQ = [
   },
   {
     q: "Mennyibe kerül?",
-    a: "A díjat és a részleteket a konzultáción személyesen átbeszéljük, mert a mentorálás a te helyzetedre épül.",
+    a: "Az igényeidtől függ: néhány százezer forinttól akár néhány millió forintig terjedhet. A pontos díjat és a részleteket a konzultáción személyesen átbeszéljük, mert a mentorálás a te helyzetedre épül.",
   },
   {
     q: "Mi van, ha nincs időm?",
