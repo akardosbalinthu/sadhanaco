@@ -46,15 +46,13 @@ const sections: LegalSection[] = [
     title: "Milyen adatokat, miért és meddig",
     body: (
       <>
-        <p id="konzultacio" className="scroll-mt-24 font-serif text-lg text-forest">Konzultáció foglalása</p>
+        <p id="jelentkezes" className="scroll-mt-24 font-serif text-lg text-forest">
+          <span id="konzultacio" className="scroll-mt-24" />
+          Jelentkezés konzultációra (kérdőív)
+        </p>
         <ul>
-          <Row what="Név, e-mail-cím, telefonszám, a „Mi az, amin a legjobban szeretnél változtatni?” kérdésre adott válaszod, a lefoglalt konzultációs időpont, illetve a link forrásjelölése, ha van" why="az ingyenes konzultáció megszervezése, előkészítése és a kapcsolattartás" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b)); ha a válaszodban egészségi adatot is megosztasz, kifejezett hozzájárulásod (9. cikk (2) a)), amely a beküldéskor időbélyeggel rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a beküldéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
-        </ul>
-
-        <p id="jelentkezes" className="scroll-mt-24 pt-3 font-serif text-lg text-forest">Kérdőív (Életmód-térkép)</p>
-        <ul>
-          <Row what="A kérdőív válaszai: az életmódodra és egészségedre vonatkozó adatok (táplálkozás, mozgás, alvás, stressz, szerhasználat, kapcsolatok), a problémád leírása, súlyossága és sürgőssége, valamint a szándékaid" why="az ismerkedő konzultáció előkészítése és – ha résztvevő leszel – a program személyre szabása" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a) és 6. cikk (1) a)); a hozzájárulás a kérdőív beküldésekor, időbélyeggel és a szöveg változatával rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a kitöltéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
-          <Row what="Név, e-mail-cím, telefonszám (nem kötelező), a lefoglalt konzultációs időpont" why="kapcsolattartás és a konzultáció megszervezése" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b))" until="ugyanaddig, mint a kérdőív válaszai" />
+          <Row what="A kérdőív válaszai: az egészségedre és a közérzetedre vonatkozó adatok (megnyugvás, alvás, esti kikapcsolás, reakciók, figyelem, döntés nyomás alatt), a „Mi az, amin a legjobban szeretnél változtatni?” kérdésre adott válaszod, valamint a szándékaid. A korábbi kérdőív-változatoknál: táplálkozás, mozgás, szerhasználat és kapcsolatok is" why="az ismerkedő konzultáció előkészítése és – ha résztvevő leszel – a program személyre szabása" basis="kifejezett hozzájárulásod (GDPR 9. cikk (2) a) és 6. cikk (1) a)); a hozzájárulás a kérdőív beküldésekor, időbélyeggel és a szöveg változatával rögzül, és bármikor visszavonható egy e-maillel" until="ha nem leszel résztvevő, a kitöltéstől számított 180 nap, utána automatikusan töröljük; résztvevőnél a program végét követő 1 év" />
+          <Row what="Név, e-mail-cím, telefonszám, a lefoglalt konzultációs időpont" why="kapcsolattartás és a konzultáció megszervezése" basis="a szerződés megkötését megelőző lépések (GDPR 6. cikk (1) b))" until="ugyanaddig, mint a kérdőív válaszai" />
           <Row what="Honnan hallottál rólam (nem kötelező válasz), illetve a link forrásjelölése, ha a kérdőívhez például egy YouTube-videó leírásából érkeztél" why="annak megértése, hogyan találnak rám az érdeklődők" basis="jogos érdek (GDPR 6. cikk (1) f))" until="ugyanaddig, mint a kérdőív válaszai" />
         </ul>
         <p className="text-sm text-ink-soft">

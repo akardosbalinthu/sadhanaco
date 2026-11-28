@@ -25,7 +25,7 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
     if (top < 0 || top > window.innerHeight * 0.35) topRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [step]);
   const total = QUESTIONS.length;
-  const steps = total + 2; // + „Mi hozott ide?” + elérhetőség
+  const steps = total + 2; // + „Mi az, amin változtatnál?” + elérhetőség
   const onQuestion = step < total;
   const q = onQuestion ? QUESTIONS[step] : null;
 
@@ -34,7 +34,7 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
     // rövid szünet, hogy látszódjon a választás, aztán tovább
     window.setTimeout(() => setStep((s) => Math.min(s + 1, steps - 1)), 220);
   };
-  const canNext = !onQuestion || answers[q!.key] != null;
+  const canNext = onQuestion ? answers[q!.key] != null : step !== total || problem.trim().length >= 3;
 
   return (
     <form
@@ -100,12 +100,11 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
 
       <div className={step === total ? "min-h-[19rem]" : "hidden"}>
         <label className="block">
-          <span className="font-serif text-2xl leading-snug text-forest sm:text-3xl">Mi hozott ide?</span>
+          <span className="font-serif text-2xl leading-snug text-forest sm:text-3xl">Mi az, amin a legjobban szeretnél változtatni?</span>
           <span className="mt-2 block text-ink-soft">
-            Ha szeretnéd, írd le pár mondatban, min változtatnál. Nem kötelező, de segít, hogy a konzultáción rögtön a
-            lényegről beszélhessünk.
+            Írd le pár mondatban, miben kérnél segítséget. Így a konzultáción rögtön a lényegről beszélhetünk.
           </span>
-          <textarea name="problem" rows={5} maxLength={4000} value={problem} onChange={(e) => setProblem(e.target.value)} className={`${inputClass} mt-4`} />
+          <textarea name="problem" rows={5} minLength={3} maxLength={4000} required={step === total} value={problem} onChange={(e) => setProblem(e.target.value)} className={`${inputClass} mt-4`} />
         </label>
       </div>
 
@@ -124,8 +123,8 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
             <input name="email" type="email" required={step === total + 1} autoComplete="email" className={inputClass} />
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-sm text-ink-soft">Telefonszám (nem kötelező)</span>
-            <input name="phone" type="tel" inputMode="tel" maxLength={40} autoComplete="tel" className={inputClass} />
+            <span className="mb-1.5 block text-sm text-ink-soft">Telefonszám</span>
+            <input name="phone" type="tel" inputMode="tel" required={step === total + 1} minLength={6} maxLength={40} autoComplete="tel" className={inputClass} />
           </label>
           <label className="block sm:col-span-2">
             <span className="mb-1.5 block text-sm text-ink-soft">Honnan hallottál rólam? (nem kötelező)</span>
@@ -142,7 +141,7 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
             <input type="checkbox" name="health_consent" required={step === total + 1} className="mt-1 h-5 w-5 shrink-0 accent-forest" />
             <span>
               <strong className="font-normal text-forest">Kifejezetten hozzájárulok</strong>, hogy a kérdőívben megadott,
-              egészségemre vonatkozó adataimat (például az alvásomról, a mozgásomról és a szerhasználatomról adott
+              egészségemre vonatkozó adataimat (például az alvásomról, a stresszről és a megnyugvásról adott
               válaszaimat) Kardos Bálint e. v. a konzultáció előkészítése és a program személyre szabása céljából kezelje.
               A hozzájárulásomat bármikor visszavonhatom egy e-maillel.
             </span>
@@ -176,7 +175,7 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
         </button>
         {step < steps - 1 ? (
           <button type="button" disabled={!canNext} onClick={() => setStep((s) => s + 1)} className={`${buttonPrimary} disabled:opacity-40`}>
-            {step === total && !problem.trim() ? "Kihagyom" : "Tovább"}
+            Tovább
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} aria-hidden />
           </button>
         ) : (

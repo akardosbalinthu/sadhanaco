@@ -4,8 +4,8 @@ import { ApplicationForm } from "./application-form";
 
 export const metadata = {
   title: "Jelentkezés konzultációra · Kardos Bálint",
-  description: "15 rövid kérdés, a végén a személyes Életmód-térképed és egy tanács, amelyet még ma kipróbálhatsz.",
-  robots: { index: false, follow: true },
+  description:
+    "Jelentkezés az Acélidegek Mentorprogram ingyenes, 30 perces konzultációjára: 14 rövid kérdés, a végén a személyes Idegrendszer-térképed és egy első lépés.",
 };
 
 export default async function ApplyPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
@@ -16,8 +16,12 @@ export default async function ApplyPage({ searchParams }: { searchParams: Promis
     <main className="py-16">
       <PageHeader eyebrow="Jelentkezés konzultációra" title="Hol tartasz most? Nézzük meg pár perc alatt.">
         <p>
-          15 rövid kérdés, mindegyikre egy számmal válaszolsz 1-től 10-ig. A végén megkapod az Életmód-térképedet: hol
-          vagy már erős, mi lehet a következő kis lépésed, és egy tanácsot, amelyet még ma kipróbálhatsz.
+          14 rövid kérdés a megnyugvásról, az alvásról, a figyelmedről és arról, hogyan döntesz nyomás alatt. Mindegyikre
+          egy számmal válaszolsz 1-től 10-ig, és a végén leírod, miben kérnél segítséget.
+        </p>
+        <p>
+          Utána megkapod az Idegrendszer-térképedet egy első lépéssel, amelyet még ma kipróbálhatsz, és időpontot
+          választhatsz az ingyenes, 30 perces online konzultációhoz.
         </p>
       </PageHeader>
       <div className="mt-12 max-w-2xl">

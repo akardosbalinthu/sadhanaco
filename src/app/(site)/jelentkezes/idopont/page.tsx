@@ -28,7 +28,7 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
         <PageHeader eyebrow="Időpontfoglalás" title="Ez a link nem érvényes.">
           <p>Lehet, hogy elírás történt, vagy a jelentkezés már nem érhető el. Kérlek, jelentkezz újra.</p>
         </PageHeader>
-        <Link href="/konzultacio" className={`${buttonPrimary} mt-8`}>
+        <Link href="/jelentkezes" className={`${buttonPrimary} mt-8`}>
           Foglalj konzultációt
         </Link>
       </main>

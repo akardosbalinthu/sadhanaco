@@ -1,5 +1,5 @@
 /**
- * Életmód-térkép: pókhálóábra (radar) a hat pillérről, 1–10-es skálán.
+ * Pókhálóábra (radar) hat területről, 1–10-es skálán (Idegrendszer-térkép, illetve a régi Életmód-térkép).
  * Tiszta SVG, a paletta színeivel; világos és sötét módban is olvasható.
  */
 export function LifestyleRadar({
@@ -24,14 +24,14 @@ export function LifestyleRadar({
   const ring = (v: number) => values.map((_, i) => pt(i, v).join(",")).join(" ");
   const shape = values.map((p, i) => pt(i, p.value).join(",")).join(" ");
   const label = values.map(({ name }, i) => [name, ...pt(i, 12.4)] as const);
-  const summary = values.map((p) => `${p.name}: ${p.value}`).join(", ");
+  const summary = values.map((p) => `${p.name}: ${p.value.toLocaleString("hu-HU")}`).join(", ");
 
   return (
     <svg
       viewBox={`0 0 ${w} ${h}`}
       className={className}
       role="img"
-      aria-label={`Életmód-térkép, 1-től 10-ig: ${summary}`}
+      aria-label={`Az eredményed, 1-től 10-ig: ${summary}`}
     >
       {[2.5, 5, 7.5, 10].map((v) => (
         <polygon key={v} points={ring(v)} fill="none" className="stroke-line" strokeWidth={v === 10 ? 1.2 : 0.8} />
@@ -57,7 +57,7 @@ export function LifestyleRadar({
             className="fill-ink-soft text-[13px]"
           >
             {name}
-            <tspan className="fill-forest font-semibold"> {values[i].value}</tspan>
+            <tspan className="fill-forest font-semibold"> {values[i].value.toLocaleString("hu-HU")}</tspan>
           </text>
         );
       })}

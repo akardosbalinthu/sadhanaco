@@ -47,7 +47,8 @@ export const APP_STATUS_LABEL: Record<string, string> = {
 export type QuestionKey = `q${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15}`;
 export type Question = { key: QuestionKey; area: string; text: string; low: string; high: string };
 
-export const QUESTIONS: Question[] = [
+/** 2. változat (15 kérdés) – csak a régi jelentkezések megjelenítéséhez. */
+export const QUESTIONS_V2: Question[] = [
   { key: "q1", area: "Táplálkozás", text: "Az elmúlt két hétben milyen gyakran ettél nyugodtan, rohanás nélkül, olyan ételt, amitől utána jól érezted magad?", low: "szinte soha", high: "szinte minden étkezésnél" },
   { key: "q2", area: "Mozgás", text: "Az elmúlt két hétben hány napon mozogtál legalább fél órát (séta, sport, kerti munka)?", low: "egyen sem", high: "szinte minden nap" },
   { key: "q3", area: "Alvás", text: "Az elmúlt két hétben hány reggel ébredtél kipihenten?", low: "szinte egyszer sem", high: "szinte minden reggel" },
@@ -65,7 +66,7 @@ export const QUESTIONS: Question[] = [
   { key: "q15", area: "Kezdés", text: "Mennyire érzed úgy, hogy most van itt az ideje elkezdeni?", low: "ráér még", high: "ma vagy holnap kezdeném" },
 ];
 
-/** A minősítés küszöbe a 15. kérdésen (8–10: foglalhat konzultációt). */
+/** A minősítés küszöbe a kezdési kérdésen (8–10: foglalhat konzultációt). */
 export const START_THRESHOLD = 8;
 
 /** A hat pillér (az Életmód-térkép tengelyei) és a hozzájuk tartozó szövegek. */
@@ -90,7 +91,7 @@ export type Answers = Record<QuestionKey, number>;
 
 const round1 = (n: number) => Math.round(n * 10) / 10;
 
-/** Az Életmód-térkép: a hat pillér, befelé/kifelé, az erősség és a következő lépés. */
+/** A 2. változat Életmód-térképe: a hat pillér, befelé/kifelé, az erősség és a következő lépés. */
 export function lifestyleMap(a: Answers) {
   const pillars = MAP_PILLARS.map((p) => ({ ...p, value: a[p.key] }));
   // holtversenynél a sorrend dönt: az első legmagasabb, illetve az első legalacsonyabb
@@ -107,6 +108,61 @@ export function lifestyleMap(a: Answers) {
     qualified: a.q15 >= START_THRESHOLD,
   };
 }
+
+// =============================================================================
+// 4. változat (2026. november 28., Acélidegek Mentorprogram): 14 kérdés, 1–10-es skála.
+// Hat terület az ígéret mentén + szándék. A kérdés szövege nem nevez meg gyakorlatot,
+// és nem árulja el a program felépítését.
+// =============================================================================
+
+export const QUESTIONS: Question[] = [
+  { key: "q1", area: "Megnyugvás", text: "Az elmúlt két hétben, ha valami felzaklatott, mennyi idő alatt nyerted vissza a nyugalmadat?", low: "órákig bennem maradt", high: "néhány perc alatt" },
+  { key: "q2", area: "Megnyugvás", text: "Mennyire bízol abban, hogy egy fontos prezentáció, tárgyalás vagy nehéz beszélgetés előtt meg tudod nyugtatni magad?", low: "egyáltalán nem", high: "teljesen" },
+  { key: "q3", area: "Alvás", text: "Az elmúlt két hétben hány reggel ébredtél kipihenten?", low: "szinte egyszer sem", high: "szinte minden reggel" },
+  { key: "q4", area: "Alvás", text: "Az elmúlt két hétben hány éjszaka aludtál nyugodtan, anélkül hogy sokáig forgolódtál volna, vagy hajnalban felriadtál volna?", low: "szinte egyen sem", high: "szinte mindegyiken" },
+  { key: "q5", area: "Kikapcsolás", text: "Az elmúlt két hétben hány este tudtál igazán kikapcsolni a munka után?", low: "egyen sem", high: "szinte minden este" },
+  { key: "q6", area: "Reakciók", text: "Az elmúlt két hétben milyen gyakran reagáltál hevesebben, mint amit a helyzet indokolt: felcsattantál, vagy napokig rágódtál valamin?", low: "nagyon gyakran", high: "szinte soha" },
+  { key: "q7", area: "Figyelem", text: "Az elmúlt két hétben mennyire tudtál hosszabb ideig, megszakítás nélkül egy feladatra összpontosítani, amikor kellett?", low: "szinte soha", high: "szinte mindig" },
+  { key: "q8", area: "Figyelem", text: "Egy átlagos munkanap végén mennyire érzed úgy, hogy arra ment el az időd, ami valóban fontos volt?", low: "szinte soha", high: "szinte mindig" },
+  { key: "q9", area: "Döntés nyomás alatt", text: "Amikor nagy a nyomás, mennyire tudsz tiszta fejjel dönteni?", low: "szinte egyáltalán nem", high: "teljesen" },
+  { key: "q10", area: "Szándék", text: "Mennyire nehezíti most a munkádat vagy a mindennapjaidat az, amin változtatni szeretnél?", low: "alig", high: "nagyon" },
+  { key: "q11", area: "Szándék", text: "Mennyire állsz készen arra, hogy pénzt, időt és energiát fektess a változtatásba?", low: "most nem", high: "teljesen" },
+  { key: "q12", area: "Szándék", text: "Mennyire tudsz időt szakítani a napjaidban arra, hogy az új eszközöket rendszeresen gyakorold?", low: "most nem tudok", high: "gond nélkül" },
+  { key: "q13", area: "Szándék", text: "Mennyire állsz készen arra, hogy a megszokásaidon is változtass?", low: "most nem", high: "teljesen" },
+  { key: "q14", area: "Kezdés", text: "Mennyire érzed úgy, hogy most van itt az ideje elkezdeni?", low: "ráér még", high: "ma vagy holnap kezdeném" },
+];
+
+/** Az Idegrendszer-térkép hat tengelye (a 4. változat kérdéseiből) és a hozzájuk tartozó szövegek. */
+export const NERVE_AXES = [
+  { keys: ["q1", "q2"], name: "Megnyugvás", strength: "Feszült helyzetben is hamar visszatalálsz a nyugalomhoz.", tip: "Legközelebb, mielőtt egy nehéz helyzetben megszólalnál, állj meg egy pillanatra, és figyeld meg, hol érzed a testedben a feszültséget. Csak vedd észre." },
+  { keys: ["q3", "q4"], name: "Alvás", strength: "Az alvásod jó alapot ad a napjaidhoz.", tip: "Ma este fél órával lefekvés előtt tedd le a telefont, és figyeld meg, hogyan ébredsz holnap." },
+  { keys: ["q5"], name: "Kikapcsolás", strength: "Este le tudod tenni a munkát.", tip: "Ma a munka végén írd fel egy papírra, mi maradt nyitva, és mi az első lépés holnap. Így a fejednek nem kell estig fejben tartania." },
+  { keys: ["q6"], name: "Reakciók", strength: "Arányosan reagálsz, nem ragadsz bele a feszültségbe.", tip: "Ha legközelebb felcsattannál, mielőtt válaszolnál, számolj el magadban ötig. Nem kell elfojtanod semmit, csak teret adsz magadnak." },
+  { keys: ["q7", "q8"], name: "Figyelem", strength: "Tudsz mélyen és hosszan összpontosítani.", tip: "Holnap a legfontosabb feladatodat kezdd 25 perccel, értesítések nélkül, a telefont egy másik szobában hagyva." },
+  { keys: ["q9"], name: "Döntés", strength: "Nyomás alatt is megőrzöd a tisztánlátásodat.", tip: "A következő fontos döntés előtt írd le egy mondatban, mit akarsz elérni vele. Ez segít, hogy a nyomás helyett a célod vezessen." },
+] as const satisfies readonly { keys: readonly QuestionKey[]; name: string; strength: string; tip: string }[];
+
+/** Az Idegrendszer-térkép: a hat terület, az erősség és a következő kis lépés. */
+export function nerveMap(a: Partial<Answers>) {
+  const pillars = NERVE_AXES.map((x) => ({
+    name: x.name,
+    strength: x.strength,
+    tip: x.tip,
+    value: round1(x.keys.reduce((sum, k) => sum + (a[k] ?? 0), 0) / x.keys.length),
+  }));
+  const strongest = pillars.reduce((best, p) => (p.value > best.value ? p : best), pillars[0]);
+  const rest = pillars.filter((p) => p.name !== strongest.name);
+  const weakest = rest.reduce((low, p) => (p.value < low.value ? p : low), rest[0]);
+  return { pillars, strongest, weakest, qualified: (a.q14 ?? 0) >= START_THRESHOLD };
+}
+
+export const RESULT_TEXT_V4 = {
+  longTerm: "Ez egy kis lépés, és már ma megteheted. A mentorálás során erre építünk, a te helyzeteidre szabva.",
+  qualified: "A válaszaid alapján most jó időben vagy. Válassz időpontot az ingyenes, 30 perces online konzultációhoz.",
+  qualifiedCta: "Időpontot választok",
+  later: "Úgy tűnik, most még nem sürget a kezdés, és ez rendben van. Addig gyere el egy Nyílt Meditációs Estre, és nézd meg, hogyan dolgozom.",
+  laterCta: "Közelgő Nyílt Estek",
+};
 
 const answerSchema = z.coerce.number().int().min(1).max(10);
 
@@ -132,9 +188,9 @@ export function normalizeUtm(v: string | null | undefined): string | undefined {
 export const applicationV2Schema = z.object({
   full_name: z.string().trim().min(2).max(120),
   email: z.string().trim().toLowerCase().email(),
-  phone: z.string().trim().max(40).optional(),
+  phone: z.string().trim().min(6).max(40),
   answers: z.object(Object.fromEntries(QUESTIONS.map((q) => [q.key, answerSchema])) as Record<QuestionKey, typeof answerSchema>),
-  problem: z.string().trim().max(4000).optional(),
+  problem: z.string().trim().min(3).max(4000),
   health_consent: z.literal("on"),
   privacy_consent: z.literal("on"),
   heard_from: z.enum(HEARD_FROM_KEYS).optional().catch(undefined),

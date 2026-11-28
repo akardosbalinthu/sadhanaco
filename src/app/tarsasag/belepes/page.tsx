@@ -29,7 +29,7 @@ export default async function LoginPage({
       </GildedCard>
       <p className="mt-6 text-center text-sm text-ink-soft">
         Még nem vagy a program résztvevője?{" "}
-        <a href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/konzultacio`} className={linkClass}>
+        <a href={`${publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/jelentkezes`} className={linkClass}>
           Konzultációt foglalok
         </a>
       </p>

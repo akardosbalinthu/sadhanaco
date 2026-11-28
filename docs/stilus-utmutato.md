@@ -17,8 +17,8 @@
 |---|---|
 | egyéni program, a program | kurzus, csomag, tréning (az egyéni programra) |
 | résztvevő | tag, ügyfél, kliens (a felületen) |
-| kérdőív (a 15 kérdés) | felmérés, teszt, kvíz |
-| Életmód-térkép (a kérdőív eredménye) | eredménylap, riport |
+| kérdőív (a 14 kérdés, 4. változat) | felmérés, teszt, kvíz |
+| Idegrendszer-térkép (a kérdőív eredménye; a 2. változatnál: Életmód-térkép) | eredménylap, riport |
 | ismerkedő konzultáció; utána: konzultáció | hívás, sales call, egyéni konzultáció |
 | alkalom (egyéni online találkozás) | óra, session, ülés (ez utóbbi csak a hosszabb önálló gyakorlásra) |
 | heti beszámoló | riport, jelentés |
@@ -72,6 +72,6 @@
 - Főcím: „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”
 - Alcím: „Több ezer éves jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.”
 - Bemutatkozás első bekezdése (ARCULAT 9.), a Nyílt Est és az Egy Kedves Üzenet leíró mondata (ARCULAT 8.).
-- A kérdőív 15 kérdése és skálafeliratai.
+- A kérdőív kérdései és skálafeliratai (2026. november 28-tól a 4. változat, `src/lib/application.ts`).
 - A fő gomb: „Kérem az Életmód-térképem”.
 - Az indiai tanulságok listája a Rólam oldalon (Bálint saját szövege).

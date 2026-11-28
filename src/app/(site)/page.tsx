@@ -13,7 +13,7 @@ export const metadata = {
 // Az oldal egyetlen célja a konzultációfoglalás. Ár, a program felépítése és a gyakorlatok
 // neve itt nem szerepelhet – ezek a konzultáción hangzanak el.
 const CTA = "Foglalj konzultációt";
-const CTA_NOTE = "Ingyenes, 30 perces online beszélgetés. Semmire nem kötelez.";
+const CTA_NOTE = "Egy rövid kérdőívvel indul, utána időpontot választasz. A konzultáció ingyenes, 30 perces, és semmire nem kötelez.";
 
 // A fő ígéret – szó szerint, nem módosítható.
 const PROMISES = [
@@ -102,7 +102,7 @@ const FAQ = [
   },
   {
     q: "Mi történik a konzultáción?",
-    a: "Egy ingyenes, 30 perces online beszélgetés. Megbeszéljük, hol tartasz, mit szeretnél elérni, és hogy a program jó választás-e neked. A részleteket és a díjat is itt beszéljük meg. A beszélgetés semmire nem kötelez.",
+    a: "Egy ingyenes, 30 perces online beszélgetés. Előtte kitöltesz egy rövid kérdőívet, így már tudom, honnan indulsz. Megbeszéljük, hol tartasz, mit szeretnél elérni, és hogy a program jó választás-e neked. A részleteket és a díjat is itt beszéljük meg. A beszélgetés semmire nem kötelez.",
   },
   {
     q: "Kell hozzá előzetes tapasztalat?",
@@ -121,7 +121,7 @@ const FAQ = [
 function Cta({ className = "" }: { className?: string }) {
   return (
     <div className={className}>
-      <Link href="/konzultacio" className={buttonPrimary}>
+      <Link href="/jelentkezes" className={buttonPrimary}>
         {CTA}
       </Link>
       <p className="mt-3 text-sm text-ink-soft">{CTA_NOTE}</p>
@@ -340,8 +340,8 @@ export default function HomePage() {
           Vedd újra a kezedbe az életed irányítását.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Nyugalom nyomás alatt, kipihent reggelek, tiszta fej a fontos döntéseknél. Az első lépés egy 30 perces
-          beszélgetés.
+          Nyugalom nyomás alatt, kipihent reggelek, tiszta fej a fontos döntéseknél. Az első lépés egy pár perces
+          kérdőív, utána egy 30 perces beszélgetés.
         </p>
         <div className="mt-8 flex justify-center">
           <Cta />
@@ -351,11 +351,7 @@ export default function HomePage() {
           <Link href="/nyilt-estek" className="text-forest underline decoration-gold/50 underline-offset-4">
             Nyílt Meditációs Estre
           </Link>{" "}
-          Budapesten, vagy töltsd ki a{" "}
-          <Link href="/jelentkezes" className="text-forest underline decoration-gold/50 underline-offset-4">
-            15 kérdéses kérdőívet
-          </Link>
-          , és nézd meg, hol tartasz most.
+          Budapesten, és nézd meg személyesen, hogyan dolgozom.
         </p>
       </section>
 

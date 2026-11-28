@@ -138,7 +138,7 @@ export default async function OpenEveningsPage() {
           megmaradjon. Az első lépés egy ingyenes, 30 perces konzultáció.
         </p>
         <div className="mt-8">
-          <Link href="/konzultacio" className={buttonSecondary}>
+          <Link href="/jelentkezes" className={buttonSecondary}>
             Foglalj konzultációt
           </Link>
         </div>

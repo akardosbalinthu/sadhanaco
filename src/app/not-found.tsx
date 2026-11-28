@@ -18,7 +18,7 @@ export default function NotFound() {
           <a href={`${site}/`} className={buttonPrimary}>
             Vissza a kezdőlapra
           </a>
-          <a href={`${site}/konzultacio`} className={buttonSecondary}>
+          <a href={`${site}/jelentkezes`} className={buttonSecondary}>
             Foglalj konzultációt
           </a>
         </div>

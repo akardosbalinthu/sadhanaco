@@ -1729,6 +1729,40 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"submit_application_v4":
+{ Args: { "p_answers": Json,"p_email": string,"p_full_name": string,"p_health_consent": boolean,"p_phone": string,"p_privacy_consent": boolean,"p_problem": string }; Returns: {
+              "admin_note": string | null,
+"answers": Json | null,
+"created_at": string,
+"email": string,
+"full_name": string,
+"health_consent_at": string,
+"health_consent_version": string,
+"heard_from": string | null,
+"id": string,
+"invest_energy": string | null,
+"invest_money": string | null,
+"invest_time": string | null,
+"phone": string | null,
+"pillars": Json | null,
+"privacy_consent_at": string,
+"problem": string | null,
+"qualified": boolean | null,
+"questionnaire_version": number,
+"severity": number | null,
+"start_score": number | null,
+"start_when": Database["public"]['Enums']["application_start"] | null,
+"status": Database["public"]['Enums']["application_status"],
+"token": string,
+"urgency": number | null,
+"utm_source": string | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "applications"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "submit_business_inquiry":
 { Args: { "p_budget": string,"p_company_name": string,"p_company_size": number,"p_contact_name": string,"p_contact_role": string,"p_email": string,"p_formats": (string)[],"p_goal": string,"p_hq_city": string,"p_locations": (string)[],"p_participants": number,"p_phone": string,"p_privacy_consent": boolean,"p_timing": string }; Returns: {
               "admin_note": string | null,

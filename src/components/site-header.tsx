@@ -31,7 +31,7 @@ export function SiteHeader() {
             Belépés
           </a>
           <Link
-            href="/konzultacio"
+            href="/jelentkezes"
             className="rounded-md border border-forest bg-forest px-3 py-1 text-paper transition-all duration-300 hover:border-gold"
           >
             Konzultáció

@@ -402,7 +402,7 @@ export default function AboutPage() {
           online konzultációt. Ha előbb személyesen ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/konzultacio" className={buttonPrimary}>
+          <Link href="/jelentkezes" className={buttonPrimary}>
             Foglalj konzultációt
           </Link>
           <Link href="/nyilt-estek" className={buttonSecondary}>

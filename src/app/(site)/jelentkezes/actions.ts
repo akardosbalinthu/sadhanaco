@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { applicationV2Input, applicationV2Schema, lifestyleMap, RESULT_TEXT } from "@/lib/application";
+import { applicationV2Input, applicationV2Schema, nerveMap, QUESTIONS, RESULT_TEXT_V4 } from "@/lib/application";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendEmail } from "@/lib/email";
 import { publicEnv } from "@/lib/env";
@@ -26,7 +26,11 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
         : k === "privacy_consent"
         ? "Kérlek, fogadd el az adatkezelési tájékoztatót."
         : k === "answers"
-        ? "Kérlek, válaszolj mind a 15 kérdésre."
+        ? `Kérlek, válaszolj mind a ${QUESTIONS.length} kérdésre.`
+        : k === "phone"
+        ? "Kérlek, add meg a telefonszámodat."
+        : k === "problem"
+        ? "Kérlek, írd le röviden, min szeretnél változtatni."
         : k === "email"
         ? "Kérlek, adj meg egy érvényes e-mail-címet."
         : k === "full_name"
@@ -36,12 +40,12 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
   }
   const d = parsed.data;
   const admin = createAdminClient();
-  const { data: app, error } = await admin.rpc("submit_application_v2", {
+  const { data: app, error } = await admin.rpc("submit_application_v4", {
     p_full_name: d.full_name,
     p_email: d.email,
-    p_phone: d.phone ?? "",
+    p_phone: d.phone,
     p_answers: d.answers,
-    p_problem: d.problem ?? "",
+    p_problem: d.problem,
     p_health_consent: true,
     p_privacy_consent: true,
   });
@@ -54,7 +58,7 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
   }
 
   const first = d.full_name.split(/\s+/).slice(-1)[0];
-  const map = lifestyleMap(d.answers);
+  const map = nerveMap(d.answers);
   const resultUrl = `${siteBase()}/jelentkezes/eredmeny?t=${app.token}`;
 
   // Értesítő nekem (a részleteket csak a védett admin felületen mutatjuk).
@@ -63,7 +67,7 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
     `Új jelentkezés${app.qualified ? " (most kezdene)" : ""} – ${d.full_name}`,
     [
       `${d.full_name} kitöltötte a kérdőívet.`,
-      `„Most van itt az ideje?” ${d.answers.q15}/10. ${app.qualified ? "Konzultációt foglalhat." : "Konzultációt nem foglalhat; a Nyílt Estre hívtam."}`,
+      `„Most van itt az ideje?” ${d.answers.q14}/10. ${app.qualified ? "Konzultációt foglalhat." : "Konzultációt nem foglalhat; a Nyílt Estre hívtam."}`,
     ],
     { href: `${adminBase()}/admin/jelentkezesek/${app.id}`, label: "Megnézem a jelentkezést" },
   );
@@ -71,14 +75,14 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
   // Az eredmény a kitöltőnek is, hogy később visszanézhesse.
   await sendEmail(
     d.email,
-    "Az Életmód-térképed",
+    "Az Idegrendszer-térképed",
     [
       `Kedves ${first}!`,
       "Köszönöm, hogy kitöltötted a kérdőívet. Itt az eredményed röviden:",
       `Az erősséged: ${map.strongest.name}. ${map.strongest.strength}`,
       ...(map.weakest ? [`A következő kis lépésed: ${map.weakest.name}. ${map.weakest.tip}`] : []),
-      RESULT_TEXT.longTerm,
-      app.qualified ? RESULT_TEXT.qualified : RESULT_TEXT.later,
+      RESULT_TEXT_V4.longTerm,
+      app.qualified ? RESULT_TEXT_V4.qualified : RESULT_TEXT_V4.later,
     ],
     { href: resultUrl, label: "Megnézem a teljes térképet" },
   );
