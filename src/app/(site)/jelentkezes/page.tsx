@@ -5,7 +5,7 @@ import { ApplicationForm } from "./application-form";
 export const metadata = {
   title: "Jelentkezés konzultációra · Kardos Bálint",
   description:
-    "Jelentkezés az Acélidegek Mentorprogram ingyenes, 30 perces konzultációjára: 14 rövid kérdés, a végén a személyes Idegrendszer-térképed és egy első lépés.",
+    "Jelentkezés az Acélidegek Mentorprogram ingyenes, 55 perces konzultációjára: 14 rövid kérdés, a végén a személyes Idegrendszer-térképed és egy első lépés.",
 };
 
 export default async function ApplyPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
@@ -21,7 +21,7 @@ export default async function ApplyPage({ searchParams }: { searchParams: Promis
         </p>
         <p>
           Utána megkapod az Idegrendszer-térképedet egy első lépéssel, amelyet még ma kipróbálhatsz, és időpontot
-          választhatsz az ingyenes, 30 perces online konzultációhoz.
+          választhatsz az ingyenes, 55 perces online konzultációhoz.
         </p>
       </PageHeader>
       <div className="mt-12 max-w-2xl">

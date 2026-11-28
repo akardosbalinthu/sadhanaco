@@ -23,7 +23,7 @@ export default async function SlotsPage({ searchParams }: { searchParams: SP }) 
       .order("starts_at")
       .limit(300),
   ]);
-  const defMin = settings?.consultation_default_minutes ?? 30;
+  const defMin = settings?.consultation_default_minutes ?? 55;
   const today = new Date().toISOString().slice(0, 10);
 
   return (
@@ -45,7 +45,7 @@ export default async function SlotsPage({ searchParams }: { searchParams: SP }) 
             <label className="block"><span className={label}>Szünet közöttük (perc)</span><input name="gap" type="number" min={0} max={120} defaultValue={15} className={`${smallInput} mt-1 w-full`} /></label>
             <label className="block"><span className={label}>Ismétlés hetente (alkalom)</span><input name="repeat_weeks" type="number" min={1} max={12} defaultValue={1} className={`${smallInput} mt-1 w-full`} /></label>
             <p className="text-xs text-ink-soft sm:col-span-3">
-              Példa: kedd 9:00–12:00, 30 perc, 15 perc szünet, 4 hétig → minden kedden 9:00, 9:45, 10:30 és 11:15.
+              Példa: kedd 9:00–13:00, 55 perc, 5 perc szünet, 4 hétig → minden kedden 9:00, 10:00, 11:00 és 12:00.
               Ha a „Vége” üres, egyetlen időpont készül.
             </p>
             <div className="sm:col-span-3"><SubmitButton className={smallPrimary}>Időpontok felvétele</SubmitButton></div>

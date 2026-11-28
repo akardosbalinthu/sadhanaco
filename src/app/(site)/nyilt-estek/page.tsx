@@ -135,7 +135,7 @@ export default async function OpenEveningsPage() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
           Az Acélidegek Mentorprogramban 16 héten át személyesen, online mentorállak, hogy a nyugalmad nyomás alatt is
-          megmaradjon. Az első lépés egy ingyenes, 30 perces konzultáció.
+          megmaradjon. Az első lépés egy ingyenes, 55 perces konzultáció.
         </p>
         <div className="mt-8">
           <Link href="/jelentkezes" className={buttonSecondary}>

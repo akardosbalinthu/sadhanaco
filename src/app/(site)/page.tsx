@@ -7,13 +7,13 @@ import { DawnLandscape } from "@/components/illustrations";
 export const metadata = {
   title: "Acélidegek Mentorprogram · Kardos Bálint",
   description:
-    "Nyugalom nyomás alatt: 16 hetes, személyes online mentorálás szakértőknek és vezetőknek, tudományos alapon. Foglalj ingyenes, 30 perces konzultációt.",
+    "Nyugalom nyomás alatt: 16 hetes, személyes online mentorálás szakértőknek és vezetőknek, tudományos alapon. Foglalj ingyenes, 55 perces konzultációt.",
 };
 
 // Az oldal egyetlen célja a konzultációfoglalás. Ár, a program felépítése és a gyakorlatok
 // neve itt nem szerepelhet – ezek a konzultáción hangzanak el.
 const CTA = "Foglalj konzultációt";
-const CTA_NOTE = "Egy rövid kérdőívvel indul, utána időpontot választasz. A konzultáció ingyenes, 30 perces, és semmire nem kötelez.";
+const CTA_NOTE = "Egy rövid kérdőívvel indul, utána időpontot választasz. A konzultáció ingyenes, 55 perces, és semmire nem kötelez.";
 
 // A fő ígéret – szó szerint, nem módosítható.
 const PROMISES = [
@@ -102,7 +102,7 @@ const FAQ = [
   },
   {
     q: "Mi történik a konzultáción?",
-    a: "Egy ingyenes, 30 perces online beszélgetés. Előtte kitöltesz egy rövid kérdőívet, így már tudom, honnan indulsz. Megbeszéljük, hol tartasz, mit szeretnél elérni, és hogy a program jó választás-e neked. A részleteket és a díjat is itt beszéljük meg. A beszélgetés semmire nem kötelez.",
+    a: "Egy ingyenes, 55 perces online beszélgetés. Előtte kitöltesz egy rövid kérdőívet, így már tudom, honnan indulsz. Megbeszéljük, hol tartasz, mit szeretnél elérni, és hogy a program jó választás-e neked. A részleteket és a díjat is itt beszéljük meg. A beszélgetés semmire nem kötelez.",
   },
   {
     q: "Kell hozzá előzetes tapasztalat?",
@@ -341,7 +341,7 @@ export default function HomePage() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
           Nyugalom nyomás alatt, kipihent reggelek, tiszta fej a fontos döntéseknél. Az első lépés egy pár perces
-          kérdőív, utána egy 30 perces beszélgetés.
+          kérdőív, utána egy 55 perces beszélgetés.
         </p>
         <div className="mt-8 flex justify-center">
           <Cta />

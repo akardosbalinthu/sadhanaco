@@ -40,7 +40,7 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
   if (!info.qualified) {
     return (
       <main className="py-16">
-        <PageHeader eyebrow="Időpontfoglalás" title={`Köszönöm, ${first}!`}>
+        <PageHeader eyebrow="Időpontfoglalás" title={`Üdvözöllek, ${first}!`}>
           <p>
             Most még nem kezdenéd el a programot, ezért konzultációs időpontot ezen a linken nem lehet foglalni. Addig is
             szeretettel várlak egy Nyílt Meditációs Esten. Ha eljött az ideje, töltsd ki újra a kérdőívet.
@@ -97,7 +97,7 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
 
   return (
     <main className="py-16">
-      <PageHeader eyebrow="Időpontfoglalás" title={`Köszönöm, ${first}! Válassz időpontot.`}>
+      <PageHeader eyebrow="Időpontfoglalás" title={`Üdvözöllek, ${first}! Válassz időpontot.`}>
         <p>
           Az ismerkedő konzultáció ingyenes, és online, Google Meeten zajlik. Beszélünk arról, hol tartasz, mit
           szeretnél, és hogy a program jó választás-e neked. Itt beszéljük meg a részleteket és a díjat is.

@@ -7,7 +7,8 @@ import { sendEmail } from "@/lib/email";
 import { publicEnv } from "@/lib/env";
 import { SITE } from "@/lib/site";
 
-export type ApplyState = { status: "idle" } | { status: "error"; message: string };
+/** missing: a megválaszolatlan kérdések kulcsai (q1…), hogy a kitöltő egy kattintással visszaléphessen hozzájuk. */
+export type ApplyState = { status: "idle" } | { status: "error"; message: string; missing?: string[] };
 
 const siteBase = () => publicEnv.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
 const adminBase = () => publicEnv.NEXT_PUBLIC_TARSASAG_URL.replace(/\/$/, "");
@@ -36,7 +37,9 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
         : k === "full_name"
         ? "Kérlek, add meg a neved."
         : "Kérlek, ellenőrizd a megadott adatokat.";
-    return { status: "error", message };
+    const missing =
+      k === "answers" ? QUESTIONS.filter((q) => !/^([1-9]|10)$/.test(String(fd.get(q.key) ?? ""))).map((q) => q.key) : undefined;
+    return { status: "error", message, missing };
   }
   const d = parsed.data;
   const admin = createAdminClient();
@@ -84,7 +87,13 @@ export async function submitApplication(_prev: ApplyState, fd: FormData): Promis
       RESULT_TEXT_V4.longTerm,
       app.qualified ? RESULT_TEXT_V4.qualified : RESULT_TEXT_V4.later,
     ],
-    { href: resultUrl, label: "Megnézem a teljes térképet" },
+    // Aki most kezdene, annak a fő gomb az időpontfoglalás; a többieknek a térkép (a foglalás nekik nem nyitott).
+    app.qualified
+      ? [
+          { href: `${siteBase()}/jelentkezes/idopont?t=${app.token}`, label: "Lefoglalom a konzultációt" },
+          { href: resultUrl, label: "Megnézem a teljes térképet" },
+        ]
+      : { href: resultUrl, label: "Megnézem a teljes térképet" },
   );
 
   redirect(`/jelentkezes/eredmeny?t=${app.token}`);

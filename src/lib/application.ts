@@ -158,7 +158,7 @@ export function nerveMap(a: Partial<Answers>) {
 
 export const RESULT_TEXT_V4 = {
   longTerm: "Ez egy kis lépés, és már ma megteheted. A mentorálás során erre építünk, a te helyzeteidre szabva.",
-  qualified: "A válaszaid alapján most jó időben vagy. Válassz időpontot az ingyenes, 30 perces online konzultációhoz.",
+  qualified: "A válaszaid alapján most jó időben vagy. Válassz időpontot az ingyenes, 55 perces online konzultációhoz.",
   qualifiedCta: "Időpontot választok",
   later: "Úgy tűnik, most még nem sürget a kezdés, és ez rendben van. Addig gyere el egy Nyílt Meditációs Estre, és nézd meg, hogyan dolgozom.",
   laterCta: "Közelgő Nyílt Estek",

@@ -398,7 +398,7 @@ export default function AboutPage() {
           Kezdjük el együtt.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Ha magadra ismertél, és szeretnéd, hogy a nyugalmad nyomás alatt is megmaradjon, foglalj egy ingyenes, 30 perces
+          Ha magadra ismertél, és szeretnéd, hogy a nyugalmad nyomás alatt is megmaradjon, foglalj egy ingyenes, 55 perces
           online konzultációt. Ha előbb személyesen ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

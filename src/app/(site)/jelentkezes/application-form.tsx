@@ -14,6 +14,8 @@ import { submitApplication, type ApplyState } from "./actions";
  */
 export function ApplicationForm({ utmSource }: { utmSource?: string }) {
   const [state, action, pending] = useActionState(submitApplication, { status: "idle" } as ApplyState);
+  // A beküldés előtti ellenőrzés: ha egy kérdés megválaszolatlan, nem küldjük el, hanem megmutatjuk, melyik.
+  const [localMissing, setLocalMissing] = useState<QuestionKey[] | null>(null);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Partial<Record<QuestionKey, number>>>({});
   const [problem, setProblem] = useState("");
@@ -29,16 +31,37 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
   const onQuestion = step < total;
   const q = onQuestion ? QUESTIONS[step] : null;
 
+  // Ha a hibaüzenetből lépett vissza egy kérdéshez, a válasz után a következő hiányzó kérdés,
+  // vagy ha már nincs ilyen, az utolsó lépés jön – nem kell újra végigmennie az összesen.
+  const [fixing, setFixing] = useState(false);
   const choose = (key: QuestionKey, v: number) => {
-    setAnswers((a) => ({ ...a, [key]: v }));
+    const next = { ...answers, [key]: v };
+    setAnswers(next);
+    const nextMissing = QUESTIONS.findIndex((x) => next[x.key] == null);
     // rövid szünet, hogy látszódjon a választás, aztán tovább
-    window.setTimeout(() => setStep((s) => Math.min(s + 1, steps - 1)), 220);
+    window.setTimeout(() => {
+      if (fixing) {
+        if (nextMissing < 0) setFixing(false);
+        setStep(nextMissing >= 0 ? nextMissing : steps - 1);
+      } else {
+        setStep((s) => Math.min(s + 1, steps - 1));
+      }
+    }, 220);
   };
   const canNext = onQuestion ? answers[q!.key] != null : step !== total || problem.trim().length >= 3;
 
   return (
     <form
-      onSubmit={keepFields(action)}
+      onSubmit={(e) => {
+        const missing = QUESTIONS.filter((x) => answers[x.key] == null).map((x) => x.key);
+        if (missing.length > 0) {
+          e.preventDefault();
+          setLocalMissing(missing);
+          return;
+        }
+        setLocalMissing(null);
+        keepFields(action)(e);
+      }}
       className="space-y-8"
       onKeyDown={(e) => {
         if (e.key === "Enter" && step < steps - 1 && (e.target as HTMLElement).tagName !== "TEXTAREA") e.preventDefault();
@@ -159,11 +182,44 @@ export function ApplicationForm({ utmSource }: { utmSource?: string }) {
         </div>
       </div>
 
-      {state.status === "error" && (
-        <p role="alert" className="rounded-md border border-alert/40 px-4 py-3 text-sm text-alert">
-          {state.message}
-        </p>
-      )}
+      {(() => {
+        const missing = localMissing ?? (state.status === "error" ? (state.missing as QuestionKey[] | undefined) : undefined);
+        if (missing && missing.length > 0) {
+          return (
+            <div role="alert" className="rounded-md border border-alert/40 px-4 py-3 text-sm text-alert">
+              <p>
+                {missing.length === 1 ? "Egy kérdésre még nem válaszoltál:" : `${missing.length} kérdésre még nem válaszoltál:`}
+              </p>
+              <ul className="mt-2 space-y-1.5">
+                {missing.map((key) => {
+                  const i = QUESTIONS.findIndex((x) => x.key === key);
+                  if (i < 0) return null;
+                  return (
+                    <li key={key}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLocalMissing(null);
+                          setFixing(true);
+                          setStep(i);
+                        }}
+                        className="text-left text-forest underline decoration-gold/60 underline-offset-4 hover:text-gold"
+                      >
+                        {i + 1}. kérdés: {QUESTIONS[i].text}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        }
+        return state.status === "error" ? (
+          <p role="alert" className="rounded-md border border-alert/40 px-4 py-3 text-sm text-alert">
+            {state.message}
+          </p>
+        ) : null;
+      })()}
 
       <div className="flex items-center justify-between gap-3">
         <button
