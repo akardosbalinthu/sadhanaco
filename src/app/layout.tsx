@@ -4,8 +4,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { themeInitScript } from "@/components/theme";
 import { resolvedSiteUrl } from "@/lib/site";
 
-const TITLE = "Kardos Bálint · Egyéni idegrendszer-fejlesztő és meditációs program";
-const DESCRIPTION = "Több ezer éves jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.";
+const TITLE = "Kardos Bálint · Acélidegek Mentorprogram";
+const DESCRIPTION =
+  "Vedd újra a kezedbe az életed irányítását. 16 hetes, személyes online mentorálás szakértőknek és vezetőknek – nyugalom nyomás alatt.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(resolvedSiteUrl()),
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "hu_HU",
     siteName: "Kardos Bálint",
-    title: "Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.",
+    title: "Vedd újra a kezedbe az életed irányítását.",
     description: DESCRIPTION,
   },
   twitter: { card: "summary_large_image" },

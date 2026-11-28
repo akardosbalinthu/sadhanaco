@@ -270,7 +270,7 @@ export default function AboutPage() {
       <CompassDivider className="my-20" />
 
       <section>
-        <SectionTitle eyebrow="Ahol minden összeér" title="A program összeköti a múltamat a jelenemmel." />
+        <SectionTitle eyebrow="Ahol minden összeér" title="Az Acélidegek Mentorprogram összeköti a múltamat a jelenemmel." />
         <p className="mt-4 max-w-2xl text-ink-soft">
           Komoly témában segít, tudományosan megalapozott eszközökkel – de nem veszi túl komolyan önmagát. Nem orvosi
           kezelés és nem vallás, hanem személyes út, amelyen végigkísérlek. Benne van minden, ami fontos nekem:
@@ -316,13 +316,8 @@ export default function AboutPage() {
             egészségtelen étkezés mellett a tartós stressz is.
           </p>
           <p>
-            És van egy csendesebb stresszforrás is: a magány. A WHO 2025-ös jelentése szerint világszerte minden hatodik
-            ember magányos, és a magány évente több mint 871 000 halálesettel hozható összefüggésbe – óránként mintegy
-            százzal.
-          </p>
-          <p>
             A jó hír az, hogy az idegrendszer nemcsak alkalmazkodik, hanem tanul is: a megnyugvás képessége gyakorlással
-            fejleszthető. Erre épül a program, két irányból.
+            fejleszthető. Erre épül az Acélidegek Mentorprogram, két irányból.
           </p>
           <p>
             <strong className="font-normal text-forest">Befelé</strong> a testünkkel, a légzésünkkel és a figyelmünkkel
@@ -403,12 +398,12 @@ export default function AboutPage() {
           Kezdjük el együtt.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Ha valamelyik történetben magadra ismertél, és most kezdenél, töltsd ki a kérdőívet: két-három perc alatt megnézheted,
-          hol tartasz most. Ha előbb személyesen ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
+          Ha magadra ismertél, és szeretnéd, hogy a nyugalmad nyomás alatt is megmaradjon, foglalj egy ingyenes, 30 perces
+          online konzultációt. Ha előbb személyesen ismerkednél, gyere el egy Nyílt Meditációs Estre – szeretettel várlak.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/jelentkezes" className={buttonPrimary}>
-            Kérem az Életmód-térképem
+          <Link href="/konzultacio" className={buttonPrimary}>
+            Foglalj konzultációt
           </Link>
           <Link href="/nyilt-estek" className={buttonSecondary}>
             Közelgő Nyílt Estek
@@ -423,10 +418,7 @@ export default function AboutPage() {
           <li>WHO (2019): Burn-out an „occupational phenomenon”: International Classification of Diseases (BNO-11)</li>
           <li>KSH (2025): Halálozások halálokok szerint, 2024</li>
           <li>Cohen, S., Janicki-Deverts, D., Miller, G. E. (2007): Psychological Stress and Disease. JAMA, 298(14)</li>
-          <li>WHO Commission on Social Connection (2025): From loneliness to social connection: charting a path to healthier societies</li>
           <li>American College of Lifestyle Medicine – az életmód-orvostan hat pillére</li>
-          <li>Holt-Lunstad, J., Smith, T. B., Layton, J. B. (2010): Social Relationships and Mortality Risk: A Meta-analytic Review. PLoS Medicine</li>
-          <li>U.S. Surgeon General (2023): Our Epidemic of Loneliness and Isolation</li>
         </ul>
       </footer>
     </main>

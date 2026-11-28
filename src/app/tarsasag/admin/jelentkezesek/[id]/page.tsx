@@ -54,7 +54,7 @@ export default async function ApplicationDetail({ params, searchParams }: { para
           {a.utm_source ? ` · link forrása: ${a.utm_source}` : ""}
         </p>
         <p className="mt-2 text-sm">
-          <span className={a.qualified ? "text-forest" : "text-ink-soft"}>{a.questionnaire_version === 2 ? `„Most van itt az ideje?” ${a.start_score}/10` : START_LABEL[a.start_when ?? ""]}</span>
+          <span className={a.qualified ? "text-forest" : "text-ink-soft"}>{a.questionnaire_version === 3 ? "Konzultációt kért (rövid űrlap)" : a.questionnaire_version === 2 ? `„Most van itt az ideje?” ${a.start_score}/10` : START_LABEL[a.start_when ?? ""]}</span>
           <span className="text-ink-soft"> · {APP_STATUS_LABEL[a.status]}</span>
         </p>
       </div>
@@ -89,7 +89,17 @@ export default async function ApplicationDetail({ params, searchParams }: { para
         )}
       </GildedCard>
 
-      {a.questionnaire_version === 2 && map && answers ? (
+      {a.questionnaire_version === 3 ? (
+        <section>
+          <H2>Mi az, amin a legjobban szeretne változtatni?</H2>
+          <GildedCard className="mt-5 p-6">
+            <p className="whitespace-pre-line text-ink">{a.problem}</p>
+          </GildedCard>
+          <p className="mt-3 text-xs text-ink-soft">
+            Adatkezelési hozzájárulás: {fmtDateTime(a.health_consent_at)} (szövegváltozat: {a.health_consent_version})
+          </p>
+        </section>
+      ) : a.questionnaire_version === 2 && map && answers ? (
         <>
           <section>
             <H2>Életmód-térkép</H2>

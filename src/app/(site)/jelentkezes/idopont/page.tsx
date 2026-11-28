@@ -26,10 +26,10 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
     return (
       <main className="py-16">
         <PageHeader eyebrow="Időpontfoglalás" title="Ez a link nem érvényes.">
-          <p>Lehet, hogy elírás történt, vagy a jelentkezés már nem érhető el. Kérlek, töltsd ki újra a kérdőívet.</p>
+          <p>Lehet, hogy elírás történt, vagy a jelentkezés már nem érhető el. Kérlek, jelentkezz újra.</p>
         </PageHeader>
-        <Link href="/jelentkezes" className={`${buttonPrimary} mt-8`}>
-          A kérdőívhez
+        <Link href="/konzultacio" className={`${buttonPrimary} mt-8`}>
+          Foglalj konzultációt
         </Link>
       </main>
     );
@@ -81,7 +81,7 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
           )}
         </div>
         <p className="mt-10 max-w-2xl text-ink-soft">
-          A kérdőívedet átolvasom a konzultáció előtt. Neked semmire nem kell készülnöd: elég, ha egy nyugodt, csendes
+          A válaszaidat átolvasom a konzultáció előtt. Neked semmire nem kell készülnöd: elég, ha egy nyugodt, csendes
           helyről csatlakozol.
         </p>
       </main>
@@ -99,8 +99,8 @@ export default async function BookingPage({ searchParams }: { searchParams: SP }
     <main className="py-16">
       <PageHeader eyebrow="Időpontfoglalás" title={`Köszönöm, ${first}! Válassz időpontot.`}>
         <p>
-          Az ismerkedő konzultáció online, Google Meeten zajlik. Beszélünk arról, hol tartasz, mit szeretnél, és hogy a
-          program jó választás-e neked. Itt beszéljük meg a részleteket és a díjat is.
+          Az ismerkedő konzultáció ingyenes, és online, Google Meeten zajlik. Beszélünk arról, hol tartasz, mit
+          szeretnél, és hogy a program jó választás-e neked. Itt beszéljük meg a részleteket és a díjat is.
         </p>
       </PageHeader>
 

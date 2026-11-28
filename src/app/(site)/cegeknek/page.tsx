@@ -23,7 +23,7 @@ const FORMS = [
   { title: "Tréningnap", text: "Egy közös nap a csapattal: érthető elmélet és közös gyakorlás, a ti helyzetetekhez igazítva." },
   { title: "Többalkalmas program", text: "Rendszeres alkalmak hetek vagy hónapok alatt, hogy a gyakorlás valóban beépüljön a csapat hétköznapjaiba." },
   { title: "Előadás", text: "Rövidebb alkalom arról, hogyan működik az idegrendszer terhelés alatt, és mit tehetünk érte – akár egy rendezvény részeként." },
-  { title: "Egyéni program vezetőknek", text: "16 hetes egyéni program azoknak a vezetőknek, akik maguk is nyugodtabban szeretnének dolgozni." },
+  { title: "Egyéni program vezetőknek", text: "Az Acélidegek Mentorprogram: 16 hetes, személyes online mentorálás azoknak a vezetőknek, akik nyomás alatt is nyugodtan és tiszta fejjel szeretnének dolgozni." },
 ];
 
 // O – mi változik (cél, nem garancia)

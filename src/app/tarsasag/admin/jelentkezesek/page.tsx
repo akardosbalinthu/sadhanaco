@@ -57,7 +57,7 @@ export default async function ApplicationsPage({ searchParams }: { searchParams:
                     <p className="font-serif text-lg text-forest">{a.full_name}</p>
                     <p className="text-xs text-ink-soft">
                       {a.email} · {fmtDateTime(a.created_at)} ·{" "}
-                      {a.questionnaire_version === 2 ? `„most van itt az ideje?” ${a.start_score}/10` : `${START_LABEL[a.start_when ?? ""] ?? "–"} · súlyosság ${a.severity}/10`}
+                      {a.questionnaire_version === 3 ? "konzultációt kért" : a.questionnaire_version === 2 ? `„most van itt az ideje?” ${a.start_score}/10` : `${START_LABEL[a.start_when ?? ""] ?? "–"} · súlyosság ${a.severity}/10`}
                     </p>
                   </div>
                   <div className="text-right text-sm">

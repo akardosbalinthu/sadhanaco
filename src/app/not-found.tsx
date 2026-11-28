@@ -18,8 +18,8 @@ export default function NotFound() {
           <a href={`${site}/`} className={buttonPrimary}>
             Vissza a kezdőlapra
           </a>
-          <a href={`${site}/jelentkezes`} className={buttonSecondary}>
-            Kérem az Életmód-térképem
+          <a href={`${site}/konzultacio`} className={buttonSecondary}>
+            Foglalj konzultációt
           </a>
         </div>
         <nav className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft" aria-label="További oldalak">

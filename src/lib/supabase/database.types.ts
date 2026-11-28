@@ -1670,6 +1670,7 @@ isOneToOne: false
 "full_name": string,
 "health_consent_at": string,
 "health_consent_version": string,
+"heard_from": string | null,
 "id": string,
 "invest_energy": string | null,
 "invest_money": string | null,
@@ -1685,7 +1686,8 @@ isOneToOne: false
 "start_when": Database["public"]['Enums']["application_start"] | null,
 "status": Database["public"]['Enums']["application_status"],
 "token": string,
-"urgency": number | null
+"urgency": number | null,
+"utm_source": string | null
             }
                           SetofOptions: {
         from: "*"
@@ -1702,6 +1704,7 @@ isOneToOne: false
 "full_name": string,
 "health_consent_at": string,
 "health_consent_version": string,
+"heard_from": string | null,
 "id": string,
 "invest_energy": string | null,
 "invest_money": string | null,
@@ -1717,7 +1720,8 @@ isOneToOne: false
 "start_when": Database["public"]['Enums']["application_start"] | null,
 "status": Database["public"]['Enums']["application_status"],
 "token": string,
-"urgency": number | null
+"urgency": number | null,
+"utm_source": string | null
             }
                           SetofOptions: {
         from: "*"
@@ -1755,6 +1759,40 @@ isOneToOne: false
 "submit_compass":
 { Args: { "p_answers": Json,"p_tiebreak"?: Database["public"]['Enums']["order_key"] }; Returns: Database["public"]['Enums']["order_key"]
                            },
+"submit_consultation_request":
+{ Args: { "p_consent": boolean,"p_email": string,"p_full_name": string,"p_phone": string,"p_problem": string }; Returns: {
+              "admin_note": string | null,
+"answers": Json | null,
+"created_at": string,
+"email": string,
+"full_name": string,
+"health_consent_at": string,
+"health_consent_version": string,
+"heard_from": string | null,
+"id": string,
+"invest_energy": string | null,
+"invest_money": string | null,
+"invest_time": string | null,
+"phone": string | null,
+"pillars": Json | null,
+"privacy_consent_at": string,
+"problem": string | null,
+"qualified": boolean | null,
+"questionnaire_version": number,
+"severity": number | null,
+"start_score": number | null,
+"start_when": Database["public"]['Enums']["application_start"] | null,
+"status": Database["public"]['Enums']["application_status"],
+"token": string,
+"urgency": number | null,
+"utm_source": string | null
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "applications"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "submit_kind_message":
 { Args: { "p_guest_email"?: string,"p_guest_name"?: string,"p_message": string,"p_recipient_name": string,"p_recipient_phone": string,"p_sender"?: string }; Returns: {
               "confirm_token": string,"message_id": string,"status": string

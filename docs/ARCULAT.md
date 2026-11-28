@@ -2,7 +2,22 @@
 
 > 2026. november 25-től érvényes, az egyéni program koncepciójához igazítva (`docs/KONCEPCIO.md`). A korábbi, a Társaságra épülő arculati alapot felváltja.
 
-## 1. A fő üzenet
+## 0. Acélidegek Mentorprogram (2026. november 28. – az alábbiak közül ez az irányadó)
+
+A weboldal egyetlen célja a konzultációfoglalás az **Acélidegek Mentorprogramra**. Az oldal csak az eredményeket és az előnyöket adja el.
+
+- **Fő ígéret (szó szerint):** „Vedd újra a kezedbe az életed irányítását. Az út az idegrendszered fejlesztésén át vezet.” 16 hét alatt eléred, hogy: bármilyen helyzetben néhány perc alatt megnyugtasd magad; kipihentebben ébredj, mint valaha; nyugodt fejjel dönts akkor is, amikor nagy a nyomás; fókuszáltabban és eredményesebben dolgozz.
+- **Az „acélideg”** nem érzéketlenség, hanem nyugalom nyomás alatt.
+- **Célcsoport:** 30–45 éves szakértők, senior munkatársak, vezetők (prezentáció, tárgyalás, nehéz beszélgetés, pörgő fej este, hajnali felébredés, szétszórt munkanap).
+- **Az oldalon nem jelenhet meg:** ár, előleg, részletfizetés, kedvezmény; a program felépítése (hetek, szakaszok, alkalmak száma és hossza); gyakorlatnevek; bónuszok, garanciák; heti beszámoló, mérőeszközök, kérdőívek; létszám és kezdési időpontok. Helyette: „a konzultáción személyesen átbeszéljük”. (Az 5. pont „semmit nem rejtünk el” mondata ezzel módosul: a részletek a konzultáción hangzanak el.)
+- **Megjelenhet:** személyes, egyéni, online mentorálás, 16 hét; idegtudomány és életmód-orvostan, kiegészítve a jóga gyakorlati bölcsességével; mérhető fejlődés (HRV); „egyszerre csak kevés emberrel dolgozom” (szám nélkül).
+- **Konzultáció:** ingyenes, 30 perces, online; a „Foglalj konzultációt” gomb a `/konzultacio` rövid űrlapjára visz (név, e-mail, telefon, „Mi az, amin a legjobban szeretnél változtatni?”), utána a saját foglalóban időpontválasztás.
+- **Nem központi üzenet:** a magány és a „kapcsolódás”; A Társaság nem szerepel.
+- **Lábléc:** „A program életmód- és stresszkezelési mentorálás, nem orvosi vagy pszichológiai kezelés, és nem helyettesíti azt.”
+- **Visszajelzés-szakasz:** helye kész, de üresen nem jelenik meg; kitalált vélemény nem lehet.
+- A Nyílt Estek, az Egy Kedves Üzenet, a Cégeknek oldal és a 15 kérdéses kérdőív megmarad, a kezdőlap csak a záró részben említi őket.
+
+## 1. A fő üzenet (2026. november 25.; a 0. pont felülírja)
 
 **Egy teljes, személyre szabott út:** meditáció, légzés, test, életmód és kapcsolatok egyetlen programban. Az alapja Bálint egyedi módszertana, amely a jóga nyolc ágát az életmód-orvostan hat pillérével vegyíti, személyes vezetéssel, a résztvevő saját életére szabva.
 

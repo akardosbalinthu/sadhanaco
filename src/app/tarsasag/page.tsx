@@ -25,8 +25,8 @@ export default async function ProgramHome() {
           <Link href={tp("/belepes")} className={buttonPrimary}>
             Belépés
           </Link>
-          <a href={`${site}/jelentkezes`} className={buttonSecondary}>
-            Jelentkezem konzultációra
+          <a href={`${site}/konzultacio`} className={buttonSecondary}>
+            Konzultációt foglalok
           </a>
         </div>
       </GildedCard>

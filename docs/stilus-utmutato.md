@@ -67,6 +67,8 @@
 
 ## 7. Nem írjuk át (jóváhagyott szövegek)
 
+- **2026. november 28-tól a kezdőlap fő ígérete** (szó szerint): „Vedd újra a kezedbe az életed irányítását. Az út az idegrendszered fejlesztésén át vezet.” + a négy pont (ARCULAT 0.). Fő gomb: „Foglalj konzultációt”. Az alábbi korábbi főcím, alcím és fő gomb ezzel a kezdőlapon megszűnt.
+
 - Főcím: „Találd meg a nyugalmad – és tartsd is meg a hétköznapokban.”
 - Alcím: „Több ezer éves jógikus légző- és meditációs gyakorlatok, modern életmód-orvostani keretrendszerben – rád szabva.”
 - Bemutatkozás első bekezdése (ARCULAT 9.), a Nyílt Est és az Egy Kedves Üzenet leíró mondata (ARCULAT 8.).

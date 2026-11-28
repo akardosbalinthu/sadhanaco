@@ -134,12 +134,12 @@ export default async function OpenEveningsPage() {
           Vidd haza a nyugalmat – és tartsd is meg.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          16 hetes egyéni programomban személyesen kísérlek: a meditációtól a légzésen és a mozgáson át az alvásig
-          és az étkezésig, a te életedre szabva.
+          Az Acélidegek Mentorprogramban 16 héten át személyesen, online mentorállak, hogy a nyugalmad nyomás alatt is
+          megmaradjon. Az első lépés egy ingyenes, 30 perces konzultáció.
         </p>
         <div className="mt-8">
-          <Link href="/#menete" className={buttonSecondary}>
-            Megnézem a programot
+          <Link href="/konzultacio" className={buttonSecondary}>
+            Foglalj konzultációt
           </Link>
         </div>
       </section>
